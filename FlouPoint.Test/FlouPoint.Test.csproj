@@ -23,7 +23,6 @@
 
   <ItemGroup>
     <Compile Remove="01.DTO\ResponseLogin\ResponseLoginTest.cs" />
-    <Compile Remove="02.EnumType\EnumExtensionsTest.cs" />
     <Compile Remove="02.EnumType\EnumMetadataAttributeTest.cs" />
   </ItemGroup>
 
@@ -53,7 +52,6 @@
 
   <ItemGroup>
     <Folder Include="01.DTO\ResponseLogin\" />
-    <Folder Include="02.EnumType\" />
   </ItemGroup>
 
 </Project>
