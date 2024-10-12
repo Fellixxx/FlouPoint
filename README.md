@@ -1,0 +1,1 @@
+Develop a code generator that leverages Roslyn for code analysis and manipulation, and integrates ChatGPT for intelligent code suggestions or generation, resulting in an end-to-end solution that automates parts of the development process.
