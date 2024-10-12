@@ -37,6 +37,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Persistence", "Persistence\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlouPoint.Test", "FlouPoint.Test\FlouPoint.Test.csproj", "{9E709462-445B-4431-B6BB-0967150BDD93}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlouPoint.Application.Test", "FlouPoint.Application.Test\FlouPoint.Application.Test.csproj", "{EEA44ACA-2AE3-4416-986B-A8240CF11A94}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -83,6 +85,10 @@ Global
 		{9E709462-445B-4431-B6BB-0967150BDD93}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9E709462-445B-4431-B6BB-0967150BDD93}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9E709462-445B-4431-B6BB-0967150BDD93}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EEA44ACA-2AE3-4416-986B-A8240CF11A94}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EEA44ACA-2AE3-4416-986B-A8240CF11A94}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EEA44ACA-2AE3-4416-986B-A8240CF11A94}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EEA44ACA-2AE3-4416-986B-A8240CF11A94}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -96,6 +102,7 @@ Global
 		{B5A06D69-E911-4B75-875C-32842A4ED091} = {92259FE0-BEFB-4994-967A-1514D14ECBB1}
 		{0B474F7B-2ABB-4F22-B6D8-3C1A3F45E314} = {676632CD-D18A-4413-9B49-3FB5D5C6D33B}
 		{9E709462-445B-4431-B6BB-0967150BDD93} = {51B4DACD-38B5-43BB-B5A6-79437EC70D1C}
+		{EEA44ACA-2AE3-4416-986B-A8240CF11A94} = {51B4DACD-38B5-43BB-B5A6-79437EC70D1C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {80D22744-314A-4A30-8CCC-C9961C48242B}
