@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34902.65
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlouPointCLI", "FlouPointCLI\FlouPointCLI.csproj", "{C5E979AB-697D-4216-B127-065BF6DFE815}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C5E979AB-697D-4216-B127-065BF6DFE815}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C5E979AB-697D-4216-B127-065BF6DFE815}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C5E979AB-697D-4216-B127-065BF6DFE815}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C5E979AB-697D-4216-B127-065BF6DFE815}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {80D22744-314A-4A30-8CCC-C9961C48242B}
+	EndGlobalSection
+EndGlobal
