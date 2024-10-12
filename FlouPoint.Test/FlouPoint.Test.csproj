@@ -22,6 +22,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Remove="01.DTO\ResponseLogin\ResponseLoginTest.cs" />
+    <Compile Remove="02.EnumType\EnumExtensionsTest.cs" />
+    <Compile Remove="02.EnumType\EnumMetadataAttributeTest.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="coverlet.collector" Version="6.0.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -43,6 +49,11 @@
     <ProjectReference Include="..\Domain\Domain.csproj" />
     <ProjectReference Include="..\Infrastructure\Infrastructure.csproj" />
     <ProjectReference Include="..\Persistence\Persistence.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="01.DTO\ResponseLogin\" />
+    <Folder Include="02.EnumType\" />
   </ItemGroup>
 
 </Project>

@@ -5,7 +5,6 @@ namespace FlouPoint.Test.DTO.ResponseLogin
     using FluentAssertions;
     using System;
     using Newtonsoft.Json;
-    using Domain.DTO.ResponseLogin;
     using Domain.Interfaces.ResponseLogin;
 
     [TestFixture]
