@@ -22,11 +22,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Remove="01.DTO\ResponseLogin\ResponseLoginTest.cs" />
-    <Compile Remove="02.EnumType\EnumMetadataAttributeTest.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="coverlet.collector" Version="6.0.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
