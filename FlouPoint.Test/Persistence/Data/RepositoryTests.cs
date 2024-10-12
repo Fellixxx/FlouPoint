@@ -20,8 +20,6 @@
             _mockDbSet = new Mock<DbSet<MockEntity>>();
             _mockContext.Setup(x => x.Set<MockEntity>()).Returns(_mockDbSet.Object);
             _repository = new MockEntityRepository(_mockContext.Object);
-
-
         }
 
         [Test]
