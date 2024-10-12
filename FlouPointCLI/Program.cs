@@ -1,80 +1,73 @@
-﻿// See https://aka.ms/new-console-template for more information
-using Newtonsoft.Json;
-using System.Net.Http.Headers;
+﻿using System;
+using System.Threading.Tasks;
+using Microsoft.Extensions.DependencyInjection;
+using FlouPoint.GitHub;
 
-namespace FlouPointCLI
+namespace FlouPoint.GitHubApp
 {
-
-    class Program
+    /// <summary>
+    /// The entry point of the GitHub repository management application.
+    /// </summary>
+    internal class Program
     {
-        static async Task Main(string[] args)
+        /// <summary>
+        /// The main method, which is the application's entry point.
+        /// </summary>
+        /// <param name="args">The command-line arguments.</param>
+        private static async Task Main(string[] args)
         {
-            // Replace with your GitHub username and personal access token
-            var credentials = GetGitHubCredentials();
-            // Repository details
-            string repoName = "NewRepository";
-            string repoDescription = "This is a new repository created via the GitHub API";
-            bool isPrivate = false;
+            // Set up dependency injection
+            var services = new ServiceCollection();
+            ConfigureServices(services);
 
-            await CreateGitHubRepository(credentials.Username, credentials.Token, repoName, repoDescription, isPrivate);
-        }
+            // Build the service provider
+            var serviceProvider = services.BuildServiceProvider();
 
-        static async Task CreateGitHubRepository(string username, string token, string repoName, string repoDescription, bool isPrivate)
-        {
-            var client = new HttpClient();
+            // Resolve the IGitHubRepositoryService and use it
+            var repositoryService = serviceProvider.GetRequiredService<IGitHubRepositoryService>();
 
-            // GitHub API endpoint for repository creation
-            var url = "https://api.github.com/user/repos";
+            // Create a new repository
+            var repositoryInfo = new RepositoryInfo("TestRepo", "A test repository", isPrivate: true);
 
-            // Authentication
-            var byteArray = System.Text.Encoding.ASCII.GetBytes($"{username}:{token}");
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", Convert.ToBase64String(byteArray));
-
-            // GitHub requires a User-Agent header
-            client.DefaultRequestHeaders.UserAgent.TryParseAdd("CSharpApp");
-
-            // Repository data
-            var postData = new
+            try
             {
-                name = repoName,
-                description = repoDescription,
-                @private = isPrivate
-            };
-
-            var json = JsonConvert.SerializeObject(postData);
-            var content = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
-
-            // Make the POST request
-            var response = await client.PostAsync(url, content);
-
-            if (response.IsSuccessStatusCode)
-            {
-                Console.WriteLine($"Repository '{repoName}' created successfully!");
+                await repositoryService.CreateRepositoryAsync(repositoryInfo);
+                Console.WriteLine($"Repository '{repositoryInfo.Name}' created successfully!");
             }
-            else
+            catch (GitHubApiException ex)
             {
-                var responseBody = await response.Content.ReadAsStringAsync();
-                Console.WriteLine("Error creating repository:");
-                Console.WriteLine(responseBody);
+                Console.WriteLine($"An error occurred while creating the repository: {ex.Message}");
+            }
+            catch (CredentialNotFoundException ex)
+            {
+                Console.WriteLine($"Credential error: {ex.Message}");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"An unexpected error occurred: {ex.Message}");
             }
         }
 
-        public static GitHubCredentials GetGitHubCredentials()
+        /// <summary>
+        /// Configures the services for dependency injection.
+        /// </summary>
+        /// <param name="services">The service collection to configure.</param>
+        private static void ConfigureServices(IServiceCollection services)
         {
-            var username = Environment.GetEnvironmentVariable("GITHUB_USERNAME", EnvironmentVariableTarget.User);
-            var token = Environment.GetEnvironmentVariable("GITHUB_TOKEN", EnvironmentVariableTarget.User);
+            // Register environment variable provider
+            services.AddSingleton<IEnvironmentVariableProvider, EnvironmentVariableProvider>();
 
-            if (string.IsNullOrEmpty(username))
-            {
-                throw new InvalidOperationException("GitHub username is not set in the environment variables.");
-            }
+            // Register credential provider
+            services.AddSingleton<ICredentialProvider, GitHubCredentialProvider>();
 
-            if (string.IsNullOrEmpty(token))
-            {
-                throw new InvalidOperationException("GitHub token is not set in the environment variables.");
-            }
+            // Register the GitHub repository service with an HttpClient
+            services.AddHttpClient<IGitHubRepositoryService, GitHubRepositoryService>();
 
-            return new GitHubCredentials(username, token);
+            // Optionally, configure HttpClient settings here if needed
+            // services.AddHttpClient<IGitHubRepositoryService, GitHubRepositoryService>(client =>
+            // {
+            //     client.Timeout = TimeSpan.FromSeconds(30);
+            // });
         }
     }
 }

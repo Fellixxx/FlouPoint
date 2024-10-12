@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34902.65
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlouPointCLI", "FlouPointCLI\FlouPointCLI.csproj", "{C5E979AB-697D-4216-B127-065BF6DFE815}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FlouPointCLI", "FlouPointCLI\FlouPointCLI.csproj", "{C5E979AB-697D-4216-B127-065BF6DFE815}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlouPoint.GitHub", "FlouPoint.GitHub\FlouPoint.GitHub.csproj", "{A80C6548-A6B4-4FA9-B85E-AD1A5C301737}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{C5E979AB-697D-4216-B127-065BF6DFE815}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C5E979AB-697D-4216-B127-065BF6DFE815}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C5E979AB-697D-4216-B127-065BF6DFE815}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A80C6548-A6B4-4FA9-B85E-AD1A5C301737}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A80C6548-A6B4-4FA9-B85E-AD1A5C301737}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A80C6548-A6B4-4FA9-B85E-AD1A5C301737}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A80C6548-A6B4-4FA9-B85E-AD1A5C301737}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
