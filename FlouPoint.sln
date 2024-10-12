@@ -7,6 +7,28 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FlouPointCLI", "FlouPointCL
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlouPoint.GitHub", "FlouPoint.GitHub\FlouPoint.GitHub.csproj", "{A80C6548-A6B4-4FA9-B85E-AD1A5C301737}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "01.Domain", "01.Domain", "{E3ACD0BE-DD42-4965-AE9D-17B912380E3F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "02.Core", "02.Core", "{58928925-C066-4A85-BB58-7770C15524DF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "03.Persistence", "03.Persistence", "{676632CD-D18A-4413-9B49-3FB5D5C6D33B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "04.Infrastructure", "04.Infrastructure", "{92259FE0-BEFB-4994-967A-1514D14ECBB1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "05.Api", "05.Api", "{A6F72447-E81E-4634-99D0-2C375E76BE73}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "06.Test", "06.Test", "{51B4DACD-38B5-43BB-B5A6-79437EC70D1C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "07.Common", "07.Common", "{6032C8F9-23A0-4B20-9DA1-F1092DD9CD90}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlouPoint.Domain", "FlouPoint.Domain\FlouPoint.Domain.csproj", "{592A08FC-C55F-4FB0-A35F-71558CED4D25}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlouPoint.Infrastructure", "FlouPoint.Infrastructure\FlouPoint.Infrastructure.csproj", "{A767E633-EA4D-43C8-ABD2-0D8E61915C53}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlouPoint.Application", "FlouPoint.Application\FlouPoint.Application.csproj", "{C571AA77-C4CF-454F-9417-454CD9B52680}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application", "Application\Application.csproj", "{6CE32C61-B014-4006-B4F7-963D62DF0CDF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,9 +43,31 @@ Global
 		{A80C6548-A6B4-4FA9-B85E-AD1A5C301737}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A80C6548-A6B4-4FA9-B85E-AD1A5C301737}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A80C6548-A6B4-4FA9-B85E-AD1A5C301737}.Release|Any CPU.Build.0 = Release|Any CPU
+		{592A08FC-C55F-4FB0-A35F-71558CED4D25}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{592A08FC-C55F-4FB0-A35F-71558CED4D25}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{592A08FC-C55F-4FB0-A35F-71558CED4D25}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{592A08FC-C55F-4FB0-A35F-71558CED4D25}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A767E633-EA4D-43C8-ABD2-0D8E61915C53}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A767E633-EA4D-43C8-ABD2-0D8E61915C53}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A767E633-EA4D-43C8-ABD2-0D8E61915C53}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A767E633-EA4D-43C8-ABD2-0D8E61915C53}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C571AA77-C4CF-454F-9417-454CD9B52680}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C571AA77-C4CF-454F-9417-454CD9B52680}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C571AA77-C4CF-454F-9417-454CD9B52680}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C571AA77-C4CF-454F-9417-454CD9B52680}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6CE32C61-B014-4006-B4F7-963D62DF0CDF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6CE32C61-B014-4006-B4F7-963D62DF0CDF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6CE32C61-B014-4006-B4F7-963D62DF0CDF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6CE32C61-B014-4006-B4F7-963D62DF0CDF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{592A08FC-C55F-4FB0-A35F-71558CED4D25} = {E3ACD0BE-DD42-4965-AE9D-17B912380E3F}
+		{A767E633-EA4D-43C8-ABD2-0D8E61915C53} = {92259FE0-BEFB-4994-967A-1514D14ECBB1}
+		{C571AA77-C4CF-454F-9417-454CD9B52680} = {58928925-C066-4A85-BB58-7770C15524DF}
+		{6CE32C61-B014-4006-B4F7-963D62DF0CDF} = {58928925-C066-4A85-BB58-7770C15524DF}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {80D22744-314A-4A30-8CCC-C9961C48242B}
