@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace FlouPoint.GitHub
+﻿namespace FlouPoint.GitHub
 {
     /// <summary>
     /// Represents errors that occur when credentials are not found or invalid.

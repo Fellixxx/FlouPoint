@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace FlouPoint.GitHub
+﻿namespace FlouPoint.GitHub
 {
     /// <summary>
     /// Represents user credentials for GitHub authentication.
