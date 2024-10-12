@@ -45,8 +45,4 @@
     <ProjectReference Include="..\Persistence\Persistence.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="01.DTO\ResponseLogin\" />
-  </ItemGroup>
-
 </Project>
