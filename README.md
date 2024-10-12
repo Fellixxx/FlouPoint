@@ -31,3 +31,10 @@ To get started with FlouPoint, follow these steps:
 1. Clone the repository:
    ```bash
    git clone https://github.com/yourusername/FlouPoint.git
+## Technologies and Libraries
+
+- **Roslyn**: For code analysis and generation.
+- **OpenAI .NET SDK**: For interacting with ChatGPT.
+- **Newtonsoft.Json** or **System.Text.Json**: For JSON handling.
+- **CommandLineParser**: For parsing CLI arguments (if using CLI).
+- **LibGit2Sharp**: For Git operations within .NET.
