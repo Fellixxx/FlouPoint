@@ -10,13 +10,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Core\Validators\**" />
     <Compile Remove="Domain\**" />
     <Compile Remove="Infrastructure\**" />
-    <EmbeddedResource Remove="Core\Validators\**" />
     <EmbeddedResource Remove="Domain\**" />
     <EmbeddedResource Remove="Infrastructure\**" />
-    <None Remove="Core\Validators\**" />
     <None Remove="Domain\**" />
     <None Remove="Infrastructure\**" />
   </ItemGroup>
