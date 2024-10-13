@@ -1,4 +1,4 @@
-﻿namespace FlouPoint.Application.Test.Persistence.Repositories
+﻿namespace FlouPoint.LayerPersistence.Test.Persistence.Repositories
 {
     using global::Domain.Interfaces.Entity;
     using global::Persistence.Repositories;

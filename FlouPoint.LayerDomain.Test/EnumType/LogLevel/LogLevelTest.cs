@@ -1,4 +1,4 @@
-﻿namespace FlouPoint.Application.Test.EnumType.LogLevel
+﻿namespace FlouPoint.LayerDomain.Test.EnumType.LogLevel
 {
     using NUnit.Framework;
     using FluentAssertions;

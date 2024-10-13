@@ -1,4 +1,4 @@
-﻿namespace FlouPoint.Application.Test.DTO.ResponseLogin
+﻿namespace FlouPoint.LayerDomain.Test.DTO.ResponseLogin
 {
     using NUnit.Framework;
     using FluentAssertions;

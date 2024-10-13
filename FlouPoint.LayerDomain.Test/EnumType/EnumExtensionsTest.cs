@@ -1,4 +1,4 @@
-﻿namespace FlouPoint.Application.Test.EnumType
+﻿namespace FlouPoint.LayerDomain.Test.EnumType
 {
     using NUnit.Framework;
     using FluentAssertions;

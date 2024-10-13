@@ -1,4 +1,4 @@
-﻿namespace FlouPoint.Application.Test.DTO.Log
+﻿namespace FlouPoint.LayerDomain.Test.DTO.Log
 {
     using NUnit.Framework;
     using FluentAssertions;
