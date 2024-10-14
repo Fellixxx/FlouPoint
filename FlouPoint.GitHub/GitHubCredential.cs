@@ -1,4 +1,6 @@
-﻿namespace FlouPoint.GitHub
+﻿using Application.Result;
+
+namespace FlouPoint.GitHub
 {
     /// <summary>
     /// Represents errors that occur when credentials are not found or invalid.
@@ -54,7 +56,7 @@
         /// </summary>
         /// <param name="key">The name of the environment variable.</param>
         /// <returns>The value of the environment variable, or <c>null</c> if it is not found.</returns>
-        string GetEnvironmentVariable(string key);
+        Task<OperationResult<string>> GetEnvironmentVariable(string key);
     }
 
     /// <summary>
@@ -63,13 +65,13 @@
     public class EnvironmentVariableProvider : IEnvironmentVariableProvider
     {
         /// <inheritdoc />
-        public string GetEnvironmentVariable(string key)
+        public async Task<OperationResult<string>> GetEnvironmentVariable(string key)
         {
             if (key == null)
                 throw new ArgumentNullException(nameof(key));
 
             // Retrieves the value of an environment variable from the current process.
-            return Environment.GetEnvironmentVariable(key);
+            return OperationResult<string>.Success(Environment.GetEnvironmentVariable(key), "Resource.SuccessfullyEmail");
         }
     }
 

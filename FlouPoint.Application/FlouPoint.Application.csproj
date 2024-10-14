@@ -7,7 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="UseCases\ExternalServices\" />
+    <ProjectReference Include="..\Application\Application.csproj" />
+    <ProjectReference Include="..\FlouPoint.GitHub\FlouPoint.GitHub.csproj" />
   </ItemGroup>
 
 </Project>
