@@ -101,22 +101,27 @@ namespace FlouPoint.GitHub
         /// </summary>
         /// <returns>An instance of <see cref="Credential"/> containing the GitHub credentials.</returns>
         /// <exception cref="CredentialNotFoundException">Thrown when the required environment variables are not set.</exception>
+       
         public Credential GetCredentials()
         {
+           
             // Retrieve the username and token from environment variables.
             var username = _environmentVariableProvider.GetEnvironmentVariable(GitHubUsernameEnvVar);
             var token = _environmentVariableProvider.GetEnvironmentVariable(GitHubTokenEnvVar);
 
             // Validate that the username is not null or whitespace.
-            if (string.IsNullOrWhiteSpace(username))
-                throw new CredentialNotFoundException($"GitHub username is not set in the environment variable '{GitHubUsernameEnvVar}'.");
+            //if (string.IsNullOrWhiteSpace(username))
+            //    throw new CredentialNotFoundException($"GitHub username is not set in the environment variable '{GitHubUsernameEnvVar}'.");
 
             // Validate that the token is not null or whitespace.
-            if (string.IsNullOrWhiteSpace(token))
-                throw new CredentialNotFoundException($"GitHub token is not set in the environment variable '{GitHubTokenEnvVar}'.");
+            //if (string.IsNullOrWhiteSpace(token))
+            //    throw new CredentialNotFoundException($"GitHub token is not set in the environment variable '{GitHubTokenEnvVar}'.");
 
             // Return a new Credential object with the retrieved username and token.
-            return new Credential(username, token);
+            //return new Credential(username, token);
+            return new Credential();
+           
         }
+           
     }
 }

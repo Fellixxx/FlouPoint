@@ -41,7 +41,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FlouPoint.LayerPersistence.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FlouPoint.LayerApplication.Test", "FlouPoint.LayerApplication.Test\FlouPoint.LayerApplication.Test.csproj", "{41679233-3CCE-462D-84AA-999AB345FC98}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlouPoint.LayerInfrastructure.Test", "FlouPoint.LayerInfrastructure.Test\FlouPoint.LayerInfrastructure.Test.csproj", "{0E93C708-E5CE-497E-B014-3A629C135602}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FlouPoint.LayerInfrastructure.Test", "FlouPoint.LayerInfrastructure.Test\FlouPoint.LayerInfrastructure.Test.csproj", "{0E93C708-E5CE-497E-B014-3A629C135602}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

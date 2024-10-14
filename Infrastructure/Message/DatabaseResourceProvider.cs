@@ -1,8 +1,6 @@
 ﻿using Application.UseCases.ExternalServices;
 using Domain.Interfaces.Entity;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Resources;
 
 namespace Infrastructure.Message
 {

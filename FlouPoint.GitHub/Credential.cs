@@ -55,5 +55,9 @@
             Username = username;
             Token = token;
         }
+
+        public Credential()
+        {
+        }
     }
 }
