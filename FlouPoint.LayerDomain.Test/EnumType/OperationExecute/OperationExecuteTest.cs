@@ -8,77 +8,152 @@
     using Domain.EnumType.OperationExecute;
 
     [TestFixture]
-    public class OperationExecuteTests
+    internal class OperationExecuteTests
     {
-        [TestCase(OperationExecute.Add, "Add", "Add a new record.")]
-        [TestCase(OperationExecute.Modified, "Modified", "Modify an existing record.")]
-        [TestCase(OperationExecute.Remove, "Remove", "Remove an existing record.")]
-        [TestCase(OperationExecute.Deactivate, "Deactivate", "Deactivate an existing record.")]
-        [TestCase(OperationExecute.Activate, "Activate", "Activate a deactivated record.")]
-        [TestCase(OperationExecute.GetUserById, "GetUserById", "Retrieve a user by their ID.")]
-        [TestCase(OperationExecute.GetAllByFilter, "GetAllByFilter", "Retrieve all records that match a given filter.")]
-        [TestCase(OperationExecute.GetPageByFilter, "GetPageByFilter", "Retrieve a page of records that match a given filter.")]
-        [TestCase(OperationExecute.GetCountFilter, "GetCountFilter", "Get the count of records that match a given filter.")]
-        [TestCase(OperationExecute.GenerateOtp, "GenerateOtp", "Generate a One-Time Password (OTP).")]
-        [TestCase(OperationExecute.LoginOtp, "LoginOtp", "Login using a One-Time Password (OTP).")]
-        [TestCase(OperationExecute.Login, "Login", "Standard login operation.")]
-        [TestCase(OperationExecute.Validate, "Validate", "General validation operation.")]
-        [TestCase(OperationExecute.ValidateEmail, "ValidateEmail", "Validate an email address.")]
-        [TestCase(OperationExecute.ValidateOtp, "ValidateOtp", "Validate the provided One-Time Password (OTP).")]
-        [TestCase(OperationExecute.ValidateUsername, "ValidateUsername", "Validate a username.")]
-        [TestCase(OperationExecute.SetNewPassword, "SetNewPassword", "Set a new password for a user.")]
-        [TestCase(OperationExecute.SendEmailAsync, "SendEmailAsync", "Asynchronously send an email.")]
-        public void OperationExecute_Should_Have_Correct_EnumMetadata(OperationExecute operation, string expectedName, string expectedDescription)
+        [Test]
+        public void When_AddOperation_Then_NameAndDescriptionShouldMatch()
         {
-            // When
-            var fieldInfo = operation.GetType().GetField(operation.ToString());
-            var attribute = fieldInfo.GetCustomAttribute<EnumMetadataAttribute>();
+            // Given
+            var operation = OperationExecute.Add;
 
             // Then
-            attribute.Should().NotBeNull();
-            attribute.Name.Should().Be(expectedName);
-            attribute.Description.Should().Be(expectedDescription);
+            operation.Should().NotBeNull();
+            operation.Name.Should().Be("Add");
+            operation.Description.Should().Be("Add a new record.");
         }
 
         [Test]
-        public void OperationExecute_Without_EnumMetadataAttribute_Should_Return_Null()
+        public void When_ModifiedOperation_Then_NameAndDescriptionShouldMatch()
+        {
+            // Given
+            var operation = OperationExecute.Modified;
+
+            // Then
+            operation.Should().NotBeNull();
+            operation.Name.Should().Be("Modified");
+            operation.Description.Should().Be("Modify an existing record.");
+        }
+
+        [Test]
+        public void When_RemoveOperation_Then_NameAndDescriptionShouldMatch()
+        {
+            // Given
+            var operation = OperationExecute.Remove;
+
+            // Then
+            operation.Should().NotBeNull();
+            operation.Name.Should().Be("Remove");
+            operation.Description.Should().Be("Remove an existing record.");
+        }
+
+        [Test]
+        public void When_DeactivateOperation_Then_NameAndDescriptionShouldMatch()
+        {
+            // Given
+            var operation = OperationExecute.Deactivate;
+
+            // Then
+            operation.Should().NotBeNull();
+            operation.Name.Should().Be("Deactivate");
+            operation.Description.Should().Be("Deactivate an existing record.");
+        }
+
+        [Test]
+        public void When_ActivateOperation_Then_NameAndDescriptionShouldMatch()
+        {
+            // Given
+            var operation = OperationExecute.Activate;
+
+            // Then
+            operation.Should().NotBeNull();
+            operation.Name.Should().Be("Activate");
+            operation.Description.Should().Be("Activate a deactivated record.");
+        }
+
+        [Test]
+        public void When_GetUserByIdOperation_Then_NameAndDescriptionShouldMatch()
+        {
+            // Given
+            var operation = OperationExecute.GetUserById;
+
+            // Then
+            operation.Should().NotBeNull();
+            operation.Name.Should().Be("GetUserById");
+            operation.Description.Should().Be("Retrieve a user by their ID.");
+        }
+
+        [Test]
+        public void When_GetAllByFilterOperation_Then_NameAndDescriptionShouldMatch()
+        {
+            // Given
+            var operation = OperationExecute.GetAllByFilter;
+
+            // Then
+            operation.Should().NotBeNull();
+            operation.Name.Should().Be("GetAllByFilter");
+            operation.Description.Should().Be("Retrieve all records that match a given filter.");
+        }
+
+        [Test]
+        public void When_GetPageByFilterOperation_Then_NameAndDescriptionShouldMatch()
+        {
+            // Given
+            var operation = OperationExecute.GetPageByFilter;
+
+            // Then
+            operation.Should().NotBeNull();
+            operation.Name.Should().Be("GetPageByFilter");
+            operation.Description.Should().Be("Retrieve a page of records that match a given filter.");
+        }
+
+        [Test]
+        public void When_GetCountFilterOperation_Then_NameAndDescriptionShouldMatch()
+        {
+            // Given
+            var operation = OperationExecute.GetCountFilter;
+
+            // Then
+            operation.Should().NotBeNull();
+            operation.Name.Should().Be("GetCountFilter");
+            operation.Description.Should().Be("Get the count of records that match a given filter.");
+        }
+
+        [Test]
+        public void When_CreateCustomOperation_Then_NameAndDescriptionShouldMatch()
+        {
+            // Given
+            var operation = OperationExecute.CreateCustomOperation("CustomOp", "This is a custom operation");
+
+            // Then
+            operation.Should().NotBeNull();
+            operation.Name.Should().Be("CustomOp");
+            operation.Description.Should().Be("This is a custom operation");
+        }
+
+        [Test]
+        public void When_GetNameForPredefinedOperation_Then_NameShouldMatch()
         {
             // Given
             var operation = OperationExecute.Add;
 
             // When
-            var fieldInfo = operation.GetType().GetField(operation.ToString());
-            var attribute = fieldInfo.GetCustomAttribute<EnumMetadataAttribute>();
+            var name = OperationExecute.GetName(operation);
 
             // Then
-            attribute.Should().NotBeNull(); // All values in OperationExecute should have metadata, so attribute should not be null
+            name.Should().Be("Add");
         }
 
         [Test]
-        public void EnumMetadata_Should_Be_Applied_To_All_OperationExecute_Values()
+        public void When_NullOperationPassedToGetName_Then_ArgumentNullExceptionShouldBeThrown()
         {
             // Given
-            var operations = Enum.GetValues(typeof(OperationExecute));
+            OperationExecute? operation = null;
 
-            // When & Then
-            foreach (OperationExecute operation in operations)
-            {
-                var fieldInfo = operation.GetType().GetField(operation.ToString());
-                var attribute = fieldInfo.GetCustomAttribute<EnumMetadataAttribute>();
-                attribute.Should().NotBeNull();
-            }
-        }
-
-        [Test]
-        public void EnumMetadata_Should_Have_Correct_AttributeUsage()
-        {
             // When
-            var attributeUsage = typeof(EnumMetadataAttribute).GetCustomAttribute<AttributeUsageAttribute>();
+            Action act = () => OperationExecute.GetName(operation);
 
             // Then
-            attributeUsage.Should().NotBeNull();
-            attributeUsage.ValidOn.Should().Be(AttributeTargets.Field);
-            attributeUsage.AllowMultiple.Should().BeFalse();
+            act.Should().Throw<ArgumentNullException>();
         }
     }
 }

@@ -62,7 +62,7 @@
             }
             catch (Exception ex)
             {
-                Log log = Util.GetLogError(ex, filename, OperationExecute.Validate);
+                Log log = Util.GetLogError(ex, filename, OperationExecute.CreateCustomOperation("Validate", "General validation operation."));
                 OperationResult<string> result = await _logService.CreateLog(log);
                 if (!result.IsSuccessful)
                 {
@@ -99,7 +99,7 @@
             }
             catch (Exception ex)
             {
-                Log log = Util.GetLogError(ex, base64String, OperationExecute.Validate);
+                Log log = Util.GetLogError(ex, base64String, OperationExecute.CreateCustomOperation("Validate", "General validation operation."));
                 OperationResult<string> result = await _logService.CreateLog(log);
                 if (!result.IsSuccessful)
                 {

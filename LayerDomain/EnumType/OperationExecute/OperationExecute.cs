@@ -11,62 +11,152 @@ namespace LayerDomain.EnumType.OperationExecute
     using NUnit.Framework;
 
     [TestFixture]
-    public class OperationExecuteTests
+    internal class OperationExecuteTests
     {
         [Test]
-        public Task When_OperationExecute_Add_Should_Match()
+        public void When_AddOperation_Then_NameAndDescriptionShouldMatch()
         {
             // Given
-            var expectedValue = 0;
-
-            // When
-            var actualValue = (int)OperationExecute.Add;
+            var operation = OperationExecute.Add;
 
             // Then
-            expectedValue.Should().Be(actualValue);
-            return Task.CompletedTask;
+            operation.Should().NotBeNull();
+            operation.Name.Should().Be("Add");
+            operation.Description.Should().Be("Add a new record.");
         }
 
         [Test]
-        public Task When_OperationExecute_Modified_Should_Match()
+        public void When_ModifiedOperation_Then_NameAndDescriptionShouldMatch()
         {
             // Given
-            var expectedValue = 1;
-
-            // When
-            var actualValue = (int)OperationExecute.Modified;
+            var operation = OperationExecute.Modified;
 
             // Then
-            expectedValue.Should().Be(actualValue);
-            return Task.CompletedTask;
+            operation.Should().NotBeNull();
+            operation.Name.Should().Be("Modified");
+            operation.Description.Should().Be("Modify an existing record.");
         }
 
         [Test]
-        public Task When_OperationExecute_Validate_AllValues()
+        public void When_RemoveOperation_Then_NameAndDescriptionShouldMatch()
         {
             // Given
-            var enumValues = Enum.GetValues(typeof(OperationExecute)).Cast<int>();
-
-            // When
-            var actualCount = enumValues.Count();
+            var operation = OperationExecute.Remove;
 
             // Then
-            actualCount.Should().BeGreaterThan(0);
-            return Task.CompletedTask;
+            operation.Should().NotBeNull();
+            operation.Name.Should().Be("Remove");
+            operation.Description.Should().Be("Remove an existing record.");
         }
 
         [Test]
-        public Task When_OperationExecute_ParseFromString_Should_Match()
+        public void When_DeactivateOperation_Then_NameAndDescriptionShouldMatch()
         {
             // Given
-            var stringValue = "Add";
-
-            // When
-            var parsedValue = Enum.Parse<OperationExecute>(stringValue);
+            var operation = OperationExecute.Deactivate;
 
             // Then
-            parsedValue.Should().Be(OperationExecute.Add);
-            return Task.CompletedTask;
+            operation.Should().NotBeNull();
+            operation.Name.Should().Be("Deactivate");
+            operation.Description.Should().Be("Deactivate an existing record.");
+        }
+
+        [Test]
+        public void When_ActivateOperation_Then_NameAndDescriptionShouldMatch()
+        {
+            // Given
+            var operation = OperationExecute.Activate;
+
+            // Then
+            operation.Should().NotBeNull();
+            operation.Name.Should().Be("Activate");
+            operation.Description.Should().Be("Activate a deactivated record.");
+        }
+
+        [Test]
+        public void When_GetUserByIdOperation_Then_NameAndDescriptionShouldMatch()
+        {
+            // Given
+            var operation = OperationExecute.GetUserById;
+
+            // Then
+            operation.Should().NotBeNull();
+            operation.Name.Should().Be("GetUserById");
+            operation.Description.Should().Be("Retrieve a user by their ID.");
+        }
+
+        [Test]
+        public void When_GetAllByFilterOperation_Then_NameAndDescriptionShouldMatch()
+        {
+            // Given
+            var operation = OperationExecute.GetAllByFilter;
+
+            // Then
+            operation.Should().NotBeNull();
+            operation.Name.Should().Be("GetAllByFilter");
+            operation.Description.Should().Be("Retrieve all records that match a given filter.");
+        }
+
+        [Test]
+        public void When_GetPageByFilterOperation_Then_NameAndDescriptionShouldMatch()
+        {
+            // Given
+            var operation = OperationExecute.GetPageByFilter;
+
+            // Then
+            operation.Should().NotBeNull();
+            operation.Name.Should().Be("GetPageByFilter");
+            operation.Description.Should().Be("Retrieve a page of records that match a given filter.");
+        }
+
+        [Test]
+        public void When_GetCountFilterOperation_Then_NameAndDescriptionShouldMatch()
+        {
+            // Given
+            var operation = OperationExecute.GetCountFilter;
+
+            // Then
+            operation.Should().NotBeNull();
+            operation.Name.Should().Be("GetCountFilter");
+            operation.Description.Should().Be("Get the count of records that match a given filter.");
+        }
+
+        [Test]
+        public void When_CreateCustomOperation_Then_NameAndDescriptionShouldMatch()
+        {
+            // Given
+            var operation = OperationExecute.CreateCustomOperation("CustomOp", "This is a custom operation");
+
+            // Then
+            operation.Should().NotBeNull();
+            operation.Name.Should().Be("CustomOp");
+            operation.Description.Should().Be("This is a custom operation");
+        }
+
+        [Test]
+        public void When_GetNameForPredefinedOperation_Then_NameShouldMatch()
+        {
+            // Given
+            var operation = OperationExecute.Add;
+
+            // When
+            var name = OperationExecute.GetName(operation);
+
+            // Then
+            name.Should().Be("Add");
+        }
+
+        [Test]
+        public void When_NullOperationPassedToGetName_Then_ArgumentNullExceptionShouldBeThrown()
+        {
+            // Given
+            OperationExecute? operation = null;
+
+            // When
+            Action act = () => OperationExecute.GetName(operation);
+
+            // Then
+            act.Should().Throw<ArgumentNullException>();
         }
     }
 }

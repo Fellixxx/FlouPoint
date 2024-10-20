@@ -87,7 +87,7 @@
 
             // When
             // Then
-            var result = CreateLog.CreateLogIfValid(string.Empty, string.Empty, 0, 0); // Replace 0 with appropriate enum values if needed
+            var result = CreateLog.CreateLogIfValid(string.Empty, string.Empty, OperationExecute.Add, 0); // Replace 0 with appropriate enum values if needed
             result.Data.Should().BeNull();
             result.Error.Should().Be("DATA_SUBMITTED_INVALID");
             result.IsSuccessful.Should().BeFalse();

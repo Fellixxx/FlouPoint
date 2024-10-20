@@ -24,7 +24,7 @@
                 EntityName = entityName,
                 EntityValue = entityValue,
                 Level = Enum.GetName(level),
-                Operation = Enum.GetName(operation),
+                Operation = OperationExecute.GetName(operation),
                 CreatedAt = DateTime.UtcNow
             };
         }

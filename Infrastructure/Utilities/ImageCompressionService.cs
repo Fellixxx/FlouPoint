@@ -54,7 +54,7 @@
             }
             catch (Exception ex)
             {
-                Log log = Util.GetLogError(ex, inputStream, OperationExecute.Validate);
+                Log log = Util.GetLogError(ex, inputStream, OperationExecute.CreateCustomOperation("Validate", "General validation operation."));
                 OperationResult<string> result = await _logService.CreateLog(log);
                 if (!result.IsSuccessful)
                 {

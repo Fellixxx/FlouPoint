@@ -3,114 +3,52 @@
     /// <summary>
     /// Defines the types of operations that can be executed.
     /// </summary>
-    public enum OperationExecute
+    public class OperationExecute
     {
-        /// <summary>
-        /// Add a new record.
-        /// </summary>
-        [EnumMetadata("Add", "Add a new record.")]
-        Add,
+        public string Name { get; private set; }
+        public string Description { get; private set; }
+        private static readonly Dictionary<string, OperationExecute> _operations = new();
 
-        /// <summary>
-        /// Modify an existing record.
-        /// </summary>
-        [EnumMetadata("Modified", "Modify an existing record.")]
-        Modified,
+        private OperationExecute(string name, string description)
+        {
+            Name = name;
+            Description = description;
+        }
 
-        /// <summary>
-        /// Remove an existing record.
-        /// </summary>
-        [EnumMetadata("Remove", "Remove an existing record.")]
-        Remove,
+        private static OperationExecute RegisterOperation(string name, string description)
+        {
+            if (_operations.ContainsKey(name))
+            {
+                throw new InvalidOperationException($"An operation with the name '{name}' already exists.");
+            }
 
-        /// <summary>
-        /// Deactivate an existing record.
-        /// </summary>
-        [EnumMetadata("Deactivate", "Deactivate an existing record.")]
-        Deactivate,
+            var operation = new OperationExecute(name, description);
+            _operations[name] = operation;
+            return operation;
+        }
 
-        /// <summary>
-        /// Activate a deactivated record.
-        /// </summary>
-        [EnumMetadata("Activate", "Activate a deactivated record.")]
-        Activate,
+        // Predefined Operations
+        public static OperationExecute Add => new("Add", "Add a new record.");
+        public static OperationExecute Modified => new("Modified", "Modify an existing record.");
+        public static OperationExecute Remove => new("Remove", "Remove an existing record.");
+        public static OperationExecute Deactivate => new("Deactivate", "Deactivate an existing record.");
+        public static OperationExecute Activate => new("Activate", "Activate a deactivated record.");
+        public static OperationExecute GetUserById => new("GetUserById", "Retrieve a user by their ID.");
+        public static OperationExecute GetAllByFilter => new("GetAllByFilter", "Retrieve all records that match a given filter.");
+        public static OperationExecute GetPageByFilter => new("GetPageByFilter", "Retrieve a page of records that match a given filter.");
+        public static OperationExecute GetCountFilter => new("GetCountFilter", "Get the count of records that match a given filter.");
 
-        /// <summary>
-        /// Retrieve a user by their ID.
-        /// </summary>
-        [EnumMetadata("GetUserById", "Retrieve a user by their ID.")]
-        GetUserById,
+        public static OperationExecute Activate2 => new("Activate", "Activate a deactivated record.");
 
-        /// <summary>
-        /// Retrieve all records that match a given filter.
-        /// </summary>
-        [EnumMetadata("GetAllByFilter", "Retrieve all records that match a given filter.")]
-        GetAllByFilter,
-
-        /// <summary>
-        /// Retrieve a page of records that match a given filter.
-        /// </summary>
-        [EnumMetadata("GetPageByFilter", "Retrieve a page of records that match a given filter.")]
-        GetPageByFilter,
-
-        /// <summary>
-        /// Get the count of records that match a given filter.
-        /// </summary>
-        [EnumMetadata("GetCountFilter", "Get the count of records that match a given filter.")]
-        GetCountFilter,
-
-        /// <summary>
-        /// Generate a One-Time Password (OTP).
-        /// </summary>
-        [EnumMetadata("GenerateOtp", "Generate a One-Time Password (OTP).")]
-        GenerateOtp,
-
-        /// <summary>
-        /// Login using a One-Time Password (OTP).
-        /// </summary>
-        [EnumMetadata("LoginOtp", "Login using a One-Time Password (OTP).")]
-        LoginOtp,
-
-        /// <summary>
-        /// Standard login operation.
-        /// </summary>
-        [EnumMetadata("Login", "Standard login operation.")]
-        Login,
-
-        /// <summary>
-        /// General validation operation.
-        /// </summary>
-        [EnumMetadata("Validate", "General validation operation.")]
-        Validate,
-
-        /// <summary>
-        /// Validate an email address.
-        /// </summary>
-        [EnumMetadata("ValidateEmail", "Validate an email address.")]
-        ValidateEmail,
-
-        /// <summary>
-        /// Validate the provided One-Time Password (OTP).
-        /// </summary>
-        [EnumMetadata("ValidateOtp", "Validate the provided One-Time Password (OTP).")]
-        ValidateOtp,
-
-        /// <summary>
-        /// Validate a username.
-        /// </summary>
-        [EnumMetadata("ValidateUsername", "Validate a username.")]
-        ValidateUsername,
-
-        /// <summary>
-        /// Set a new password for a user.
-        /// </summary>
-        [EnumMetadata("SetNewPassword", "Set a new password for a user.")]
-        SetNewPassword,
-
-        /// <summary>
-        /// Asynchronously send an email.
-        /// </summary>
-        [EnumMetadata("SendEmailAsync", "Asynchronously send an email.")]
-        SendEmailAsync
+        // Allow for dynamic operations to be created
+        public static OperationExecute CreateCustomOperation(string name, string description)
+        {
+            return RegisterOperation(name, description);
+        }
+        public static string? GetName(OperationExecute enumType)
+        {
+            ArgumentNullException.ThrowIfNull(enumType);
+            return enumType.Name;
+        }
     }
 }
