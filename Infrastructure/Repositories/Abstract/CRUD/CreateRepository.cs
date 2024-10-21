@@ -63,7 +63,7 @@
                 OperationResult<string> result = await _logService.CreateLog(log);
                 if (!result.IsSuccessful)
                 {
-                    result.ToResultWithIntType();
+                    result.ToResultWithStringType();
                 }
 
                 return OperationBuilder<string>.FailureDatabase(Resource.FailedOccurredDataLayer);

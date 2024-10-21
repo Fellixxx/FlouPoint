@@ -68,7 +68,7 @@
                 // Handle logging failure
                 if (!result.IsSuccessful)
                 {
-                    result.ToResultWithBoolType();
+                    result.ToResultWithXType<IQueryable<T>>();
                 }
 
                 // Return a failure operation result for database issues

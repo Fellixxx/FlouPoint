@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Domain.Entities;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Persistence.BaseDbContext.Interface;
 using Persistence.CreateStruture.Constants.ColumnType;
@@ -13,6 +14,11 @@ namespace Persistence.BaseDbContext
     {
         protected readonly IColumnTypes _columnTypes;
         protected readonly ILogger<CommonDbContext> _logger;
+
+        /// <summary>
+        /// Represents a collection of <see cref="ResourceEntry"/> entities in the database context.
+        /// </summary>
+        public virtual DbSet<ResourceEntry> Lists { get; set; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="CommonDbContext"/> class with the specified options, column types, and logger.
@@ -49,6 +55,7 @@ namespace Persistence.BaseDbContext
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+            CommonDbContextHelpers.SetTableResourceEntries(modelBuilder, _columnTypes);
         }
     }
 }

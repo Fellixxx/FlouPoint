@@ -58,7 +58,7 @@
                 // Handle logging failure
                 if (!result.IsSuccessful)
                 {
-                    result.ToResultWithBoolType();
+                    result.ToResultWithIntType();
                 }
 
                 // Return a failure operation result for database issues

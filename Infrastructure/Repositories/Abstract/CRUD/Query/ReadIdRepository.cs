@@ -60,7 +60,7 @@
                 // Handle logging failure
                 if (!result.IsSuccessful)
                 {
-                    result.ToResultWithBoolType();
+                    result.ToResultWithXType<T>();
                 }
 
                 // Return a failure operation result for database issues
@@ -107,7 +107,7 @@
                 // Handle logging failure
                 if (!result.IsSuccessful)
                 {
-                    result.ToResultWithBoolType();
+                    result.ToResultWithXType<T>();
                 }
 
                 // Return a failure operation result for database issues
