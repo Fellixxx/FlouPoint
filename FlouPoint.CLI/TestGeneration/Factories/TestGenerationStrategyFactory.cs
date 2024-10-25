@@ -1,5 +1,5 @@
 ﻿using FlouPoint.CLI.TestGeneration.Interfaces;
-using FlouPoint.CLI.TestGeneration.Strategies;
+using FlouPoint.CLI.TestGeneration.Strategies.Generation;
 
 namespace FlouPoint.CLI.TestGeneration.Factories
 {

@@ -1,7 +1,6 @@
-﻿
-using FlouPoint.CLI.TestGeneration.Strategies.ExpressionGenerator.AST;
+﻿using FlouPoint.CLI.TestGeneration.Strategies.Generation.ExpressionGenerator.AST;
 
-namespace FlouPoint.CLI.TestGeneration.Strategies.ExpressionGenerator
+namespace FlouPoint.CLI.TestGeneration.Strategies.Generation.ExpressionGenerator
 {
     public class TestExpressionGenerator
     {

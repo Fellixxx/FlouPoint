@@ -1,8 +1,8 @@
 ﻿using FlouPoint.CLI.TestGeneration.Interfaces;
 
-namespace FlouPoint.CLI.TestGeneration.Strategies
+namespace FlouPoint.CLI.TestGeneration.Strategies.Generation
 {
-    public class DefaultTestGenerationStrategy : ITestGenerationStrategy
+    public class DecimalTestGenerationStrategy : ITestGenerationStrategy
     {
         public string GenerateTestCode(string className, string propertyName, string expectedValue, string testCase, string expectedResult)
         {

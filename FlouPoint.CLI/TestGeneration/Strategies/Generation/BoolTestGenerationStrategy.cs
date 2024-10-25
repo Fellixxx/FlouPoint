@@ -1,8 +1,8 @@
 ﻿using FlouPoint.CLI.TestGeneration.Interfaces;
 
-namespace FlouPoint.CLI.TestGeneration.Strategies
+namespace FlouPoint.CLI.TestGeneration.Strategies.Generation
 {
-    public class DecimalTestGenerationStrategy : ITestGenerationStrategy
+    public class BoolTestGenerationStrategy : ITestGenerationStrategy
     {
         public string GenerateTestCode(string className, string propertyName, string expectedValue, string testCase, string expectedResult)
         {
@@ -19,4 +19,5 @@ namespace FlouPoint.CLI.TestGeneration.Strategies
             throw new NotImplementedException();
         }
     }
+
 }

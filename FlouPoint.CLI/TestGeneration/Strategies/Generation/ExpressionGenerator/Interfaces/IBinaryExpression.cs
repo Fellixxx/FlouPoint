@@ -1,6 +1,6 @@
-﻿using FlouPoint.CLI.TestGeneration.Strategies.ExpressionGenerator.AST;
+﻿using FlouPoint.CLI.TestGeneration.Strategies.Generation.ExpressionGenerator.AST;
 
-namespace FlouPoint.CLI.TestGeneration.Strategies.ExpressionGenerator.Interfaces
+namespace FlouPoint.CLI.TestGeneration.Strategies.Generation.ExpressionGenerator.Interfaces
 {
     public interface IBinaryExpression
     {

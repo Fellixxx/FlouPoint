@@ -1,7 +1,7 @@
 ﻿using FlouPoint.CLI.TestGeneration.Interfaces;
-using FlouPoint.CLI.TestGeneration.Strategies.ExpressionGenerator;
+using FlouPoint.CLI.TestGeneration.Strategies.Generation.ExpressionGenerator;
 
-namespace FlouPoint.CLI.TestGeneration.Strategies
+namespace FlouPoint.CLI.TestGeneration.Strategies.Generation
 {
     public class StringTestGenerationStrategy : ITestGenerationStrategy
     {

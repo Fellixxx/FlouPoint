@@ -1,4 +1,4 @@
-﻿namespace FlouPoint.CLI.TestGeneration.Strategies.ExpressionGenerator.AST
+﻿namespace FlouPoint.CLI.TestGeneration.Strategies.Generation.ExpressionGenerator.AST
 {
     public class IdentifierExpression : InfixExpression
     {

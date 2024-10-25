@@ -1,6 +1,6 @@
 ﻿using FlouPoint.CLI.TestGeneration.Interfaces;
 
-namespace FlouPoint.CLI.TestGeneration.Strategies
+namespace FlouPoint.CLI.TestGeneration.Strategies.Generation
 {
     public class DateTimeTestGenerationStrategy : ITestGenerationStrategy
     {
