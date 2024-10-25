@@ -1,9 +1,8 @@
 ﻿using FlouPoint.CLI.TestGeneration.Strategies.ExpressionGenerator.AST;
-using System.Linq.Expressions;
 
 namespace FlouPoint.CLI.TestGeneration.Strategies.ExpressionGenerator.Interfaces
 {
-    public interface IBinaryExpression : IExpressionCompound
+    public interface IBinaryExpression
     {
         InfixExpression Left { get; }
         IdentifierExpression Operator { get; }

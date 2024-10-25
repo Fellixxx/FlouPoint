@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using FlouPoint.CLI.TestGeneration.Interfaces;
+﻿using FlouPoint.CLI.TestGeneration.Interfaces;
 
 namespace FlouPoint.CLI.TestGeneration.Strategies
 {
@@ -11,8 +6,7 @@ namespace FlouPoint.CLI.TestGeneration.Strategies
     {
         public string GenerateTestCode(string className, string propertyName, string expectedValue, string testCase, string expectedResult)
         {
-            // Provide a generic implementation or throw an exception
-            throw new NotSupportedException($"Test generation for type '{propertyName}' is not supported.");
+            throw new NotImplementedException();
         }
 
         public List<KeyValuePair<string, string?>> GetInvalidValues()
