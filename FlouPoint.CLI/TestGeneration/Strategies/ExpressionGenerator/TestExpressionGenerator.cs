@@ -1,6 +1,7 @@
-﻿using FlouPoint.CLI.TestGeneration.Strategies.ExpressionGenerator.Strategies.AST;
+﻿
+using FlouPoint.CLI.TestGeneration.Strategies.ExpressionGenerator.AST;
 
-namespace FlouPoint.CLI.TestGeneration.Strategies.ExpressionGenerator.Strategies
+namespace FlouPoint.CLI.TestGeneration.Strategies.ExpressionGenerator
 {
     public class TestExpressionGenerator
     {
@@ -34,7 +35,7 @@ namespace FlouPoint.CLI.TestGeneration.Strategies.ExpressionGenerator.Strategies
                 expectedExpr
             );
 
-            return assertionExpr.ToString(); // Simular la salida de la aserción como string
+            return $"{actualExpr.ToString()}.Should().Be({expectedExpr.ToString()});"; // Simular la salida de la aserción como string
         }
     }
 }

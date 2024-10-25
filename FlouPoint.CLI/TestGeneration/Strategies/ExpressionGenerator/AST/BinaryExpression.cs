@@ -6,7 +6,7 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FlouPoint.CLI.TestGeneration.Strategies.ExpressionGenerator.Strategies.AST
+namespace FlouPoint.CLI.TestGeneration.Strategies.ExpressionGenerator.AST
 {
     public class BinaryExpression : InfixExpression, IBinaryExpression
     {
@@ -23,9 +23,17 @@ namespace FlouPoint.CLI.TestGeneration.Strategies.ExpressionGenerator.Strategies
             Right = right;
         }
 
-        InfixExpression IBinaryExpression.Left => this.Left;
-        IdentifierExpression IBinaryExpression.Operator => this.Operator;
-        TypeArguments? IBinaryExpression.TypeArguments => this.TypeArguments;
-        InfixExpression IBinaryExpression.Right => this.Right;
+        InfixExpression IBinaryExpression.Left => Left;
+        IdentifierExpression IBinaryExpression.Operator => Operator;
+        TypeArguments? IBinaryExpression.TypeArguments => TypeArguments;
+        InfixExpression IBinaryExpression.Right => Right;
+
+        public override string ToString()
+        {
+            var left = Left != null ? Left.ToString() : "null";
+            var right = Right != null ? Right.ToString() : "null";
+            var operatorExpr = Operator != null ? Operator.ToString() : "=";
+            return $"var {left} {operatorExpr} {right};";
+        }
     }
 }

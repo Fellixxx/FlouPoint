@@ -1,4 +1,4 @@
-﻿using FlouPoint.CLI.TestGeneration.Strategies.ExpressionGenerator.Strategies.AST;
+﻿using FlouPoint.CLI.TestGeneration.Strategies.ExpressionGenerator.AST;
 using System.Linq.Expressions;
 
 namespace FlouPoint.CLI.TestGeneration.Strategies.ExpressionGenerator.Interfaces

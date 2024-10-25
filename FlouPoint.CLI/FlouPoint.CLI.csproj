@@ -23,13 +23,4 @@
     </Compile>
   </ItemGroup>
 
-  <ItemGroup>
-    <None Update="Template\TestTemplate_IsInvalid.sbn">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="Template\TestTemplate_IsValid.sbn">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
-
 </Project>

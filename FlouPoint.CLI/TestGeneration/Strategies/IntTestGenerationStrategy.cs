@@ -22,11 +22,9 @@ namespace FlouPoint.CLI.TestGeneration.Strategies
             _whenExpression = new IntWhenExpression();
             _thenExpression = new IntThenExpression();
         }
-        public string GenerateTestCode(string className, string propertyName)
+        public string GenerateTestCode(string className, string propertyName, string expectedValue, string caseTest, string resultExpected)
         {
-            string propertyType = "int";
-            string expectedValue = "42";
-
+            var propertyType = "int";
             // Concatenate the parts of the test code
             string testCode = "[Test]\n" +
                               $"public void When_{propertyName}_IsSetToValidValue_Then_ShouldReturnSameValue()\n" +

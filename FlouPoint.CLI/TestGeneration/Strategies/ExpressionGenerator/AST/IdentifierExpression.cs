@@ -5,7 +5,7 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FlouPoint.CLI.TestGeneration.Strategies.ExpressionGenerator.Strategies.AST
+namespace FlouPoint.CLI.TestGeneration.Strategies.ExpressionGenerator.AST
 {
     public class IdentifierExpression : InfixExpression
     {

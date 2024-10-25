@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FlouPoint.CLI.TestGeneration.Strategies.ExpressionGenerator.Strategies.AST
+namespace FlouPoint.CLI.TestGeneration.Strategies.ExpressionGenerator.AST
 {
     public abstract class InfixExpression : ExpressionCompound
     {

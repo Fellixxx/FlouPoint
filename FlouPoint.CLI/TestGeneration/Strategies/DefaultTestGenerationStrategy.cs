@@ -9,7 +9,7 @@ namespace FlouPoint.CLI.TestGeneration.Strategies
 {
     public class DefaultTestGenerationStrategy : ITestGenerationStrategy
     {
-        public string GenerateTestCode(string className, string propertyName)
+        public string GenerateTestCode(string className, string propertyName, string expectedValue, string caseTest, string resultExpected)
         {
             // Provide a generic implementation or throw an exception
             throw new NotSupportedException($"Test generation for type '{propertyName}' is not supported.");

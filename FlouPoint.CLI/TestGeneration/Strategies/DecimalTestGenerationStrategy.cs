@@ -9,7 +9,7 @@ namespace FlouPoint.CLI.TestGeneration.Strategies
 {
     public class DecimalTestGenerationStrategy : ITestGenerationStrategy
     {
-        public string GenerateTestCode(string className, string propertyName)
+        public string GenerateTestCode(string className, string propertyName, string expectedValue, string caseTest, string resultExpected)
         {
             return $@"
 [Test]
