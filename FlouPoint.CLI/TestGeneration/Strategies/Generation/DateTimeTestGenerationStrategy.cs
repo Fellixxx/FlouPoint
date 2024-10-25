@@ -2,19 +2,15 @@
 
 namespace FlouPoint.CLI.TestGeneration.Strategies.Generation
 {
-    public class DateTimeTestGenerationStrategy : ITestGenerationStrategy
+    public class DateTimeTestGenerationStrategy : BaseTestGenerationStrategy
     {
-        public string GenerateTestCode(string className, string propertyName, string expectedValue, string testCase, string expectedResult)
+
+        public override List<KeyValuePair<string, string?>> GetInvalidValues()
         {
             throw new NotImplementedException();
         }
 
-        public List<KeyValuePair<string, string?>> GetInvalidValues()
-        {
-            throw new NotImplementedException();
-        }
-
-        public List<KeyValuePair<string, string>> GetValidValues()
+        public override List<KeyValuePair<string, string>> GetValidValues()
         {
             throw new NotImplementedException();
         }

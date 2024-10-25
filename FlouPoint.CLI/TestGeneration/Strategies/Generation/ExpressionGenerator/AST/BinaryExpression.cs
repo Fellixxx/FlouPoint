@@ -17,17 +17,10 @@ namespace FlouPoint.CLI.TestGeneration.Strategies.Generation.ExpressionGenerator
             Right = right;
         }
 
-        InfixExpression IBinaryExpression.Left => Left;
-        IdentifierExpression IBinaryExpression.Operator => Operator;
-        TypeArguments? IBinaryExpression.TypeArguments => TypeArguments;
-        InfixExpression IBinaryExpression.Right => Right;
 
         public override string ToString()
         {
-            var left = Left != null ? Left.ToString() : "null";
-            var right = Right != null ? Right.ToString() : "null";
-            var operatorExpr = Operator != null ? Operator.ToString() : "=";
-            return $"var {left} {operatorExpr} {right};";
+            return $"{Left} {Operator} {Right}";
         }
     }
 }
