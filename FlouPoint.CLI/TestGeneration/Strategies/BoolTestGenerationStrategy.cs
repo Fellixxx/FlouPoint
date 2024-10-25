@@ -49,7 +49,7 @@ public void When_{propertyName}_IsSetToFalse_Then_ShouldReturnFalse()
             throw new NotImplementedException();
         }
 
-        public List<KeyValuePair<string, string>> GetSuccessValues()
+        public List<KeyValuePair<string, string>> GetValidValues()
         {
             throw new NotImplementedException();
         }

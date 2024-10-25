@@ -13,22 +13,11 @@ namespace FlouPoint.CLI.TestGeneration.Strategies
         // Método para generar la expresión completa para el test
         private static string GenerateTestExpression(string className, string propertyName, string expectedValue, string testCase, string expectedResult)
         {
-            // Crear la instancia de la clase
             var createInstance = CreateInstance(className);
-
-            // Definir el valor esperado
             var defineExpectedValue = DefineExpectedValue(expectedValue);
-
-            // Asignar el valor esperado a la propiedad
             var assignProperty = AssignProperty(propertyName);
-
-            // Recuperar el valor actual
             var retrieveActualValue = RetrieveActualValue(propertyName);
-
-            // Aserción de que el valor actual es igual al esperado
             var assertion = Assertion();
-
-            // Combinar todo en el método de prueba
             return $@"
                     [Test]
                     public void When_{propertyName}_{testCase}_Then_{expectedResult}()
@@ -86,7 +75,7 @@ namespace FlouPoint.CLI.TestGeneration.Strategies
             );
         }
 
-        public List<KeyValuePair<string, string>> GetSuccessValues()
+        public List<KeyValuePair<string, string>> GetValidValues()
         {
             // Create a list of valid string values with descriptive test case names
             return
@@ -107,18 +96,17 @@ namespace FlouPoint.CLI.TestGeneration.Strategies
         public List<KeyValuePair<string, string?>> GetInvalidValues()
         {
             // Create a list of invalid string values with test case names
-            return
-            [
-                new KeyValuePair<string, string?>("EmptyString", ""),                  // Empty string
-                new KeyValuePair<string, string?>("WhitespaceOnly", "   "),            // Whitespace only
-                new KeyValuePair<string, string?>("NullValue", null),                  // Null value
-                new KeyValuePair<string, string?>("TabCharacter", "\t"),               // Tab character
-                new KeyValuePair<string, string?>("NewlineCharacter", "\n"),           // Newline character
-                new KeyValuePair<string, string?>("SpecialCharacters", "Invalid@@@###"), // String with special characters
-                new KeyValuePair<string, string?>("ExcessivelyLongString", new string('a', 1001)), // Excessively long string (1001 characters)
-                new KeyValuePair<string, string?>("LeadingTrailingWhitespace", "   Invalid Text   "), // Leading and trailing whitespaces
-                new KeyValuePair<string, string?>("QuotedText", "\"Quoted Text\""),    // String with quotes
-                new KeyValuePair<string, string?>("Emojis", "😊😀😁"),                  // String with emojis or non-ASCII characters
+            return [
+                new KeyValuePair<string, string?>("EmptyString", ""),
+                new KeyValuePair<string, string?>("WhitespaceOnly", "   "),
+                new KeyValuePair<string, string?>("NullValue", null),
+                new KeyValuePair<string, string?>("TabCharacter", "\t"),
+                new KeyValuePair<string, string?>("NewlineCharacter", "\n"),
+                new KeyValuePair<string, string?>("SpecialCharacters", "Invalid@@@###"),
+                new KeyValuePair<string, string?>("ExcessivelyLongString", new string('a', 1001)),
+                new KeyValuePair<string, string?>("LeadingTrailingWhitespace", "   Invalid Text   "),
+                new KeyValuePair<string, string?>("QuotedText", "\"Quoted Text\""),
+                new KeyValuePair<string, string?>("Emojis", "😊😀😁"),
             ];
         }
     }

@@ -64,7 +64,7 @@ public void When_{propertyName}_IsSetToZeroDecimal_Then_ShouldReturnZero()
             throw new NotImplementedException();
         }
 
-        public List<KeyValuePair<string, string>> GetSuccessValues()
+        public List<KeyValuePair<string, string>> GetValidValues()
         {
             throw new NotImplementedException();
         }

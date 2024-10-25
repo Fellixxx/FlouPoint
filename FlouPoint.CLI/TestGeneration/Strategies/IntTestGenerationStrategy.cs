@@ -44,7 +44,7 @@ namespace FlouPoint.CLI.TestGeneration.Strategies
             throw new NotImplementedException();
         }
 
-        public List<KeyValuePair<string, string>> GetSuccessValues()
+        public List<KeyValuePair<string, string>> GetValidValues()
         {
             throw new NotImplementedException();
         }

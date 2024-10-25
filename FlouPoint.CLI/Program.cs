@@ -4,6 +4,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Scriban;
 using FlouPoint.CLI.TestGeneration.Factories;
 using FlouPoint.CLI.TestGeneration.Context;
+using FlouPoint.CLI.TestGeneration.Interfaces;
 
 namespace TestGenerator
 {
@@ -39,26 +40,26 @@ namespace TestGenerator
 
             foreach (var prop in properties)
             {
-                var propertyName = prop.Identifier.Text;
                 var propertyType = prop.Type.ToString();
-               
-                //
-                var expectedResult = "Success";
-
-                // Get the appropriate strategy
                 var strategy = TestGenerationStrategyFactory.GetStrategy(propertyType);
-
-                foreach (var testCase in strategy.GetSuccessValues())
-                {
-                    var expectedValue = testCase.Value;
-                    var testCaseValue = testCase.Key;
-                    var context = new TestGeneratorContext(strategy);
-                    var testCode = context.GenerateTestCode(className, propertyName, expectedValue, testCaseValue, expectedResult);
-                    Console.WriteLine(testCode);
-                }
-
+                GenerateTest(className, prop, strategy, true);
+                GenerateTest(className, prop, strategy, false);
             }
         }
 
+        private static void GenerateTest(string className, PropertyDeclarationSyntax prop, ITestGenerationStrategy strategy, bool success)
+        {
+            var expectedResult = success ? "Success" : "Failed";
+            var testCases = success ? strategy.GetValidValues() : strategy.GetInvalidValues();
+            foreach (var testCase in testCases)
+            {
+                var propertyName = prop.Identifier.Text;
+                var expectedValue = testCase.Value;
+                var testCaseValue = testCase.Key;
+                var context = new TestGeneratorContext(strategy);
+                var testCode = context.GenerateTestCode(className, propertyName, expectedValue, testCaseValue, expectedResult);
+                Console.WriteLine(testCode);
+            }
+        }
     }
 }
