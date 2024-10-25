@@ -16,9 +16,9 @@ namespace FlouPoint.CLI.TestGeneration.Context
             _strategy = strategy;
         }
 
-        public string GenerateTestCode(string className, string propertyName, string expectedValue, string caseTest, string resultExpected)
+        public string GenerateTestCode(string className, string propertyName, string expectedValue, string testCase, string expectedResult)
         {
-            return _strategy.GenerateTestCode(className, propertyName, expectedValue, caseTest, resultExpected);
+            return _strategy.GenerateTestCode(className, propertyName, expectedValue, testCase, expectedResult);
         }
     }
 }

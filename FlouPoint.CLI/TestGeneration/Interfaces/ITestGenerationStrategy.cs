@@ -8,6 +8,8 @@ namespace FlouPoint.CLI.TestGeneration.Interfaces
 {
     public interface ITestGenerationStrategy
     {
-        string GenerateTestCode(string className, string propertyName, string expectedValue, string caseTest, string resultExpected);
+        string GenerateTestCode(string className, string propertyName, string expectedValue, string testCase, string expectedResult);
+        List<KeyValuePair<string, string>> GetSuccessValues();
+        List<KeyValuePair<string, string?>> GetInvalidValues();
     }
 }

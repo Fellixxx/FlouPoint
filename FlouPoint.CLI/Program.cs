@@ -41,21 +41,24 @@ namespace TestGenerator
             {
                 var propertyName = prop.Identifier.Text;
                 var propertyType = prop.Type.ToString();
-                var expectedValue = "Test String";
-                var caseTest = "IsValidString";
-                var resultExpected = "Success";
+               
+                //
+                var expectedResult = "Success";
 
                 // Get the appropriate strategy
                 var strategy = TestGenerationStrategyFactory.GetStrategy(propertyType);
 
-                // Use the context to generate the test code
-                var context = new TestGeneratorContext(strategy);
-                var testCode = context.GenerateTestCode(className, propertyName, expectedValue, caseTest, resultExpected);
+                foreach (var testCase in strategy.GetSuccessValues())
+                {
+                    var expectedValue = testCase.Value;
+                    var testCaseValue = testCase.Key;
+                    var context = new TestGeneratorContext(strategy);
+                    var testCode = context.GenerateTestCode(className, propertyName, expectedValue, testCaseValue, expectedResult);
+                    Console.WriteLine(testCode);
+                }
 
-                // Output the test code
-                
-                Console.WriteLine(testCode);
             }
         }
+
     }
 }

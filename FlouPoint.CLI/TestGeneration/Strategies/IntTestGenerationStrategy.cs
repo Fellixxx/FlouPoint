@@ -22,7 +22,7 @@ namespace FlouPoint.CLI.TestGeneration.Strategies
             _whenExpression = new IntWhenExpression();
             _thenExpression = new IntThenExpression();
         }
-        public string GenerateTestCode(string className, string propertyName, string expectedValue, string caseTest, string resultExpected)
+        public string GenerateTestCode(string className, string propertyName, string expectedValue, string testCase, string expectedResult)
         {
             var propertyType = "int";
             // Concatenate the parts of the test code
@@ -37,6 +37,16 @@ namespace FlouPoint.CLI.TestGeneration.Strategies
                               "}\n";
 
             return testCode;
+        }
+
+        public List<KeyValuePair<string, string?>> GetInvalidValues()
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<KeyValuePair<string, string>> GetSuccessValues()
+        {
+            throw new NotImplementedException();
         }
     }
 

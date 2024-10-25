@@ -9,7 +9,7 @@ namespace FlouPoint.CLI.TestGeneration.Strategies
 {
     public class DecimalTestGenerationStrategy : ITestGenerationStrategy
     {
-        public string GenerateTestCode(string className, string propertyName, string expectedValue, string caseTest, string resultExpected)
+        public string GenerateTestCode(string className, string propertyName, string expectedValue, string testCase, string expectedResult)
         {
             return $@"
 [Test]
@@ -57,6 +57,16 @@ public void When_{propertyName}_IsSetToZeroDecimal_Then_ShouldReturnZero()
     actualValue.Should().Be(expectedValue);
 }}
 ";
+        }
+
+        public List<KeyValuePair<string, string?>> GetInvalidValues()
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<KeyValuePair<string, string>> GetSuccessValues()
+        {
+            throw new NotImplementedException();
         }
     }
 }
