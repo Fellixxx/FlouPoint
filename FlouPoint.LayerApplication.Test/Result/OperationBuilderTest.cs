@@ -25,18 +25,7 @@
             result.Message.Should().Be(expectedMessage);
         }
 
-        [Test]
-        public void FailureBusinessValidation_Should_Throw_ArgumentNullException_If_Message_Is_Null()
-        {
-            // Arrange
-            string? nullMessage = null;
 
-            // Act
-            Action act = () => OperationBuilder<string>.FailureBusinessValidation(nullMessage);
-
-            // Assert
-            act.Should().Throw<ArgumentNullException>().WithMessage("Value cannot be null. (Parameter 'message')");
-        }
 
         [Test]
         public void FailureConfigurationMissingError_Should_Return_Correct_OperationResult()

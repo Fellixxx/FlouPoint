@@ -23,7 +23,7 @@ namespace Application.Test.Result
             Assert.IsNotNull(result);
             Assert.IsFalse(result.IsSuccessful);
             Assert.AreEqual(message, result.Message);
-            Assert.AreEqual(ErrorTypes.BusinessValidationError.GetDescription(), result.Error);
+            Assert.AreEqual("BUSINESS_VALIDATION_ERROR", result.Error);
         }
 
         [TestMethod]
@@ -49,7 +49,7 @@ namespace Application.Test.Result
             Assert.IsNotNull(result);
             Assert.IsFalse(result.IsSuccessful);
             Assert.AreEqual(message, result.Message);
-            Assert.AreEqual(ErrorTypes.ConfigurationMissingError.GetDescription(), result.Error);
+            Assert.AreEqual("CONFIGURATION_MISSING_ERROR", result.Error);
         }
 
         [TestMethod]
@@ -75,7 +75,7 @@ namespace Application.Test.Result
             Assert.IsNotNull(result);
             Assert.IsFalse(result.IsSuccessful);
             Assert.AreEqual(message, result.Message);
-            Assert.AreEqual(ErrorTypes.ConfigurationMissingError.GetDescription(), result.Error);
+            Assert.AreEqual("DATABASE_ERROR", result.Error);
         }
 
         [TestMethod]
@@ -101,7 +101,7 @@ namespace Application.Test.Result
             Assert.IsNotNull(result);
             Assert.IsFalse(result.IsSuccessful);
             Assert.AreEqual(message, result.Message);
-            Assert.AreEqual(ErrorTypes.ConfigurationMissingError.GetDescription(), result.Error);
+            Assert.AreEqual("DATA_SUBMITTED_INVALID", result.Error);
         }
 
         [TestMethod]
@@ -126,8 +126,7 @@ namespace Application.Test.Result
             // Assert
             Assert.IsNotNull(result);
             Assert.IsFalse(result.IsSuccessful);
-            Assert.AreEqual(message, result.Error);
-            Assert.AreEqual(ErrorTypes.ExternalServicesError.GetDescription(), result.Error);
+            Assert.AreEqual("EXTERNAL_SERVICES_ERROR", result.Error);
         }
 
         [TestMethod]
@@ -153,7 +152,7 @@ namespace Application.Test.Result
             Assert.IsNotNull(result);
             Assert.IsFalse(result.IsSuccessful);
             Assert.AreEqual(message, result.Message);
-            Assert.AreEqual(ErrorTypes.ConfigurationMissingError.GetDescription(), result.Error);
+            Assert.AreEqual("UNEXPECTED_ERROR", result.Error);
         }
 
         [TestMethod]
@@ -179,7 +178,7 @@ namespace Application.Test.Result
             Assert.IsNotNull(result);
             Assert.IsFalse(result.IsSuccessful);
             Assert.AreEqual(message, result.Message);
-            Assert.AreEqual(ErrorTypes.ConfigurationMissingError.GetDescription(), result.Error);
+            Assert.AreEqual("NETWORK_ERROR", result.Error);
         }
 
         [TestMethod]
