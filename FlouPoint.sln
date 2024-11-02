@@ -3,10 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34902.65
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FlouPointCLI", "FlouPointCLI\FlouPointCLI.csproj", "{C5E979AB-697D-4216-B127-065BF6DFE815}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FlouPoint.GitHub", "FlouPoint.GitHub\FlouPoint.GitHub.csproj", "{A80C6548-A6B4-4FA9-B85E-AD1A5C301737}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "01.Domain", "01.Domain", "{E3ACD0BE-DD42-4965-AE9D-17B912380E3F}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "02.Core", "02.Core", "{58928925-C066-4A85-BB58-7770C15524DF}"
@@ -55,22 +51,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LayerPersistence", "LayerPe
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LayerInfrastructure", "LayerInfrastructure\LayerInfrastructure.csproj", "{341939D9-BC20-4708-B4BA-FD16872F7E1F}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CLI", "CLI", "{95196529-BE74-4572-8777-89067115ECC5}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{C5E979AB-697D-4216-B127-065BF6DFE815}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C5E979AB-697D-4216-B127-065BF6DFE815}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C5E979AB-697D-4216-B127-065BF6DFE815}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C5E979AB-697D-4216-B127-065BF6DFE815}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A80C6548-A6B4-4FA9-B85E-AD1A5C301737}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A80C6548-A6B4-4FA9-B85E-AD1A5C301737}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A80C6548-A6B4-4FA9-B85E-AD1A5C301737}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A80C6548-A6B4-4FA9-B85E-AD1A5C301737}.Release|Any CPU.Build.0 = Release|Any CPU
 		{592A08FC-C55F-4FB0-A35F-71558CED4D25}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{592A08FC-C55F-4FB0-A35F-71558CED4D25}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{592A08FC-C55F-4FB0-A35F-71558CED4D25}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -153,7 +139,6 @@ Global
 		{27FA6857-558A-4E82-9495-0FFC7B9361AF} = {0BA8372F-6A29-476D-ACA0-56BCCB641A33}
 		{93128DCA-8E24-4C15-8960-89DAEF6AD1E5} = {0BA8372F-6A29-476D-ACA0-56BCCB641A33}
 		{341939D9-BC20-4708-B4BA-FD16872F7E1F} = {0BA8372F-6A29-476D-ACA0-56BCCB641A33}
-		{95196529-BE74-4572-8777-89067115ECC5} = {51B4DACD-38B5-43BB-B5A6-79437EC70D1C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {80D22744-314A-4A30-8CCC-C9961C48242B}
