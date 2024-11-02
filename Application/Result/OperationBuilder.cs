@@ -12,9 +12,10 @@
         /// <returns>The operation result</returns>
         public static OperationResult<T> FailureBusinessValidation(string? message)
         {
-            message = message ?? throw new ArgumentNullException(nameof(message));
+            ValidateMessage(message);
             return OperationResult<T>.Failure(message, ErrorTypes.BusinessValidationError);
         }
+
 
         /// <summary>
         /// Creates a failed operation result for a configuration missing error scenario."
@@ -23,6 +24,7 @@
         /// <returns>The operation result</returns>
         public static OperationResult<T> FailureConfigurationMissingError(string message)
         {
+            ValidateMessage(message);
             return OperationResult<T>.Failure(message, ErrorTypes.ConfigurationMissingError);
         }
 
@@ -33,6 +35,7 @@
         /// <returns>The operation result</returns>
         public static OperationResult<T> FailureDatabase(string message)
         {
+            ValidateMessage(message);
             return OperationResult<T>.Failure(message, ErrorTypes.DatabaseError);
         }
 
@@ -43,6 +46,7 @@
         /// <returns>The operation result</returns>
         public static OperationResult<T> FailureDataSubmittedInvalid(string message)
         {
+            ValidateMessage(message);
             return OperationResult<T>.Failure(message, ErrorTypes.DataSubmittedInvalid);
         }
 
@@ -53,10 +57,7 @@
         /// <returns>The operation result</returns>
         public static OperationResult<T> FailureExtenalService(string message)
         {
-            if(string.IsNullOrEmpty(message)) 
-            { 
-                throw new ArgumentNullException(nameof(message)); 
-            }
+            ValidateMessage(message);
             return OperationResult<T>.Failure(message, ErrorTypes.ExternalServicesError);
         }
 
@@ -67,6 +68,7 @@
         /// <returns>The operation result</returns>
         public static OperationResult<T> FailureUnexpectedError(string message)
         {
+            ValidateMessage(message);
             return OperationResult<T>.Failure(message, ErrorTypes.UnexpectedError);
         }
 
@@ -77,7 +79,16 @@
         /// <returns>The operation result</returns>
         public static OperationResult<T> FailureNetworkError(string message)
         {
+            ValidateMessage(message);
             return OperationResult<T>.Failure(message, ErrorTypes.NetworkError);
+        }
+
+        private static void ValidateMessage(string? message)
+        {
+            if (string.IsNullOrWhiteSpace(message))
+            {
+                throw new ArgumentNullException(nameof(message), $"{nameof(ValidateMessage)}: The 'message' parameter cannot be null, empty, or whitespace.");
+            }
         }
     }
 }

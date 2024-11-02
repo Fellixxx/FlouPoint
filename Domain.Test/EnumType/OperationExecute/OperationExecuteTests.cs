@@ -2,6 +2,7 @@
 namespace Domain.Test.EnumType.OperationExecute
 {
     using System;
+    using System.Xml.Linq;
     using Domain.EnumType.OperationExecute;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     [TestClass]
@@ -53,8 +54,8 @@ namespace Domain.Test.EnumType.OperationExecute
         public void CreateCustomOperationPerformsMapping()
         {
             // Arrange
-            var name = "TestValue765520947";
-            var description = "TestValue1800813388";
+            var name = "TestValue765520547";
+            var description = "TestValue134813388";
 
             // Act
             var result = OperationExecute.CreateCustomOperation(name, description);
@@ -67,6 +68,11 @@ namespace Domain.Test.EnumType.OperationExecute
         [TestMethod]
         public void CanGetName()
         {
+            // Arrange
+            var name = "TestValue2029983520";
+            var description = "TestValue1891303237";
+            _testClass = OperationExecute.CreateCustomOperation(name, description);
+
             // Assert
             Assert.IsInstanceOfType(_testClass.Name, typeof(string));
             Assert.AreEqual("TestValue2029983520", _testClass.Name);
@@ -75,6 +81,10 @@ namespace Domain.Test.EnumType.OperationExecute
         [TestMethod]
         public void CanGetDescription()
         {
+            // Arrange
+            var name = "TestValue765520947";
+            var description = "TestValue1891303237";
+            _testClass = OperationExecute.CreateCustomOperation(name, description);
             // Assert
             Assert.IsInstanceOfType(_testClass.Description, typeof(string));
             Assert.AreEqual("TestValue1891303237", _testClass.Description);
@@ -186,6 +196,10 @@ namespace Domain.Test.EnumType.OperationExecute
         [TestMethod]
         public void OperationEqualsItself()
         {
+            // Arrange
+            var name = "TestValue2123520947";
+            var description = "TestValue1891303237";
+            _testClass = OperationExecute.CreateCustomOperation(name, description);
             // Assert
             Assert.IsTrue(_testClass.Equals(_testClass));
             Assert.AreEqual(_testClass.GetHashCode(), _testClass.GetHashCode());
@@ -194,6 +208,10 @@ namespace Domain.Test.EnumType.OperationExecute
         [TestMethod]
         public void OperationDoesNotEqualNull()
         {
+            // Arrange
+            var name = "TestValue76523431947";
+            var description = "TestValue1891303237";
+            _testClass = OperationExecute.CreateCustomOperation(name, description);
             // Assert
             Assert.IsFalse(_testClass.Equals(null));
         }

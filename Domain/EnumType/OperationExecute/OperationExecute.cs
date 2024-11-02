@@ -43,16 +43,21 @@
         // Allow for dynamic operations to be created
         public static OperationExecute CreateCustomOperation(string name, string description)
         {
-            if (string.IsNullOrWhiteSpace(name) || string.IsNullOrWhiteSpace(description))
+            if (string.IsNullOrWhiteSpace(name))
             {
-                throw new ArgumentNullException(nameof(name));
+                throw new ArgumentNullException(nameof(name), "The 'name' parameter cannot be null, empty, or whitespace.");
+            }
+            if (string.IsNullOrWhiteSpace(description))
+            {
+                throw new ArgumentNullException(nameof(description), "The 'description' parameter cannot be null, empty, or whitespace.");
             }
             if (_operations.ContainsKey(name))
             {
-                throw new InvalidOperationException(nameof(name));
+                throw new InvalidOperationException($"An operation with the name '{name}' already exists.");
             }
             return RegisterOperation(name, description);
         }
+
         public static string? GetName(OperationExecute enumType)
         {
             ArgumentNullException.ThrowIfNull(enumType);
