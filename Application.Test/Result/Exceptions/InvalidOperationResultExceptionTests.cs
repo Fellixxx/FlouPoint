@@ -35,5 +35,45 @@ namespace Application.Test.Result.Exceptions
         {
             Assert.ThrowsException<ArgumentNullException>(() => new InvalidOperationResultException(value));
         }
+
+        [TestMethod]
+        public void InvalidOperationResultException_Should_Contain_Provided_Message()
+        {
+            // Arrange
+            var expectedMessage = "This is a custom error message for an invalid operation result.";
+
+            // Act
+            var exception = new InvalidOperationResultException(expectedMessage);
+
+            // Assert
+            Assert.IsNotNull(exception);
+            Assert.AreEqual(expectedMessage, exception.Message);
+        }
+
+        [TestMethod]
+        public void InvalidOperationResultException_Should_Work_With_Throw_And_Catch()
+        {
+            // Arrange
+            var expectedMessage = "This operation is invalid.";
+
+            // Act & Assert
+            var exception = Assert.ThrowsException<InvalidOperationResultException>(() =>
+            {
+                throw new InvalidOperationResultException(expectedMessage);
+            });
+
+            // Assert
+            Assert.AreEqual(expectedMessage, exception.Message);
+        }
+
+        [TestMethod]
+        public void InvalidOperationResultException_Should_Inherit_From_Exception_Class()
+        {
+            // Arrange & Act
+            var exception = new InvalidOperationResultException("Test inheritance");
+
+            // Assert
+            Assert.IsInstanceOfType(exception, typeof(Exception));
+        }
     }
 }

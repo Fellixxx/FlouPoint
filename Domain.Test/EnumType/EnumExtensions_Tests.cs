@@ -1,7 +1,6 @@
 ﻿namespace FlouPoint.LayerDomain.Test.EnumType
 {
-    using NUnit.Framework;
-    using FluentAssertions;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
     using System;
     using Domain.EnumType;
 
@@ -35,13 +34,15 @@
         DuplicateValueOne,
 
         [EnumMetadata("DUPLICATE_NAME", "Second duplicate description.")]
-        DuplicateValueTwo
+        DuplicateValueTwo,
+        ValueWithMetadata,
+        ValueWithoutMetadata
     }
 
-    [TestFixture]
+    [TestClass]
     public class EnumExtensionsTests
     {
-        [Test]
+        [TestMethod]
         public void GetCustomName_Should_Return_CustomName_When_MetadataExists()
         {
             // Given
@@ -52,10 +53,10 @@
             var customName = enumValue.GetCustomName();
 
             // Then
-            customName.Should().Be("UNKNOWN");
+            Assert.AreEqual("UNKNOWN", customName);
         }
 
-        [Test]
+        [TestMethod]
         public void GetCustomName_Should_Return_UNKNOWN_When_MetadataDoesNotExist()
         {
             // Given
@@ -65,10 +66,10 @@
             var customName = enumValue.GetCustomName();
 
             // Then
-            customName.Should().Be("UNKNOWN");
+            Assert.AreEqual("UNKNOWN", customName);
         }
 
-        [Test]
+        [TestMethod]
         public void GetDescription_Should_Return_Description_When_MetadataExists()
         {
             // Given
@@ -79,10 +80,10 @@
             var description = enumValue.GetDescription();
 
             // Then
-            description.Should().Be("Description not available.");
+            Assert.AreEqual("Description not available.", description);
         }
 
-        [Test]
+        [TestMethod]
         public void GetDescription_Should_Return_DefaultMessage_When_MetadataDoesNotExist()
         {
             // Given
@@ -92,10 +93,10 @@
             var description = enumValue.GetDescription();
 
             // Then
-            description.Should().Be("Description not available.");
+            Assert.AreEqual("Description not available.", description);
         }
 
-        [Test]
+        [TestMethod]
         public void GetEnumByName_Should_Return_EnumValue_When_ValidNameIsProvided()
         {
             // Given
@@ -105,39 +106,34 @@
             var enumValue = enumName.GetEnumByName<SampleEnum>();
 
             // Then
-            enumValue.Should().Be(SampleEnum.FirstValue);
+            Assert.AreEqual(SampleEnum.FirstValue, enumValue);
         }
 
-        [Test]
+        [TestMethod]
         public void GetEnumByName_Should_Throw_ArgumentException_When_InvalidNameIsProvided()
         {
             // Given
             var invalidName = "InvalidValue";
 
-            // When
-            Action action = () => invalidName.GetEnumByName<SampleEnum>();
+            // When & Then
+            var exception = Assert.ThrowsException<ArgumentException>(() => invalidName.GetEnumByName<SampleEnum>());
 
-            // Then
-            action.Should().Throw<ArgumentException>()
-                .WithMessage($"No enum value found for {invalidName} in {typeof(SampleEnum)}");
+            Assert.AreEqual($"No enum value found for {invalidName} in {typeof(SampleEnum)}", exception.Message);
         }
 
-        [Test]
+        [TestMethod]
         public void GetEnumByName_Should_Throw_ArgumentException_When_NameIsNull()
         {
             // Given
             string nullName = null;
 
-            // When
-            Action action = () => nullName.GetEnumByName<SampleEnum>();
+            // When & Then
+            var exception = Assert.ThrowsException<ArgumentException>(() => nullName.GetEnumByName<SampleEnum>());
 
-            // Then
-            action.Should().Throw<ArgumentException>()
-                .WithMessage($"No enum value found for  in {typeof(SampleEnum)}");
+            Assert.AreEqual($"No enum value found for  in {typeof(SampleEnum)}", exception.Message);
         }
 
-
-        [Test]
+        [TestMethod]
         public void GetCustomName_Should_Handle_Duplicate_MetadataNames()
         {
             // Given
@@ -147,10 +143,10 @@
             var customName = enumValue.GetCustomName();
 
             // Then
-            customName.Should().Be("UNKNOWN");
+            Assert.AreEqual("UNKNOWN", customName);
         }
 
-        [Test]
+        [TestMethod]
         public void GetDescription_Should_Handle_Duplicate_MetadataDescriptions()
         {
             // Given
@@ -160,11 +156,10 @@
             var description = enumValue.GetDescription();
 
             // Then
-            description.Should().Be("Description not available.");
+            Assert.AreEqual("Description not available.", description);
         }
 
-
-        [Test]
+        [TestMethod]
         public void GetDescription_Should_Return_DefaultMessage_When_InvalidEnumValue()
         {
             // Given
@@ -174,20 +169,17 @@
             var description = invalidEnumValue.GetDescription();
 
             // Then
-            description.Should().Be("Description not available.");
+            Assert.AreEqual("Description not available.", description);
         }
 
-        [Test]
+        [TestMethod]
         public void GetEnumByName_Should_Throw_ArgumentException_When_EmptyStringProvided()
         {
             // Given
             var emptyName = string.Empty;
 
-            // When
-            Action action = () => emptyName.GetEnumByName<SampleEnum>();
-
-            // Then
-            action.Should().Throw<ArgumentException>();
+            // When & Then
+            Assert.ThrowsException<ArgumentException>(() => emptyName.GetEnumByName<SampleEnum>());
         }
     }
 }

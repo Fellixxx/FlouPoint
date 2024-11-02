@@ -1,19 +1,13 @@
-﻿namespace FlouPoint.LayerApplication.Test.Result
-{
-    using Application.Result;
-    using Application.Result.Error;
-    using Application.Result.Exceptions;
-    using FluentAssertions;
-    using Application.Result.Error;
-    using Application.Result.Exceptions;
-    using Application.Result;
-    using NUnit.Framework;
-    using System;
+﻿using Application.Result.Error;
+using Application.Result.Exceptions;
+using Application.Result;
 
-    [TestFixture]
+namespace Application.Test.Result
+{
+    [TestClass]
     public class OperationResultTests
     {
-        [Test]
+        [TestMethod]
         public void Success_Should_Create_Successful_OperationResult_With_Data_And_Message()
         {
             // Arrange
@@ -24,13 +18,13 @@
             var result = OperationResult<string>.Success(expectedData, expectedMessage);
 
             // Assert
-            result.Should().NotBeNull();
-            result.IsSuccessful.Should().BeTrue();
-            result.Data.Should().Be(expectedData);
-            result.Message.Should().Be(expectedMessage);
+            Assert.IsNotNull(result);
+            Assert.IsTrue(result.IsSuccessful);
+            Assert.AreEqual(expectedData, result.Data);
+            Assert.AreEqual(expectedMessage, result.Message);
         }
 
-        [Test]
+        [TestMethod]
         public void Success_Should_Create_Successful_OperationResult_With_Empty_Message_When_None_Provided()
         {
             // Arrange
@@ -40,13 +34,13 @@
             var result = OperationResult<string>.Success(expectedData);
 
             // Assert
-            result.Should().NotBeNull();
-            result.IsSuccessful.Should().BeTrue();
-            result.Data.Should().Be(expectedData);
-            result.Message.Should().BeEmpty();
+            Assert.IsNotNull(result);
+            Assert.IsTrue(result.IsSuccessful);
+            Assert.AreEqual(expectedData, result.Data);
+            Assert.AreEqual(string.Empty, result.Message);
         }
 
-        [Test]
+        [TestMethod]
         public void Failure_Should_Create_Failed_OperationResult_With_Message_And_ErrorType()
         {
             // Arrange
@@ -57,12 +51,13 @@
             var result = OperationResult<string>.Failure(expectedMessage, expectedErrorType);
 
             // Assert
-            result.Should().NotBeNull();
-            result.IsSuccessful.Should().BeFalse();
-            result.Message.Should().Be(expectedMessage);
+            Assert.IsNotNull(result);
+            Assert.IsFalse(result.IsSuccessful);
+            Assert.AreEqual(expectedMessage, result.Message);
+            Assert.AreEqual(expectedErrorType, result.ErrorType);
         }
 
-        [Test]
+        [TestMethod]
         public void AsType_Should_Convert_Failure_Result_To_Different_Generic_Type()
         {
             // Arrange
@@ -72,26 +67,25 @@
             var convertedResult = failureResult.AsType<int>();
 
             // Assert
-            convertedResult.Should().NotBeNull();
-            convertedResult.IsSuccessful.Should().BeFalse();
-            convertedResult.Message.Should().Be(failureResult.Message);
+            Assert.IsNotNull(convertedResult);
+            Assert.IsFalse(convertedResult.IsSuccessful);
+            Assert.AreEqual(failureResult.Message, convertedResult.Message);
+            Assert.AreEqual(failureResult.ErrorType, convertedResult.ErrorType);
         }
 
-        [Test]
+        [TestMethod]
         public void AsType_Should_Throw_InvalidOperationResultException_If_IsSuccessful_Is_True()
         {
             // Arrange
             var successResult = OperationResult<string>.Success("Success");
 
-            // Act
-            Action act = () => successResult.AsType<int>();
+            // Act & Assert
+            var exception = Assert.ThrowsException<InvalidOperationResultException>(() => successResult.AsType<int>());
 
-            // Assert
-            act.Should().Throw<InvalidOperationResultException>()
-                .WithMessage("This method can only be used if the value of IsSuccessful is false.");
+            Assert.AreEqual("This method can only be used if the value of IsSuccessful is false.", exception.Message);
         }
 
-        [Test]
+        [TestMethod]
         public void ToResultWithBoolType_Should_Convert_To_Bool_Type_When_Failure()
         {
             // Arrange
@@ -101,12 +95,13 @@
             var boolResult = failureResult.ToResultWithBoolType();
 
             // Assert
-            boolResult.Should().NotBeNull();
-            boolResult.IsSuccessful.Should().BeFalse();
-            boolResult.Message.Should().Be(failureResult.Message);
+            Assert.IsNotNull(boolResult);
+            Assert.IsFalse(boolResult.IsSuccessful);
+            Assert.AreEqual(failureResult.Message, boolResult.Message);
+            Assert.AreEqual(failureResult.ErrorType, boolResult.ErrorType);
         }
 
-        [Test]
+        [TestMethod]
         public void ToResultWithIntType_Should_Convert_To_Int_Type_When_Failure()
         {
             // Arrange
@@ -116,12 +111,13 @@
             var intResult = failureResult.ToResultWithIntType();
 
             // Assert
-            intResult.Should().NotBeNull();
-            intResult.IsSuccessful.Should().BeFalse();
-            intResult.Message.Should().Be(failureResult.Message);
+            Assert.IsNotNull(intResult);
+            Assert.IsFalse(intResult.IsSuccessful);
+            Assert.AreEqual(failureResult.Message, intResult.Message);
+            Assert.AreEqual(failureResult.ErrorType, intResult.ErrorType);
         }
 
-        [Test]
+        [TestMethod]
         public void ToResultWithStringType_Should_Convert_To_String_Type_When_Failure()
         {
             // Arrange
@@ -131,12 +127,13 @@
             var stringResult = failureResult.ToResultWithStringType();
 
             // Assert
-            stringResult.Should().NotBeNull();
-            stringResult.IsSuccessful.Should().BeFalse();
-            stringResult.Message.Should().Be(failureResult.Message);
+            Assert.IsNotNull(stringResult);
+            Assert.IsFalse(stringResult.IsSuccessful);
+            Assert.AreEqual(failureResult.Message, stringResult.Message);
+            Assert.AreEqual(failureResult.ErrorType, stringResult.ErrorType);
         }
 
-        [Test]
+        [TestMethod]
         public void ToResultWithGenericType_Should_Return_Original_Generic_Type()
         {
             // Arrange
@@ -146,12 +143,13 @@
             var genericResult = failureResult.ToResultWithGenericType();
 
             // Assert
-            genericResult.Should().NotBeNull();
-            genericResult.IsSuccessful.Should().BeFalse();
-            genericResult.Message.Should().Be(failureResult.Message);
+            Assert.IsNotNull(genericResult);
+            Assert.IsFalse(genericResult.IsSuccessful);
+            Assert.AreEqual(failureResult.Message, genericResult.Message);
+            Assert.AreEqual(failureResult.ErrorType, genericResult.ErrorType);
         }
 
-        [Test]
+        [TestMethod]
         public void ToResultWithXType_Should_Convert_To_Specified_Generic_Type_When_Failure()
         {
             // Arrange
@@ -161,10 +159,10 @@
             var xResult = failureResult.ToResultWithXType<DateTime>();
 
             // Assert
-            xResult.Should().NotBeNull();
-            xResult.IsSuccessful.Should().BeFalse();
-            xResult.Message.Should().Be(failureResult.Message);
+            Assert.IsNotNull(xResult);
+            Assert.IsFalse(xResult.IsSuccessful);
+            Assert.AreEqual(failureResult.Message, xResult.Message);
+            Assert.AreEqual(failureResult.ErrorType, xResult.ErrorType);
         }
     }
 }
-

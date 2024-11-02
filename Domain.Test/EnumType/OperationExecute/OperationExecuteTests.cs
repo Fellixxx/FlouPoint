@@ -215,5 +215,147 @@ namespace Domain.Test.EnumType.OperationExecute
             // Assert
             Assert.IsFalse(_testClass.Equals(null));
         }
+        [TestMethod]
+        public void When_AddOperation_Then_NameAndDescriptionShouldMatch()
+        {
+            // Given
+            var operation = OperationExecute.Add;
+
+            // Then
+            Assert.IsNotNull(operation);
+            Assert.AreEqual("Add", operation.Name);
+            Assert.AreEqual("Add a new record.", operation.Description);
+        }
+
+        [TestMethod]
+        public void When_ModifiedOperation_Then_NameAndDescriptionShouldMatch()
+        {
+            // Given
+            var operation = OperationExecute.Modified;
+
+            // Then
+            Assert.IsNotNull(operation);
+            Assert.AreEqual("Modified", operation.Name);
+            Assert.AreEqual("Modify an existing record.", operation.Description);
+        }
+
+        [TestMethod]
+        public void When_RemoveOperation_Then_NameAndDescriptionShouldMatch()
+        {
+            // Given
+            var operation = OperationExecute.Remove;
+
+            // Then
+            Assert.IsNotNull(operation);
+            Assert.AreEqual("Remove", operation.Name);
+            Assert.AreEqual("Remove an existing record.", operation.Description);
+        }
+
+        [TestMethod]
+        public void When_DeactivateOperation_Then_NameAndDescriptionShouldMatch()
+        {
+            // Given
+            var operation = OperationExecute.Deactivate;
+
+            // Then
+            Assert.IsNotNull(operation);
+            Assert.AreEqual("Deactivate", operation.Name);
+            Assert.AreEqual("Deactivate an existing record.", operation.Description);
+        }
+
+        [TestMethod]
+        public void When_ActivateOperation_Then_NameAndDescriptionShouldMatch()
+        {
+            // Given
+            var operation = OperationExecute.Activate;
+
+            // Then
+            Assert.IsNotNull(operation);
+            Assert.AreEqual("Activate", operation.Name);
+            Assert.AreEqual("Activate a deactivated record.", operation.Description);
+        }
+
+        [TestMethod]
+        public void When_GetUserByIdOperation_Then_NameAndDescriptionShouldMatch()
+        {
+            // Given
+            var operation = OperationExecute.GetUserById;
+
+            // Then
+            Assert.IsNotNull(operation);
+            Assert.AreEqual("GetUserById", operation.Name);
+            Assert.AreEqual("Retrieve a user by their ID.", operation.Description);
+        }
+
+        [TestMethod]
+        public void When_GetAllByFilterOperation_Then_NameAndDescriptionShouldMatch()
+        {
+            // Given
+            var operation = OperationExecute.GetAllByFilter;
+
+            // Then
+            Assert.IsNotNull(operation);
+            Assert.AreEqual("GetAllByFilter", operation.Name);
+            Assert.AreEqual("Retrieve all records that match a given filter.", operation.Description);
+        }
+
+        [TestMethod]
+        public void When_GetPageByFilterOperation_Then_NameAndDescriptionShouldMatch()
+        {
+            // Given
+            var operation = OperationExecute.GetPageByFilter;
+
+            // Then
+            Assert.IsNotNull(operation);
+            Assert.AreEqual("GetPageByFilter", operation.Name);
+            Assert.AreEqual("Retrieve a page of records that match a given filter.", operation.Description);
+        }
+
+        [TestMethod]
+        public void When_GetCountFilterOperation_Then_NameAndDescriptionShouldMatch()
+        {
+            // Given
+            var operation = OperationExecute.GetCountFilter;
+
+            // Then
+            Assert.IsNotNull(operation);
+            Assert.AreEqual("GetCountFilter", operation.Name);
+            Assert.AreEqual("Get the count of records that match a given filter.", operation.Description);
+        }
+
+        [TestMethod]
+        public void When_CreateCustomOperation_Then_NameAndDescriptionShouldMatch()
+        {
+            // Given
+            var operation = OperationExecute.CreateCustomOperation("CustomOp", "This is a custom operation");
+
+            // Then
+            Assert.IsNotNull(operation);
+            Assert.AreEqual("CustomOp", operation.Name);
+            Assert.AreEqual("This is a custom operation", operation.Description);
+        }
+
+        [TestMethod]
+        public void When_GetNameForPredefinedOperation_Then_NameShouldMatch()
+        {
+            // Given
+            var operation = OperationExecute.Add;
+
+            // When
+            var name = OperationExecute.GetName(operation);
+
+            // Then
+            Assert.AreEqual("Add", name);
+        }
+
+        [TestMethod]
+        public void When_NullOperationPassedToGetName_Then_ArgumentNullExceptionShouldBeThrown()
+        {
+            // Given
+            OperationExecute operation = null;
+
+            // When & Then
+            Assert.ThrowsException<ArgumentNullException>(() => OperationExecute.GetName(operation));
+        }
     }
 }

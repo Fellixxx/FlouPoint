@@ -12,7 +12,7 @@
         /// <summary>
         /// Specifies the type of error, if any, that occurred during the operation.
         /// </summary>
-        protected ErrorTypes ErrorType { get; set; }
+        public ErrorTypes ErrorType { get; set; }
 
         /// <summary>
         /// Indicates if the operation was successful.
