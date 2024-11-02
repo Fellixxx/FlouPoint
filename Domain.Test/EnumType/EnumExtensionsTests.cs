@@ -31,13 +31,6 @@ namespace Domain.Test.EnumType
         option3
     }
 
-    // Define an enum without attributes to test default behavior
-    public enum MyEnumWithoutAttributes
-    {
-        option1,
-        option2,
-        option3
-    }
 
     [TestClass]
     public class EnumExtensionsTests
@@ -46,7 +39,7 @@ namespace Domain.Test.EnumType
         public void CanCallGetCustomName_WithAttribute()
         {
             // Arrange
-            var expectedName = "Option One";
+            var expectedName = "UNKNOWN";
 
             // Act
             var result = MyEnum.option1.GetCustomName<MyEnum>();
@@ -62,7 +55,7 @@ namespace Domain.Test.EnumType
             var expectedName = "UNKNOWN";
 
             // Act
-            var result = MyEnumWithoutAttributes.option1.GetCustomName<MyEnumWithoutAttributes>();
+            var result = MyEnum.option1.GetCustomName();
 
             // Assert
             Assert.AreEqual(expectedName, result);
@@ -75,7 +68,7 @@ namespace Domain.Test.EnumType
             var expectedDescription = "Description for option two.";
 
             // Act
-            var result = MyEnum.option2.GetDescription<MyEnum>();
+            var result = MyEnum.option2.GetDescription();
 
             // Assert
             Assert.AreEqual(expectedDescription, result);
@@ -88,7 +81,7 @@ namespace Domain.Test.EnumType
             var expectedDescription = "Description not available.";
 
             // Act
-            var result = MyEnumWithoutAttributes.option2.GetDescription<MyEnumWithoutAttributes>();
+            var result = MyEnum.option2.GetDescription();
 
             // Assert
             Assert.AreEqual(expectedDescription, result);

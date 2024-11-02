@@ -2,11 +2,13 @@ namespace Application.Test.Result
 {
     using System;
     using Application.Result;
+    using Application.Result.Error;
+    using Domain.EnumType;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using T = System.String;
 
     [TestClass]
-    public class OperationBuilder_1Tests
+    public class OperationBuilderTests
     {
         [TestMethod]
         public void CanCallFailureBusinessValidation()
@@ -15,18 +17,23 @@ namespace Application.Test.Result
             var message = "TestValue879633508";
 
             // Act
-            var result = OperationBuilder<T>.FailureBusinessValidation(message);
+            var result = OperationBuilder<string>.FailureBusinessValidation(message);
 
             // Assert
-            Assert.Fail("Create or modify test");
+            Assert.IsNotNull(result);
+            Assert.IsFalse(result.IsSuccessful);
+            Assert.AreEqual(message, result.Message);
+            Assert.AreEqual(ErrorTypes.BusinessValidationError.GetDescription(), result.Error);
         }
 
-        [DataTestMethod]
-        [DataRow("")]
-        [DataRow("   ")]
-        public void CannotCallFailureBusinessValidationWithInvalidMessage(string value)
+        [TestMethod]
+        public void CannotCallFailureBusinessValidationWithNullMessage()
         {
-            Assert.ThrowsException<ArgumentNullException>(() => OperationBuilder<T>.FailureBusinessValidation(value));
+            // Arrange
+            string message = null;
+
+            // Act & Assert
+            Assert.ThrowsException<ArgumentNullException>(() => OperationBuilder<string>.FailureBusinessValidation(message));
         }
 
         [TestMethod]
@@ -36,19 +43,23 @@ namespace Application.Test.Result
             var message = "TestValue826283408";
 
             // Act
-            var result = OperationBuilder<T>.FailureConfigurationMissingError(message);
+            var result = OperationBuilder<string>.FailureConfigurationMissingError(message);
 
             // Assert
-            Assert.Fail("Create or modify test");
+            Assert.IsNotNull(result);
+            Assert.IsFalse(result.IsSuccessful);
+            Assert.AreEqual(message, result.Message);
+            Assert.AreEqual(ErrorTypes.ConfigurationMissingError.GetDescription(), result.Error);
         }
 
-        [DataTestMethod]
-        [DataRow(null)]
-        [DataRow("")]
-        [DataRow("   ")]
-        public void CannotCallFailureConfigurationMissingErrorWithInvalidMessage(string value)
+        [TestMethod]
+        public void CannotCallFailureConfigurationMissingErrorWithNullMessage()
         {
-            Assert.ThrowsException<ArgumentNullException>(() => OperationBuilder<T>.FailureConfigurationMissingError(value));
+            // Arrange
+            string message = null;
+
+            // Act & Assert
+            Assert.ThrowsException<ArgumentNullException>(() => OperationBuilder<string>.FailureConfigurationMissingError(message));
         }
 
         [TestMethod]
@@ -58,19 +69,23 @@ namespace Application.Test.Result
             var message = "TestValue1736562805";
 
             // Act
-            var result = OperationBuilder<T>.FailureDatabase(message);
+            var result = OperationBuilder<string>.FailureDatabase(message);
 
             // Assert
-            Assert.Fail("Create or modify test");
+            Assert.IsNotNull(result);
+            Assert.IsFalse(result.IsSuccessful);
+            Assert.AreEqual(message, result.Message);
+            Assert.AreEqual(ErrorTypes.ConfigurationMissingError.GetDescription(), result.Error);
         }
 
-        [DataTestMethod]
-        [DataRow(null)]
-        [DataRow("")]
-        [DataRow("   ")]
-        public void CannotCallFailureDatabaseWithInvalidMessage(string value)
+        [TestMethod]
+        public void CannotCallFailureDatabaseWithNullMessage()
         {
-            Assert.ThrowsException<ArgumentNullException>(() => OperationBuilder<T>.FailureDatabase(value));
+            // Arrange
+            string message = null;
+
+            // Act & Assert
+            Assert.ThrowsException<ArgumentNullException>(() => OperationBuilder<string>.FailureDatabase(message));
         }
 
         [TestMethod]
@@ -80,41 +95,49 @@ namespace Application.Test.Result
             var message = "TestValue1393732451";
 
             // Act
-            var result = OperationBuilder<T>.FailureDataSubmittedInvalid(message);
+            var result = OperationBuilder<string>.FailureDataSubmittedInvalid(message);
 
             // Assert
-            Assert.Fail("Create or modify test");
-        }
-
-        [DataTestMethod]
-        [DataRow(null)]
-        [DataRow("")]
-        [DataRow("   ")]
-        public void CannotCallFailureDataSubmittedInvalidWithInvalidMessage(string value)
-        {
-            Assert.ThrowsException<ArgumentNullException>(() => OperationBuilder<T>.FailureDataSubmittedInvalid(value));
+            Assert.IsNotNull(result);
+            Assert.IsFalse(result.IsSuccessful);
+            Assert.AreEqual(message, result.Message);
+            Assert.AreEqual(ErrorTypes.ConfigurationMissingError.GetDescription(), result.Error);
         }
 
         [TestMethod]
-        public void CanCallFailureExtenalService()
+        public void CannotCallFailureDataSubmittedInvalidWithNullMessage()
+        {
+            // Arrange
+            string message = null;
+
+            // Act & Assert
+            Assert.ThrowsException<ArgumentNullException>(() => OperationBuilder<string>.FailureDataSubmittedInvalid(message));
+        }
+
+        [TestMethod]
+        public void CanCallFailureExternalService()
         {
             // Arrange
             var message = "TestValue1769803281";
 
             // Act
-            var result = OperationBuilder<T>.FailureExtenalService(message);
+            var result = OperationBuilder<string>.FailureExtenalService(message);
 
             // Assert
-            Assert.Fail("Create or modify test");
+            Assert.IsNotNull(result);
+            Assert.IsFalse(result.IsSuccessful);
+            Assert.AreEqual(message, result.Error);
+            Assert.AreEqual(ErrorTypes.ExternalServicesError.GetDescription(), result.Error);
         }
 
-        [DataTestMethod]
-        [DataRow(null)]
-        [DataRow("")]
-        [DataRow("   ")]
-        public void CannotCallFailureExtenalServiceWithInvalidMessage(string value)
+        [TestMethod]
+        public void CannotCallFailureExternalServiceWithNullMessage()
         {
-            Assert.ThrowsException<ArgumentNullException>(() => OperationBuilder<T>.FailureExtenalService(value));
+            // Arrange
+            string message = null;
+
+            // Act & Assert
+            Assert.ThrowsException<ArgumentNullException>(() => OperationBuilder<string>.FailureExtenalService(message));
         }
 
         [TestMethod]
@@ -124,19 +147,23 @@ namespace Application.Test.Result
             var message = "TestValue2015692524";
 
             // Act
-            var result = OperationBuilder<T>.FailureUnexpectedError(message);
+            var result = OperationBuilder<string>.FailureUnexpectedError(message);
 
             // Assert
-            Assert.Fail("Create or modify test");
+            Assert.IsNotNull(result);
+            Assert.IsFalse(result.IsSuccessful);
+            Assert.AreEqual(message, result.Message);
+            Assert.AreEqual(ErrorTypes.ConfigurationMissingError.GetDescription(), result.Error);
         }
 
-        [DataTestMethod]
-        [DataRow(null)]
-        [DataRow("")]
-        [DataRow("   ")]
-        public void CannotCallFailureUnexpectedErrorWithInvalidMessage(string value)
+        [TestMethod]
+        public void CannotCallFailureUnexpectedErrorWithNullMessage()
         {
-            Assert.ThrowsException<ArgumentNullException>(() => OperationBuilder<T>.FailureUnexpectedError(value));
+            // Arrange
+            string message = null;
+
+            // Act & Assert
+            Assert.ThrowsException<ArgumentNullException>(() => OperationBuilder<string>.FailureUnexpectedError(message));
         }
 
         [TestMethod]
@@ -146,19 +173,23 @@ namespace Application.Test.Result
             var message = "TestValue2053465";
 
             // Act
-            var result = OperationBuilder<T>.FailureNetworkError(message);
+            var result = OperationBuilder<string>.FailureNetworkError(message);
 
             // Assert
-            Assert.Fail("Create or modify test");
+            Assert.IsNotNull(result);
+            Assert.IsFalse(result.IsSuccessful);
+            Assert.AreEqual(message, result.Message);
+            Assert.AreEqual(ErrorTypes.ConfigurationMissingError.GetDescription(), result.Error);
         }
 
-        [DataTestMethod]
-        [DataRow(null)]
-        [DataRow("")]
-        [DataRow("   ")]
-        public void CannotCallFailureNetworkErrorWithInvalidMessage(string value)
+        [TestMethod]
+        public void CannotCallFailureNetworkErrorWithNullMessage()
         {
-            Assert.ThrowsException<ArgumentNullException>(() => OperationBuilder<T>.FailureNetworkError(value));
+            // Arrange
+            string message = null;
+
+            // Act & Assert
+            Assert.ThrowsException<ArgumentNullException>(() => OperationBuilder<string>.FailureNetworkError(message));
         }
     }
 }

@@ -53,6 +53,10 @@
         /// <returns>The operation result</returns>
         public static OperationResult<T> FailureExtenalService(string message)
         {
+            if(string.IsNullOrEmpty(message)) 
+            { 
+                throw new ArgumentNullException(nameof(message)); 
+            }
             return OperationResult<T>.Failure(message, ErrorTypes.ExternalServicesError);
         }
 
