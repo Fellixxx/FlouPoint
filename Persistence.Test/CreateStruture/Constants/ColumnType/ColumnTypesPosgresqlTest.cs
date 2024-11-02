@@ -1,6 +1,4 @@
-﻿using FluentAssertions;
-using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
-using NUnit.Framework;
+﻿using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using Persistence.CreateStruture.Constants.ColumnType;
 using System;
 using System.Collections.Generic;
@@ -10,135 +8,135 @@ using System.Threading.Tasks;
 
 namespace LayerPersistence
 {
-    [TestFixture]
+    [TestClass]
     public class ColumnTypesPosgresqlTests
     {
         private ColumnTypesPosgresql _columnTypes;
 
-        [SetUp]
+        [TestInitialize]
         public void Setup()
         {
             _columnTypes = new ColumnTypesPosgresql();
         }
 
-        [Test]
+        [TestMethod]
         public void TypeBool_Should_Return_Boolean()
         {
             // Act
             var result = _columnTypes.TypeBool;
 
             // Assert
-            result.Should().Be("boolean");
+            Assert.AreEqual(result,"boolean");
         }
 
-        [Test]
+        [TestMethod]
         public void TypeTime_Should_Return_Timestamp_With_TimeZone()
         {
             // Act
             var result = _columnTypes.TypeTime;
 
             // Assert
-            result.Should().Be("TIMESTAMPTZ");
+            Assert.AreEqual(result,"TIMESTAMPTZ");
         }
 
-        [Test]
+        [TestMethod]
         public void TypeVar_Should_Return_Character_Varying_100()
         {
             // Act
             var result = _columnTypes.TypeVar;
 
             // Assert
-            result.Should().Be("character varying(100)");
+            Assert.AreEqual(result,"character varying(100)");
         }
 
-        [Test]
+        [TestMethod]
         public void TypeVar50_Should_Return_Character_Varying_50()
         {
             // Act
             var result = _columnTypes.TypeVar50;
 
             // Assert
-            result.Should().Be("character varying(50)");
+            Assert.AreEqual(result,"character varying(50)");
         }
 
-        [Test]
+        [TestMethod]
         public void TypeVar64_Should_Return_Char_64()
         {
             // Act
             var result = _columnTypes.TypeVar64;
 
             // Assert
-            result.Should().Be("character char(64)");
+            Assert.AreEqual(result,"character char(64)");
         }
 
-        [Test]
+        [TestMethod]
         public void TypeBlob_Should_Return_Blob()
         {
             // Act
             var result = _columnTypes.TypeBlob;
 
             // Assert
-            result.Should().Be("Blob");
+            Assert.AreEqual(result,"Blob");
         }
 
-        [Test]
+        [TestMethod]
         public void Integer_Should_Return_Integer()
         {
             // Act
             var result = _columnTypes.Integer;
 
             // Assert
-            result.Should().Be("integer");
+            Assert.AreEqual(result,"integer");
         }
 
-        [Test]
+        [TestMethod]
         public void Long_Should_Return_Bigint_Unsigned_Default_Null()
         {
             // Act
             var result = _columnTypes.Long;
 
             // Assert
-            result.Should().Be("bigint unsigned DEFAULT NULL");
+            Assert.AreEqual(result,"bigint unsigned DEFAULT NULL");
         }
 
-        [Test]
+        [TestMethod]
         public void Strategy_Should_Return_Npgsql_ValueGenerationStrategy()
         {
             // Act
             var result = _columnTypes.Strategy;
 
             // Assert
-            result.Should().Be("Npgsql:ValueGenerationStrategy");
+            Assert.AreEqual(result,"Npgsql:ValueGenerationStrategy");
         }
 
-        [Test]
+        [TestMethod]
         public void SqlStrategy_Should_Return_IdentityByDefaultColumn()
         {
             // Act
             var result = _columnTypes.SqlStrategy;
 
             // Assert
-            result.Should().Be(NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+            Assert.AreEqual(result,NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
         }
 
-        [Test]
+        [TestMethod]
         public void Name_Should_Return_PostgreSQL_Encoding()
         {
             // Act
             var result = _columnTypes.Name;
 
             // Assert
-            result.Should().Be("PostgreSQL:Encoding");
+            Assert.AreEqual(result,"PostgreSQL:Encoding");
         }
 
-        [Test]
+        [TestMethod]
         public void Value_Should_Return_UTF8()
         {
             // Act
             var result = _columnTypes.Value;
 
             // Assert
-            result.Should().Be("UTF8");
+            Assert.AreEqual(result,"UTF8");
         }
     }
 }

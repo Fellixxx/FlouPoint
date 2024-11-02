@@ -1,144 +1,138 @@
-﻿using FluentAssertions;
-using MySql.EntityFrameworkCore.Metadata;
-using NUnit.Framework;
-using Persistence.CreateStruture.Constants.ColumnType;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace LayerPersistence
+﻿namespace Persistence.Test.CreateStruture.Constants.ColumnType
 {
-    [TestFixture]
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using MySql.EntityFrameworkCore.Metadata;
+    using Persistence.CreateStruture.Constants.ColumnType;
+
+    [TestClass]
     public class ColumnTypesMySQLTests
     {
         private ColumnTypesMySQL _columnTypes;
 
-        [SetUp]
+        [TestInitialize]
         public void Setup()
         {
             _columnTypes = new ColumnTypesMySQL();
         }
 
-        [Test]
+        [TestMethod]
         public void TypeBool_Should_Return_TinyInt_1()
         {
             // Act
             var result = _columnTypes.TypeBool;
 
             // Assert
-            result.Should().Be("TINYINT(1)");
+            Assert.AreEqual(result, "TINYINT(1)");
         }
 
-        [Test]
+        [TestMethod]
         public void TypeTime_Should_Return_Datetime()
         {
             // Act
             var result = _columnTypes.TypeTime;
 
             // Assert
-            result.Should().Be("DATETIME");
+            Assert.AreEqual(result, "DATETIME");
         }
 
-        [Test]
+        [TestMethod]
         public void TypeVar_Should_Return_Varchar_100()
         {
             // Act
             var result = _columnTypes.TypeVar;
 
             // Assert
-            result.Should().Be("VARCHAR(100)");
+            Assert.AreEqual(result, "VARCHAR(100)");
         }
 
-        [Test]
+        [TestMethod]
         public void TypeVar50_Should_Return_Varchar_50()
         {
             // Act
             var result = _columnTypes.TypeVar50;
 
             // Assert
-            result.Should().Be("VARCHAR(50)");
+            Assert.AreEqual(result, "VARCHAR(50)");
         }
 
-        [Test]
+        [TestMethod]
         public void TypeVar64_Should_Return_Char_64()
         {
             // Act
             var result = _columnTypes.TypeVar64;
 
             // Assert
-            result.Should().Be("char(64)");
+            Assert.AreEqual(result, "char(64)");
         }
 
-        [Test]
+        [TestMethod]
         public void TypeBlob_Should_Return_Blob()
         {
             // Act
             var result = _columnTypes.TypeBlob;
 
             // Assert
-            result.Should().Be("Blob");
+            Assert.AreEqual(result, "Blob");
         }
 
-        [Test]
+        [TestMethod]
         public void Integer_Should_Return_Int()
         {
             // Act
             var result = _columnTypes.Integer;
 
             // Assert
-            result.Should().Be("INT");
+            Assert.AreEqual(result, "INT");
         }
 
-        [Test]
+        [TestMethod]
         public void Long_Should_Return_Bigint_Unsigned()
         {
             // Act
             var result = _columnTypes.Long;
 
             // Assert
-            result.Should().Be("bigint unsigned");
+            Assert.AreEqual(result, "bigint unsigned");
         }
 
-        [Test]
+        [TestMethod]
         public void Strategy_Should_Return_MySql_ValueGenerationStrategy()
         {
             // Act
             var result = _columnTypes.Strategy;
 
             // Assert
-            result.Should().Be("MySql:ValueGenerationStrategy");
+            Assert.AreEqual(result, "MySql:ValueGenerationStrategy");
         }
 
-        [Test]
+        [TestMethod]
         public void SqlStrategy_Should_Return_IdentityColumn()
         {
             // Act
             var result = _columnTypes.SqlStrategy;
 
             // Assert
-            result.Should().Be(MySQLValueGenerationStrategy.IdentityColumn);
+            Assert.AreEqual(result, MySQLValueGenerationStrategy.IdentityColumn);
         }
 
-        [Test]
+        [TestMethod]
         public void Name_Should_Return_MySQL_Charset()
         {
             // Act
             var result = _columnTypes.Name;
 
             // Assert
-            result.Should().Be("MySQL:Charset");
+            Assert.AreEqual(result, "MySQL:Charset");
         }
 
-        [Test]
+        [TestMethod]
         public void Value_Should_Return_Utf8mb4()
         {
             // Act
             var result = _columnTypes.Value;
 
             // Assert
-            result.Should().Be("utf8mb4");
+            Assert.AreEqual(result, "utf8mb4");
         }
     }
 }

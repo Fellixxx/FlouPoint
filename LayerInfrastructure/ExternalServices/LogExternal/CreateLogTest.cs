@@ -2,7 +2,6 @@
 using Domain.EnumType.OperationExecute;
 using FluentAssertions;
 using Infrastructure.ExternalServices.LogExternal;
-using LayerPersistence.Repositories;
 using Moq;
 using Newtonsoft.Json;
 using NUnit.Framework;

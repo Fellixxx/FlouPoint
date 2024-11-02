@@ -31,7 +31,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Infrastructure\Infrastructure.csproj" />
-    <ProjectReference Include="..\LayerPersistence\LayerPersistence.csproj" />
   </ItemGroup>
 
   <ItemGroup>
