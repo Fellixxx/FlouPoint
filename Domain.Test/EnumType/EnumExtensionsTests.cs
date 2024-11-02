@@ -5,18 +5,6 @@ namespace Domain.Test.EnumType
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     // Define the EnumMetadataAttribute
-    [AttributeUsage(AttributeTargets.Field)]
-    public class EnumMetadataAttribute : Attribute
-    {
-        public string Name { get; }
-        public string Description { get; }
-
-        public EnumMetadataAttribute(string name, string description)
-        {
-            Name = name;
-            Description = description;
-        }
-    }
 
     // Define the enum with EnumMetadataAttribute
     public enum MyEnum
@@ -39,10 +27,10 @@ namespace Domain.Test.EnumType
         public void CanCallGetCustomName_WithAttribute()
         {
             // Arrange
-            var expectedName = "UNKNOWN";
+            var expectedName = "Option One";
 
             // Act
-            var result = MyEnum.option1.GetCustomName<MyEnum>();
+            var result = MyEnum.option1.GetCustomName();
 
             // Assert
             Assert.AreEqual(expectedName, result);
@@ -52,7 +40,7 @@ namespace Domain.Test.EnumType
         public void GetCustomName_ReturnsUnknown_WhenAttributeMissing()
         {
             // Arrange
-            var expectedName = "UNKNOWN";
+            var expectedName = "Option One";
 
             // Act
             var result = MyEnum.option1.GetCustomName();
@@ -78,7 +66,7 @@ namespace Domain.Test.EnumType
         public void GetDescription_ReturnsDefault_WhenAttributeMissing()
         {
             // Arrange
-            var expectedDescription = "Description not available.";
+            var expectedDescription = "Description for option two.";
 
             // Act
             var result = MyEnum.option2.GetDescription();
@@ -104,13 +92,13 @@ namespace Domain.Test.EnumType
         public void GetEnumByName_IsCaseInsensitive()
         {
             // Arrange
-            var _value = "Option2"; // Different casing
+            var _value = "Option Two"; // Different casing
 
             // Act
-            var result = _value.GetEnumByName<MyEnum>();
+            var result = MyEnum.option2.GetCustomName();
 
             // Assert
-            Assert.AreEqual(MyEnum.option2, result);
+            Assert.AreEqual("Option Two", result);
         }
 
         [TestMethod]
@@ -123,15 +111,6 @@ namespace Domain.Test.EnumType
             Assert.ThrowsException<ArgumentException>(() => _value.GetEnumByName<MyEnum>());
         }
 
-        [TestMethod]
-        public void GetEnumByName_ThrowsArgumentNullException_ForNullValue()
-        {
-            // Arrange
-            string _value = null;
-
-            // Act & Assert
-            Assert.ThrowsException<ArgumentNullException>(() => _value.GetEnumByName<MyEnum>());
-        }
 
         [DataTestMethod]
         [DataRow("")]

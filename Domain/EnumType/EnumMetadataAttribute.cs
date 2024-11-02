@@ -27,6 +27,11 @@
         /// <param name="description">The description of the enum field.</param>
         public EnumMetadataAttribute(string name, string description)
         {
+            if (string.IsNullOrWhiteSpace(name) || string.IsNullOrWhiteSpace(description))
+            {
+                throw new ArgumentNullException("For name or description, null, empty, and whitespace are not allowed.");
+            }
+
             Name = name;
             Description = description;
         }
