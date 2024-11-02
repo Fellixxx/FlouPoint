@@ -190,5 +190,124 @@ namespace Application.Test.Result
             // Act & Assert
             Assert.ThrowsException<ArgumentNullException>(() => OperationBuilder<string>.FailureNetworkError(message));
         }
+        [TestMethod]
+        public void FailureBusinessValidation_Should_Return_OperationResult_With_BusinessValidationError()
+        {
+            // Arrange
+            var expectedMessage = "Business validation failed.";
+
+            // Act
+            var result = OperationBuilder<string>.FailureBusinessValidation(expectedMessage);
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.AreEqual("BUSINESS_VALIDATION_ERROR", result.Error);
+            Assert.AreEqual("Business validation failed.", result.Message);
+            Assert.IsFalse(result.IsSuccessful);
+        }
+
+        [TestMethod]
+        public void FailureBusinessValidation_Should_Throw_ArgumentNullException_When_Message_Is_Null()
+        {
+            // Act & Assert
+            Assert.ThrowsException<ArgumentNullException>(() => OperationBuilder<string>.FailureBusinessValidation(null));
+        }
+
+        [TestMethod]
+        public void FailureConfigurationMissingError_Should_Return_OperationResult_With_ConfigurationMissingError()
+        {
+            // Arrange
+            var expectedMessage = "Configuration is missing.";
+
+            // Act
+            var result = OperationBuilder<string>.FailureConfigurationMissingError(expectedMessage);
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.AreEqual("CONFIGURATION_MISSING_ERROR", result.Error);
+            Assert.AreEqual("Configuration is missing.", result.Message);
+            Assert.IsFalse(result.IsSuccessful);
+        }
+
+        [TestMethod]
+        public void FailureDatabase_Should_Return_OperationResult_With_DatabaseError()
+        {
+            // Arrange
+            var expectedMessage = "Database failure occurred.";
+
+            // Act
+            var result = OperationBuilder<string>.FailureDatabase(expectedMessage);
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.AreEqual("DATABASE_ERROR", result.Error);
+            Assert.AreEqual("Database failure occurred.", result.Message);
+            Assert.IsFalse(result.IsSuccessful);
+        }
+
+        [TestMethod]
+        public void FailureDataSubmittedInvalid_Should_Return_OperationResult_With_DataSubmittedInvalidError()
+        {
+            // Arrange
+            var expectedMessage = "Data submitted is invalid.";
+
+            // Act
+            var result = OperationBuilder<string>.FailureDataSubmittedInvalid(expectedMessage);
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.AreEqual("DATA_SUBMITTED_INVALID", result.Error);
+            Assert.AreEqual("Data submitted is invalid.", result.Message);
+            Assert.IsFalse(result.IsSuccessful);
+        }
+
+        [TestMethod]
+        public void FailureExternalService_Should_Return_OperationResult_With_ExternalServicesError()
+        {
+            // Arrange
+            var expectedMessage = "External service failed.";
+
+            // Act
+            var result = OperationBuilder<string>.FailureExtenalService(expectedMessage);
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.AreEqual("EXTERNAL_SERVICES_ERROR", result.Error);
+            Assert.AreEqual("External service failed.", result.Message);
+            Assert.IsFalse(result.IsSuccessful);
+        }
+
+        [TestMethod]
+        public void FailureUnexpectedError_Should_Return_OperationResult_With_UnexpectedError()
+        {
+            // Arrange
+            var expectedMessage = "An unexpected error occurred.";
+
+            // Act
+            var result = OperationBuilder<string>.FailureUnexpectedError(expectedMessage);
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.AreEqual(expectedMessage, result.Message);
+            Assert.IsNull(result.Data);
+            Assert.AreEqual("UNEXPECTED_ERROR", result.Error);
+            Assert.IsFalse(result.IsSuccessful);
+        }
+
+        [TestMethod]
+        public void FailureNetworkError_Should_Return_OperationResult_With_NetworkError()
+        {
+            // Arrange
+            var expectedMessage = "Network error occurred.";
+
+            // Act
+            var result = OperationBuilder<string>.FailureNetworkError(expectedMessage);
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.AreEqual("NETWORK_ERROR", result.Error);
+            Assert.AreEqual("Network error occurred.", result.Message);
+            Assert.IsFalse(result.IsSuccessful);
+        }
     }
 }

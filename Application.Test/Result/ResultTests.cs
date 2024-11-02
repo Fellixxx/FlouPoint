@@ -1,11 +1,16 @@
 ﻿using Application.Result.Error;
 using Application.Result;
-using NUnit.Framework;
-using FluentAssertions;
+using Microsoft.VisualStudio.TestPlatform.CommunicationUtilities;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
-namespace LayerApplication.Result
+namespace Application.Test.Result
 {
-    [TestFixture]
+    [TestClass]
     public class ResultTests
     {
         private class TestResult : Result<string>
@@ -19,7 +24,7 @@ namespace LayerApplication.Result
             }
         }
 
-        [Test]
+        [TestMethod]
         public void Result_Should_Initialize_With_Correct_Values()
         {
             // Arrange
@@ -32,12 +37,12 @@ namespace LayerApplication.Result
             var result = new TestResult(isSuccess, message, data, errorType);
 
             // Assert
-            result.IsSuccessful.Should().Be(isSuccess);
-            result.Message.Should().Be(message);
-            result.Data.Should().Be(data);
+            Assert.AreEqual(isSuccess, result.IsSuccessful);
+            Assert.AreEqual(message, result.Message);
+            Assert.AreEqual(data, result.Data);
         }
 
-        [Test]
+        [TestMethod]
         public void Result_Should_Return_Correct_Error_Custom_Name()
         {
             // Arrange
@@ -47,10 +52,10 @@ namespace LayerApplication.Result
             var errorName = result.Error;
 
             // Assert
-            errorName.Should().Be("DATABASE_ERROR");
+            Assert.AreEqual("DATABASE_ERROR", errorName);
         }
 
-        [Test]
+        [TestMethod]
         public void Result_Should_Return_Default_Error_Custom_Name_When_No_Error()
         {
             // Arrange
@@ -60,32 +65,32 @@ namespace LayerApplication.Result
             var errorName = result.Error;
 
             // Assert
-            errorName.Should().Be("NONE");
+            Assert.AreEqual("NONE", errorName);
         }
 
-        [Test]
+        [TestMethod]
         public void Result_Should_Have_Null_Data_And_Message_When_Not_Set()
         {
             // Arrange
             var result = new TestResult(true, null, null, ErrorTypes.None);
 
             // Assert
-            result.Data.Should().BeNull();
-            result.Message.Should().BeNull();
-            result.IsSuccessful.Should().BeTrue();
+            Assert.IsNull(result.Data);
+            Assert.IsNull(result.Message);
+            Assert.IsTrue(result.IsSuccessful);
         }
 
-        [Test]
+        [TestMethod]
         public void Result_Should_Indicate_Failure_With_ErrorType()
         {
             // Arrange
             var result = new TestResult(false, "An unexpected error occurred", null, ErrorTypes.UnexpectedError);
 
             // Assert
-            result.IsSuccessful.Should().BeFalse();
-            result.Error.Should().Be("UNEXPECTED_ERROR");
-            result.Message.Should().Be("An unexpected error occurred");
-            result.Data.Should().BeNull();
+            Assert.IsFalse(result.IsSuccessful);
+            Assert.AreEqual("UNEXPECTED_ERROR", result.Error);
+            Assert.AreEqual("An unexpected error occurred", result.Message);
+            Assert.IsNull(result.Data);
         }
     }
 }
