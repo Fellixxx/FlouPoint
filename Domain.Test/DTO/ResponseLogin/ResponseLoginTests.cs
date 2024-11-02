@@ -40,5 +40,47 @@ namespace Domain.Test.DTO.ResponseLogin
             // Assert
             Assert.AreEqual(testValue, _testClass.RefreshToken);
         }
+        [TestMethod]
+        public void ResponseLogin_Should_Have_Default_Empty_AccessToken_And_RefreshToken()
+        {
+            // Act
+            var responseLogin = new ResponseLogin();
+
+            // Assert
+            Assert.AreEqual(responseLogin.AccessToken, string.Empty);
+            Assert.AreEqual(responseLogin.RefreshToken, string.Empty);
+        }
+
+        [TestMethod]
+        public void ResponseLogin_Should_Store_AccessToken_Property_Correctly()
+        {
+            // Arrange
+            string expectedAccessToken = "sample-access-token";
+
+            // Act
+            var responseLogin = new ResponseLogin
+            {
+                AccessToken = expectedAccessToken
+            };
+
+            // Assert
+            Assert.AreEqual(responseLogin.AccessToken, expectedAccessToken);
+        }
+
+        [TestMethod]
+        public void ResponseLogin_Should_Store_RefreshToken_Property_Correctly()
+        {
+            // Arrange
+            string expectedRefreshToken = "sample-refresh-token";
+
+            // Act
+            var responseLogin = new ResponseLogin
+            {
+                RefreshToken = expectedRefreshToken
+            };
+
+            // Assert
+            Assert.AreEqual(responseLogin.RefreshToken, expectedRefreshToken);
+        }
     }
 }

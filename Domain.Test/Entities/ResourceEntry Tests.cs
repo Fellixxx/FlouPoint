@@ -79,5 +79,99 @@ namespace Domain.Test.Entities
             // Assert
             Assert.AreEqual(testValue, _testClass.Active);
         }
+
+        [TestMethod]
+        public void ResourceEntry_Should_Have_Default_Empty_Properties_And_Inactive_Status()
+        {
+            // Act
+            var resourceEntry = new ResourceEntry();
+
+            // Assert
+            Assert.AreEqual(resourceEntry.Id, string.Empty);
+            Assert.AreEqual(resourceEntry.Name, string.Empty);
+            Assert.AreEqual(resourceEntry.Value, string.Empty);
+            Assert.AreEqual(resourceEntry.Comment, string.Empty);
+            Assert.AreEqual(resourceEntry.Active, false);
+        }
+
+        [TestMethod]
+        public void ResourceEntry_Should_Store_Id_Property_Correctly()
+        {
+            // Arrange
+            string expectedId = "12345";
+
+            // Act
+            var resourceEntry = new ResourceEntry
+            {
+                Id = expectedId
+            };
+
+            // Assert
+            Assert.AreEqual(resourceEntry.Id, expectedId);
+        }
+
+        [TestMethod]
+        public void ResourceEntry_Should_Store_Name_Property_Correctly()
+        {
+            // Arrange
+            string expectedName = "SampleResource";
+
+            // Act
+            var resourceEntry = new ResourceEntry
+            {
+                Name = expectedName
+            };
+
+            // Assert
+            Assert.AreEqual(resourceEntry.Name, expectedName);
+        }
+
+        [TestMethod]
+        public void ResourceEntry_Should_Store_Value_Property_Correctly()
+        {
+            // Arrange
+            string expectedValue = "ResourceValue";
+
+            // Act
+            var resourceEntry = new ResourceEntry
+            {
+                Value = expectedValue
+            };
+
+            // Assert
+            Assert.AreEqual(resourceEntry.Value, expectedValue);
+        }
+
+        [TestMethod]
+        public void ResourceEntry_Should_Store_Comment_Property_Correctly()
+        {
+            // Arrange
+            string expectedComment = "This is a test comment.";
+
+            // Act
+            var resourceEntry = new ResourceEntry
+            {
+                Comment = expectedComment
+            };
+
+            // Assert
+            Assert.AreEqual(resourceEntry.Comment, expectedComment);
+        }
+
+        [TestMethod]
+        public void ResourceEntry_Should_Store_Active_Property_Correctly()
+        {
+            // Arrange
+            bool expectedActive = true;
+
+            // Act
+            var resourceEntry = new ResourceEntry
+            {
+                Active = expectedActive
+            };
+
+            // Assert
+            Assert.AreEqual(resourceEntry.Active, true);
+        }
     }
 }
