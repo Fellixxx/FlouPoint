@@ -11,4 +11,9 @@
     <ProjectReference Include="..\Infrastructure\Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="ExternalServices\Github\" />
+    <Folder Include="ExternalServices\OS\" />
+  </ItemGroup>
+
 </Project>

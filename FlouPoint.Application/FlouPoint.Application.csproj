@@ -8,6 +8,11 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Application\Application.csproj" />
+    <ProjectReference Include="..\FlouPoint.Domain\FlouPoint.Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="UseCases\ExternalServices\" />
   </ItemGroup>
 
 </Project>
