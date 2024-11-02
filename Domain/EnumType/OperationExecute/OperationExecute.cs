@@ -19,7 +19,7 @@
         {
             if (_operations.ContainsKey(name))
             {
-                throw new InvalidOperationException($"An operation with the name '{name}' already exists.");
+                return _operations[name];
             }
 
             var operation = new OperationExecute(name, description);
@@ -43,6 +43,14 @@
         // Allow for dynamic operations to be created
         public static OperationExecute CreateCustomOperation(string name, string description)
         {
+            if (string.IsNullOrWhiteSpace(name) || string.IsNullOrWhiteSpace(description))
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
+            if (_operations.ContainsKey(name))
+            {
+                throw new InvalidOperationException(nameof(name));
+            }
             return RegisterOperation(name, description);
         }
         public static string? GetName(OperationExecute enumType)
