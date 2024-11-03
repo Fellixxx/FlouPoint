@@ -85,9 +85,20 @@
 
         private static void ValidateMessage(string? message)
         {
-            if (string.IsNullOrWhiteSpace(message))
+            var errorMessage = $"{nameof(ValidateMessage)}: The 'message' parameter cannot be null, empty, or whitespace.";
+            Validate(message, errorMessage);
+            return;
+        }
+
+        private static void Validate(string? field, string errorMessage)
+        {
+            if (field == null)
             {
-                throw new ArgumentNullException(nameof(message), $"{nameof(ValidateMessage)}: The 'message' parameter cannot be null, empty, or whitespace.");
+                throw new ArgumentNullException(nameof(field), errorMessage);
+            }
+            else if (string.IsNullOrWhiteSpace(field))
+            {
+                throw new ArgumentException(errorMessage, nameof(field));
             }
         }
     }

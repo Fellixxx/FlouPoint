@@ -309,5 +309,239 @@ namespace Application.Test.Result
             Assert.AreEqual("Network error occurred.", result.Message);
             Assert.IsFalse(result.IsSuccessful);
         }
+
+        [TestMethod]
+        public void CannotCallFailureBusinessValidationWithEmptyMessage()
+        {
+            // Arrange
+            string message = "";
+
+            // Act & Assert
+            Assert.ThrowsException<ArgumentException>(() => OperationBuilder<string>.FailureBusinessValidation(message));
+        }
+
+        [TestMethod]
+        public void CannotCallFailureConfigurationMissingErrorWithEmptyMessage()
+        {
+            // Arrange
+            string message = "";
+
+            // Act & Assert
+            Assert.ThrowsException<ArgumentException>(() => OperationBuilder<string>.FailureConfigurationMissingError(message));
+        }
+
+        [TestMethod]
+        public void CannotCallFailureDatabaseWithEmptyMessage()
+        {
+            // Arrange
+            string message = "";
+
+            // Act & Assert
+            Assert.ThrowsException<ArgumentException>(() => OperationBuilder<string>.FailureDatabase(message));
+        }
+
+        [TestMethod]
+        public void CannotCallFailureDataSubmittedInvalidWithEmptyMessage()
+        {
+            // Arrange
+            string message = "";
+
+            // Act & Assert
+            Assert.ThrowsException<ArgumentException>(() => OperationBuilder<string>.FailureDataSubmittedInvalid(message));
+        }
+
+        [TestMethod]
+        public void CannotCallFailureExternalServiceWithEmptyMessage()
+        {
+            // Arrange
+            string message = "";
+
+            // Act & Assert
+            Assert.ThrowsException<ArgumentException>(() => OperationBuilder<string>.FailureExtenalService(message));
+        }
+
+        [TestMethod]
+        public void CannotCallFailureUnexpectedErrorWithEmptyMessage()
+        {
+            // Arrange
+            string message = "";
+
+            // Act & Assert
+            Assert.ThrowsException<ArgumentException>(() => OperationBuilder<string>.FailureUnexpectedError(message));
+        }
+
+        [TestMethod]
+        public void CannotCallFailureNetworkErrorWithEmptyMessage()
+        {
+            // Arrange
+            string message = "";
+
+            // Act & Assert
+            Assert.ThrowsException<ArgumentException>(() => OperationBuilder<string>.FailureNetworkError(message));
+        }
+
+        // Additional tests for whitespace message
+        [TestMethod]
+        public void CannotCallFailureBusinessValidationWithWhitespaceMessage()
+        {
+            // Arrange
+            string message = "   ";
+
+            // Act & Assert
+            Assert.ThrowsException<ArgumentException>(() => OperationBuilder<string>.FailureBusinessValidation(message));
+        }
+
+        [TestMethod]
+        public void CannotCallFailureConfigurationMissingErrorWithWhitespaceMessage()
+        {
+            // Arrange
+            string message = "   ";
+
+            // Act & Assert
+            Assert.ThrowsException<ArgumentException>(() => OperationBuilder<string>.FailureConfigurationMissingError(message));
+        }
+
+        [TestMethod]
+        public void CannotCallFailureDatabaseWithWhitespaceMessage()
+        {
+            // Arrange
+            string message = "   ";
+
+            // Act & Assert
+            Assert.ThrowsException<ArgumentException>(() => OperationBuilder<string>.FailureDatabase(message));
+        }
+
+        [TestMethod]
+        public void CannotCallFailureDataSubmittedInvalidWithWhitespaceMessage()
+        {
+            // Arrange
+            string message = "   ";
+
+            // Act & Assert
+            Assert.ThrowsException<ArgumentException>(() => OperationBuilder<string>.FailureDataSubmittedInvalid(message));
+        }
+
+        [TestMethod]
+        public void CannotCallFailureExternalServiceWithWhitespaceMessage()
+        {
+            // Arrange
+            string message = "   ";
+
+            // Act & Assert
+            Assert.ThrowsException<ArgumentException>(() => OperationBuilder<string>.FailureExtenalService(message));
+        }
+
+        [TestMethod]
+        public void CannotCallFailureUnexpectedErrorWithWhitespaceMessage()
+        {
+            // Arrange
+            string message = "   ";
+
+            // Act & Assert
+            Assert.ThrowsException<ArgumentException>(() => OperationBuilder<string>.FailureUnexpectedError(message));
+        }
+
+        [TestMethod]
+        public void CannotCallFailureNetworkErrorWithWhitespaceMessage()
+        {
+            // Arrange
+            string message = "   ";
+
+            // Act & Assert
+            Assert.ThrowsException<ArgumentException>(() => OperationBuilder<string>.FailureNetworkError(message));
+        }
+
+        // Additional assertions for Data field being null
+        [TestMethod]
+        public void FailureBusinessValidation_Should_Have_Null_Data()
+        {
+            // Arrange
+            var message = "Business validation failed.";
+
+            // Act
+            var result = OperationBuilder<string>.FailureBusinessValidation(message);
+
+            // Assert
+            Assert.IsNull(result.Data);
+        }
+
+        [TestMethod]
+        public void FailureConfigurationMissingError_Should_Have_Null_Data()
+        {
+            // Arrange
+            var message = "Configuration is missing.";
+
+            // Act
+            var result = OperationBuilder<string>.FailureConfigurationMissingError(message);
+
+            // Assert
+            Assert.IsNull(result.Data);
+        }
+
+        [TestMethod]
+        public void FailureDatabase_Should_Have_Null_Data()
+        {
+            // Arrange
+            var message = "Database failure occurred.";
+
+            // Act
+            var result = OperationBuilder<string>.FailureDatabase(message);
+
+            // Assert
+            Assert.IsNull(result.Data);
+        }
+
+        [TestMethod]
+        public void FailureDataSubmittedInvalid_Should_Have_Null_Data()
+        {
+            // Arrange
+            var message = "Data submitted is invalid.";
+
+            // Act
+            var result = OperationBuilder<string>.FailureDataSubmittedInvalid(message);
+
+            // Assert
+            Assert.IsNull(result.Data);
+        }
+
+        [TestMethod]
+        public void FailureExternalService_Should_Have_Null_Data()
+        {
+            // Arrange
+            var message = "External service failed.";
+
+            // Act
+            var result = OperationBuilder<string>.FailureExtenalService(message);
+
+            // Assert
+            Assert.IsNull(result.Data);
+        }
+
+        [TestMethod]
+        public void FailureUnexpectedError_Should_Have_Null_Data()
+        {
+            // Arrange
+            var message = "An unexpected error occurred.";
+
+            // Act
+            var result = OperationBuilder<string>.FailureUnexpectedError(message);
+
+            // Assert
+            Assert.IsNull(result.Data);
+        }
+
+        [TestMethod]
+        public void FailureNetworkError_Should_Have_Null_Data()
+        {
+            // Arrange
+            var message = "Network error occurred.";
+
+            // Act
+            var result = OperationBuilder<string>.FailureNetworkError(message);
+
+            // Assert
+            Assert.IsNull(result.Data);
+        }
+
     }
 }

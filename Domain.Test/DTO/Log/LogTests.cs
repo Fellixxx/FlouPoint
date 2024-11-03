@@ -450,5 +450,249 @@
             Assert.AreEqual(whitespaceString, log.Level);
             Assert.AreEqual(whitespaceString, log.Operation);
         }
+        [TestMethod]
+        public void CanSetCreatedAtToDateTimeMinValue()
+        {
+            // Arrange
+            var testValue = DateTime.MinValue;
+
+            // Act
+            _testClass.CreatedAt = testValue;
+
+            // Assert
+            Assert.AreEqual(testValue, _testClass.CreatedAt);
+        }
+
+        [TestMethod]
+        public void CanSetCreatedAtToDateTimeMaxValue()
+        {
+            // Arrange
+            var testValue = DateTime.MaxValue;
+
+            // Act
+            _testClass.CreatedAt = testValue;
+
+            // Assert
+            Assert.AreEqual(testValue, _testClass.CreatedAt);
+        }
+
+        [TestMethod]
+        public void When_Log_With_Null_Properties_Is_Serialized_Then_Should_Deserialize_Correctly()
+        {
+            // Arrange
+            var log = new Log
+            {
+                Message = null,
+                EntityName = null,
+                EntityValue = null,
+                Level = null,
+                Operation = null,
+                CreatedAt = DateTime.UtcNow
+            };
+
+            // Act
+            var json = JsonConvert.SerializeObject(log);
+            var deserializedLog = JsonConvert.DeserializeObject<Log>(json);
+
+            // Assert
+            Assert.IsNull(deserializedLog.Message);
+            Assert.IsNull(deserializedLog.EntityName);
+            Assert.IsNull(deserializedLog.EntityValue);
+            Assert.IsNull(deserializedLog.Level);
+            Assert.IsNull(deserializedLog.Operation);
+            Assert.AreEqual(log.CreatedAt, deserializedLog.CreatedAt);
+        }
+
+        [TestMethod]
+        public void CanSetPropertiesToNullAfterSettingValue()
+        {
+            // Arrange
+            _testClass.Message = "Test Message";
+            _testClass.EntityName = "Test Entity";
+            _testClass.EntityValue = "{ \"id\": 1 }";
+            _testClass.Level = "Info";
+            _testClass.Operation = "Create";
+
+            // Act
+            _testClass.Message = null;
+            _testClass.EntityName = null;
+            _testClass.EntityValue = null;
+            _testClass.Level = null;
+            _testClass.Operation = null;
+
+            // Assert
+            Assert.IsNull(_testClass.Message);
+            Assert.IsNull(_testClass.EntityName);
+            Assert.IsNull(_testClass.EntityValue);
+            Assert.IsNull(_testClass.Level);
+            Assert.IsNull(_testClass.Operation);
+        }
+
+        [TestMethod]
+        public void CanAddLogToCollection()
+        {
+            // Arrange
+            var log1 = new Log { Message = "Log 1" };
+            var log2 = new Log { Message = "Log 2" };
+            var logs = new List<Log>();
+
+            // Act
+            logs.Add(log1);
+            logs.Add(log2);
+
+            // Assert
+            Assert.AreEqual(2, logs.Count);
+            Assert.AreEqual("Log 1", logs[0].Message);
+            Assert.AreEqual("Log 2", logs[1].Message);
+        }
+
+        [TestMethod]
+        public void TwoLogObjectsWithSameValues_AreNotEqualByDefault()
+        {
+            // Arrange
+            var log1 = new Log
+            {
+                Message = "Test Message",
+                EntityName = "Test Entity",
+                EntityValue = "{ \"id\": 1 }",
+                Level = "Info",
+                Operation = "Create",
+                CreatedAt = DateTime.UtcNow
+            };
+
+            var log2 = new Log
+            {
+                Message = "Test Message",
+                EntityName = "Test Entity",
+                EntityValue = "{ \"id\": 1 }",
+                Level = "Info",
+                Operation = "Create",
+                CreatedAt = log1.CreatedAt
+            };
+
+            // Act & Assert
+            Assert.AreNotEqual(log1, log2);
+        }
+
+        [TestMethod]
+        public void CanCloneLogObject()
+        {
+            // Arrange
+            var originalLog = new Log
+            {
+                Message = "Original Message",
+                EntityName = "Original Entity",
+                EntityValue = "{ \"id\": 1 }",
+                Level = "Info",
+                Operation = "Create",
+                CreatedAt = DateTime.UtcNow
+            };
+
+            // Act
+            var clonedLog = new Log
+            {
+                Message = originalLog.Message,
+                EntityName = originalLog.EntityName,
+                EntityValue = originalLog.EntityValue,
+                Level = originalLog.Level,
+                Operation = originalLog.Operation,
+                CreatedAt = originalLog.CreatedAt
+            };
+
+            // Assert
+            Assert.AreEqual(originalLog.Message, clonedLog.Message);
+            Assert.AreEqual(originalLog.EntityName, clonedLog.EntityName);
+            Assert.AreEqual(originalLog.EntityValue, clonedLog.EntityValue);
+            Assert.AreEqual(originalLog.Level, clonedLog.Level);
+            Assert.AreEqual(originalLog.Operation, clonedLog.Operation);
+            Assert.AreEqual(originalLog.CreatedAt, clonedLog.CreatedAt);
+            Assert.AreNotSame(originalLog, clonedLog);
+        }
+
+        [TestMethod]
+        public void LevelProperty_CanBeSetToAnyString()
+        {
+            // Arrange
+            var testValues = new[] { "Info", "Warning", "Error", "Debug", "Verbose", "CustomLevel" };
+
+            foreach (var level in testValues)
+            {
+                // Act
+                _testClass.Level = level;
+
+                // Assert
+                Assert.AreEqual(level, _testClass.Level);
+            }
+        }
+
+        [TestMethod]
+        public void EntityValue_CanAcceptDifferentSerializedFormats()
+        {
+            // Arrange
+            var jsonValue = "{ \"id\": 1, \"name\": \"Test\" }";
+            var xmlValue = "<Entity><Id>1</Id><Name>Test</Name></Entity>";
+            var yamlValue = "id: 1\nname: Test";
+
+            // Act & Assert
+            _testClass.EntityValue = jsonValue;
+            Assert.AreEqual(jsonValue, _testClass.EntityValue);
+
+            _testClass.EntityValue = xmlValue;
+            Assert.AreEqual(xmlValue, _testClass.EntityValue);
+
+            _testClass.EntityValue = yamlValue;
+            Assert.AreEqual(yamlValue, _testClass.EntityValue);
+        }
+
+        [TestMethod]
+        public void CanCreateDerivedClassFromLog()
+        {
+            // Arrange
+            var extendedLog = new ExtendedLog
+            {
+                Message = "Extended Message",
+                AdditionalInfo = "Extra Data"
+            };
+
+            // Act & Assert
+            Assert.AreEqual("Extended Message", extendedLog.Message);
+            Assert.AreEqual("Extra Data", extendedLog.AdditionalInfo);
+        }
+
+        public class ExtendedLog : Log
+        {
+            public string AdditionalInfo { get; set; }
+        }
+
+        [TestMethod]
+        public void LogProperties_CanBeAccessedConcurrently()
+        {
+            // Arrange
+            var log = new Log();
+            var tasks = new List<Task>();
+            var exceptionOccurred = false;
+
+            // Act
+            for (int i = 0; i < 100; i++)
+            {
+                tasks.Add(Task.Run(() =>
+                {
+                    try
+                    {
+                        log.Message = "Concurrent Message";
+                        var temp = log.Message;
+                    }
+                    catch
+                    {
+                        exceptionOccurred = true;
+                    }
+                }));
+            }
+
+            Task.WaitAll(tasks.ToArray());
+
+            // Assert
+            Assert.IsFalse(exceptionOccurred, "Exception occurred during concurrent access.");
+        }
     }
 }

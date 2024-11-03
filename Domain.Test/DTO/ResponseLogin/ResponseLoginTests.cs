@@ -1,4 +1,4 @@
-namespace Domain.Test.DTO.ResponseLogin
+﻿namespace Domain.Test.DTO.ResponseLogin
 {
     using System;
     using Domain.DTO.Login;
@@ -242,5 +242,205 @@ namespace Domain.Test.DTO.ResponseLogin
             Assert.AreEqual(invalidToken, responseLogin.AccessToken);
             Assert.AreEqual(invalidToken, responseLogin.RefreshToken);
         }
+
+        [TestMethod]
+        public void CanSetPropertiesToNullAfterSettingValue()
+        {
+            // Arrange
+            _testClass.AccessToken = "SampleAccessToken";
+            _testClass.RefreshToken = "SampleRefreshToken";
+
+            // Act
+            _testClass.AccessToken = null;
+            _testClass.RefreshToken = null;
+
+            // Assert
+            Assert.IsNull(_testClass.AccessToken);
+            Assert.IsNull(_testClass.RefreshToken);
+        }
+
+        [TestMethod]
+        public void CanAddResponseLoginToCollection()
+        {
+            // Arrange
+            var responseLogin1 = new ResponseLogin { AccessToken = "Token1", RefreshToken = "Refresh1" };
+            var responseLogin2 = new ResponseLogin { AccessToken = "Token2", RefreshToken = "Refresh2" };
+            var responses = new List<ResponseLogin>();
+
+            // Act
+            responses.Add(responseLogin1);
+            responses.Add(responseLogin2);
+
+            // Assert
+            Assert.AreEqual(2, responses.Count);
+            Assert.AreEqual("Token1", responses[0].AccessToken);
+            Assert.AreEqual("Refresh1", responses[0].RefreshToken);
+            Assert.AreEqual("Token2", responses[1].AccessToken);
+            Assert.AreEqual("Refresh2", responses[1].RefreshToken);
+        }
+
+        [TestMethod]
+        public void TwoResponseLoginObjectsWithSameValues_AreNotEqualByDefault()
+        {
+            // Arrange
+            var responseLogin1 = new ResponseLogin
+            {
+                AccessToken = "SameToken",
+                RefreshToken = "SameRefresh"
+            };
+
+            var responseLogin2 = new ResponseLogin
+            {
+                AccessToken = "SameToken",
+                RefreshToken = "SameRefresh"
+            };
+
+            // Act & Assert
+            Assert.AreNotEqual(responseLogin1, responseLogin2);
+        }
+
+        [TestMethod]
+        public void CanCloneResponseLoginObject()
+        {
+            // Arrange
+            var originalResponse = new ResponseLogin
+            {
+                AccessToken = "OriginalAccessToken",
+                RefreshToken = "OriginalRefreshToken"
+            };
+
+            // Act
+            var clonedResponse = new ResponseLogin
+            {
+                AccessToken = originalResponse.AccessToken,
+                RefreshToken = originalResponse.RefreshToken
+            };
+
+            // Assert
+            Assert.AreEqual(originalResponse.AccessToken, clonedResponse.AccessToken);
+            Assert.AreEqual(originalResponse.RefreshToken, clonedResponse.RefreshToken);
+            Assert.AreNotSame(originalResponse, clonedResponse);
+        }
+
+        [TestMethod]
+        public void When_ResponseLoginProperties_Have_UnicodeCharacters_Then_Should_Handle_Correctly()
+        {
+            // Given
+            var unicodeString = "アクセストークン🔑";
+            var responseLogin = new ResponseLogin
+            {
+                AccessToken = unicodeString,
+                RefreshToken = unicodeString
+            };
+
+            // Then
+            Assert.AreEqual(unicodeString, responseLogin.AccessToken);
+            Assert.AreEqual(unicodeString, responseLogin.RefreshToken);
+        }
+
+        [TestMethod]
+        public void When_ResponseLogin_With_Null_Properties_Is_Serialized_Then_Should_Deserialize_Correctly()
+        {
+            // Arrange
+            var responseLogin = new ResponseLogin
+            {
+                AccessToken = null,
+                RefreshToken = null
+            };
+
+            // Act
+            var json = JsonConvert.SerializeObject(responseLogin);
+            var deserializedResponseLogin = JsonConvert.DeserializeObject<ResponseLogin>(json);
+
+            // Assert
+            Assert.IsNull(deserializedResponseLogin.AccessToken);
+            Assert.IsNull(deserializedResponseLogin.RefreshToken);
+        }
+
+        [TestMethod]
+        public void CanSetPropertiesToEmptyStringAfterSettingValue()
+        {
+            // Arrange
+            _testClass.AccessToken = "SampleAccessToken";
+            _testClass.RefreshToken = "SampleRefreshToken";
+
+            // Act
+            _testClass.AccessToken = string.Empty;
+            _testClass.RefreshToken = string.Empty;
+
+            // Assert
+            Assert.AreEqual(string.Empty, _testClass.AccessToken);
+            Assert.AreEqual(string.Empty, _testClass.RefreshToken);
+        }
+
+        [TestMethod]
+        public void CanCreateDerivedClassFromResponseLogin()
+        {
+            // Arrange
+            var extendedResponse = new ExtendedResponseLogin
+            {
+                AccessToken = "ExtendedAccessToken",
+                RefreshToken = "ExtendedRefreshToken",
+                AdditionalProperty = "ExtraData"
+            };
+
+            // Act & Assert
+            Assert.AreEqual("ExtendedAccessToken", extendedResponse.AccessToken);
+            Assert.AreEqual("ExtendedRefreshToken", extendedResponse.RefreshToken);
+            Assert.AreEqual("ExtraData", extendedResponse.AdditionalProperty);
+        }
+
+        public class ExtendedResponseLogin : ResponseLogin
+        {
+            public string AdditionalProperty { get; set; }
+        }
+
+        [TestMethod]
+        public void ResponseLoginProperties_CanBeAccessedConcurrently()
+        {
+            // Arrange
+            var responseLogin = new ResponseLogin();
+            var tasks = new List<Task>();
+            var exceptionOccurred = false;
+
+            // Act
+            for (int i = 0; i < 100; i++)
+            {
+                tasks.Add(Task.Run(() =>
+                {
+                    try
+                    {
+                        responseLogin.AccessToken = "ConcurrentAccessToken";
+                        var temp = responseLogin.AccessToken;
+                    }
+                    catch
+                    {
+                        exceptionOccurred = true;
+                    }
+                }));
+            }
+
+            Task.WaitAll(tasks.ToArray());
+
+            // Assert
+            Assert.IsFalse(exceptionOccurred, "Exception occurred during concurrent access.");
+        }
+
+        [TestMethod]
+        public void ResponseLogin_CannotBeUsedAsDictionaryKeyWithoutOverridingEqualsAndGetHashCode()
+        {
+            // Arrange
+            var responseLogin1 = new ResponseLogin { AccessToken = "Token1", RefreshToken = "Refresh1" };
+            var responseLogin2 = new ResponseLogin { AccessToken = "Token1", RefreshToken = "Refresh1" };
+            var dictionary = new Dictionary<ResponseLogin, string>();
+
+            // Act
+            dictionary[responseLogin1] = "First Entry";
+            dictionary[responseLogin2] = "Second Entry"; // Should overwrite if objects are equal
+
+            // Assert
+            Assert.AreEqual(2, dictionary.Count); // They are considered different keys
+        }
+
     }
 }

@@ -38,8 +38,6 @@
         public static OperationExecute GetPageByFilter => RegisterOperation("GetPageByFilter", "Retrieve a page of records that match a given filter.");
         public static OperationExecute GetCountFilter => RegisterOperation("GetCountFilter", "Get the count of records that match a given filter.");
 
-        public static OperationExecute Activate2 => RegisterOperation("Activate", "Activate a deactivated record.");
-
         // Allow for dynamic operations to be created
         public static OperationExecute CreateCustomOperation(string name, string description)
         {

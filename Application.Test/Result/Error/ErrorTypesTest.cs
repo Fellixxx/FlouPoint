@@ -29,9 +29,9 @@ namespace Application.Test.Result.Error
             var attribute = fieldInfo.GetCustomAttribute<EnumMetadataAttribute>();
 
             // Assert
-            Assert.IsNotNull(attribute);
-            Assert.AreEqual(attribute.Name, expectedName);
-            Assert.AreEqual(attribute.Description, expectedDescription);
+            Assert.IsNotNull(attribute, $"Enum value {errorType} is missing EnumMetadataAttribute.");
+            Assert.AreEqual(expectedName, attribute.Name);
+            Assert.AreEqual(expectedDescription, attribute.Description);
         }
 
         [TestMethod]
@@ -45,7 +45,113 @@ namespace Application.Test.Result.Error
             {
                 var fieldInfo = errorType.GetType().GetField(errorType.ToString());
                 var attribute = fieldInfo.GetCustomAttribute<EnumMetadataAttribute>();
-                Assert.IsNotNull(attribute);
+                Assert.IsNotNull(attribute, $"Enum value {errorType} is missing EnumMetadataAttribute.");
+            }
+        }
+
+        // Additional tests for EnumMetadataAttribute constructor
+
+        [TestMethod]
+        public void EnumMetadataAttribute_Should_Throw_ArgumentNullException_When_Name_Is_Null()
+        {
+            // Arrange
+            string name = null;
+            string description = "Valid description";
+
+            // Act & Assert
+            Assert.ThrowsException<ArgumentNullException>(() => new EnumMetadataAttribute(name, description));
+        }
+
+        [TestMethod]
+        public void EnumMetadataAttribute_Should_Throw_ArgumentNullException_When_Name_Is_Empty()
+        {
+            // Arrange
+            string name = "";
+            string description = "Valid description";
+
+            // Act & Assert
+            Assert.ThrowsException<ArgumentNullException>(() => new EnumMetadataAttribute(name, description));
+        }
+
+        [TestMethod]
+        public void EnumMetadataAttribute_Should_Throw_ArgumentNullException_When_Name_Is_Whitespace()
+        {
+            // Arrange
+            string name = "   ";
+            string description = "Valid description";
+
+            // Act & Assert
+            Assert.ThrowsException<ArgumentNullException>(() => new EnumMetadataAttribute(name, description));
+        }
+
+        [TestMethod]
+        public void EnumMetadataAttribute_Should_Throw_ArgumentNullException_When_Description_Is_Null()
+        {
+            // Arrange
+            string name = "Valid name";
+            string description = null;
+
+            // Act & Assert
+            Assert.ThrowsException<ArgumentNullException>(() => new EnumMetadataAttribute(name, description));
+        }
+
+        [TestMethod]
+        public void EnumMetadataAttribute_Should_Throw_ArgumentNullException_When_Description_Is_Empty()
+        {
+            // Arrange
+            string name = "Valid name";
+            string description = "";
+
+            // Act & Assert
+            Assert.ThrowsException<ArgumentNullException>(() => new EnumMetadataAttribute(name, description));
+        }
+
+        [TestMethod]
+        public void EnumMetadataAttribute_Should_Throw_ArgumentNullException_When_Description_Is_Whitespace()
+        {
+            // Arrange
+            string name = "Valid name";
+            string description = "   ";
+
+            // Act & Assert
+            Assert.ThrowsException<ArgumentNullException>(() => new EnumMetadataAttribute(name, description));
+        }
+
+        // Additional tests for duplicate Names and Descriptions
+
+        [TestMethod]
+        public void ErrorTypes_Should_Have_Unique_Names_In_Metadata()
+        {
+            // Arrange
+            var names = new HashSet<string>();
+            var errorTypes = Enum.GetValues(typeof(ErrorTypes));
+
+            // Act & Assert
+            foreach (ErrorTypes errorType in errorTypes)
+            {
+                var fieldInfo = errorType.GetType().GetField(errorType.ToString());
+                var attribute = fieldInfo.GetCustomAttribute<EnumMetadataAttribute>();
+                Assert.IsNotNull(attribute, $"Enum value {errorType} is missing EnumMetadataAttribute.");
+                bool added = names.Add(attribute.Name);
+                Assert.IsTrue(added, $"Duplicate Name '{attribute.Name}' found in EnumMetadataAttribute of {errorType}.");
+            }
+        }
+
+        [TestMethod]
+        public void ErrorTypes_Should_Have_Unique_Descriptions_In_Metadata()
+        {
+            // Arrange
+            var descriptions = new HashSet<string>();
+            var errorTypes = Enum.GetValues(typeof(ErrorTypes));
+
+            // Act & Assert
+            foreach (ErrorTypes errorType in errorTypes)
+            {
+                var fieldInfo = errorType.GetType().GetField(errorType.ToString());
+                var attribute = fieldInfo.GetCustomAttribute<EnumMetadataAttribute>();
+                Assert.IsNotNull(attribute, $"Enum value {errorType} is missing EnumMetadataAttribute.");
+                bool added = descriptions.Add(attribute.Description);
+                Assert.IsTrue(added, $"Duplicate Description '{attribute.Description}' found in EnumMetadataAttribute of {errorType}.");
             }
         }
     }
