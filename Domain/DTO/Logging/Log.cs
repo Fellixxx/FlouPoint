@@ -1,6 +1,6 @@
 ﻿namespace Domain.DTO.Logging
 {
-    using Domain.Interfaces.Log;
+    using Domain.Interfaces.Loggin;
 
     /// <summary>
     ///   The Log class represents a log entry in the system.

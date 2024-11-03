@@ -1,4 +1,4 @@
-﻿namespace Domain.Interfaces.Log
+﻿namespace Domain.Interfaces.Loggin
 {
     /// <summary>
     ///   The Log class represents a log entry in the system.

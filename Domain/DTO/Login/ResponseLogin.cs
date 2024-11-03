@@ -1,6 +1,6 @@
 ﻿namespace Domain.DTO.Login
 {
-    using Domain.Interfaces.ResponseLogin;
+    using Domain.Interfaces.Login;
 
     /// <summary>
     /// The TokenResponse class represents a response from a token generating service such as an OAuth or JWT service.

@@ -2,7 +2,7 @@
 {
     using System;
     using Domain.DTO.Logging;
-    using Domain.Interfaces.Log;
+    using Domain.Interfaces.Loggin;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Newtonsoft.Json;
 
