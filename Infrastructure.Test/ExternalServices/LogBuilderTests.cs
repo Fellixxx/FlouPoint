@@ -1,24 +1,27 @@
-﻿namespace LayerInfrastructure.ExternalServices
-{
-    using FluentAssertions;
-    using global::Application.UseCases.ExternalServices;
-    using global::Domain.DTO.Log;
-    using global::Domain.EnumType.OperationExecute;
-    using global::Domain.EnumType.LogLevel;
-    using global::Infrastructure.ExternalServices.LogExternal;
-    using NUnit.Framework;
+﻿using Application.UseCases.ExternalServices;
+using Domain.DTO.Log;
+using Domain.EnumType.OperationExecute;
+using Infrastructure.ExternalServices.LogExternal;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
+namespace Infrastructure.Test.ExternalServices
+{
+    [TestClass]
     internal class LogBuilderTests
     {
         private ILogBuilder<Log>? logBuilder;
 
-        [SetUp]
+        [TestInitialize]
         public void Setup()
         {
             logBuilder = LogBuilder.GetLogBuilder();
         }
 
-        [Test]
+        [TestMethod]
         public void When_Trace_ValidEntity_Then_Success()
         {
             // Given
@@ -30,11 +33,11 @@
             var result = logBuilder?.Trace(message, entity, operation);
 
             // Then
-            result.Should().NotBeNull();
-            result.IsSuccessful.Should().BeTrue();
+            Assert.IsNotNull(result);
+            Assert.IsTrue(result.IsSuccessful);
         }
 
-        [Test]
+        [TestMethod]
         public void When_Debug_ValidEntity_Then_Success()
         {
             // Given
@@ -46,13 +49,13 @@
             var result = logBuilder?.Debug(message, entity, operation);
 
             // Then
-            result.Should().NotBeNull();
-            result.IsSuccessful.Should().BeTrue();
+            Assert.IsNotNull(result);
+            Assert.IsTrue(result.IsSuccessful);
         }
 
         // You can similarly write tests for the other methods: Information, Warning, Error, and Fatal
 
-        [Test]
+        [TestMethod]
         public void When_Information_InvalidEntity_Then_Failed()
         {
             // Given
@@ -64,8 +67,8 @@
             var result = logBuilder?.Information(message, entity, operation);
 
             // Then
-            result.Should().NotBeNull();
-            result.IsSuccessful.Should().BeFalse();
+            Assert.IsNotNull(result);
+            Assert.IsFalse(result.IsSuccessful);
         }
     }
 }

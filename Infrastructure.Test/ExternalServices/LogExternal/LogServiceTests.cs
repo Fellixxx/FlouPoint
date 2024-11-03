@@ -1,27 +1,20 @@
-﻿namespace LayerInfrastructure.ExternalServices
-{
-    using global::Application.Result;
-    using global::Application.Result.Error;
-    using global::Application.UseCases.ExternalServices;
-    using global::Domain.DTO.Log;
-    using global::Domain.EnumType;
-    using FluentAssertions;
-    using global::Infrastructure.ExternalServices.LogExternal;
-    using global::Infrastructure.Other;
-    using Microsoft.Extensions.Configuration;
-    using Moq;
-    using Newtonsoft.Json;
-    using NUnit.Framework;
-    using System;
-    using System.Net.Http;
-    using System.Net.Http.Headers;
-    using System.Threading.Tasks;
-    using global::Application.UseCases.Wrapper;
-    using global::Domain.DTO.ResponseLogin;
-    using global::Domain.EnumType.OperationExecute;
-    using LayerInfrastructure.ExternalServices.LogExternal;
+﻿using Application.Result.Error;
+using Application.UseCases.ExternalServices;
+using Application.UseCases.Wrapper;
+using Domain.DTO.Log;
+using Domain.DTO.ResponseLogin;
+using Domain.EnumType.OperationExecute;
+using Infrastructure.ExternalServices.LogExternal;
+using Infrastructure.Other;
+using Microsoft.Extensions.Configuration;
+using Moq;
+using Newtonsoft.Json;
+using System.Net.Http.Headers;
+using Domain.EnumType;
 
-    [TestFixture]
+namespace Infrastructure.Test.ExternalServices.LogExternal
+{
+    [TestClass]
     internal class LogServiceTests
     {
         private const string MessageSuccessful = "The log was create successfully.";
@@ -35,7 +28,7 @@
         private Mock<IConfigurationSection> mockConfigSectionUrlLogservice;
 
 
-        [SetUp]
+        [TestInitialize]
         public void SetUp()
         {
             mockHttpClientFactory = new Mock<IHttpClientFactory>();
@@ -110,7 +103,7 @@
                 .Returns(Task.FromResult(httpResponseMessage));
         }
 
-        [Test]
+        [TestMethod]
         public async Task CreateLog_ValidLogObject_ReturnsSuccess()
         {
             SetUpConfiguration();
@@ -121,13 +114,13 @@
             var result = await logService.CreateLog(log);
 
             // Then
-            result.IsSuccessful.Should().BeTrue();
-            result.Data.Should().Be(string.Empty);
-            result.Error.Should().Be("NONE");
-            result.Message.Should().Be("The log was create successfully.");
+            Assert.IsTrue(result.IsSuccessful);
+            Assert.AreEqual(string.Empty, result.Data);
+            Assert.AreEqual("NONE", result.Error);
+            Assert.AreEqual("The log was create successfully.", result.Message);
         }
 
-        [Test]
+        [TestMethod]
         public async Task CreateLog_NullLogObject_ReturnsFailure()
         {
             SetUpConfiguration();
@@ -138,12 +131,12 @@
             var result = await logService.CreateLog(log);
 
             // Then
-            result.IsSuccessful.Should().BeTrue();
-            result.Error.Should().Be("NONE");
-            result.Message.Should().Be("The log was create successfully.");
+            Assert.IsTrue(result.IsSuccessful);
+            Assert.AreEqual("NONE", result.Error);
+            Assert.AreEqual("The log was create successfully.", result.Message);
         }
 
-        [Test]
+        [TestMethod]
         public async Task CreateLog_ExceptionThrown_ReturnsFailure()
         {
             SetUpConfiguration();
@@ -158,13 +151,13 @@
             var result = await logService.CreateLog(log);
 
             // Then
-            result.IsSuccessful.Should().BeFalse();
-            result.Error.Should().Be("UNEXPECTED_ERROR");
-            result.Message.Should().Be("The log was create successfully.");
+            Assert.IsFalse(result.IsSuccessful);
+            Assert.AreEqual("UNEXPECTED_ERROR", result.Error);
+            Assert.AreEqual("The log was create successfully.", result.Message);
         }
 
-        [Test]
-        public Task When_CreateLog_ValidLogObject_Then_Success()
+        [TestMethod]
+        public async Task When_CreateLog_ValidLogObject_Then_Success()
         {
             SetUpConfiguration();
             // Given
@@ -179,19 +172,17 @@
             Log log = Util.GetLogError(ex, myObject, OperationExecute.Activate);
 
             // When
-            Task<OperationResult<string>>? result = logService?.CreateLog(log);
+            var result = await logService.CreateLog(log);
 
             // Then
-            UtilTest<string>.Assert(result);
-            result.Result.IsSuccessful.Should().BeTrue();
-            result.Result.Data.Should().Be(string.Empty);
-            result.Result.Message.Should().Be(MessageSuccessful);
-            return Task.CompletedTask;
+            Assert.IsTrue(result.IsSuccessful);
+            Assert.AreEqual(string.Empty, result.Data);
+            Assert.AreEqual(MessageSuccessful, result.Message);
         }
 
 
-        [Test]
-        public Task When_CreateLog_InvalidLogObject_Then_Success()
+        [TestMethod]
+        public async Task When_CreateLog_InvalidLogObject_Then_Success()
         {
             SetUpConfiguration();
             // Given
@@ -200,33 +191,28 @@
             Log log = Util.GetLogError(ex, myObject, OperationExecute.Activate);
 
             // When
-            Task<OperationResult<string>> result = logService.CreateLog(log);
+            var result = await logService.CreateLog(log);
 
             // Then
-            UtilTest<string>.Assert(result);
-            result.Result.IsSuccessful.Should().BeTrue();
-            result.Result.Data.Should().Be(string.Empty);
-            result.Result.Message.Should().Be("The log was create successfully.");
-            return Task.CompletedTask;
+            Assert.IsTrue(result.IsSuccessful);
+            Assert.AreEqual(string.Empty, result.Data);
+            Assert.AreEqual("The log was create successfully.", result.Message);
         }
 
-        [Test]
-        public Task When_CreateLog_InvalidLogObject_InvalidException_Then_Failed()
+        [TestMethod]
+        public async Task When_CreateLog_InvalidLogObject_InvalidException_Then_Failed()
         {
             SetUpConfiguration();
             // Given
             object? myObject = null;
             Exception? ex = default(Exception);
 
-            // When
-
-            // Then
-            Assert.ThrowsAsync<Exception>(async () => Util.GetLogError(ex, myObject, OperationExecute.Activate));
-            return Task.CompletedTask;
+            // When & Then
+            await Assert.ThrowsExceptionAsync<Exception>(async () => Util.GetLogError(ex, myObject, OperationExecute.Activate));
         }
 
-        [Test]
-        public Task When_CreateLog_InvalidConfiguracion_Then_Failed()
+        [TestMethod]
+        public async Task When_CreateLog_InvalidConfiguracion_Then_Failed()
         {
             SetUpConfiguration(username: string.Empty, password: string.Empty, urllogservice: string.Empty);
             // Given
@@ -240,16 +226,13 @@
             Log log = Util.GetLogError(ex, myObject, OperationExecute.Activate);
 
             // When
-            Task<OperationResult<string>> result = logService.CreateLog(log);
+            var result = await logService.CreateLog(log);
 
             // Then
-            UtilTest<string>.Assert(result);
-            result.Result.IsSuccessful.Should().BeFalse();
-            result.Result.Data.Should().BeNull();
+            Assert.IsFalse(result.IsSuccessful);
+            Assert.IsNull(result.Data);
             string expected = ErrorTypes.ConfigurationMissingError.GetCustomName();
-            result.Result.Error.Should().Be(expected);
-            return Task.CompletedTask;
+            Assert.AreEqual(expected, result.Error);
         }
-
     }
 }

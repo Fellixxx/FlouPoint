@@ -1,15 +1,14 @@
-﻿namespace LayerInfrastructure.ExternalServices
-{
-    using global::Domain.DTO.Log;
-    using FluentAssertions;
-    using global::Domain.EnumType.OperationExecute;
-    using global::Domain.EnumType.LogLevel;
-    using global::Infrastructure.ExternalServices.LogExternal;
-    using NUnit.Framework;
+﻿using Domain.DTO.Log;
+using Domain.EnumType.LogLevel;
+using Domain.EnumType.OperationExecute;
+using Infrastructure.ExternalServices.LogExternal;
 
+namespace Infrastructure.Test.ExternalServices
+{
+    [TestClass]
     internal class CreateLogTests
     {
-        [Test]
+        [TestMethod]
         public void When_CreateLogIfValid_ValidInputs_Then_Success()
         {
             // Given
@@ -22,13 +21,13 @@
             var result = CreateLog.CreateLogIfValid(message, entity, operation, level);
 
             // Then
-            result.IsSuccessful.Should().BeTrue();
-            result.Data.Should().NotBeNull();
+            Assert.IsTrue(result.IsSuccessful);
+            Assert.IsNotNull(result.Data);
             var data = result.Data ?? new Log();
-            data.Message.Should().Be(message);
+            Assert.AreEqual(message, data.Message);
         }
 
-        [Test]
+        [TestMethod]
         public void When_CreateLogIfValid_InvalidMessage_Then_Failure()
         {
             // Given
@@ -41,10 +40,10 @@
             var result = CreateLog.CreateLogIfValid(message, entity, operation, level);
 
             // Then
-            result.IsSuccessful.Should().BeFalse();
+            Assert.IsFalse(result.IsSuccessful);
         }
 
-        [Test]
+        [TestMethod]
         public void When_CreateLogIfValid_InvalidEntity_Then_Failure()
         {
             // Given
@@ -57,10 +56,10 @@
             var result = CreateLog.CreateLogIfValid(message, entity, operation, level);
 
             // Then
-            result.IsSuccessful.Should().BeFalse();
+            Assert.IsFalse(result.IsSuccessful);
         }
 
-        [Test]
+        [TestMethod]
         public void When_CreateLogIfValid_JsonSerializationException_Then_Failure()
         {
             // Given
@@ -73,12 +72,12 @@
             var result = CreateLog.CreateLogIfValid(message, entity, operation, level);
 
             // Then
-            result.IsSuccessful.Should().BeTrue();
-            result.Error.Should().Be("NONE");
-            result.Message.Should().Be("The Log validation of the OperationResult was successfully.");
+            Assert.IsTrue(result.IsSuccessful);
+            Assert.AreEqual("NONE", result.Error);
+            Assert.AreEqual("The Log validation of the OperationResult was successfully.", result.Message);
         }
 
-        [Test]
+        [TestMethod]
         public void When_CreateLogIfValid_UnexpectedException_Then_Failure()
         {
             // Given
@@ -87,11 +86,17 @@
 
             // When
             // Then
-            var result = CreateLog.CreateLogIfValid(string.Empty, string.Empty, OperationExecute.Add, 0); // Replace 0 with appropriate enum values if needed
-            result.Data.Should().BeNull();
-            result.Error.Should().Be("DATA_SUBMITTED_INVALID");
-            result.IsSuccessful.Should().BeFalse();
-            result.Message.Should().Be("The message or enitty was not submitted.");
+            var result = CreateLog.CreateLogIfValid(string.Empty, string.Empty, OperationExecute.Add, default(LogLevel)); // Replace default(LogLevel) with appropriate value if needed
+            Assert.IsNull(result.Data);
+            Assert.AreEqual("DATA_SUBMITTED_INVALID", result.Error);
+            Assert.IsFalse(result.IsSuccessful);
+            Assert.AreEqual("The message or enitty was not submitted.", result.Message);
         }
+    }
+
+    // Assume NonSerializableClass is defined elsewhere
+    public class NonSerializableClass
+    {
+        // This class is intentionally non-serializable
     }
 }

@@ -1,4 +1,4 @@
-namespace LayerInfrastructure
+namespace Infrastructure.Test
 {
     [TestClass]
     public class UnitTest1

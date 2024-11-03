@@ -1,29 +1,22 @@
 ﻿using Domain.EnumType.LogLevel;
 using Domain.EnumType.OperationExecute;
-using FluentAssertions;
 using Infrastructure.ExternalServices.LogExternal;
-using NUnit.Framework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace LayerInfrastructure.ExternalServices.LogExternal
+namespace Infrastructure.Test.ExternalServices.LogExternal
 {
-    [TestFixture]
+    [TestClass]
     public class LogBuilderTests
     {
         private LogBuilder _logBuilder;
 
-        [SetUp]
+        [TestInitialize]
         public void SetUp()
         {
             // Usamos el singleton de LogBuilder
             _logBuilder = LogBuilder.GetLogBuilder();
         }
 
-        [Test]
+        [TestMethod]
         public void GetLogBuilder_Should_Return_Singleton_Instance()
         {
             // Act
@@ -31,10 +24,10 @@ namespace LayerInfrastructure.ExternalServices.LogExternal
             var instance2 = LogBuilder.GetLogBuilder();
 
             // Assert
-            instance1.Should().BeSameAs(instance2);  // Verifica que ambas instancias son la misma
+            Assert.AreSame(instance1, instance2);  // Verifica que ambas instancias son la misma
         }
 
-        [Test]
+        [TestMethod]
         public void Trace_Should_Create_Trace_Level_Log()
         {
             // Arrange
@@ -46,14 +39,14 @@ namespace LayerInfrastructure.ExternalServices.LogExternal
             var result = _logBuilder.Trace(message, entity, operation);
 
             // Assert
-            result.Should().NotBeNull();
-            result.IsSuccessful.Should().BeTrue();
-            result.Data.Should().NotBeNull();
-            result.Data.Message.Should().Be(message);
-            result.Data.Level.Should().Be(LogLevel.Trace.ToString());
+            Assert.IsNotNull(result);
+            Assert.IsTrue(result.IsSuccessful);
+            Assert.IsNotNull(result.Data);
+            Assert.AreEqual(message, result.Data.Message);
+            Assert.AreEqual(LogLevel.Trace.ToString(), result.Data.Level);
         }
 
-        [Test]
+        [TestMethod]
         public void Debug_Should_Create_Debug_Level_Log()
         {
             // Arrange
@@ -65,14 +58,14 @@ namespace LayerInfrastructure.ExternalServices.LogExternal
             var result = _logBuilder.Debug(message, entity, operation);
 
             // Assert
-            result.Should().NotBeNull();
-            result.IsSuccessful.Should().BeTrue();
-            result.Data.Should().NotBeNull();
-            result.Data.Message.Should().Be(message);
-            result.Data.Level.Should().Be(LogLevel.Debug.ToString());
+            Assert.IsNotNull(result);
+            Assert.IsTrue(result.IsSuccessful);
+            Assert.IsNotNull(result.Data);
+            Assert.AreEqual(message, result.Data.Message);
+            Assert.AreEqual(LogLevel.Debug.ToString(), result.Data.Level);
         }
 
-        [Test]
+        [TestMethod]
         public void Information_Should_Create_Information_Level_Log()
         {
             // Arrange
@@ -84,14 +77,14 @@ namespace LayerInfrastructure.ExternalServices.LogExternal
             var result = _logBuilder.Information(message, entity, operation);
 
             // Assert
-            result.Should().NotBeNull();
-            result.IsSuccessful.Should().BeTrue();
-            result.Data.Should().NotBeNull();
-            result.Data.Message.Should().Be(message);
-            result.Data.Level.Should().Be(LogLevel.Information.ToString());
+            Assert.IsNotNull(result);
+            Assert.IsTrue(result.IsSuccessful);
+            Assert.IsNotNull(result.Data);
+            Assert.AreEqual(message, result.Data.Message);
+            Assert.AreEqual(LogLevel.Information.ToString(), result.Data.Level);
         }
 
-        [Test]
+        [TestMethod]
         public void Warning_Should_Create_Warning_Level_Log()
         {
             // Arrange
@@ -103,14 +96,14 @@ namespace LayerInfrastructure.ExternalServices.LogExternal
             var result = _logBuilder.Warning(message, entity, operation);
 
             // Assert
-            result.Should().NotBeNull();
-            result.IsSuccessful.Should().BeTrue();
-            result.Data.Should().NotBeNull();
-            result.Data.Message.Should().Be(message);
-            result.Data.Level.Should().Be(LogLevel.Warning.ToString());
+            Assert.IsNotNull(result);
+            Assert.IsTrue(result.IsSuccessful);
+            Assert.IsNotNull(result.Data);
+            Assert.AreEqual(message, result.Data.Message);
+            Assert.AreEqual(LogLevel.Warning.ToString(), result.Data.Level);
         }
 
-        [Test]
+        [TestMethod]
         public void Error_Should_Create_Error_Level_Log()
         {
             // Arrange
@@ -122,14 +115,14 @@ namespace LayerInfrastructure.ExternalServices.LogExternal
             var result = _logBuilder.Error(message, entity, operation);
 
             // Assert
-            result.Should().NotBeNull();
-            result.IsSuccessful.Should().BeTrue();
-            result.Data.Should().NotBeNull();
-            result.Data.Message.Should().Be(message);
-            result.Data.Level.Should().Be(LogLevel.Error.ToString());
+            Assert.IsNotNull(result);
+            Assert.IsTrue(result.IsSuccessful);
+            Assert.IsNotNull(result.Data);
+            Assert.AreEqual(message, result.Data.Message);
+            Assert.AreEqual(LogLevel.Error.ToString(), result.Data.Level);
         }
 
-        [Test]
+        [TestMethod]
         public void Fatal_Should_Create_Fatal_Level_Log()
         {
             // Arrange
@@ -141,11 +134,11 @@ namespace LayerInfrastructure.ExternalServices.LogExternal
             var result = _logBuilder.Fatal(message, entity, operation);
 
             // Assert
-            result.Should().NotBeNull();
-            result.IsSuccessful.Should().BeTrue();
-            result.Data.Should().NotBeNull();
-            result.Data.Message.Should().Be(message);
-            result.Data.Level.Should().Be(LogLevel.Fatal.ToString());
+            Assert.IsNotNull(result);
+            Assert.IsTrue(result.IsSuccessful);
+            Assert.IsNotNull(result.Data);
+            Assert.AreEqual(message, result.Data.Message);
+            Assert.AreEqual(LogLevel.Fatal.ToString(), result.Data.Level);
         }
     }
 }

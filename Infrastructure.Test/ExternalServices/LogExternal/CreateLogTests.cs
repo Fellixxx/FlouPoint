@@ -1,17 +1,20 @@
 ﻿using Domain.EnumType.LogLevel;
 using Domain.EnumType.OperationExecute;
-using FluentAssertions;
 using Infrastructure.ExternalServices.LogExternal;
 using Moq;
 using Newtonsoft.Json;
-using NUnit.Framework;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace LayerInfrastructure.ExternalServices.LogExternal
+namespace Infrastructure.Test.ExternalServices.LogExternal
 {
-    [TestFixture]
+    [TestClass]
     public class CreateLogTests
     {
-        [Test]
+        [TestMethod]
         public void CreateLogIfValid_Should_Return_Success_When_Valid_Data()
         {
             // Arrange
@@ -24,14 +27,14 @@ namespace LayerInfrastructure.ExternalServices.LogExternal
             var result = CreateLog.CreateLogIfValid(message, entity, operation, level);
 
             // Assert
-            result.Should().NotBeNull();
-            result.IsSuccessful.Should().BeTrue();
-            result.Data.Should().NotBeNull();
-            result.Data.Message.Should().Be(message);
-            result.Message.Should().Be("The Log validation of the OperationResult was successfully.");
+            Assert.IsNotNull(result);
+            Assert.IsTrue(result.IsSuccessful);
+            Assert.IsNotNull(result.Data);
+            Assert.AreEqual(message, result.Data.Message);
+            Assert.AreEqual("The Log validation of the OperationResult was successfully.", result.Message);
         }
 
-        [Test]
+        [TestMethod]
         public void CreateLogIfValid_Should_Return_Failure_When_Message_Is_NullOrWhitespace()
         {
             // Arrange
@@ -44,12 +47,12 @@ namespace LayerInfrastructure.ExternalServices.LogExternal
             var result = CreateLog.CreateLogIfValid(message, entity, operation, level);
 
             // Assert
-            result.Should().NotBeNull();
-            result.IsSuccessful.Should().BeFalse();
-            result.Message.Should().Be("The message or enitty was not submitted.");
+            Assert.IsNotNull(result);
+            Assert.IsFalse(result.IsSuccessful);
+            Assert.AreEqual("The message or enitty was not submitted.", result.Message);
         }
 
-        [Test]
+        [TestMethod]
         public void CreateLogIfValid_Should_Return_Failure_When_Entity_Is_Null()
         {
             // Arrange
@@ -62,12 +65,12 @@ namespace LayerInfrastructure.ExternalServices.LogExternal
             var result = CreateLog.CreateLogIfValid(message, entity, operation, level);
 
             // Assert
-            result.Should().NotBeNull();
-            result.IsSuccessful.Should().BeFalse();
-            result.Message.Should().Be("The message or enitty was not submitted.");
+            Assert.IsNotNull(result);
+            Assert.IsFalse(result.IsSuccessful);
+            Assert.AreEqual("The message or enitty was not submitted.", result.Message);
         }
 
-        [Test]
+        [TestMethod]
         public void CreateLogIfValid_Should_Return_Failure_When_JsonSerializationException_Occurs()
         {
             // Arrange
@@ -84,12 +87,12 @@ namespace LayerInfrastructure.ExternalServices.LogExternal
             var result = CreateLog.CreateLogIfValid(message, mockEntity.Object, operation, level);
 
             // Assert
-            result.Should().NotBeNull();
-            result.IsSuccessful.Should().BeFalse();
-            result.Message.Should().Contain("Failed to serialize entity: Self referencing loop detected for property 'Object' with type 'Castle.Proxies.TestEntityProxy'. Path 'Mock'.");
+            Assert.IsNotNull(result);
+            Assert.IsFalse(result.IsSuccessful);
+            StringAssert.Contains(result.Message, "Failed to serialize entity: Self referencing loop detected for property 'Object' with type 'Castle.Proxies.TestEntityProxy'. Path 'Mock'.");
         }
 
-        [Test]
+        [TestMethod]
         public void CreateLogIfValid_Should_Return_Failure_When_NullReferenceException_Occurs()
         {
             // Arrange
@@ -99,18 +102,18 @@ namespace LayerInfrastructure.ExternalServices.LogExternal
             var level = LogLevel.Information;
 
             // Simular una excepción de referencia nula
-            //Mock.Get(entity).Setup(e => e.ToString()).Throws(new NullReferenceException("Null reference encountered"));
+            // Mock.Get(entity).Setup(e => e.ToString()).Throws(new NullReferenceException("Null reference encountered"));
 
             // Act
             var result = CreateLog.CreateLogIfValid(message, entity, operation, level);
 
             // Assert
-            result.Should().NotBeNull();
-            result.IsSuccessful.Should().BeTrue();
-            result.Message.Should().Contain("The Log validation of the OperationResult was successfully.");
+            Assert.IsNotNull(result);
+            Assert.IsTrue(result.IsSuccessful);
+            StringAssert.Contains(result.Message, "The Log validation of the OperationResult was successfully.");
         }
 
-        [Test]
+        [TestMethod]
         public void CreateLogIfValid_Should_Return_Failure_When_Unexpected_Exception_Occurs()
         {
             // Arrange
@@ -123,9 +126,16 @@ namespace LayerInfrastructure.ExternalServices.LogExternal
             var result = CreateLog.CreateLogIfValid(message, entity, operation, level);
 
             // Assert
-            result.Should().NotBeNull();
-            result.IsSuccessful.Should().BeTrue();
-            result.Message.Should().Contain("The Log validation of the OperationResult was successfully.");
+            Assert.IsNotNull(result);
+            Assert.IsTrue(result.IsSuccessful);
+            StringAssert.Contains(result.Message, "The Log validation of the OperationResult was successfully.");
         }
+    }
+
+    // Assuming TestEntity is defined somewhere; including a basic definition for completeness
+    public class TestEntity
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
     }
 }
