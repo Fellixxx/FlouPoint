@@ -2,6 +2,7 @@
 {
     using System;
     using Domain.DTO.Login;
+    using Domain.Entities;
     using Domain.Interfaces.Login;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Newtonsoft.Json;
@@ -442,5 +443,106 @@
             Assert.AreEqual(2, dictionary.Count); // They are considered different keys
         }
 
+        [TestMethod]
+        public void CanSerializeAndDeserialize()
+        {
+            // Arrange
+            var resourceEntry = new ResourceEntry
+            {
+                Id = "123",
+                Name = "Resource",
+                Value = "Value",
+                Comment = "Comment",
+                Active = true
+            };
+
+            // Act
+            var json = JsonConvert.SerializeObject(resourceEntry);
+            var deserializedResourceEntry = JsonConvert.DeserializeObject<ResourceEntry>(json);
+
+            // Assert
+            Assert.AreEqual(resourceEntry.Id, deserializedResourceEntry.Id);
+            Assert.AreEqual(resourceEntry.Name, deserializedResourceEntry.Name);
+            Assert.AreEqual(resourceEntry.Value, deserializedResourceEntry.Value);
+            Assert.AreEqual(resourceEntry.Comment, deserializedResourceEntry.Comment);
+            Assert.AreEqual(resourceEntry.Active, deserializedResourceEntry.Active);
+        }
+
+        [TestMethod]
+        public void CanAddResourceEntryToCollection()
+        {
+            // Arrange
+            var resourceEntry1 = new ResourceEntry { Id = "1", Name = "Resource1" };
+            var resourceEntry2 = new ResourceEntry { Id = "2", Name = "Resource2" };
+            var resourceEntries = new List<ResourceEntry>();
+
+            // Act
+            resourceEntries.Add(resourceEntry1);
+            resourceEntries.Add(resourceEntry2);
+
+            // Assert
+            Assert.AreEqual(2, resourceEntries.Count);
+            Assert.AreEqual("1", resourceEntries[0].Id);
+            Assert.AreEqual("2", resourceEntries[1].Id);
+        }
+
+        [TestMethod]
+        public void CanCreateDerivedClassFromResourceEntry()
+        {
+            // Arrange
+            var extendedResourceEntry = new ExtendedResourceEntry
+            {
+                Id = "123",
+                Name = "Resource",
+                Value = "Value",
+                Comment = "Comment",
+                Active = true,
+                AdditionalInfo = "Extra Data"
+            };
+
+            // Act & Assert
+            Assert.AreEqual("123", extendedResourceEntry.Id);
+            Assert.AreEqual("Resource", extendedResourceEntry.Name);
+            Assert.AreEqual("Value", extendedResourceEntry.Value);
+            Assert.AreEqual("Comment", extendedResourceEntry.Comment);
+            Assert.IsTrue(extendedResourceEntry.Active);
+            Assert.AreEqual("Extra Data", extendedResourceEntry.AdditionalInfo);
+        }
+
+        public class ExtendedResourceEntry : ResourceEntry
+        {
+            public string AdditionalInfo { get; set; }
+        }
+
+        [TestMethod]
+        public void ResourceEntryProperties_CanBeAccessedConcurrently()
+        {
+            // Arrange
+            var resourceEntry = new ResourceEntry();
+            var tasks = new List<Task>();
+            var exceptionOccurred = false;
+
+            // Act
+            for (int i = 0; i < 100; i++)
+            {
+                tasks.Add(Task.Run(() =>
+                {
+                    try
+                    {
+                        resourceEntry.Name = "ConcurrentName";
+                        var temp = resourceEntry.Name;
+                    }
+                    catch
+                    {
+                        exceptionOccurred = true;
+                    }
+                }));
+            }
+
+            Task.WaitAll(tasks.ToArray());
+
+            // Assert
+            Assert.IsFalse(exceptionOccurred, "Exception occurred during concurrent access.");
+        }
     }
 }
