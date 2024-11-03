@@ -1,6 +1,5 @@
-﻿using Domain.DTO.Log;
-using Domain.EnumType.LogLevel;
-using Domain.EnumType.OperationExecute;
+﻿using Domain.DTO.Logging;
+using Domain.EnumType;
 using Infrastructure.ExternalServices.LogExternal;
 
 namespace Infrastructure.Test.ExternalServices

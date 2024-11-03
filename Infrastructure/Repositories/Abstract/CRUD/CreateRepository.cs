@@ -4,11 +4,11 @@
     using Application.UseCases.ExternalServices;
     using Application.UseCases.Repository.CRUD;
     using Domain.Interfaces.Entity;
-    using Domain.DTO.Log;
     using Infrastructure.Other;
     using Persistence.Repositories;
     using Microsoft.EntityFrameworkCore;
-    using Domain.EnumType.OperationExecute;
+    using Domain.DTO.Logging;
+    using Domain.EnumType;
 
     /// <summary>
     /// Abstract repository class for creating a new entity.

@@ -1,5 +1,6 @@
 ﻿namespace Application.Result.Error
 {
+    using Domain.EnumType.Extensions;
     using global::Domain.EnumType;
 
     /// <summary>

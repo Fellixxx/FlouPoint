@@ -1,7 +1,7 @@
 ﻿namespace Application.UseCases.ExternalServices
 {
     using Application.Result;
-    using Domain.EnumType.OperationExecute;
+    using Domain.EnumType;
 
     /// <summary>
     /// ILogBuilder provides an interface for building log entries 

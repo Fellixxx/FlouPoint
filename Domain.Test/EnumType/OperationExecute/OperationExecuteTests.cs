@@ -3,7 +3,7 @@ namespace Domain.Test.EnumType.OperationExecute
 {
     using System;
     using System.Xml.Linq;
-    using Domain.EnumType.OperationExecute;
+    using Domain.EnumType;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     [TestClass]
     public class OperationExecuteTests

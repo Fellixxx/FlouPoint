@@ -1,4 +1,4 @@
-﻿namespace Domain.EnumType
+﻿namespace Domain.EnumType.Extensions
 {
     using System;
     using System.Reflection;

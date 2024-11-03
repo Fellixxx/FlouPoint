@@ -2,7 +2,7 @@
 {
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using System;
-    using Domain.EnumType;
+    using Domain.EnumType.Extensions;
 
     // Define EnumMetadataAttribute for testing purposes
     [AttributeUsage(AttributeTargets.Field, AllowMultiple = false)]

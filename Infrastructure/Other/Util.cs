@@ -1,8 +1,8 @@
 ﻿namespace Infrastructure.Other
 {
     using Application.Result;
-    using Domain.DTO.Log;
-    using Domain.EnumType.OperationExecute;
+    using Domain.DTO.Logging;
+    using Domain.EnumType;
     using Infrastructure.ExternalServices.LogExternal;
     using System;
     using System.Runtime.CompilerServices;

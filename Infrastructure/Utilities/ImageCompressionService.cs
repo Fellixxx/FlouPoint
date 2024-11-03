@@ -3,8 +3,8 @@
     using Application.Result;
     using Application.UseCases.ExternalServices;
     using Application.UseCases.Utilities;
-    using Domain.DTO.Log;
-    using Domain.EnumType.OperationExecute;
+    using Domain.DTO.Logging;
+    using Domain.EnumType;
     using Infrastructure.Other;
     using SixLabors.ImageSharp.Formats.Jpeg;
 

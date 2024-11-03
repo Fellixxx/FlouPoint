@@ -2,9 +2,8 @@
 {
     using global::Application.Result;
     using Newtonsoft.Json;
-    using Domain.DTO.Log;
-    using Domain.EnumType.LogLevel;
-    using Domain.EnumType.OperationExecute;
+    using Domain.DTO.Logging;
+    using Domain.EnumType;
 
     public static class CreateLog
     {

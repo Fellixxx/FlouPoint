@@ -1,10 +1,9 @@
 ﻿namespace Domain.Test.EnumType
 {
     using Microsoft.VisualStudio.TestTools.UnitTesting;
-    using global::Domain.EnumType.LogLevel;
     using System.Reflection;
     using Domain.EnumType;
-    using Domain.EnumType.LogLevel;
+    using Domain.EnumType.Extensions;
 
     [TestClass]
     public class LogLevelTests

@@ -3,7 +3,7 @@
     using Application.Result;
     using Application.UseCases.ExternalServices;
     using Application.UseCases.Wrapper;
-    using Domain.DTO.Log;
+    using Domain.DTO.Logging;
     using Infrastructure;
     using Microsoft.Extensions.Configuration;
 

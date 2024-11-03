@@ -1,7 +1,7 @@
 ﻿namespace Application.UseCases.ExternalServices
 {
     using Application.Result;
-    using Domain.DTO.Log;
+    using Domain.DTO.Logging;
 
     /// <summary>
     ///  The logging service is responsible for recording the events or actions that occur within the application.

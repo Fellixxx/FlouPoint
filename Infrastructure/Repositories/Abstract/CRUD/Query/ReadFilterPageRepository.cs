@@ -2,14 +2,14 @@
 {
     using Application.Result;
     using Application.UseCases.ExternalServices;
-    using Domain.DTO.Log;
     using Infrastructure.Other;
     using Persistence.Repositories;
     using System;
     using System.Linq.Expressions;
     using Application.UseCases.Repository.CRUD.Query;
     using Microsoft.EntityFrameworkCore;
-    using Domain.EnumType.OperationExecute;
+    using Domain.DTO.Logging;
+    using Domain.EnumType;
 
     /// <summary>
     /// Abstract repository class for reading and filtering entities with pagination.

@@ -2,14 +2,14 @@
 {
     using global::Application.Result;
     using Application.UseCases.Wrapper;
-    using Domain.DTO.Log;
     using global::Domain.DTO;
     using Infrastructure;
     using Microsoft.Extensions.Configuration;
     using Newtonsoft.Json;
     using System.Net.Http.Headers;
     using System.Text;
-    using Domain.DTO.ResponseLogin;
+    using Domain.DTO.Login;
+    using Domain.DTO.Logging;
 
     /// <summary>
     /// Provides a base for interacting with an external logging service.

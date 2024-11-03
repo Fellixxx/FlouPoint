@@ -1,4 +1,6 @@
-﻿namespace Domain.EnumType.LogLevel
+﻿using Domain.EnumType.Extensions;
+
+namespace Domain.EnumType
 {
     /// <summary>
     /// Defines the levels of logs that can be used in the application.

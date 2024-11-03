@@ -1,4 +1,4 @@
-﻿namespace Domain.DTO.ResponseLogin
+﻿namespace Domain.DTO.Login
 {
     using Domain.Interfaces.ResponseLogin;
 

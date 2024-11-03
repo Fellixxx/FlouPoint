@@ -1,8 +1,7 @@
 ﻿namespace Infrastructure.ExternalServices.LogExternal
 {
-    using Domain.DTO.Log;
-    using Domain.EnumType.LogLevel;
-    using Domain.EnumType.OperationExecute;
+    using Domain.DTO.Logging;
+    using Domain.EnumType;
 
     internal static class LogBuilderHelpers
     {

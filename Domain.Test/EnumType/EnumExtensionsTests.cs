@@ -2,6 +2,7 @@ namespace Domain.Test.EnumType
 {
     using System;
     using Domain.EnumType;
+    using Domain.EnumType.Extensions;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     // Define the EnumMetadataAttribute

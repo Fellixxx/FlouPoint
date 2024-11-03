@@ -4,11 +4,11 @@
     using Application.UseCases.ExternalServices;
     using Application.UseCases.Repository.CRUD.Query;
     using Domain.Interfaces.Entity;
-    using Domain.DTO.Log;
     using Infrastructure.Other;
     using Infrastructure.Repositories.Abstract.CRUD.Validation;
     using Microsoft.EntityFrameworkCore;
-    using Domain.EnumType.OperationExecute;
+    using Domain.DTO.Logging;
+    using Domain.EnumType;
 
     /// <summary>
     /// Abstract repository class for reading an entity by its ID.

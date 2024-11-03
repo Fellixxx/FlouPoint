@@ -1,7 +1,7 @@
 namespace Domain.Test.DTO.ResponseLogin
 {
     using System;
-    using Domain.DTO.ResponseLogin;
+    using Domain.DTO.Login;
     using Domain.Interfaces.ResponseLogin;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Newtonsoft.Json;

@@ -1,9 +1,7 @@
 ﻿using Application.Result.Error;
 using Application.UseCases.ExternalServices;
 using Application.UseCases.Wrapper;
-using Domain.DTO.Log;
-using Domain.DTO.ResponseLogin;
-using Domain.EnumType.OperationExecute;
+using Domain.DTO.Login;
 using Infrastructure.ExternalServices.LogExternal;
 using Infrastructure.Other;
 using Microsoft.Extensions.Configuration;
@@ -11,6 +9,8 @@ using Moq;
 using Newtonsoft.Json;
 using System.Net.Http.Headers;
 using Domain.EnumType;
+using Domain.DTO.Logging;
+using Domain.EnumType.Extensions;
 
 namespace Infrastructure.Test.ExternalServices.LogExternal
 {

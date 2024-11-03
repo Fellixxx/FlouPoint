@@ -1,7 +1,7 @@
 ﻿namespace Application.Result
 {
     using Application.Result.Error;
-    using global::Domain.EnumType;
+    using Domain.EnumType.Extensions;
 
     /// <summary>
     /// Represents the result of an operation.

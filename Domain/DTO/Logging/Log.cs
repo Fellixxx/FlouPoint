@@ -1,4 +1,4 @@
-﻿namespace Domain.DTO.Log
+﻿namespace Domain.DTO.Logging
 {
     using Domain.Interfaces.Log;
 

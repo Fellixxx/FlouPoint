@@ -2,10 +2,8 @@
 {
     using Application.Result;
     using Application.UseCases.ExternalServices;
-    using Domain.DTO.Log;
     using global::Domain.EnumType;
-    using Domain.EnumType.LogLevel;
-    using Domain.EnumType.OperationExecute;
+    using Domain.DTO.Logging;
 
     /// <summary>
     /// Provides functionality to build and validate log entries.

@@ -4,11 +4,11 @@
     using Application.UseCases.ExternalServices;
     using Application.UseCases.Repository.Status.StatusChange;
     using Domain.Interfaces.Entity;
-    using Domain.DTO.Log;
     using Infrastructure.Other;
     using Persistence.Repositories;
     using Microsoft.EntityFrameworkCore;
-    using Domain.EnumType.OperationExecute;
+    using Domain.DTO.Logging;
+    using Domain.EnumType;
 
     /// <summary>
     /// Repository class for managing the status of entities.

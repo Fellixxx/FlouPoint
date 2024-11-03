@@ -1,5 +1,5 @@
 ﻿using Application.Result.Error;
-using Domain.EnumType;
+using Domain.EnumType.Extensions;
 using System.Reflection;
 
 namespace Application.Test.Result.Error

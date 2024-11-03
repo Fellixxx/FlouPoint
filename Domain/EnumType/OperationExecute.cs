@@ -1,4 +1,4 @@
-﻿namespace Domain.EnumType.OperationExecute
+﻿namespace Domain.EnumType
 {
     /// <summary>
     /// Defines the types of operations that can be executed.

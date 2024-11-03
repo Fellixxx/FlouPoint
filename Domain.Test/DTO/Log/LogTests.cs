@@ -1,7 +1,7 @@
 ﻿namespace Domain.Test.DTO.Log
 {
     using System;
-    using Domain.DTO.Log;
+    using Domain.DTO.Logging;
     using Domain.Interfaces.Log;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Newtonsoft.Json;

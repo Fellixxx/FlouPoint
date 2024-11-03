@@ -4,12 +4,12 @@
     using Application.UseCases.ExternalServices;
     using Application.UseCases.Repository.CRUD;
     using Domain.Interfaces.Entity;
-    using Domain.DTO.Log;
     using Infrastructure.Other;
     using Infrastructure.Repositories.Abstract.CRUD.Validation;
     using Persistence.Repositories;
     using Microsoft.EntityFrameworkCore;
-    using Domain.EnumType.OperationExecute;
+    using Domain.DTO.Logging;
+    using Domain.EnumType;
 
     /// <summary>
     /// Abstract repository class for deleting an entity.

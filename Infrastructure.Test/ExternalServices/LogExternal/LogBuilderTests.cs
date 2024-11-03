@@ -1,5 +1,4 @@
-﻿using Domain.EnumType.LogLevel;
-using Domain.EnumType.OperationExecute;
+﻿using Domain.EnumType;
 using Infrastructure.ExternalServices.LogExternal;
 
 namespace Infrastructure.Test.ExternalServices.LogExternal
