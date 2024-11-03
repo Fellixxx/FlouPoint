@@ -2,12 +2,12 @@ namespace Persistence.Test.BaseDbContext
 {
     using System;
     using Domain.Entities;
+    using global::Persistence.BaseDbContext;
+    using global::Persistence.CreateStruture.Constants.ColumnType;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Logging;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using NSubstitute;
-    using Persistence.BaseDbContext;
-    using Persistence.CreateStruture.Constants.ColumnType;
     using TContext = System.String;
 
     [TestClass]

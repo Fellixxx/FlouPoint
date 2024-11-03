@@ -1,19 +1,21 @@
-﻿namespace FlouPoint.LayerPersistence.Test.Persistence.Repositories
+﻿namespace Persistence.Test.Persistence.Data
 {
     using global::Domain.Interfaces.Entity;
     using global::Persistence.Repositories;
-    using FluentAssertions;
     using Microsoft.EntityFrameworkCore;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Moq;
+    using System;
+    using System.Threading.Tasks;
 
-    [TestFixture]
+    [TestClass]
     public class RepositoryTests
     {
         private Mock<DbContext> _mockContext;
         private Mock<DbSet<MockEntity>> _mockDbSet;
         private MockEntityRepository _repository;
 
-        [SetUp]
+        [TestInitialize]
         public void SetUp()
         {
             _mockContext = new Mock<DbContext>();
@@ -22,7 +24,7 @@
             _repository = new MockEntityRepository(_mockContext.Object);
         }
 
-        [Test]
+        [TestMethod]
         public async Task When_Create_ValidEntity_Then_Success()
         {
             // Given
@@ -33,31 +35,28 @@
 
             // Then
             _mockDbSet.Verify(x => x.Add(entity), Times.Once);
-            entity.Id.Should().Be(id);
-
+            Assert.AreEqual(id, entity.Id);
         }
 
-        [Test]
-        public void When_Create_NullEntity_Then_ThrowsException()
+        [TestMethod]
+        public async Task When_Create_NullEntity_Then_ThrowsException()
         {
             // Given, When, Then
-            Assert.ThrowsAsync<ArgumentNullException>(() => _repository.Create(null));
+            await Assert.ThrowsExceptionAsync<ArgumentNullException>(async () => await _repository.Create(null));
         }
 
-        [Test]
-        public void When_Update_NullEntity_Then_ThrowsException()
+        [TestMethod]
+        public async Task When_Update_NullEntity_Then_ThrowsException()
         {
             // Given, When, Then
-            Assert.ThrowsAsync<ArgumentNullException>(() => _repository.Update(null));
+            await Assert.ThrowsExceptionAsync<ArgumentNullException>(async () => await _repository.Update(null));
         }
 
-
-
-        [Test]
-        public void When_Delete_NullEntity_Then_ThrowsException()
+        [TestMethod]
+        public async Task When_Delete_NullEntity_Then_ThrowsException()
         {
             // Given, When, Then
-            Assert.ThrowsAsync<ArgumentNullException>(() => _repository.Delete(null));
+            await Assert.ThrowsExceptionAsync<ArgumentNullException>(async () => await _repository.Delete(null));
         }
 
         // ... (You can add more tests for other methods like ReadPageByFilter, ReadCountFilter)

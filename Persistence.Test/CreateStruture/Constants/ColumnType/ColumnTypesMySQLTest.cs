@@ -1,8 +1,9 @@
 ﻿namespace Persistence.Test.CreateStruture.Constants.ColumnType
 {
+    using global::Persistence.CreateStruture.Constants.ColumnType;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using MySql.EntityFrameworkCore.Metadata;
-    using Persistence.CreateStruture.Constants.ColumnType;
+
 
     [TestClass]
     public class ColumnTypesMySQLTests
