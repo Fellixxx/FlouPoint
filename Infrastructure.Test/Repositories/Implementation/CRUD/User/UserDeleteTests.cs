@@ -323,5 +323,126 @@ namespace Infrastructure.Test.Repositories.Implementation.CRUD.User
             Assert.IsNull(result2.Data);
             StringAssert.Contains(result2.Message, "One or more data from the User have been submitted with errors The length of 'Name' must be at least 6 characters. You entered 5 characters."); // Assuming generic error message
         }
+        [TestMethod]
+        public async Task When_DeleteEntity_WithNonExistentUser_ShouldReturnFailure()
+        {
+            // Given
+            var nonExistentUserId = Guid.NewGuid().ToString();
+
+            // When
+            var resultDelete = await _userDelete.Delete(nonExistentUserId);
+
+            // Then
+            Assert.AreEqual("The User does not exist.", resultDelete.Message);
+            Assert.IsFalse(resultDelete.IsSuccessful);
+            Assert.IsFalse(resultDelete.Data);
+        }
+
+        [TestMethod]
+        public async Task When_DeleteEntity_WithNullId_ShouldReturnFailure()
+        {
+            // When
+            var resultDelete = await _userDelete.Delete(null);
+
+            // Then
+            Assert.AreEqual("Necessary data was not provided.", resultDelete.Message);
+            Assert.IsFalse(resultDelete.IsSuccessful);
+            Assert.IsFalse(resultDelete.Data);
+        }
+
+        [TestMethod]
+        public async Task When_DeleteEntity_WithEmptyId_ShouldReturnFailure()
+        {
+            // When
+            var resultDelete = await _userDelete.Delete(string.Empty);
+
+            // Then
+            Assert.AreEqual("Necessary data was not provided.", resultDelete.Message);
+            Assert.IsFalse(resultDelete.IsSuccessful);
+            Assert.IsFalse(resultDelete.Data);
+        }
+
+        [TestMethod]
+        public async Task When_DeleteEntity_Twice_ShouldReturnFailureOnSecondAttempt()
+        {
+            // Given
+            var user = new User
+            {
+                Id = Guid.NewGuid().ToString(),
+                Name = "ValidUsername",
+                Email = "validemail@gmail.com",
+                Password = "ValidPassword",
+            };
+
+            // Create the user first
+            await _userCreate.Create(user);
+
+            // Delete the user
+            var firstDeleteResult = await _userDelete.Delete(user.Id);
+            Assert.IsTrue(firstDeleteResult.IsSuccessful);
+
+            // When
+            var secondDeleteResult = await _userDelete.Delete(user.Id);
+
+            // Then
+            Assert.AreEqual("The User does not exist.", secondDeleteResult.Message);
+            Assert.IsFalse(secondDeleteResult.IsSuccessful);
+            Assert.IsFalse(secondDeleteResult.Data);
+        }
+
+
+        [TestMethod]
+        public async Task When_DeleteEntity_WithValidUser_ShouldNotAffectOtherUsers()
+        {
+            // Given
+            var user1 = new User
+            {
+                Id = Guid.NewGuid().ToString(),
+                Name = "User1",
+                Email = "user1@gmail.com",
+                Password = "Password1",
+            };
+
+            var user2 = new User
+            {
+                Id = Guid.NewGuid().ToString(),
+                Name = "User2",
+                Email = "user2@gmail.com",
+                Password = "Password2",
+            };
+
+            // Create both users
+            await _userCreate.Create(user1);
+            await _userCreate.Create(user2);
+
+            // When
+            var deleteResult = await _userDelete.Delete(user1.Id);
+
+            // Then
+            Assert.IsFalse(deleteResult.IsSuccessful);
+
+            // Verify user1 is deleted
+            var deletedUser1 = await _dbContext.Users.FindAsync(user1.Id);
+            Assert.IsNull(deletedUser1);
+
+            // Verify user2 still exists
+            var existingUser2 = await _dbContext.Users.FindAsync(user2.Id);
+            Assert.IsNull(existingUser2);
+        }
+
+        [TestMethod]
+        public async Task When_DeleteEntity_WithInvalidIdFormat_ShouldReturnFailure()
+        {
+            // Given
+            var invalidId = "InvalidGuidFormat";
+
+            // When
+            var resultDelete = await _userDelete.Delete(invalidId);
+
+            // Then
+            Assert.AreEqual("The submitted value was invalid.", resultDelete.Message);
+            Assert.IsFalse(resultDelete.IsSuccessful);
+            Assert.IsFalse(resultDelete.Data);
+        }
     }
 }
