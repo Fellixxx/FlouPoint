@@ -15,7 +15,7 @@ namespace Persistence.Test.BaseDbContext
     {
         private class TestCommonDbContext : CommonDbContext
         {
-            public TestCommonDbContext(DbContextOptions options, IColumnTypes columnTypes, ILogger<CommonDbContext> logger) : base(options, columnTypes, logger)
+            public TestCommonDbContext(DbContextOptions options, IColumnTypes columnTypes) : base(options, columnTypes)
             {
             }
 
@@ -36,14 +36,14 @@ namespace Persistence.Test.BaseDbContext
             _options = new DbContextOptionsBuilder<CommonDbContext>().Options;
             _columnTypes = Substitute.For<IColumnTypes>();
             _logger = Substitute.For<ILogger<CommonDbContext>>();
-            _testClass = new TestCommonDbContext(_options, _columnTypes, _logger);
+            _testClass = new TestCommonDbContext(_options, _columnTypes);
         }
 
         [TestMethod]
         public void CanConstruct()
         {
             // Act
-            var instance = new TestCommonDbContext(_options, _columnTypes, _logger);
+            var instance = new TestCommonDbContext(_options, _columnTypes);
 
             // Assert
             Assert.IsNotNull(instance);
@@ -52,7 +52,7 @@ namespace Persistence.Test.BaseDbContext
         [TestMethod]
         public void CannotConstructWithNullOptions()
         {
-            Assert.ThrowsException<ArgumentNullException>(() => new TestCommonDbContext(default(DbContextOptions<CommonDbContext>), _columnTypes, _logger));
+            Assert.ThrowsException<ArgumentNullException>(() => new TestCommonDbContext(default(DbContextOptions<CommonDbContext>), _columnTypes));
         }
 
         [TestMethod]

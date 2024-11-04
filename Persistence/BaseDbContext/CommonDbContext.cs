@@ -13,7 +13,6 @@ namespace Persistence.BaseDbContext
     public class CommonDbContext : DbContext, ICommonDbContext
     {
         protected readonly IColumnTypes _columnTypes;
-        protected readonly ILogger<CommonDbContext> _logger;
 
         /// <summary>
         /// Represents a collection of <see cref="ResourceEntry"/> entities in the database context.
@@ -27,10 +26,9 @@ namespace Persistence.BaseDbContext
         /// <param name="options">The options to be used by the database context.</param>
         /// <param name="columnTypes">The column types to be used by the database context.</param>
         /// <param name="logger">The logger instance.</param>
-        public CommonDbContext(DbContextOptions options, IColumnTypes columnTypes, ILogger<CommonDbContext> logger) : base(options)
+        public CommonDbContext(DbContextOptions options, IColumnTypes columnTypes) : base(options)
         {
             _columnTypes = columnTypes;
-            _logger = logger;
         }
 
         /// <summary>
@@ -44,8 +42,7 @@ namespace Persistence.BaseDbContext
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "An error occurred while migrating or initializing the database.");
-                throw;
+                throw new Exception("An error occurred while migrating or initializing the database.");
             }
         }
 
