@@ -2,7 +2,6 @@ namespace Infrastructure.Test.Repositories.Implementation.CRUD.User
 {
     using System;
     using System.Threading.Tasks;
-    using Application.Result;
     using Application.UseCases.CRUD.User;
     using Application.UseCases.ExternalServices;
     using Domain.Entities;
@@ -10,10 +9,8 @@ namespace Infrastructure.Test.Repositories.Implementation.CRUD.User
     using Microsoft.EntityFrameworkCore;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Moq;
-    using MySqlX.XDevAPI.Common;
     using Persistence.BaseDbContext;
     using Persistence.CreateStruture.Constants.ColumnType;
-    using TContext = System.String;
 
     [TestClass]
     public class UserCreateTests
