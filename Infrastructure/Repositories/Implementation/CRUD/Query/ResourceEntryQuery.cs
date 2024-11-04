@@ -11,7 +11,7 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Infrastructure.Repositories.Implemntation.CRUD.Query
+namespace Infrastructure.Repositories.Implementation.CRUD.Query
 {
     public class ResourceEntryQuery : Read<ResourceEntry>, IResourceEntryQuery
     {

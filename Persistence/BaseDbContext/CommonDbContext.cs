@@ -19,6 +19,7 @@ namespace Persistence.BaseDbContext
         /// Represents a collection of <see cref="ResourceEntry"/> entities in the database context.
         /// </summary>
         public virtual DbSet<ResourceEntry> Lists { get; set; }
+        public virtual DbSet<User> Users { get; set; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="CommonDbContext"/> class with the specified options, column types, and logger.
