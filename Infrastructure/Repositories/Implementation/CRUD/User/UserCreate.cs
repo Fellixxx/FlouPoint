@@ -23,17 +23,6 @@ namespace Infrastructure.Repositories.Implementation.CRUD.User
         /// <param name="logService">The logging service for tracking operations.</param>
         public UserCreate(CommonDbContext context, ILogService logService) : base(context, logService)
         {
-            // Validate that context is not null
-            if (context == null)
-            {
-                throw new ArgumentNullException(nameof(context), "The database context cannot be null.");
-            }
-
-            // Validate that logService is not null
-            if (logService == null)
-            {
-                throw new ArgumentNullException(nameof(logService), "The log service cannot be null.");
-            }
         }
 
         /// <summary>
@@ -41,7 +30,7 @@ namespace Infrastructure.Repositories.Implementation.CRUD.User
         /// </summary>
         /// <param name="entity">The user entity to be created and stored.</param>
         /// <returns>An operation result indicating the outcome of the user creation.</returns>
-        public override async Task<OperationResult<User>> CreateEntity(User entity)
+        protected override async Task<OperationResult<User>> CreateEntity(User entity)
         {
             // Validate the user entity using the defined rules
             CreateUserRules validatorAdd = new CreateUserRules();

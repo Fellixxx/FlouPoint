@@ -75,6 +75,6 @@
         /// </summary>
         /// <param name="entity">The entity to validate.</param>
         /// <returns>A task representing the asynchronous operation with the validation result.</returns>
-        public abstract Task<OperationResult<T>> CreateEntity(T entity);
+        protected abstract Task<OperationResult<T>> CreateEntity(T entity);
     }
 }
