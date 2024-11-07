@@ -5,8 +5,8 @@
     /// </summary>
     public static class UsernameGenerator
     {
-        private static readonly Random RandomInstance = new Random();
-        private const string DefaultSuffix = "authflow";
+        private static readonly Random RandomInstance = new();
+        private const string DefaultSuffix = "flou";
         private const int RandomLimit = 2;
 
         /// <summary>
@@ -28,7 +28,7 @@
                 suggestions.Add($"{username}.{suffix}");
             }
 
-            return suggestions.ToList();
+            return [.. suggestions];
         }
 
         /// <summary>

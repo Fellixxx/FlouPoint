@@ -7,6 +7,7 @@ namespace Infrastructure.Repositories.Implementation.CRUD.Query.User
     using Application.UseCases.ExternalServices;
     using User = Domain.Entities.User;
     using Persistence.BaseDbContext;
+    using Microsoft.EntityFrameworkCore;
 
     /// <summary>
     /// Repository class for reading user entity counts with filtering.
@@ -29,13 +30,18 @@ namespace Infrastructure.Repositories.Implementation.CRUD.Query.User
         /// <returns>The predicate expression for filtering.</returns>
         public override Expression<Func<User, bool>> GetPredicate(string filter)
         {
-            // Convert the filter to lowercase for case-insensitive comparison
-            filter = filter.ToLower();
+            if (string.IsNullOrWhiteSpace(filter))
+            {
+                return u => true; // No filtering if the filter is empty
+            }
 
-            // Define the predicate expression based on the filter
-            return u => string.IsNullOrWhiteSpace(filter) ||
-            (u.Name ?? string.Empty).ToLower().Contains(filter) ||
-            (u.Email ?? string.Empty).ToLower().Contains(filter);
+            // Escape wildcard characters in the filter
+            filter = filter.Replace("[", "[[]").Replace("%", "[%]").Replace("_", "[_]");
+
+            // Add wildcards for partial matching
+            filter = $"%{filter}%";
+
+            return u => EF.Functions.Like(u.Name, filter) || EF.Functions.Like(u.Email, filter);
         }
     }
 }
