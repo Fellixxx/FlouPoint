@@ -1,9 +1,11 @@
-﻿using Application.UseCases.CRUD.User;
+﻿using Application.UseCases.CRUD.Query.User;
+using Application.UseCases.CRUD.User;
 using Application.UseCases.CRUD.Validation;
 using Application.UseCases.ExternalServices;
 using Application.UseCases.Operations;
 using Application.UseCases.Repository.Status.StatusChange;
 using Domain.Entities;
+using Infrastructure.Repositories.Implementation.CRUD.Query.User;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Configuration;
@@ -39,7 +41,7 @@ namespace Infrastructure.Test.Repositories.Implementation
         protected IStatusRepository _userStatus;
         protected IUserExistenceValidator _userExistenceValidator;
         protected Mock<IDistributedCache> _distributedCacheMock;
-
+        protected IUserReadFilterPage _userReadFilterPage;
         [TestMethod]
         public virtual void Setup()
         {
