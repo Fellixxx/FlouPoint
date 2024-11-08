@@ -1,5 +1,7 @@
-﻿using Application.UseCases.CRUD.User;
+﻿using Application.UseCases.CRUD.Query.User;
+using Application.UseCases.CRUD.User;
 using Application.UseCases.ExternalServices;
+using Infrastructure.Repositories.Implementation.CRUD.Query.User;
 using Infrastructure.Repositories.Implementation.CRUD.User;
 using Infrastructure.Repositories.Implementation.Status;
 using Microsoft.EntityFrameworkCore;
@@ -15,6 +17,7 @@ namespace Infrastructure.Test.Repositories.Implementation.CRUD
         protected DbContextOptions<CommonDbContext> _options;
         protected CommonDbContext _dbContext;
         protected Mock<ILogService> _logService;
+        protected IUserReadFilter _userReadFilter;
         protected IUserCreate _userCreate;
         protected IUserUpdate _userUpdate;
         protected IUserDelete _userDelete;
@@ -34,6 +37,7 @@ namespace Infrastructure.Test.Repositories.Implementation.CRUD
             _userDelete = new UserDelete(_dbContext, _logService.Object);
             _userUpdate = new UserUpdate(_dbContext, _logService.Object);
             _userStatus = new UserStatus(_dbContext, _logService.Object);
+            _userReadFilter = new UserReadFilter(_dbContext, _logService.Object);
         }
     }
 }

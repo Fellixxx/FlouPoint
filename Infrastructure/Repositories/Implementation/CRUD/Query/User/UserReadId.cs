@@ -17,7 +17,9 @@
         /// </summary>
         /// <param name="context">The database context.</param>
         /// <param name="logService">The log service.</param>
-        public UserReadId(CommonDbContext context, ILogService logService) : base(context, logService)
+        public UserReadId(
+            CommonDbContext context, 
+            ILogService logService) : base(context, logService)
         {
         }
     }

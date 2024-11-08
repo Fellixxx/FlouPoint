@@ -18,7 +18,9 @@ namespace Infrastructure.Repositories.Implementation.CRUD.Query.User
         /// </summary>
         /// <param name="context">The database context.</param>
         /// <param name="logService">The log service.</param>
-        public UserReadFilterPage(CommonDbContext context, ILogService logService) : base(context, logService)
+        public UserReadFilterPage(
+            CommonDbContext context, 
+            ILogService logService) : base(context, logService)
         {
         }
 
