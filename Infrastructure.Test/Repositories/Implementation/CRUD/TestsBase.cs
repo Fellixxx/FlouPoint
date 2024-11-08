@@ -1,6 +1,7 @@
 ﻿using Application.UseCases.CRUD.Query.User;
 using Application.UseCases.CRUD.User;
 using Application.UseCases.ExternalServices;
+using Application.UseCases.Repository.Status.Status;
 using Infrastructure.Repositories.Implementation.CRUD.Query.User;
 using Infrastructure.Repositories.Implementation.CRUD.User;
 using Infrastructure.Repositories.Implementation.Status;
@@ -21,7 +22,9 @@ namespace Infrastructure.Test.Repositories.Implementation.CRUD
         protected IUserCreate _userCreate;
         protected IUserUpdate _userUpdate;
         protected IUserDelete _userDelete;
-        protected UserStatus _userStatus;
+        protected IUserStatus _userStatus;
+        protected IUserReadFilterCount _userReadFilterCount;
+
 
         [TestInitialize]
         public void SetUp()
@@ -38,6 +41,7 @@ namespace Infrastructure.Test.Repositories.Implementation.CRUD
             _userUpdate = new UserUpdate(_dbContext, _logService.Object);
             _userStatus = new UserStatus(_dbContext, _logService.Object);
             _userReadFilter = new UserReadFilter(_dbContext, _logService.Object);
+            _userReadFilterCount = new UserReadFilterCount(_dbContext, _logService.Object);
         }
     }
 }

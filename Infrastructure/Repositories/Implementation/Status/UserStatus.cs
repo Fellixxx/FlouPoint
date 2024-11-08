@@ -5,11 +5,12 @@
     using Application.UseCases.Repository.Status.StatusChange;
     using Domain.Entities;
     using Persistence.BaseDbContext;
+    using Application.UseCases.Repository.Status.Status;
 
     /// <summary>
     /// Repository class for managing the status of user entities.
     /// </summary>
-    public class UserStatus : StatusRepository<User>, IStatusRepository
+    public class UserStatus : StatusRepository<User>, IUserStatus
     {
         /// <summary>
         /// Constructor with dependency injection.
