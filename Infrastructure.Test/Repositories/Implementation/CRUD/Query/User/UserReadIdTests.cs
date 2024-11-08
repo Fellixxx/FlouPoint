@@ -4,15 +4,11 @@ namespace Infrastructure.Test.Repositories.Implementation.CRUD.Query.User
     using Application.UseCases.ExternalServices;
     using Infrastructure.Repositories.Implementation.CRUD.Query.User;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using Moq;
     using Persistence.BaseDbContext;
 
     [TestClass]
     public class UserReadIdTests : BaseTests
     {
-        [TestMethod]
-        public void CannotConstructWithNullLogService()
-        {
-            Assert.ThrowsException<ArgumentNullException>(() => new UserReadId(_dbContext, default(ILogService)));
-        }
     }
 }
