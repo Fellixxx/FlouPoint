@@ -42,6 +42,9 @@ namespace Infrastructure.Test.Repositories.Implementation
         protected IUserExistenceValidator _userExistenceValidator;
         protected Mock<IDistributedCache> _distributedCacheMock;
         protected IUserReadFilterPage _userReadFilterPage;
+        protected IUserReadId _userReadId;
+
+
         [TestMethod]
         public virtual void Setup()
         {
