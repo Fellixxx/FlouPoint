@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Domain.DTO.User
+﻿namespace Domain.DTO.User
 {
     /// <summary>
     /// Represents a user in the context of the application.

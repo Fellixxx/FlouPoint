@@ -1,13 +1,8 @@
-﻿using Application.Result;
-using Application.UseCases.Repository.Status.StatusChange;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Application.UseCases.Repository.Status.Status
+﻿namespace Application.UseCases.Repository.Status.Status
 {
+    using Application.Result;
+    using Application.UseCases.Repository.Status.StatusChange;
+
     public interface IUserStatus : IStatusRepository
     {
         Task<OperationResult<bool>> Activate(string id);

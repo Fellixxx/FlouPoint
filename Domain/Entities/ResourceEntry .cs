@@ -1,7 +1,7 @@
-﻿using Domain.Interfaces.Entity;
-
-namespace Domain.Entities
+﻿namespace Domain.Entities
 {
+    using Domain.Interfaces.Entity;
+
     public class ResourceEntry : IEntity
     {
         /// <summary>

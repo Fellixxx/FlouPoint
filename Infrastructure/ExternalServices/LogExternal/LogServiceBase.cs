@@ -1,8 +1,7 @@
 ﻿namespace Infrastructure.ExternalServices.LogExternal
 {
-    using global::Application.Result;
+    using Application.Result;
     using Application.UseCases.Wrapper;
-    using global::Domain.DTO;
     using Infrastructure;
     using Microsoft.Extensions.Configuration;
     using Newtonsoft.Json;

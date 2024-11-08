@@ -1,12 +1,10 @@
-﻿using Application.Result;
-using Application.UseCases.ExternalServices;
-using Application.UseCases.Repository.CRUD.ResourceEntry;
-using Domain.Entities;
-using Domain.Interfaces.Entity;
-using Microsoft.EntityFrameworkCore;
-
-namespace Infrastructure.Message
+﻿namespace Infrastructure.Message
 {
+    using Application.UseCases.ExternalServices;
+    using Application.UseCases.Repository.CRUD.ResourceEntry;
+    using Domain.Entities;
+    using Microsoft.EntityFrameworkCore;
+
     public class DatabaseResourceProvider : IResourceProvider
     {
         

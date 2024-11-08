@@ -1,6 +1,6 @@
 ﻿namespace Infrastructure.ExternalServices.LogExternal
 {
-    using global::Application.Result;
+    using Application.Result;
     using Newtonsoft.Json;
     using Domain.DTO.Logging;
     using Domain.EnumType;

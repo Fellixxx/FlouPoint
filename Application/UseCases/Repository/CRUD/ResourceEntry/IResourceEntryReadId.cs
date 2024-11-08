@@ -1,7 +1,7 @@
-﻿using Application.Result;
-
-namespace Application.UseCases.Repository.CRUD.ResourceEntry
+﻿namespace Application.UseCases.Repository.CRUD.ResourceEntry
 {
+    using Application.Result;
+
     using ResourceEntry = Domain.Entities.ResourceEntry;
     public interface IResourceEntryReadId
     {

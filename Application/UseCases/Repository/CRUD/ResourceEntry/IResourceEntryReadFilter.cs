@@ -1,13 +1,7 @@
-﻿using Application.Result;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Application.UseCases.Repository.CRUD.ResourceEntry
+﻿namespace Application.UseCases.Repository.CRUD.ResourceEntry
 {
+    using Application.Result;
+    using System.Linq.Expressions;
     using ResourceEntry = Domain.Entities.ResourceEntry;
     public interface IResourceEntryReadFilter
     {

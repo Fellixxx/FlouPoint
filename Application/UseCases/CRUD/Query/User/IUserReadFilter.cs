@@ -1,5 +1,4 @@
-﻿
-namespace Application.UseCases.CRUD.Query.User
+﻿namespace Application.UseCases.CRUD.Query.User
 {
     using Application.Result;
     using System.Linq.Expressions;

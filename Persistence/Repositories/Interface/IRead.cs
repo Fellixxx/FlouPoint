@@ -1,5 +1,4 @@
-﻿// Namespace for persistence repository interfaces
-namespace Persistence.Repositories.Interface
+﻿namespace Persistence.Repositories.Interface
 {
     using System.Linq.Expressions;
     using System.Threading.Tasks; // Assuming that the 'Task' type is from System.Threading.Tasks namespace

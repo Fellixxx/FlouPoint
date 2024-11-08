@@ -1,9 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore.ChangeTracking;
-using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore;
-
-namespace Persistence.BaseDbContext.Interface
+﻿namespace Persistence.BaseDbContext.Interface
 {
+    using Microsoft.EntityFrameworkCore.ChangeTracking;
+    using Microsoft.EntityFrameworkCore.Infrastructure;
+    using Microsoft.EntityFrameworkCore;
+
     /// <summary>
     /// Interface for the CommonDbContext class, representing a common database context coordinating Entity Framework functionality across projects.
     /// </summary>

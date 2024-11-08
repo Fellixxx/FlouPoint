@@ -2,7 +2,7 @@
 {
     using Application.Result;
     using Application.UseCases.ExternalServices;
-    using global::Domain.EnumType;
+    using Domain.EnumType;
     using Domain.DTO.Logging;
 
     /// <summary>

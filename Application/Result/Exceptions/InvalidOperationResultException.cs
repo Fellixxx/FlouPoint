@@ -1,6 +1,4 @@
-﻿using System.Xml.Linq;
-
-namespace Application.Result.Exceptions
+﻿namespace Application.Result.Exceptions
 {
     // Represents an exception for invalid operation results.
     public class InvalidOperationResultException : Exception

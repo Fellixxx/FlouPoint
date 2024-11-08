@@ -1,9 +1,8 @@
-﻿
-using Application.UseCases.ExternalServices;
-using System.Resources;
-
-namespace Infrastructure.Message
+﻿namespace Infrastructure.Message
 {
+    using Application.UseCases.ExternalServices;
+    using System.Resources;
+
     public class ResxResourceProvider(ResourceManager resourceManager) : IResourceProvider
     {
         private readonly ResourceManager _resourceManager = resourceManager;

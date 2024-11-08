@@ -1,7 +1,7 @@
 ﻿namespace Infrastructure.Utilities
 {
     using System; // This is required for Guid.TryParse method.
-    using global::Application.Result;
+    using Application.Result;
 
     /// <summary>
     /// Provides utility functions to validate GUIDs (Globally Unique Identifiers).

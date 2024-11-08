@@ -1,6 +1,6 @@
 ﻿namespace Infrastructure.Repositories.Abstract.CRUD.Query
 {
-    using global::Application.Result;
+    using Application.Result;
     using Newtonsoft.Json.Linq;
     using System.Text;
 

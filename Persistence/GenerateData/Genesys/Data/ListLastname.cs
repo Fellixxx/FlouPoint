@@ -1,5 +1,4 @@
-﻿
-namespace Persistence.GenerateData.Genesys.Data
+﻿namespace Persistence.GenerateData.Genesys.Data
 {
     using System.Collections.Immutable;
 

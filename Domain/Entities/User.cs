@@ -1,7 +1,7 @@
-﻿using Domain.Interfaces.Entity;
-
-namespace Domain.Entities
+﻿namespace Domain.Entities
 {
+    using Domain.Interfaces.Entity;
+
     /// <summary>
     /// User is a domain entity that represents a user in the system.
     /// This entity contains information necessary for user authentication and identification.

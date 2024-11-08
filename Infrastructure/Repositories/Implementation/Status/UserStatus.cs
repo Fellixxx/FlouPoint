@@ -2,7 +2,6 @@
 {
     using Infrastructure.Repositories.Abstract.Status;
     using Application.UseCases.ExternalServices;
-    using Application.UseCases.Repository.Status.StatusChange;
     using Domain.Entities;
     using Persistence.BaseDbContext;
     using Application.UseCases.Repository.Status.Status;

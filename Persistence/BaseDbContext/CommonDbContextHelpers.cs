@@ -1,15 +1,10 @@
-﻿using Domain.Entities;
-using Microsoft.EntityFrameworkCore;
-using Persistence.CreateStruture.Constants;
-using Persistence.CreateStruture.Constants.ColumnType;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Persistence.BaseDbContext
+﻿namespace Persistence.BaseDbContext
 {
+    using Domain.Entities;
+    using Microsoft.EntityFrameworkCore;
+    using Persistence.CreateStruture.Constants;
+    using Persistence.CreateStruture.Constants.ColumnType;
+
     public static class CommonDbContextHelpers
     {
         /// <summary>

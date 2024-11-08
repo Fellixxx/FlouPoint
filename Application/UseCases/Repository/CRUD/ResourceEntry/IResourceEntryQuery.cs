@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Application.UseCases.Repository.CRUD.ResourceEntry
+﻿namespace Application.UseCases.Repository.CRUD.ResourceEntry
 {
     /// <summary>
     /// The IResourceEntryQuery interface defines the contract for querying ResourceEntry entities.

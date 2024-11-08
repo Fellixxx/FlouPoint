@@ -1,18 +1,13 @@
-﻿using Application.Result;
-using Application.UseCases.ExternalServices;
-using Application.UseCases.Repository.CRUD.ResourceEntry;
-using Domain.Entities;
-using Microsoft.EntityFrameworkCore;
-using Persistence.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Infrastructure.Repositories.Implementation.CRUD.Query
+﻿namespace Infrastructure.Repositories.Implementation.CRUD.Query
 {
+    using Application.Result;
+    using Application.UseCases.ExternalServices;
+    using Application.UseCases.Repository.CRUD.ResourceEntry;
+    using Domain.Entities;
+    using Microsoft.EntityFrameworkCore;
+    using Persistence.Repositories;
+    using System.Linq.Expressions;
+
     public class ResourceEntryQuery : Read<ResourceEntry>, IResourceEntryQuery
     {
         protected readonly ILogService _logService;

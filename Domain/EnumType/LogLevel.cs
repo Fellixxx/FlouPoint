@@ -1,7 +1,7 @@
-﻿using Domain.EnumType.Extensions;
-
-namespace Domain.EnumType
+﻿namespace Domain.EnumType
 {
+    using Domain.EnumType.Extensions;
+
     /// <summary>
     /// Defines the levels of logs that can be used in the application.
     /// The level of a log entry indicates its severity.

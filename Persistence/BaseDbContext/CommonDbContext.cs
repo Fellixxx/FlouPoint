@@ -1,12 +1,10 @@
-﻿using Domain.Entities;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
-using Persistence.BaseDbContext.Interface;
-using Persistence.CreateStruture.Constants.ColumnType;
-
-
-namespace Persistence.BaseDbContext
+﻿namespace Persistence.BaseDbContext
 {
+    using Domain.Entities;
+    using Microsoft.EntityFrameworkCore;
+    using Persistence.BaseDbContext.Interface;
+    using Persistence.CreateStruture.Constants.ColumnType;
+
     /// <summary>
     /// Represents a common database context coordinating Entity Framework functionality across projects.
     /// </summary>

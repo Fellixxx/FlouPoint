@@ -1,6 +1,6 @@
 ﻿namespace Infrastructure.Repositories.Abstract.CRUD.Validation
 {
-    using global::Application.Result;
+    using Application.Result;
     using Application.UseCases.Repository.CRUD.Validation;
     using Domain.Interfaces.Entity;
     using Infrastructure.Utilities;

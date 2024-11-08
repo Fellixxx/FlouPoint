@@ -2,10 +2,7 @@ namespace Application.Test.Result
 {
     using System;
     using Application.Result;
-    using Application.Result.Error;
-    using Domain.EnumType;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
-    using T = System.String;
 
     [TestClass]
     public class OperationBuilderTests
