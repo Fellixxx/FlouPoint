@@ -1,7 +1,11 @@
-﻿namespace Application.UseCases.ExternalServices
+﻿using Application.Result;
+using Domain.Entities;
+
+namespace Application.UseCases.ExternalServices
 {
     public interface IResourceProvider
     {
-        string GetMessage(string key);
+        Task<OperationResult<ResourceEntry>> GetMessage(string key);
+        Task<OperationResult<IQueryable<ResourceEntry>>> GetResourceEntries();
     }
 }

@@ -1,12 +1,7 @@
 ﻿using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using Persistence.CreateStruture.Constants.ColumnType;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace LayerPersistence
+namespace Persistence.Test.CreateStruture.Constants.ColumnType
 {
     [TestClass]
     public class ColumnTypesPosgresqlTests

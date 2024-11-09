@@ -1,15 +1,98 @@
 ﻿namespace Infrastructure.Message
 {
+    using Application.Result;
     using Application.UseCases.ExternalServices;
+    using Domain.Entities;
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.Reflection;
     using System.Resources;
 
-    public class ResxResourceProvider(ResourceManager resourceManager) : IResourceProvider
+    public class ResxResourceProvider : IResourceProvider
     {
-        private readonly ResourceManager _resourceManager = resourceManager;
-
-        public string GetMessage(string key)
+        public static Dictionary<string, string> GetEntries()
         {
-            return _resourceManager.GetString(key) ?? "Message not found.";
+            var resourceEntries = new Dictionary<string, string>();
+            var currentAssembly = Assembly.GetExecutingAssembly();
+            var resources = currentAssembly.GetManifestResourceNames();
+            var embeddedResources = resources.Where(name => IsResource(name)).ToArray();
+            foreach (var resourceName in embeddedResources)
+            {
+                using Stream resxStream = GetResxStream(currentAssembly, resourceName);
+                using ResourceReader reader = new ResourceReader(resxStream);
+                foreach (DictionaryEntry entry in reader)
+                {
+                    if (entry.Key is string entryKey)
+                    {
+                        var unique = $"{resourceName}.{entryKey}";
+                        if (unique != null && entry.Value is string value && !resourceEntries.ContainsKey(unique))
+                        {
+                            resourceEntries.Add(unique, value);
+                        }
+                    }
+                }
+            }
+
+            return resourceEntries;
+        }
+
+        private static Stream? GetResxStream(Assembly currentAssembly, string resourceName)
+        {
+            return currentAssembly.GetManifestResourceStream(resourceName);
+        }
+
+        private static bool IsResource(string name)
+        {
+            return name.EndsWith(".resources", StringComparison.OrdinalIgnoreCase);
+        }
+
+        public async Task<OperationResult<ResourceEntry>> GetMessage(string key)
+        {
+            var entries = await GetResourceEntries();
+            if (!entries.IsSuccessful)
+            {
+                return entries.ToResultWithXType<ResourceEntry>();
+            }
+
+            var resources = entries.Data.Where(r => r.Name == key);
+
+            if (!resources.Any())
+            {
+                return OperationBuilder<ResourceEntry>.FailureBusinessValidation("No resource exists with the specified key.");
+            }
+
+            if (resources.Count() > 1)
+            {
+                return OperationBuilder<ResourceEntry>.FailureBusinessValidation("Multiple resources exist with the same key.");
+            }
+
+            return OperationResult<ResourceEntry>.Success(resources.FirstOrDefault());
+        }
+
+        public async Task<OperationResult<IQueryable<ResourceEntry>>> GetResourceEntries()
+        {
+            var entries = GetEntries();
+            if (entries is null)
+            {
+                return OperationBuilder<IQueryable<ResourceEntry>>.FailureBusinessValidation("Unable to read the resources file.");
+            }
+
+            if (entries.Keys.Count == 0)
+            {
+                return OperationBuilder<IQueryable<ResourceEntry>>.FailureBusinessValidation("No resource keys were found.");
+            }
+
+
+            var resourceEntries = entries.Select(entry => new ResourceEntry
+            {
+                Id = Guid.NewGuid().ToString(),
+                Name = entry.Key,
+                Value = entry.Value,
+                Comment = string.Empty,
+                Active = true
+            }).AsQueryable();
+
+            return OperationResult<IQueryable<ResourceEntry>>.Success(resourceEntries);
         }
     }
 }

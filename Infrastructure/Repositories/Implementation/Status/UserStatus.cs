@@ -18,6 +18,7 @@
         /// <param name="logService">The log service.</param>
         public UserStatus(CommonDbContext context, ILogService logService) : base(context, logService)
         {
+
         }
     }
 }
