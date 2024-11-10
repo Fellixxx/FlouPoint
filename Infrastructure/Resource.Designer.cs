@@ -583,15 +583,6 @@ namespace Infrastructure {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The search in the {0} entity completed successfully..
-        /// </summary>
-        internal static string SuccessfullySearchGeneric {
-            get {
-                return ResourceManager.GetString("SuccessfullySearchGeneric", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to The search in the User entity completed successfully..
         /// </summary>
         internal static string SuccessfullySearchUser {

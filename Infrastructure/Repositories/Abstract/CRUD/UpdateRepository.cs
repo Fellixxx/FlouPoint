@@ -9,6 +9,7 @@
     using Microsoft.EntityFrameworkCore;
     using Domain.DTO.Logging;
     using Domain.EnumType;
+    using Infrastructure.Repositories.Abstract.CRUD.Query;
 
     /// <summary>
     /// Abstract repository class for updating an entity.
@@ -87,7 +88,7 @@
         public virtual async Task<OperationResult<T>> UpdateEntity(T entityModified, T entityUnmodified)
         {
             // Custom success message
-            string messageSuccessfully = string.Format(Resource.SuccessfullySearchGeneric, typeof(T).Name);
+            string messageSuccessfully = string.Format(ResourceQuery.SuccessfullySearchGeneric, typeof(T).Name);
             return OperationResult<T>.Success(entityModified, messageSuccessfully);
         }
     }

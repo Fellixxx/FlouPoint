@@ -35,6 +35,11 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>ResourceExample.resx</DependentUpon>
     </Compile>
+    <Compile Update="Repositories\Abstract\CRUD\Query\ResourceQuery.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ResourceQuery.resx</DependentUpon>
+    </Compile>
     <Compile Update="Resource.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -46,6 +51,10 @@
     <EmbeddedResource Update="Other\ResourceExample.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>ResourceExample.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Repositories\Abstract\CRUD\Query\ResourceQuery.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ResourceQuery.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Update="Resource.resx">
       <Generator>ResXFileCodeGenerator</Generator>

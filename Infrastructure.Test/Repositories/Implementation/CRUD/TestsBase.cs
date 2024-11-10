@@ -2,6 +2,7 @@
 using Application.UseCases.CRUD.User;
 using Application.UseCases.ExternalServices;
 using Application.UseCases.Repository.Status.Status;
+using Infrastructure.Message;
 using Infrastructure.Repositories.Implementation.CRUD.Query.User;
 using Infrastructure.Repositories.Implementation.CRUD.User;
 using Infrastructure.Repositories.Implementation.Status;
@@ -24,7 +25,7 @@ namespace Infrastructure.Test.Repositories.Implementation.CRUD
         protected IUserDelete _userDelete;
         protected IUserStatus _userStatus;
         protected IUserReadFilterCount _userReadFilterCount;
-
+        protected IResourceProvider _resourceProvider;
 
         [TestInitialize]
         public void SetUp()
@@ -41,7 +42,8 @@ namespace Infrastructure.Test.Repositories.Implementation.CRUD
             _userUpdate = new UserUpdate(_dbContext, _logService.Object);
             _userStatus = new UserStatus(_dbContext, _logService.Object);
             _userReadFilter = new UserReadFilter(_dbContext, _logService.Object);
-            _userReadFilterCount = new UserReadFilterCount(_dbContext, _logService.Object);
+            _resourceProvider = new ResxResourceProvider();
+            _userReadFilterCount = new UserReadFilterCount(_dbContext, _logService.Object, _resourceProvider);
         }
     }
 }

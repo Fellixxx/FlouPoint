@@ -7,5 +7,6 @@ namespace Application.UseCases.ExternalServices
     {
         Task<OperationResult<ResourceEntry>> GetMessage(string key);
         Task<OperationResult<IQueryable<ResourceEntry>>> GetResourceEntries();
+        Task<string> GetMessageValueOrDefault(string key, string defaultValue = "Resource not found");
     }
 }

@@ -291,9 +291,6 @@
   <data name="SuccessfullyRecaptcha" xml:space="preserve">
     <value>The reCAPTCHA code was validated successfully.</value>
   </data>
-  <data name="SuccessfullySearchGeneric" xml:space="preserve">
-    <value>The search in the {0} entity completed successfully.</value>
-  </data>
   <data name="SuccessfullySearchUser" xml:space="preserve">
     <value>The search in the User entity completed successfully.</value>
   </data>

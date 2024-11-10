@@ -5,7 +5,6 @@
     using Application.UseCases.Repository.CRUD.ResourceEntry;
     using Domain.Entities;
     using Microsoft.EntityFrameworkCore;
-    using System.Resources;
 
     public class DatabaseResourceProvider : IResourceProvider
     {
@@ -41,9 +40,19 @@
             return OperationResult<ResourceEntry>.Success(resources.Data.FirstOrDefault());
         }
 
+        public async Task<string> GetMessageValueOrDefault(string key, string defaultValue = "Resource not found")
+        {
+            var result = await GetMessage(key);
+            if (result.IsSuccessful)
+            {
+                return result.Data.Value;
+            }
+            return defaultValue;
+        }
+
         public async Task<OperationResult<IQueryable<ResourceEntry>>> GetResourceEntries()
         {
-            var entries = _resourceEntryQuery.ReadFilter(r=>r.Active);
+            var entries = _resourceEntryQuery.ReadFilter(r => r.Active);
             if (entries is null)
             {
                 return OperationBuilder<IQueryable<ResourceEntry>>.FailureBusinessValidation("Unable to read the resources file.");

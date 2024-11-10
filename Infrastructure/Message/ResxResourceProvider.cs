@@ -68,7 +68,15 @@
 
             return OperationResult<ResourceEntry>.Success(resources.FirstOrDefault());
         }
-
+        public async Task<string> GetMessageValueOrDefault(string key, string defaultValue = "Resource not found")
+        {
+            var result = await GetMessage(key);
+            if (result.IsSuccessful)
+            {
+                return result.Data.Value;
+            }
+            return defaultValue;
+        }
         public async Task<OperationResult<IQueryable<ResourceEntry>>> GetResourceEntries()
         {
             var entries = GetEntries();

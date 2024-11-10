@@ -18,15 +18,18 @@
     public abstract class ReadFilterCountRepository<T> : Read<T>, IReadFilterCountRepository<T> where T : class
     {
         protected readonly ILogService _logService;
+        protected readonly IResourceProvider _resourceProvider;
+    
 
         /// <summary>
         /// Constructor with dependency injection.
         /// </summary>
         /// <param name="context">The database context.</param>
         /// <param name="logService">The log service.</param>
-        protected ReadFilterCountRepository(DbContext context, ILogService logService) : base(context)
+        protected ReadFilterCountRepository(DbContext context, ILogService logService, IResourceProvider resourceProvider) : base(context)
         {
             _logService = logService;
+            _resourceProvider = resourceProvider;
         }
 
         /// <summary>
@@ -38,16 +41,10 @@
         {
             try
             {
-                // Get entities from the database based on the provided filter expression
                 Expression<Func<T, bool>> predicate = GetPredicate(filter);
                 int result = await ReadCountFilter(predicate);
-
-                // Custom success message
-                string messageSuccessfully = string.Format(Resource.SuccessfullySearchGeneric, typeof(T).Name);
-
-                // Return a success operation result
+                string messageSuccessfully = await _resourceProvider.GetMessageValueOrDefault("SuccessfullySearchGeneric");
                 return OperationResult<int>.Success(result, messageSuccessfully);
-
             }
             catch (Exception ex)
             {
@@ -65,6 +62,8 @@
                 return OperationBuilder<int>.FailureDatabase(Resource.FailedOccurredDataLayer);
             }
         }
+
+        
 
         /// <summary>
         /// Get the predicate based on the provided filter.

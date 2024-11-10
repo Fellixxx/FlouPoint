@@ -18,15 +18,17 @@
     public abstract class ReadFilterPageRepository<T> : Read<T>, IReadFilterPageRepository<T> where T : class
     {
         private readonly ILogService _logService;
+        private readonly IResourceProvider _resourceProvider;
 
         /// <summary>
         /// Constructor with dependency injection.
         /// </summary>
         /// <param name="context">The database context.</param>
         /// <param name="logService">The log service.</param>
-        protected ReadFilterPageRepository(DbContext context, ILogService logService) : base(context)
+        protected ReadFilterPageRepository(DbContext context, ILogService logService, IResourceProvider resourceProvider) : base(context)
         {
             _logService = logService;
+            _resourceProvider = resourceProvider;
         }
 
         /// <summary>
@@ -40,14 +42,15 @@
         {
             try
             {
-                // Get entities from the database based on the provided filter expression
                 Expression<Func<T, bool>> predicate = GetPredicate(filter);
                 IQueryable<T> result = await ReadPageByFilter(predicate, pageNumber, pageSize);
-
-                // Custom success message
-                string messageSuccessfully = string.Format(Resource.SuccessfullySearchGeneric, typeof(T).Name);
-
-                // Return a success operation result
+                var resultResource = await _resourceProvider.GetMessage("SuccessfullySearchGeneric");
+                if (!resultResource.IsSuccessful)
+                {
+                    return OperationBuilder<IQueryable<T>>.FailureBusinessValidation("Due to unknowlege reason, no resource exists with the specified key.");
+                }
+                var successfullySearchGeneric = resultResource.Data.Value;
+                var messageSuccessfully = string.Format(successfullySearchGeneric, typeof(T).Name);
                 return OperationResult<IQueryable<T>>.Success(result, messageSuccessfully);
 
             }

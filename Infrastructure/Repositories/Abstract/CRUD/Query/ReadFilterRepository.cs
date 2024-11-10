@@ -41,7 +41,7 @@
                 IQueryable<T> result = await base.ReadFilter(predicate);
 
                 // Custom success message
-                string messageSuccessfully = string.Format(Resource.SuccessfullySearchGeneric, typeof(T).Name);
+                string messageSuccessfully = string.Format(ResourceQuery.SuccessfullySearchGeneric, typeof(T).Name);
 
                 // Return a success operation result
                 return OperationResult<IQueryable<T>>.Success(result, messageSuccessfully);

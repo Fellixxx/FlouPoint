@@ -21,7 +21,7 @@ namespace Infrastructure.Repositories.Implementation.CRUD.Query.User
         /// <param name="logService">The log service.</param>
         public UserReadFilterCount(
             CommonDbContext context, 
-            ILogService logService) : base(context, logService)
+            ILogService logService, IResourceProvider resourceProvider) : base(context, logService, resourceProvider)
         {
         }
 

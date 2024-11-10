@@ -13,6 +13,7 @@
     using Persistence.BaseDbContext;
     using Domain.Entities;
     using Application.Validators.User;
+    using Infrastructure.Repositories.Abstract.CRUD.Query;
 
     /// <summary>
     /// Provides methods to update user entities in the database.
@@ -81,7 +82,8 @@
             entityUnmodified.Password = CredentialUtility.ComputeSha256Hash(password);
 
             // Return a success operation result
-            string successMessage = string.Format(Resource.SuccessfullySearchGeneric, typeof(User).Name);
+            var successfullySearchGeneric = ResourceQuery.SuccessfullySearchGeneric;
+            var successMessage = string.Format(successfullySearchGeneric, typeof(User).Name);
             return OperationResult<User>.Success(entityUnmodified, successMessage);
         }
 
