@@ -19,7 +19,8 @@
         /// <param name="logService">The log service.</param>
         public UserReadFilter(
             CommonDbContext context, 
-            ILogService logService) : base(context, logService)
+            ILogService logService,
+            IResourceProvider resourceProvider) : base(context, logService, resourceProvider)
         {
         }
     }

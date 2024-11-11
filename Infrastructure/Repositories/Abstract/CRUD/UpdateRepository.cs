@@ -10,6 +10,7 @@
     using Domain.DTO.Logging;
     using Domain.EnumType;
     using Infrastructure.Repositories.Abstract.CRUD.Query;
+    using Infrastructure.Constants;
 
     /// <summary>
     /// Abstract repository class for updating an entity.
@@ -18,15 +19,17 @@
     public abstract class UpdateRepository<T> : EntityExistenceValidator<T>, IUpdateRepository<T> where T : class, IEntity
     {
         private readonly ILogService _logService;
+        private readonly IUtilEntity<T> _utilEntity;
 
         /// <summary>
         /// Constructor with dependency injection.
         /// </summary>
         /// <param name="context">The database context.</param>
         /// <param name="logService">The log service.</param>
-        protected UpdateRepository(DbContext context, ILogService logService) : base(context)
+        protected UpdateRepository(DbContext context, ILogService logService, IUtilEntity<T> utilEntity, IResourceProvider resourceProvider) : base(context, resourceProvider)
         {
             _logService = logService;
+            _utilEntity = utilEntity;
         }
 
         /// <summary>
@@ -38,7 +41,7 @@
         {
             try
             {
-                OperationResult<T> hasEntity = UtilEntity<T>.HasEntity(entity);
+                OperationResult<T> hasEntity = await _utilEntity.HasEntity(entity);
                 if (!hasEntity.IsSuccessful)
                 {
                     return hasEntity.ToResultWithBoolType();
@@ -75,7 +78,7 @@
                     result.ToResultWithBoolType();
                 }
 
-                return OperationBuilder<bool>.FailureDatabase(Resource.FailedOccurredDataLayer);
+                return OperationBuilder<bool>.FailureDatabase(ExceptionMessages.FailedOccurredDataLayer);
             }
         }
 

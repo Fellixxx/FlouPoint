@@ -10,6 +10,7 @@ namespace Infrastructure.Repositories.Implementation.CRUD.User
     using Persistence.BaseDbContext;
     using UtilitiesLayer;
     using FluentValidation.Results;
+    using Application.UseCases.Repository.CRUD;
 
     /// <summary>
     /// Implementation of the user creation repository.
@@ -21,7 +22,7 @@ namespace Infrastructure.Repositories.Implementation.CRUD.User
         /// </summary>
         /// <param name="context">The database context for the application.</param>
         /// <param name="logService">The logging service for tracking operations.</param>
-        public UserCreate(CommonDbContext context, ILogService logService) : base(context, logService)
+        public UserCreate(CommonDbContext context, ILogService logService, IUtilEntity<User> utilEntity) : base(context, logService, utilEntity)
         {
         }
 

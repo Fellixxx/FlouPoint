@@ -18,7 +18,7 @@ namespace Infrastructure.Test.Repositories.Implementation.CRUD.Query.User
         public void CanConstruct()
         {
             // Act
-            var instance = new UserReadFilterCount(_dbContext, _logService.Object, _resourceProvider);
+            var instance = new UserReadFilterCount(_dbContext, _logService.Object, _resourceProvider.Object);
 
             // Assert
             Assert.IsNotNull(instance);
@@ -27,7 +27,7 @@ namespace Infrastructure.Test.Repositories.Implementation.CRUD.Query.User
         [TestMethod]
         public void CannotConstructWithNullContext()
         {
-            Assert.ThrowsException<ArgumentNullException>(() => new UserReadFilterCount(default(CommonDbContext), _logService.Object, _resourceProvider));
+            Assert.ThrowsException<ArgumentNullException>(() => new UserReadFilterCount(default(CommonDbContext), _logService.Object, _resourceProvider.Object));
         }
     }
 }

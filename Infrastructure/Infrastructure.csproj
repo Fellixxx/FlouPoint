@@ -40,6 +40,21 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>ResourceQuery.resx</DependentUpon>
     </Compile>
+    <Compile Update="Repositories\Abstract\CRUD\ResourceUtilEntity.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ResourceUtilEntity.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Repositories\Abstract\CRUD\Validation\ResourceValidation.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ResourceValidation.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Repositories\Abstract\Status\ResourceStatusRepository.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ResourceStatusRepository.resx</DependentUpon>
+    </Compile>
     <Compile Update="Resource.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -55,6 +70,18 @@
     <EmbeddedResource Update="Repositories\Abstract\CRUD\Query\ResourceQuery.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>ResourceQuery.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Repositories\Abstract\CRUD\ResourceUtilEntity.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ResourceUtilEntity.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Repositories\Abstract\CRUD\Validation\ResourceValidation.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ResourceValidation.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Repositories\Abstract\Status\ResourceStatusRepository.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ResourceStatusRepository.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Update="Resource.resx">
       <Generator>ResXFileCodeGenerator</Generator>

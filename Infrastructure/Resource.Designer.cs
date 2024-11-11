@@ -205,29 +205,11 @@ namespace Infrastructure {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Necessary data was not provided..
-        /// </summary>
-        internal static string FailedNecesaryData {
-            get {
-                return ResourceManager.GetString("FailedNecesaryData", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to This email is not registered by any user..
         /// </summary>
         internal static string FailedNotRegisteredEmail {
             get {
                 return ResourceManager.GetString("FailedNotRegisteredEmail", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to An error occurred in the data layer..
-        /// </summary>
-        internal static string FailedOccurredDataLayer {
-            get {
-                return ResourceManager.GetString("FailedOccurredDataLayer", resourceCulture);
             }
         }
         
@@ -385,15 +367,6 @@ namespace Infrastructure {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The {0} does not exist..
-        /// </summary>
-        internal static string GenericExistValidation {
-            get {
-                return ResourceManager.GetString("GenericExistValidation", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to The {0} you are trying to active does not exist..
         /// </summary>
         internal static string GenericToActiveNotExist {
@@ -471,15 +444,6 @@ namespace Infrastructure {
         internal static string SuccessfullyEmail {
             get {
                 return ResourceManager.GetString("SuccessfullyEmail", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The entity was found by id successfully.
-        /// </summary>
-        internal static string SuccessfullyFind {
-            get {
-                return ResourceManager.GetString("SuccessfullyFind", resourceCulture);
             }
         }
         

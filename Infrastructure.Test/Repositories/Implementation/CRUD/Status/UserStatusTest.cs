@@ -16,7 +16,7 @@
         public void CanConstruct()
         {
             // Act
-            var instance = new UserStatus(_dbContext, _logService.Object);
+            var instance = new UserStatus(_dbContext, _logService.Object, _resourceProvider.Object);
 
             // Assert
             Assert.IsNotNull(instance);
@@ -25,13 +25,13 @@
         [TestMethod]
         public void CannotConstructWithNullContext()
         {
-            Assert.ThrowsException<ArgumentNullException>(() => new UserStatus(null, _logService.Object));
+            Assert.ThrowsException<ArgumentNullException>(() => new UserStatus(null, _logService.Object, _resourceProvider.Object));
         }
 
         [TestMethod]
         public void CanConstructWithNullLogService()
         {
-            var userCreate = new UserCreate(_dbContext, null);
+            var userCreate = new UserCreate(_dbContext, null, _utilEntity.Object);
             Assert.IsNotNull(userCreate);
         }
 

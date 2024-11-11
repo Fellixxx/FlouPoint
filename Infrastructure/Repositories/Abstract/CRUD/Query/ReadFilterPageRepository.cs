@@ -10,6 +10,8 @@
     using Microsoft.EntityFrameworkCore;
     using Domain.DTO.Logging;
     using Domain.EnumType;
+    using Infrastructure.Constants;
+    using Application.UseCases.Repository;
 
     /// <summary>
     /// Abstract repository class for reading and filtering entities with pagination.
@@ -19,6 +21,8 @@
     {
         private readonly ILogService _logService;
         private readonly IResourceProvider _resourceProvider;
+        private IResourceHandler _resourceHandler;
+        private readonly List<string> _resourceKeys;
 
         /// <summary>
         /// Constructor with dependency injection.
@@ -29,6 +33,10 @@
         {
             _logService = logService;
             _resourceProvider = resourceProvider;
+            _resourceKeys =
+            [
+                "SuccessfullySearchGeneric"
+            ];
         }
 
         /// <summary>
@@ -44,38 +52,26 @@
             {
                 Expression<Func<T, bool>> predicate = GetPredicate(filter);
                 IQueryable<T> result = await ReadPageByFilter(predicate, pageNumber, pageSize);
-                var resultResource = await _resourceProvider.GetMessage("SuccessfullySearchGeneric");
-                if (!resultResource.IsSuccessful)
-                {
-                    return OperationBuilder<IQueryable<T>>.FailureBusinessValidation("Due to unknowlege reason, no resource exists with the specified key.");
-                }
-                var successfullySearchGeneric = resultResource.Data.Value;
+                await ResourceHandler.CreateAsync(_resourceProvider, _resourceKeys);
+                var successfullySearchGeneric = _resourceHandler.GetResource("SuccessfullySearchGeneric");
                 var messageSuccessfully = string.Format(successfullySearchGeneric, typeof(T).Name);
                 return OperationResult<IQueryable<T>>.Success(result, messageSuccessfully);
-
             }
             catch (Exception ex)
             {
-                // Create a filter value object for logging
                 var filterValue = new
                 {
                     PageNumber = pageNumber,
                     PageSize = pageSize,
                     Filter = filter
                 };
-
-                // Create a log entry for the exception
                 Log log = Util.GetLogError(ex, filterValue, OperationExecute.GetPageByFilter);
                 OperationResult<string> result = await _logService.CreateLog(log);
-
-                // Handle logging failure
                 if (!result.IsSuccessful)
                 {
                     result.ToResultWithXType<IQueryable<T>>();
                 }
-
-                // Return a failure operation result for database issues
-                return OperationBuilder<IQueryable<T>>.FailureDatabase(Resource.FailedOccurredDataLayer);
+                return OperationBuilder<IQueryable<T>>.FailureDatabase(ExceptionMessages.FailedOccurredDataLayer);
             }
         }
 

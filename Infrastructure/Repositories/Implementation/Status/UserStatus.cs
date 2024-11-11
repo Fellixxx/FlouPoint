@@ -16,7 +16,7 @@
         /// </summary>
         /// <param name="context">The database context.</param>
         /// <param name="logService">The log service.</param>
-        public UserStatus(CommonDbContext context, ILogService logService) : base(context, logService)
+        public UserStatus(CommonDbContext context, ILogService logService, IResourceProvider resourceProvider) : base(context, logService, resourceProvider)
         {
 
         }

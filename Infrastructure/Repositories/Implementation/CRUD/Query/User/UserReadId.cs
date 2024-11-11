@@ -19,7 +19,7 @@
         /// <param name="logService">The log service.</param>
         public UserReadId(
             CommonDbContext context, 
-            ILogService logService) : base(context, logService)
+            ILogService logService, IResourceProvider resourceProvider) : base(context, logService, resourceProvider)
         {
         }
     }

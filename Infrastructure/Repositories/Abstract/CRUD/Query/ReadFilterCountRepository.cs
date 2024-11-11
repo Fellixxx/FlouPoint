@@ -10,6 +10,8 @@
     using Microsoft.EntityFrameworkCore;
     using Domain.DTO.Logging;
     using Domain.EnumType;
+    using Application.UseCases.Repository;
+    using Infrastructure.Constants;
 
     /// <summary>
     /// Abstract repository class for reading and counting entities based on a filter.
@@ -18,8 +20,9 @@
     public abstract class ReadFilterCountRepository<T> : Read<T>, IReadFilterCountRepository<T> where T : class
     {
         protected readonly ILogService _logService;
-        protected readonly IResourceProvider _resourceProvider;
-    
+        private readonly IResourceProvider _resourceProvider;
+        private IResourceHandler _resourceHandler;
+        private readonly List<string> _resourceKeys;
 
         /// <summary>
         /// Constructor with dependency injection.
@@ -30,6 +33,10 @@
         {
             _logService = logService;
             _resourceProvider = resourceProvider;
+            _resourceKeys =
+            [
+                "SuccessfullySearchGeneric"
+            ];
         }
 
         /// <summary>
@@ -43,14 +50,15 @@
             {
                 Expression<Func<T, bool>> predicate = GetPredicate(filter);
                 int result = await ReadCountFilter(predicate);
-                string messageSuccessfully = await _resourceProvider.GetMessageValueOrDefault("SuccessfullySearchGeneric");
+                await ResourceHandler.CreateAsync(_resourceProvider, _resourceKeys);
+                var messageSuccessfully = _resourceHandler.GetResource("SuccessfullySearchGeneric");
                 return OperationResult<int>.Success(result, messageSuccessfully);
             }
             catch (Exception ex)
             {
                 // Create a log entry for the exception
-                Log log = Util.GetLogError(ex, filter, OperationExecute.GetCountFilter);
-                OperationResult<string> result = await _logService.CreateLog(log);
+                var log = Util.GetLogError(ex, filter, OperationExecute.GetCountFilter);
+                var result = await _logService.CreateLog(log);
 
                 // Handle logging failure
                 if (!result.IsSuccessful)
@@ -59,7 +67,7 @@
                 }
 
                 // Return a failure operation result for database issues
-                return OperationBuilder<int>.FailureDatabase(Resource.FailedOccurredDataLayer);
+                return OperationBuilder<int>.FailureDatabase(ExceptionMessages.FailedOccurredDataLayer);
             }
         }
 

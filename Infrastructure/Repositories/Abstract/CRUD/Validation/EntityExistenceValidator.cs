@@ -6,6 +6,9 @@
     using Infrastructure.Utilities;
     using Persistence.Repositories;
     using Microsoft.EntityFrameworkCore;
+    using Application.UseCases.ExternalServices;
+    using Application.UseCases.Repository;
+    using Infrastructure.ExternalServices.LogExternal;
 
     /// <summary>
     /// Abstract class for validating the existence of an entity.
@@ -13,12 +16,23 @@
     /// <typeparam name="T">The entity type.</typeparam>
     public abstract class EntityExistenceValidator<T> : Repository<T>, IEntityExistenceValidator<T> where T : class, IEntity
     {
+        private readonly IResourceProvider _resourceProvider;
+        private IResourceHandler _resourceHandler;
+        private readonly List<string> _resourceKeys;
+
         /// <summary>
         /// Constructor with dependency injection.
         /// </summary>
         /// <param name="context">The database context.</param>
-        protected EntityExistenceValidator(DbContext context) : base(context)
+        protected EntityExistenceValidator(DbContext context, IResourceProvider resourceProvider) : base(context)
         {
+            _resourceProvider = resourceProvider;
+            _resourceKeys =
+            [
+                "FailedNecesaryData",
+                "GenericExistValidation",
+                "ValidationGlobalOkMessage"
+            ];
         }
 
         /// <summary>
@@ -31,21 +45,25 @@
             // Validate the provided ID
             if (id.Equals(string.Empty))
             {
-                return OperationBuilder<T>.FailureBusinessValidation(Resource.FailedNecesaryData);
+                await ResourceHandler.CreateAsync(_resourceProvider, _resourceKeys);
+                var failedNecesaryData = _resourceHandler.GetResource("FailedNecesaryData");
+                return OperationBuilder<T>.FailureBusinessValidation(failedNecesaryData);
             }
 
             // Get the existing user from the repository
             IQueryable<T> entityRepo = await ReadFilter(e => e.Id.Equals(id));
             T? entityUnmodified = entityRepo?.FirstOrDefault();
             bool hasEntity = entityUnmodified is not null;
+            await ResourceHandler.CreateAsync(_resourceProvider, _resourceKeys);
             if (!hasEntity)
             {
-                string messageExist = string.Format(Resource.GenericExistValidation, typeof(T).Name);
+               
+                var genericExistValidation = _resourceHandler.GetResource("GenericExistValidation");
+                string messageExist = string.Format(genericExistValidation, typeof(T).Name);
                 return OperationBuilder<T>.FailureBusinessValidation(messageExist);
             }
-
-            // If the entity exists, return a success operation result
-            return OperationResult<T>.Success(entityUnmodified, Resource.GlobalOkMessage);
+            var validationGlobalOkMessage = _resourceHandler.GetResource("ValidationGlobalOkMessage");
+            return OperationResult<T>.Success(entityUnmodified, validationGlobalOkMessage);
         }
 
 
@@ -56,19 +74,17 @@
         /// <returns>Operation result indicating whether the entity exists or not.</returns>
         public virtual async Task<OperationResult<T>> HasId(string id)
         {
-
-            // Validate the provided ID
+            await ResourceHandler.CreateAsync(_resourceProvider, _resourceKeys);
+            var failedNecesaryData = _resourceHandler.GetResource("FailedNecesaryData");
             if (string.IsNullOrWhiteSpace(id))
             {
-                return OperationBuilder<T>.FailureBusinessValidation(Resource.FailedNecesaryData);
+                return OperationBuilder<T>.FailureBusinessValidation(failedNecesaryData);
             }
             var result = GuidValidator.HasGuid(id);
             if (!result.IsSuccessful)
             {
                 return result.AsType<T>();
             }
-
-            // If the entity exists, return a success operation result
             return await HasEntity(id);
         }
     }

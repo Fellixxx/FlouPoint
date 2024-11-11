@@ -9,6 +9,8 @@
     using Microsoft.EntityFrameworkCore;
     using Domain.DTO.Logging;
     using Domain.EnumType;
+    using Infrastructure.Constants;
+    using Application.UseCases.Repository;
 
     /// <summary>
     /// Repository class for managing the status of entities.
@@ -17,15 +19,25 @@
     public class StatusRepository<T> : Repository<T>, IStatusRepository where T : class, IEntity
     {
         private readonly ILogService _logService;
+        private readonly IResourceProvider _resourceProvider;
+        private IResourceHandler _resourceHandler;
+        private readonly List<string> _resourceKeys;
 
         /// <summary>
         /// Constructor with dependency injection.
         /// </summary>
         /// <param name="context">The database context.</param>
         /// <param name="externalLogService">The external log service.</param>
-        public StatusRepository(DbContext context, ILogService logService) : base(context)
+        public StatusRepository(DbContext context, ILogService logService, IResourceProvider resourceProvider) : base(context)
         {
             _logService = logService;
+            _resourceProvider = resourceProvider;
+            _resourceKeys =
+            [
+                "SuccessfullyGenericActiveated",
+                "StatusFailedNecesaryData",
+                "GenericExistValidation"
+            ];
         }
 
         public async Task<OperationResult<bool>> Activate(string id)
@@ -48,6 +60,8 @@
                 // Update the entity in the database
                 bool result = await Update(entity);
 
+                await ResourceHandler.CreateAsync(_resourceProvider, _resourceKeys);
+                var failedNecesaryData = _resourceHandler.GetResource("SuccessfullyGenericActiveated");
                 // Custom success message
                 string messageSuccess = string.Format(Resource.SuccessfullyGenericActiveated, typeof(T).Name);
 
@@ -63,7 +77,7 @@
                     result.ToResultWithBoolType();
                 }
 
-                return OperationBuilder<bool>.FailureDatabase(Resource.FailedOccurredDataLayer);
+                return OperationBuilder<bool>.FailureDatabase(ExceptionMessages.FailedOccurredDataLayer);
             }
         }
 
@@ -105,30 +119,33 @@
                     result.ToResultWithBoolType();
                 }
 
-                return OperationBuilder<bool>.FailureDatabase(Resource.FailedOccurredDataLayer);
+                return OperationBuilder<bool>.FailureDatabase(ExceptionMessages.FailedOccurredDataLayer);
             }
         }
 
         private async Task<OperationResult<T>> HasEntity(string id)
         {
+            await ResourceHandler.CreateAsync(_resourceProvider, _resourceKeys);
+            var statusFailedNecesaryData = _resourceHandler.GetResource("StatusFailedNecesaryData");
             // Validate the provided ID
             if (string.IsNullOrWhiteSpace(id))
             {
-                return OperationBuilder<T>.FailureBusinessValidation(Resource.FailedNecesaryData);
+                return OperationBuilder<T>.FailureBusinessValidation(statusFailedNecesaryData);
             }
 
             // Get the existing user from the repository
             IQueryable<T> entityRepo = await ReadFilter(e => e.Id.Equals(id));
             T? entityUnmodified = entityRepo?.FirstOrDefault();
             bool hasEntity = entityUnmodified is not null;
+            var genericExistValidation = _resourceHandler.GetResource("GenericExistValidation");
             if (!hasEntity)
             {
-                string messageExist = string.Format(Resource.GenericExistValidation, typeof(T).Name);
+                string messageExist = string.Format(genericExistValidation, typeof(T).Name);
                 return OperationBuilder<T>.FailureBusinessValidation(messageExist);
             }
-
+            var statusGlobalOkMessage = _resourceHandler.GetResource("StatusGlobalOkMessage");
             // If the entity exists, return a success operation result
-            return OperationResult<T>.Success(entityUnmodified, Resource.GlobalOkMessage);
+            return OperationResult<T>.Success(entityUnmodified, "statusGlobalOkMessage");
         }
     }
 }

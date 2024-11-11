@@ -10,6 +10,7 @@
     using Microsoft.EntityFrameworkCore;
     using Domain.DTO.Logging;
     using Domain.EnumType;
+    using Infrastructure.Constants;
 
     /// <summary>
     /// Abstract repository class for deleting an entity.
@@ -24,7 +25,7 @@
         /// </summary>
         /// <param name="context">The database context.</param>
         /// <param name="logService">The log service.</param>
-        protected DeleteRepository(DbContext context, ILogService logService) : base(context)
+        protected DeleteRepository(DbContext context, ILogService logService, IResourceProvider resourceProvider) : base(context, resourceProvider)
         {
             _logService = logService;
         }
@@ -66,7 +67,7 @@
                     result.ToResultWithBoolType();
                 }
 
-                return OperationBuilder<bool>.FailureDatabase(Resource.FailedOccurredDataLayer);
+                return OperationBuilder<bool>.FailureDatabase(ExceptionMessages.FailedOccurredDataLayer);
             }
         }
     }

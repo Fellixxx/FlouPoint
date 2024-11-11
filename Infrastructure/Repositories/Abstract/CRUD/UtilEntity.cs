@@ -1,24 +1,45 @@
 ﻿namespace Infrastructure.Repositories.Abstract.CRUD
 {
+    using Application.UseCases.ExternalServices;
+    using Application.UseCases.Repository;
+    using Application.UseCases.Repository.CRUD;
+    using Domain.Interfaces.Entity;
     using global::Application.Result;
 
     /// <summary>
     /// Utility class for entity validation operations.
     /// </summary>
     /// <typeparam name="T">The entity type.</typeparam>
-    public static class UtilEntity<T>
+    public class UtilEntity<T> : IUtilEntity<T> where T : class, IEntity
     {
+        private readonly IResourceProvider _resourceProvider;
+        private IResourceHandler _resourceHandler;
+        private readonly List<string> _resourceKeys;
+
+        public UtilEntity(IResourceProvider resourceProvider)
+        {
+            _resourceProvider = resourceProvider;
+            _resourceKeys =
+            [
+                "FailedNecesaryData",
+                "GenericExistValidation",
+                "ValidationGlobalOkMessage"
+            ];
+        }
+
         /// <summary>
         /// Check if an entity exists.
         /// </summary>
         /// <param name="entity">The entity to be checked.</param>
         /// <returns>An operation result indicating whether the entity exists or not.</returns>
-        public static OperationResult<T> HasEntity(T entity)
+        public async Task<OperationResult<T>> HasEntity(T entity)
         {
+            await ResourceHandler.CreateAsync(_resourceProvider, _resourceKeys);
+            var failedNecesaryData = _resourceHandler.GetResource("EntityFailedNecesaryData");
             if (entity is null)
             {
                 // Return a failure result if the entity is null
-                return OperationBuilder<T>.FailureBusinessValidation(Resource.FailedNecesaryData);
+                return OperationBuilder<T>.FailureBusinessValidation(failedNecesaryData);
             }
 
             // Return a success result if the entity is not null

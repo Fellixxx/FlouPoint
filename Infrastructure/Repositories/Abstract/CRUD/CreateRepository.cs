@@ -9,6 +9,7 @@
     using Microsoft.EntityFrameworkCore;
     using Domain.DTO.Logging;
     using Domain.EnumType;
+    using Infrastructure.Constants;
 
     /// <summary>
     /// Abstract repository class for creating a new entity.
@@ -17,15 +18,17 @@
     public abstract class CreateRepository<T> : Repository<T>, ICreateRepository<T> where T : class, IEntity
     {
         private readonly ILogService _logService;
+        private readonly IUtilEntity<T> _utilEntity;
 
         /// <summary>
         /// Constructor with dependency injection.
         /// </summary>
         /// <param name="context">The database context.</param>
         /// <param name="logService">The log service.</param>
-        public CreateRepository(DbContext context, ILogService logService) : base(context)
+        public CreateRepository(DbContext context, ILogService logService, IUtilEntity<T> utilEntity) : base(context)
         {
             _logService = logService;
+            _utilEntity = utilEntity;
         }
 
         /// <summary>
@@ -37,7 +40,7 @@
         {
             try
             {
-                OperationResult<T> hasEntity = UtilEntity<T>.HasEntity(entity);
+                OperationResult<T> hasEntity = await _utilEntity.HasEntity(entity);
                 if (!hasEntity.IsSuccessful)
                 {
                     return hasEntity.ToResultWithStringType();
@@ -66,7 +69,7 @@
                     result.ToResultWithStringType();
                 }
 
-                return OperationBuilder<string>.FailureDatabase(Resource.FailedOccurredDataLayer);
+                return OperationBuilder<string>.FailureDatabase(ExceptionMessages.FailedOccurredDataLayer);
             }
         }
 

@@ -9,6 +9,8 @@
     using Microsoft.EntityFrameworkCore;
     using Domain.DTO.Logging;
     using Domain.EnumType;
+    using Infrastructure.Constants;
+    using Application.UseCases.Repository;
 
     /// <summary>
     /// Abstract repository class for reading an entity by its ID.
@@ -17,15 +19,23 @@
     public abstract class ReadIdRepository<T> : EntityExistenceValidator<T>, IReadIdRepository<T> where T : class, IEntity
     {
         private readonly ILogService _logService;
+        private readonly IResourceProvider _resourceProvider;
+        private IResourceHandler _resourceHandler;
+        private readonly List<string> _resourceKeys;
 
         /// <summary>
         /// Constructor with dependency injection.
         /// </summary>
         /// <param name="context">The database context.</param>
         /// <param name="logService">The log service.</param>
-        protected ReadIdRepository(DbContext context, ILogService logService) : base(context)
+        protected ReadIdRepository(DbContext context, ILogService logService, IResourceProvider resourceProvider) : base(context, resourceProvider)
         {
             _logService = logService;
+            _resourceProvider = resourceProvider;
+            _resourceKeys =
+            [
+                "SuccessfullyFind"
+            ];
         }
 
         /// <summary>
@@ -37,19 +47,15 @@
         {
             try
             {
-                // Get entities from the database based on the provided filter expression
                 OperationResult<T> validationResult = await HasId(id);
-
-                // If validation is not successful, return a failure operation result
                 if (!validationResult.IsSuccessful)
                 {
                     return validationResult.ToResultWithGenericType();
                 }
-
                 T? entity = validationResult.Data;
-                // Return a success operation result
-                string messageSuccessfully = Resource.SuccessfullyFind;
-                return OperationResult<T>.Success(entity, messageSuccessfully);
+                await ResourceHandler.CreateAsync(_resourceProvider, _resourceKeys);
+                var successfullyFind = _resourceHandler.GetResource("SuccessfullySearchGeneric");
+                return OperationResult<T>.Success(entity, successfullyFind);
             }
             catch (Exception ex)
             {
@@ -64,7 +70,7 @@
                 }
 
                 // Return a failure operation result for database issues
-                return OperationBuilder<T>.FailureDatabase(Resource.FailedOccurredDataLayer);
+                return OperationBuilder<T>.FailureDatabase(ExceptionMessages.FailedOccurredDataLayer);
             }
         }
 
@@ -94,15 +100,15 @@
                 }
 
                 T? entity = validationResult.Data;
-                // Return a success operation result
-                string messageSuccessfully = Resource.SuccessfullyFind;
-                return OperationResult<T>.Success(entity, messageSuccessfully);
+                await ResourceHandler.CreateAsync(_resourceProvider, _resourceKeys);
+                var successfullyFind = _resourceHandler.GetResource("SuccessfullyFind");
+                return OperationResult<T>.Success(entity, successfullyFind);
             }
             catch (Exception ex)
             {
                 // Create a log entry for the exception
-                Log log = Util.GetLogError(ex, bearerToken, OperationExecute.GetUserById);
-                OperationResult<string> result = await _logService.CreateLog(log);
+                var log = Util.GetLogError(ex, bearerToken, OperationExecute.GetUserById);
+                var result = await _logService.CreateLog(log);
 
                 // Handle logging failure
                 if (!result.IsSuccessful)
@@ -111,7 +117,7 @@
                 }
 
                 // Return a failure operation result for database issues
-                return OperationBuilder<T>.FailureDatabase(Resource.FailedOccurredDataLayer);
+                return OperationBuilder<T>.FailureDatabase(ExceptionMessages.FailedOccurredDataLayer);
             }
         }
     }

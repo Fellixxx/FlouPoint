@@ -9,6 +9,8 @@
     using Microsoft.EntityFrameworkCore;
     using Domain.DTO.Logging;
     using Domain.EnumType;
+    using Infrastructure.Constants;
+    using Application.UseCases.Repository;
 
     /// <summary>
     /// Abstract repository class for reading and filtering entities.
@@ -17,15 +19,23 @@
     public abstract class ReadFilterRepository<T> : Read<T>, IReadFilterRepository<T> where T : class
     {
         private readonly ILogService _logService;
+        private readonly IResourceProvider _resourceProvider;
+        private IResourceHandler _resourceHandler;
+        private readonly List<string> _resourceKeys;
 
         /// <summary>
         /// Constructor with dependency injection.
         /// </summary>
         /// <param name="context">The database context.</param>
         /// <param name="logService">The log service.</param>
-        protected ReadFilterRepository(DbContext context, ILogService logService) : base(context)
+        protected ReadFilterRepository(DbContext context, ILogService logService, IResourceProvider resourceProvider) : base(context)
         {
             _logService = logService;
+            _resourceProvider = resourceProvider;
+            _resourceKeys =
+            [
+                "SuccessfullySearchGeneric"
+            ];
         }
 
         /// <summary>
@@ -37,13 +47,10 @@
         {
             try
             {
-                // Get entities from the database based on the provided filter expression
                 IQueryable<T> result = await base.ReadFilter(predicate);
-
-                // Custom success message
-                string messageSuccessfully = string.Format(ResourceQuery.SuccessfullySearchGeneric, typeof(T).Name);
-
-                // Return a success operation result
+                await ResourceHandler.CreateAsync(_resourceProvider, _resourceKeys);
+                var successfullySearchGeneric = _resourceHandler.GetResource("SuccessfullySearchGeneric");
+                var messageSuccessfully = string.Format(successfullySearchGeneric, typeof(T).Name);
                 return OperationResult<IQueryable<T>>.Success(result, messageSuccessfully);
             }
             catch (Exception ex)
@@ -59,7 +66,7 @@
                 }
 
                 // Return a failure operation result for database issues
-                return OperationBuilder<IQueryable<T>>.FailureDatabase(Resource.FailedOccurredDataLayer);
+                return OperationBuilder<IQueryable<T>>.FailureDatabase(ExceptionMessages.FailedOccurredDataLayer);
             }
         }
     }

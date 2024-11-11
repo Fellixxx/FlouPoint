@@ -22,7 +22,7 @@ namespace Infrastructure.Test.Repositories.Implementation.CRUD.User
         public void CanConstruct()
         {
             // Act
-            var instance = new UserCreate(_dbContext, _logService.Object);
+            var instance = new UserCreate(_dbContext, _logService.Object, _utilEntity.Object);
 
             // Assert
             Assert.IsNotNull(instance);
@@ -31,13 +31,13 @@ namespace Infrastructure.Test.Repositories.Implementation.CRUD.User
         [TestMethod]
         public void CannotConstructWithNullContext()
         {
-            Assert.ThrowsException<ArgumentNullException>(() => new UserCreate(null, _logService.Object));
+            Assert.ThrowsException<ArgumentNullException>(() => new UserCreate(null, _logService.Object, _utilEntity.Object));
         }
 
         [TestMethod]
         public void CanConstructWithNullLogService()
         {
-            var userCreate = new UserCreate(_dbContext, null);
+            var userCreate = new UserCreate(_dbContext, null, _utilEntity.Object);
             Assert.IsNotNull(userCreate);
         }
 
