@@ -16,14 +16,13 @@
         private IResourceHandler _resourceHandler;
         private readonly List<string> _resourceKeys;
 
-        public UtilEntity(IResourceProvider resourceProvider)
+        public UtilEntity(IResourceProvider resourceProvider, IResourceHandler resourceHandler)
         {
             _resourceProvider = resourceProvider;
+            _resourceHandler = resourceHandler;
             _resourceKeys =
             [
-                "FailedNecesaryData",
-                "GenericExistValidation",
-                "ValidationGlobalOkMessage"
+                "EntityFailedNecesaryData"
             ];
         }
 

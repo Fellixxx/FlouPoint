@@ -11,6 +11,7 @@
     using Domain.EnumType;
     using Infrastructure.Repositories.Abstract.CRUD.Query;
     using Infrastructure.Constants;
+    using Application.UseCases.Repository;
 
     /// <summary>
     /// Abstract repository class for updating an entity.
@@ -26,7 +27,7 @@
         /// </summary>
         /// <param name="context">The database context.</param>
         /// <param name="logService">The log service.</param>
-        protected UpdateRepository(DbContext context, ILogService logService, IUtilEntity<T> utilEntity, IResourceProvider resourceProvider) : base(context, resourceProvider)
+        protected UpdateRepository(DbContext context, ILogService logService, IUtilEntity<T> utilEntity, IResourceProvider resourceProvider, IResourceHandler resourceHandler) : base(context, resourceProvider, resourceHandler)
         {
             _logService = logService;
             _utilEntity = utilEntity;

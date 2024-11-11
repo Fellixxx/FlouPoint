@@ -24,9 +24,10 @@
         /// Constructor with dependency injection.
         /// </summary>
         /// <param name="context">The database context.</param>
-        protected EntityExistenceValidator(DbContext context, IResourceProvider resourceProvider) : base(context)
+        protected EntityExistenceValidator(DbContext context, IResourceProvider resourceProvider, IResourceHandler resourceHandler) : base(context)
         {
             _resourceProvider = resourceProvider;
+            _resourceHandler = resourceHandler;
             _resourceKeys =
             [
                 "FailedNecesaryData",

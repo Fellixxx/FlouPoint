@@ -15,7 +15,7 @@ namespace Infrastructure.Test.Repositories.Implementation.CRUD.User
         public void CanConstruct()
         {
             // Act
-            var instance = new UserUpdate(_dbContext, _logService.Object, _utilEntity.Object, _resourceProvider.Object);
+            var instance = new UserUpdate(_dbContext, _logService.Object, _utilEntity, _resourceProvider, _resourceHandler);
 
             // Assert
             Assert.IsNotNull(instance);
@@ -24,13 +24,13 @@ namespace Infrastructure.Test.Repositories.Implementation.CRUD.User
         [TestMethod]
         public void CannotConstructWithNullContext()
         {
-            Assert.ThrowsException<ArgumentNullException>(() => new UserUpdate(null, _logService.Object, _utilEntity.Object, _resourceProvider.Object));
+            Assert.ThrowsException<ArgumentNullException>(() => new UserUpdate(null, _logService.Object, _utilEntity, _resourceProvider, _resourceHandler));
         }
 
         [TestMethod]
         public void CanConstructWithNullLogService()
         {
-            var userUpdate = new UserUpdate(_dbContext, null, _utilEntity.Object, _resourceProvider.Object);
+            var userUpdate = new UserUpdate(_dbContext, null, _utilEntity, _resourceProvider, _resourceHandler);
             Assert.IsNotNull(userUpdate);
         }
 

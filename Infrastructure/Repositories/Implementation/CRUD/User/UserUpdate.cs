@@ -15,6 +15,7 @@
     using Application.Validators.User;
     using Infrastructure.Repositories.Abstract.CRUD.Query;
     using Application.UseCases.Repository.CRUD;
+    using Application.UseCases.Repository;
 
     /// <summary>
     /// Provides methods to update user entities in the database.
@@ -27,7 +28,7 @@
         /// </summary>
         /// <param name="context">The database context.</param>
         /// <param name="logService">The service used for logging operations.</param>
-        public UserUpdate(CommonDbContext context, ILogService logService, IUtilEntity<User> utilEntity, IResourceProvider resourceProvider) : base(context, logService, utilEntity, resourceProvider)
+        public UserUpdate(CommonDbContext context, ILogService logService, IUtilEntity<User> utilEntity, IResourceProvider resourceProvider, IResourceHandler resourceHandler) : base(context, logService, utilEntity, resourceProvider, resourceHandler)
         {
         }
 

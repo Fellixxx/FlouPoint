@@ -28,10 +28,11 @@
         /// </summary>
         /// <param name="context">The database context.</param>
         /// <param name="externalLogService">The external log service.</param>
-        public StatusRepository(DbContext context, ILogService logService, IResourceProvider resourceProvider) : base(context)
+        public StatusRepository(DbContext context, ILogService logService, IResourceProvider resourceProvider, IResourceHandler resourceHandler) : base(context)
         {
             _logService = logService;
             _resourceProvider = resourceProvider;
+            _resourceHandler = resourceHandler;
             _resourceKeys =
             [
                 "SuccessfullyGenericActiveated",

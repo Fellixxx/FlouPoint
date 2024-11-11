@@ -5,6 +5,7 @@
     using User = Domain.Entities.User;
     using Application.UseCases.ExternalServices;
     using Persistence.BaseDbContext;
+    using Application.UseCases.Repository;
 
 
     /// <summary>
@@ -19,7 +20,7 @@
         /// <param name="logService">The log service.</param>
         public UserReadId(
             CommonDbContext context, 
-            ILogService logService, IResourceProvider resourceProvider) : base(context, logService, resourceProvider)
+            ILogService logService, IResourceProvider resourceProvider, IResourceHandler resourceHandler) : base(context, logService, resourceProvider, resourceHandler)
         {
         }
     }

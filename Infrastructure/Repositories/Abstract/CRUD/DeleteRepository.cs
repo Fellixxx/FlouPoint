@@ -11,6 +11,7 @@
     using Domain.DTO.Logging;
     using Domain.EnumType;
     using Infrastructure.Constants;
+    using Application.UseCases.Repository;
 
     /// <summary>
     /// Abstract repository class for deleting an entity.
@@ -25,7 +26,7 @@
         /// </summary>
         /// <param name="context">The database context.</param>
         /// <param name="logService">The log service.</param>
-        protected DeleteRepository(DbContext context, ILogService logService, IResourceProvider resourceProvider) : base(context, resourceProvider)
+        protected DeleteRepository(DbContext context, ILogService logService, IResourceProvider resourceProvider, IResourceHandler resourceHandler) : base(context, resourceProvider, resourceHandler)
         {
             _logService = logService;
         }

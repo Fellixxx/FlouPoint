@@ -7,6 +7,7 @@ namespace Infrastructure.Repositories.Implementation.CRUD.User
     using Persistence.BaseDbContext;
     using Domain.Entities;
     using Application.UseCases.Repository.CRUD;
+    using Application.UseCases.Repository;
 
     /// <summary>
     /// Repository class for deleting user entities.
@@ -18,7 +19,7 @@ namespace Infrastructure.Repositories.Implementation.CRUD.User
         /// </summary>
         /// <param name="context">The database context.</param>
         /// <param name="logService">The log service.</param>
-        public UserDelete(CommonDbContext context,ILogService logService, IResourceProvider resourceProvider) : base(context, logService, resourceProvider)
+        public UserDelete(CommonDbContext context,ILogService logService, IResourceProvider resourceProvider, IResourceHandler resourceHandler) : base(context, logService, resourceProvider, resourceHandler)
         {
         }
     }

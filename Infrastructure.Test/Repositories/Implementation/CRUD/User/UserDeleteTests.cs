@@ -21,7 +21,7 @@ namespace Infrastructure.Test.Repositories.Implementation.CRUD.User
         public void CanConstruct()
         {
             // Act
-            var instance = new UserDelete(_dbContext, _logService.Object, _resourceProvider.Object);
+            var instance = new UserDelete(_dbContext, _logService.Object, _resourceProvider, _resourceHandler);
 
             // Assert
             Assert.IsNotNull(instance);
@@ -30,13 +30,13 @@ namespace Infrastructure.Test.Repositories.Implementation.CRUD.User
         [TestMethod]
         public void CannotConstructWithNullContext()
         {
-            Assert.ThrowsException<ArgumentNullException>(() => new UserDelete(null, _logService.Object, _resourceProvider.Object));
+            Assert.ThrowsException<ArgumentNullException>(() => new UserDelete(null, _logService.Object, _resourceProvider, _resourceHandler));
         }
 
         [TestMethod]
         public void CanConstructWithNullLogService()
         {
-            var userCreate = new UserDelete(_dbContext, null, _resourceProvider.Object);
+            var userCreate = new UserDelete(_dbContext, null, _resourceProvider, _resourceHandler);
             Assert.IsNotNull(userCreate);
         }
 

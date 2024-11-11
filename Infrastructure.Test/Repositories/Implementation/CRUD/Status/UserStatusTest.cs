@@ -2,11 +2,13 @@
 {
     using System;
     using System.Threading.Tasks;
+    using Application.UseCases.Repository;
     using Domain.Entities;
     using Infrastructure.Repositories.Implementation.CRUD.User;
     using Infrastructure.Repositories.Implementation.Status;
     using Infrastructure.Test.Repositories.Implementation.CRUD;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using Moq;
     using UtilitiesLayer;
 
     [TestClass]
@@ -16,7 +18,7 @@
         public void CanConstruct()
         {
             // Act
-            var instance = new UserStatus(_dbContext, _logService.Object, _resourceProvider.Object);
+            var instance = new UserStatus(_dbContext, _logService.Object, _resourceProvider, _resourceHandler);
 
             // Assert
             Assert.IsNotNull(instance);
@@ -25,13 +27,13 @@
         [TestMethod]
         public void CannotConstructWithNullContext()
         {
-            Assert.ThrowsException<ArgumentNullException>(() => new UserStatus(null, _logService.Object, _resourceProvider.Object));
+            Assert.ThrowsException<ArgumentNullException>(() => new UserStatus(null, _logService.Object, _resourceProvider,  _resourceHandler));
         }
 
         [TestMethod]
         public void CanConstructWithNullLogService()
         {
-            var userCreate = new UserCreate(_dbContext, null, _utilEntity.Object);
+            var userCreate = new UserCreate(_dbContext, null, _utilEntity);
             Assert.IsNotNull(userCreate);
         }
 
@@ -111,6 +113,7 @@
                 Email = "ExistingEmail@gmail.com",
                 Password = "ValidPassword",
             };
+
 
             // When
             var result1 = await _userCreate.Create(user);

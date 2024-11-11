@@ -54,10 +54,10 @@
                 }
 
                 // If validation is successful, add the entity to the database
-                string addedEntityResult = await base.Create(validationResult.Data);
+                var addedEntityResult = await base.Create(validationResult.Data);
 
                 // Create a success message and return the success result
-                string successMessage = string.Format(Resource.SuccessfullyGeneric, typeof(T).Name);
+                var successMessage = string.Format(Resource.SuccessfullyGeneric, typeof(T).Name);
                 return OperationResult<string>.Success(addedEntityResult, successMessage);
             }
             catch (Exception ex)
