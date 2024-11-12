@@ -67,7 +67,8 @@ namespace Infrastructure.Test.Repositories.Implementation.CRUD
             { "UpdateFailedAlreadyRegisteredEmail", "A user is already registered with this email." },
             { "UpdateSuccessfullySearchGeneric", "The search in the {0} entity completed successfully." },
             { "ImageSuccessfullyUpload", "The image was uploaded successfully due to an unexpected error." },
-            { "ImageGlobalOkMessage", "Ok." }
+            { "ImageGlobalOkMessage", "Ok." },
+            { "SuccessCompressed", "The image was compressed successfully." }
         };
 
         [TestInitialize]

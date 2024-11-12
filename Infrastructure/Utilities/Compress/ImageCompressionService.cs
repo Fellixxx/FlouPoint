@@ -1,4 +1,4 @@
-﻿namespace Infrastructure.Utilities
+﻿namespace Infrastructure.Utilities.Compress
 {
     using Application.Result;
     using Application.UseCases.ExternalServices;
@@ -8,6 +8,7 @@
     using Domain.EnumType;
     using Infrastructure.Constants;
     using Infrastructure.Other;
+    using Infrastructure.Repositories;
     using SixLabors.ImageSharp.Formats.Jpeg;
 
     /// <summary>
@@ -63,6 +64,8 @@
                 }
 
                 outputStream.Seek(0, SeekOrigin.Begin);
+                await ResourceHandler.CreateAsync(_resourceProvider, _resourceKeys);
+                var successCompressed = _resourceHandler.GetResource("SuccessCompressed");
                 return OperationResult<Stream>.Success(outputStream, Resource.SuccessCompressed); ;
             }
             catch (Exception ex)
