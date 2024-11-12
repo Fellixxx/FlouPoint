@@ -46,6 +46,7 @@ namespace Infrastructure.Test.Repositories.Implementation.CRUD
             { "SuccessfullyGenericActiveated", "{0} was activated successfully." },
             { "LogSuccessfullyGenericActiveated", "{0} was activated successfully." },
             { "StatusGlobalOkMessage", "Ok" }
+            { "FailureConfigurationMissingError", "The configuration for the log services is missing the username, password, or URL." },
         };
 
         [TestInitialize]
