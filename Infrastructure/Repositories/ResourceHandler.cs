@@ -1,12 +1,13 @@
 ﻿using Application.UseCases.ExternalServices;
 using Application.UseCases.Repository;
+using System.Threading.Tasks;
 
 namespace Infrastructure.Repositories
 {
     public class ResourceHandler : IResourceHandler
     {
         private readonly IResourceProvider _resourceProvider;
-        private readonly Dictionary<string, string> _preloadedResources;
+        private Dictionary<string, string> _preloadedResources;
 
         private ResourceHandler(IResourceProvider resourceProvider)
         {
@@ -14,7 +15,7 @@ namespace Infrastructure.Repositories
             _preloadedResources = [];
         }
 
-        public static async Task<ResourceHandler> CreateAsync(IResourceProvider resourceProvider, IEnumerable<string> keys)
+        public static async Task<ResourceHandler> CreateAsync(IResourceProvider resourceProvider, IEnumerable<string> keys = null)
         {
             if (keys == null)
             {
@@ -33,11 +34,25 @@ namespace Infrastructure.Repositories
 
         private async Task PreloadResourcesAsync(IEnumerable<string> keys)
         {
-            foreach (var key in keys)
+            _preloadedResources ??= [];
+            if (keys is null)
             {
-                _preloadedResources[key] = await _resourceProvider.GetMessageValueOrDefault(key, $"Default for {key}");
+                var result = await _resourceProvider.GetResourceEntries();
+                if (result.IsSuccessful && result.Data != null && result.Data.Any())
+                {
+                    _preloadedResources = result.Data.ToDictionary(x => x.Name, x => x.Value);
+                }
+            }
+            else
+            {
+                foreach (var key in keys)
+                {
+                    var resource = await _resourceProvider.GetMessageValueOrDefault(key, $"Default for {key}");
+                    _preloadedResources[key] = resource;
+                }
             }
         }
+
 
         public string GetResource(string key)
         {
