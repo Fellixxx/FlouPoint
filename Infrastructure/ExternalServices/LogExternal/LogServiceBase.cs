@@ -9,6 +9,8 @@
     using System.Text;
     using Domain.DTO.Login;
     using Domain.DTO.Logging;
+    using Application.UseCases.ExternalServices;
+    using Application.UseCases.Repository;
 
     /// <summary>
     /// Provides a base for interacting with an external logging service.
@@ -21,6 +23,9 @@
         private readonly string _urlLogservice;
         private readonly IWrapper _httpContentWrapper;
         private readonly HttpClient _client;
+        private readonly IResourceProvider _resourceProvider;
+        private IResourceHandler _resourceHandler;
+        private readonly List<string> _resourceKeys;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="LogServiceBase"/> class.
@@ -28,7 +33,7 @@
         /// <param name="clientFactory">Factory for creating instances of <see cref="HttpClient"/>.</param>
         /// <param name="configuration">Application's configuration interface.</param>
         /// <param name="httpContentWrapper">Wrapper for handling HTTP content.</param>
-        protected LogServiceBase(IHttpClientFactory clientFactory, IConfiguration configuration, IWrapper httpContentWrapper)
+        protected LogServiceBase(IHttpClientFactory clientFactory, IConfiguration configuration, IWrapper httpContentWrapper, IResourceProvider resourceProvider, IResourceHandler resourceHandler)
         {
             _client = clientFactory.CreateClient();
             _configuration = configuration;
@@ -36,6 +41,12 @@
             _password = _configuration.GetSection("mongodb:password").Value ?? string.Empty;
             _urlLogservice = _configuration.GetSection("logService:urlLogservice").Value ?? string.Empty;
             _httpContentWrapper = httpContentWrapper;
+            _resourceProvider = resourceProvider;
+            _resourceHandler = resourceHandler;
+            _resourceKeys =
+            [
+                "LogSuccessfullyGenericActiveated"
+            ];
         }
 
         /// <summary>

@@ -23,6 +23,10 @@
     /// </summary>
     public class UserUpdate : UpdateRepository<User>, IUserUpdate
     {
+        private readonly IResourceProvider _resourceProvider;
+        private IResourceHandler _resourceHandler;
+        private readonly List<string> _resourceKeys;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="UserUpdate"/> class.
         /// </summary>

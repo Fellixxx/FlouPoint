@@ -26,7 +26,7 @@
         /// <param name="configuration">Application's configuration interface.</param>
         /// <param name="httpContentWrapper">Wrapper for handling HTTP content.</param>
         public LogService(IHttpClientFactory clientFactory, IConfiguration configuration, IWrapper httpContentWrapper, IResourceProvider resourceProvider, IResourceHandler resourceHandler) :
-            base(clientFactory, configuration, httpContentWrapper)
+            base(clientFactory, configuration, httpContentWrapper, resourceProvider, resourceHandler)
         {
             _resourceProvider=resourceProvider;
             _resourceHandler=resourceHandler;

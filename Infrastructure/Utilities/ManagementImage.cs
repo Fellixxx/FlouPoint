@@ -2,6 +2,7 @@
 {
     using Application.Result;
     using Application.UseCases.ExternalServices;
+    using Application.UseCases.Repository;
     using Application.UseCases.Utilities;
     using Domain.DTO.Logging;
     using Domain.EnumType;
@@ -21,13 +22,15 @@
 
         // Service responsible for image compression operations.
         private readonly IImageCompressionService _imageCompressionService;
-
+        private readonly IResourceProvider _resourceProvider;
+        private IResourceHandler _resourceHandler;
+        private readonly List<string> _resourceKeys;
         /// <summary>
         /// Initializes a new instance of the ManagementImage class.
         /// </summary>
         /// <param name="logService">Service responsible for logging operations.</param>
         /// <param name="imageCompressionService">Service responsible for image compression.</param>
-        public ManagementImage(ILogService logService, IImageCompressionService imageCompressionService)
+        public ManagementImage(ILogService logService, IImageCompressionService imageCompressionService, IResourceProvider resourceProvider, IResourceHandler resourceHandler)
         {
             _logService = logService;
             _imageCompressionService = imageCompressionService;

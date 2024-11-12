@@ -62,7 +62,7 @@ namespace Infrastructure.Test.Repositories.Implementation.CRUD
             _resourceHandler = SetupResourceHandlerMock();
             _resourceProvider = SetupResourceProviderMock();
             _utilEntity = new UtilEntity<Domain.Entities.User>(_resourceProvider, _resourceHandler);
-            _userCreate = new UserCreate(_dbContext, _logService.Object, _utilEntity);
+            _userCreate = new UserCreate(_dbContext, _logService.Object, _utilEntity, _resourceProvider, _resourceHandler);
             _userDelete = new UserDelete(_dbContext, _logService.Object, _resourceProvider, _resourceHandler);
             _userUpdate = new UserUpdate(_dbContext, _logService.Object, _utilEntity, _resourceProvider, _resourceHandler);
             _userStatus = new UserStatus(_dbContext, _logService.Object, _resourceProvider, _resourceHandler);

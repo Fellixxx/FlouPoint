@@ -11,18 +11,23 @@ namespace Infrastructure.Repositories.Implementation.CRUD.User
     using UtilitiesLayer;
     using FluentValidation.Results;
     using Application.UseCases.Repository.CRUD;
+    using Application.UseCases.Repository;
 
     /// <summary>
     /// Implementation of the user creation repository.
     /// </summary>
     public class UserCreate : CreateRepository<User>, IUserCreate
     {
+        private readonly IResourceProvider _resourceProvider;
+        private IResourceHandler _resourceHandler;
+        private readonly List<string> _resourceKeys;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="UserCreate"/> class.
         /// </summary>
         /// <param name="context">The database context for the application.</param>
         /// <param name="logService">The logging service for tracking operations.</param>
-        public UserCreate(CommonDbContext context, ILogService logService, IUtilEntity<User> utilEntity) : base(context, logService, utilEntity)
+        public UserCreate(CommonDbContext context, ILogService logService, IUtilEntity<User> utilEntity, IResourceProvider resourceProvider, IResourceHandler resourceHandler) : base(context, logService, utilEntity, resourceProvider, resourceHandler)
         {
         }
 

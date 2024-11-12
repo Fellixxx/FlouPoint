@@ -20,6 +20,9 @@
     public abstract class DeleteRepository<T> : EntityExistenceValidator<T>, IDeleteRepository<T> where T : class, IEntity
     {
         private readonly ILogService _logService;
+        private readonly IResourceProvider _resourceProvider;
+        private IResourceHandler _resourceHandler;
+        private readonly List<string> _resourceKeys;
 
         /// <summary>
         /// Constructor with dependency injection.
@@ -29,6 +32,12 @@
         protected DeleteRepository(DbContext context, ILogService logService, IResourceProvider resourceProvider, IResourceHandler resourceHandler) : base(context, resourceProvider, resourceHandler)
         {
             _logService = logService;
+            _resourceProvider = resourceProvider;
+            _resourceHandler = resourceHandler;
+            _resourceKeys =
+            [
+                "LogSuccessfullyGenericActiveated"
+            ];
         }
 
         /// <summary>

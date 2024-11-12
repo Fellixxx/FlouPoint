@@ -10,6 +10,7 @@
     using Domain.DTO.Logging;
     using Domain.EnumType;
     using Infrastructure.Constants;
+    using Application.UseCases.Repository;
 
     /// <summary>
     /// Abstract repository class for creating a new entity.
@@ -19,16 +20,25 @@
     {
         private readonly ILogService _logService;
         private readonly IUtilEntity<T> _utilEntity;
+        private readonly IResourceProvider _resourceProvider;
+        private IResourceHandler _resourceHandler;
+        private readonly List<string> _resourceKeys;
 
         /// <summary>
         /// Constructor with dependency injection.
         /// </summary>
         /// <param name="context">The database context.</param>
         /// <param name="logService">The log service.</param>
-        public CreateRepository(DbContext context, ILogService logService, IUtilEntity<T> utilEntity) : base(context)
+        public CreateRepository(DbContext context, ILogService logService, IUtilEntity<T> utilEntity, IResourceProvider resourceProvider, IResourceHandler resourceHandler) : base(context)
         {
             _logService = logService;
             _utilEntity = utilEntity;
+            _resourceProvider = resourceProvider;
+            _resourceHandler = resourceHandler;
+            _resourceKeys =
+            [
+                "LogSuccessfullyGenericActiveated"
+            ];
         }
 
         /// <summary>

@@ -21,6 +21,9 @@
     {
         private readonly ILogService _logService;
         private readonly IUtilEntity<T> _utilEntity;
+        private readonly IResourceProvider _resourceProvider;
+        private IResourceHandler _resourceHandler;
+        private readonly List<string> _resourceKeys;
 
         /// <summary>
         /// Constructor with dependency injection.
@@ -31,6 +34,12 @@
         {
             _logService = logService;
             _utilEntity = utilEntity;
+            _resourceProvider = resourceProvider;
+            _resourceHandler = resourceHandler;
+            _resourceKeys =
+            [
+                "LogSuccessfullyGenericActiveated"
+            ];
         }
 
         /// <summary>

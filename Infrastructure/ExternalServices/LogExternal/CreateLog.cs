@@ -7,6 +7,9 @@
 
     public static class CreateLog
     {
+        //private readonly IResourceProvider _resourceProvider;
+        //private IResourceHandler _resourceHandler;
+        //private readonly List<string> _resourceKeys;
 
         /// <summary>
         /// Validates the logging data, creates and returns the log entry if valid.

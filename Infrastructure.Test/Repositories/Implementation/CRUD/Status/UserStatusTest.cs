@@ -33,7 +33,7 @@
         [TestMethod]
         public void CanConstructWithNullLogService()
         {
-            var userCreate = new UserCreate(_dbContext, null, _utilEntity);
+            var userCreate = new UserCreate(_dbContext, null, _utilEntity, _resourceProvider, _resourceHandler);
             Assert.IsNotNull(userCreate);
         }
 

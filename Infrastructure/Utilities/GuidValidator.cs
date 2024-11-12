@@ -2,12 +2,18 @@
 {
     using System; // This is required for Guid.TryParse method.
     using Application.Result;
+    using Application.UseCases.ExternalServices;
+    using Application.UseCases.Repository;
 
     /// <summary>
     /// Provides utility functions to validate GUIDs (Globally Unique Identifiers).
     /// </summary>
     public class GuidValidator
     {
+        private readonly IResourceProvider _resourceProvider;
+        private IResourceHandler _resourceHandler;
+        private readonly List<string> _resourceKeys;
+
         /// <summary>
         /// Validates if the provided string is a valid GUID.
         /// </summary>

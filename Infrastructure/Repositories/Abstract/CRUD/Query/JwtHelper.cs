@@ -1,6 +1,8 @@
 ﻿namespace Infrastructure.Repositories.Abstract.CRUD.Query
 {
     using Application.Result;
+    using Application.UseCases.ExternalServices;
+    using Application.UseCases.Repository;
     using Newtonsoft.Json.Linq;
     using System.Text;
 
@@ -16,6 +18,9 @@
         private const string LengthBearer = "The length of the 'bearer' string is less than the 'bearer token' string.";
         private const string InvalidJwt = "Invalid JWT payload format.";
         private const string InvalidBase64Url = "Invalid Base64Url format.";
+        //private readonly IResourceProvider _resourceProvider;
+        //private IResourceHandler _resourceHandler;
+        //private readonly List<string> _resourceKeys;
 
         /// <summary>
         /// Extracts the user data ID from the JWT token.
