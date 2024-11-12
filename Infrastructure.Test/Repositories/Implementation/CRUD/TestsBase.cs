@@ -44,6 +44,7 @@ namespace Infrastructure.Test.Repositories.Implementation.CRUD
             { "ValidationGlobalOkMessage", "Operation completed successfully." },
             { "GenericExistValidation", "The {0} does not exist." },
             { "SuccessfullyGenericActiveated", "{0} was activated successfully." },
+            { "LogSuccessfullyGenericActiveated", "{0} was activated successfully." },
             { "StatusGlobalOkMessage", "Ok" }
         };
 

@@ -2,9 +2,12 @@
 {
     using Application.Result;
     using Application.UseCases.ExternalServices;
+    using Application.UseCases.Repository;
     using Application.UseCases.Wrapper;
     using Domain.DTO.Logging;
     using Infrastructure;
+    using Infrastructure.Constants;
+    using Infrastructure.Repositories;
     using Microsoft.Extensions.Configuration;
 
     /// <summary>
@@ -12,16 +15,25 @@
     /// </summary>
     public class LogService : LogServiceBase, ILogService
     {
+        private readonly IResourceProvider _resourceProvider;
+        private IResourceHandler _resourceHandler;
+        private readonly List<string> _resourceKeys;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="LogService"/> class.
         /// </summary>
         /// <param name="clientFactory">Factory for creating instances of <see cref="HttpClient"/>.</param>
         /// <param name="configuration">Application's configuration interface.</param>
         /// <param name="httpContentWrapper">Wrapper for handling HTTP content.</param>
-        public LogService(IHttpClientFactory clientFactory, IConfiguration configuration, IWrapper httpContentWrapper) :
+        public LogService(IHttpClientFactory clientFactory, IConfiguration configuration, IWrapper httpContentWrapper, IResourceProvider resourceProvider, IResourceHandler resourceHandler) :
             base(clientFactory, configuration, httpContentWrapper)
         {
-
+            _resourceProvider=resourceProvider;
+            _resourceHandler=resourceHandler;
+            _resourceKeys =
+            [
+                "SuccessfullyLogCreate"
+            ];
         }
 
         /// <summary>
@@ -29,23 +41,23 @@
         /// </summary>
         /// <param name="log">The log entity to create.</param>
         /// <returns>A task representing the asynchronous operation. The task result contains the operation result with an optional message.</returns>
-        public Task<OperationResult<string>> CreateLog(Log log)
+        public async Task<OperationResult<string>> CreateLog(Log log)
         {
             try
             {
                 var result = SetLog(log);
                 if (!result.Result.IsSuccessful)
                 {
-                    return Task.FromResult(result.Result);
+                    return result.Result;
                 }
-
-                var successfullyLogCreate = Resource.SuccessfullyLogCreate;
-                return Task.FromResult(OperationResult<string>.Success(string.Empty, successfullyLogCreate));
+                await ResourceHandler.CreateAsync(_resourceProvider, _resourceKeys);
+                var successfullyLogCreate = _resourceHandler.GetResource("LogSuccessfullyGenericActiveated");
+                return OperationResult<string>.Success(string.Empty, successfullyLogCreate);
             }
             catch (Exception ex)
             {
                 var message = string.Format(Resource.FailedGolbalException, ex.Message, ex.StackTrace);
-                return Task.FromResult(OperationBuilder<string>.FailureUnexpectedError(Resource.SuccessfullyLogCreate));
+                return OperationBuilder<string>.FailureUnexpectedError(ExceptionMessages.FailureUnexpectedError);
             }
         }
     }
