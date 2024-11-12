@@ -70,29 +70,11 @@ namespace Infrastructure {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to A user is already registered with this email..
-        /// </summary>
-        internal static string FailedAlreadyRegisteredEmail {
-            get {
-                return ResourceManager.GetString("FailedAlreadyRegisteredEmail", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to A user is already registered with this username..
         /// </summary>
         internal static string FailedAlreadyRegisteredUser {
             get {
                 return ResourceManager.GetString("FailedAlreadyRegisteredUser", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to One or more data from the User have been submitted with errors {0}.
-        /// </summary>
-        internal static string FailedDataSizeCharacter {
-            get {
-                return ResourceManager.GetString("FailedDataSizeCharacter", resourceCulture);
             }
         }
         
@@ -106,38 +88,11 @@ namespace Infrastructure {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The given email is not in a valid format.
-        /// </summary>
-        internal static string FailedEmailInvalidFormat {
-            get {
-                return ResourceManager.GetString("FailedEmailInvalidFormat", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to It happened an error in the email service..
         /// </summary>
         internal static string FailedEmailService {
             get {
                 return ResourceManager.GetString("FailedEmailService", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The log services token got failed..
-        /// </summary>
-        internal static string FailedGetToken {
-            get {
-                return ResourceManager.GetString("FailedGetToken", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Exception Unknowled message:{0} stacktrace {1}.
-        /// </summary>
-        internal static string FailedGolbalException {
-            get {
-                return ResourceManager.GetString("FailedGolbalException", resourceCulture);
             }
         }
         
@@ -223,15 +178,6 @@ namespace Infrastructure {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The log creation got failed..
-        /// </summary>
-        internal static string FailedSetLog {
-            get {
-                return ResourceManager.GetString("FailedSetLog", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to The token cannot be read..
         /// </summary>
         internal static string FailedTokenCanNotRead {
@@ -309,15 +255,6 @@ namespace Infrastructure {
         internal static string FailedValidationLogUnknowled {
             get {
                 return ResourceManager.GetString("FailedValidationLogUnknowled", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The configuration for the log services is missing the username, password, or URL..
-        /// </summary>
-        internal static string FailureConfigurationMissingError {
-            get {
-                return ResourceManager.GetString("FailureConfigurationMissingError", resourceCulture);
             }
         }
         
@@ -421,29 +358,11 @@ namespace Infrastructure {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0} was created successfully..
-        /// </summary>
-        internal static string SuccessfullyGeneric {
-            get {
-                return ResourceManager.GetString("SuccessfullyGeneric", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to {0} was activated successfully..
         /// </summary>
         internal static string SuccessfullyGenericActiveated {
             get {
                 return ResourceManager.GetString("SuccessfullyGenericActiveated", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to {0} was deleted successfully..
-        /// </summary>
-        internal static string SuccessfullyGenericDeleted {
-            get {
-                return ResourceManager.GetString("SuccessfullyGenericDeleted", resourceCulture);
             }
         }
         
@@ -462,15 +381,6 @@ namespace Infrastructure {
         internal static string SuccessfullyGenericUpdated {
             get {
                 return ResourceManager.GetString("SuccessfullyGenericUpdated", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Token got successfully..
-        /// </summary>
-        internal static string SuccessfullyGetToken {
-            get {
-                return ResourceManager.GetString("SuccessfullyGetToken", resourceCulture);
             }
         }
         
@@ -525,15 +435,6 @@ namespace Infrastructure {
         internal static string SuccessfullySearchUser {
             get {
                 return ResourceManager.GetString("SuccessfullySearchUser", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The successfully SetLog..
-        /// </summary>
-        internal static string SuccessfullySetLog {
-            get {
-                return ResourceManager.GetString("SuccessfullySetLog", resourceCulture);
             }
         }
         

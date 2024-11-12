@@ -63,7 +63,7 @@
             {
                 string errorMessage = GetErrorMessage(result);
                 var failedDataSizeCharacter = _resourceHandler.GetResource("UpdateFailedDataSizeCharacter");
-                string message = string.Format(Resource.FailedDataSizeCharacter, errorMessage);
+                string message = string.Format(failedDataSizeCharacter, errorMessage);
                 return OperationBuilder<User>.FailureBusinessValidation(message);
             }
 
@@ -72,7 +72,7 @@
             if (!CredentialUtility.IsValidEmail(email))
             {
                 var failedDataSizeCharacter = _resourceHandler.GetResource("UpdateFailedEmailInvalidFormat");
-                return OperationBuilder<User>.FailureBusinessValidation(Resource.FailedEmailInvalidFormat);
+                return OperationBuilder<User>.FailureBusinessValidation(failedDataSizeCharacter);
             }
 
             string id = entityModified?.Id ?? string.Empty;
