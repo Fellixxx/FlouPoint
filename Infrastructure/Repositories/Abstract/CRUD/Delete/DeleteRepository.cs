@@ -45,12 +45,12 @@
         /// </summary>
         /// <param name="id">The ID of the entity to delete.</param>
         /// <returns>A task representing the asynchronous operation with the deletion result.</returns>
-        public async Task<OperationResult<bool>> Delete(string id)
+        public async Task<Operation<bool>> Delete(string id)
         {
             try
             {
                 // Validate if the entity with the provided ID exists
-                OperationResult<T> validationResult = await HasId(id);
+                Operation<T> validationResult = await HasId(id);
 
                 // If validation is not successful, return a failure operation result
                 if (!validationResult.IsSuccessful)
@@ -68,12 +68,12 @@
                 string messageSuccess = string.Format(successfullyGenericDeleted, typeof(T).Name);
 
                 // Return a success operation result
-                return OperationResult<bool>.Success(result, messageSuccess);
+                return Operation<bool>.Success(result, messageSuccess);
             }
             catch (Exception ex)
             {
                 Log log = Util.GetLogError(ex, id, OperationExecute.Remove);
-                OperationResult<string> result = await _logService.CreateLog(log);
+                Operation<string> result = await _logService.CreateLog(log);
                 if (!result.IsSuccessful)
                 {
                     result.ToResultWithBoolType();

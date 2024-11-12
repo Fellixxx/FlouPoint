@@ -31,7 +31,7 @@
         /// </summary>
         /// <param name="entity">The entity to be checked.</param>
         /// <returns>An operation result indicating whether the entity exists or not.</returns>
-        public async Task<OperationResult<T>> HasEntity(T entity)
+        public async Task<Operation<T>> HasEntity(T entity)
         {
             await ResourceHandler.CreateAsync(_resourceProvider, _resourceKeys);
             var failedNecesaryData = _resourceHandler.GetResource("EntityFailedNecesaryData");
@@ -43,7 +43,7 @@
 
             // Return a success result if the entity is not null
             var utilGlobalOkMessage = _resourceHandler.GetResource("UtilGlobalOkMessage");
-            return OperationResult<T>.Success(entity, utilGlobalOkMessage);
+            return Operation<T>.Success(entity, utilGlobalOkMessage);
         }
     }
 }

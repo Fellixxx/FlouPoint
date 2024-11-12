@@ -58,7 +58,7 @@
         /// Asynchronously gets a token for authentication with the logging service.
         /// </summary>
         /// <returns>A task representing the asynchronous operation. The task result contains the operation result with the authentication token or an error message.</returns>
-        private async Task<OperationResult<string>> GetToken()
+        private async Task<Operation<string>> GetToken()
         {
             await ResourceHandler.CreateAsync(_resourceProvider, _resourceKeys);
             if (HasParameter())
@@ -83,7 +83,7 @@
 
             string accessToken = _tokenResponse?.AccessToken ?? string.Empty;
             var successfullyLogCreate = _resourceHandler.GetResource("SuccessfullyGetToken");
-            return OperationResult<string>.Success(accessToken, successfullyLogCreate);
+            return Operation<string>.Success(accessToken, successfullyLogCreate);
         }
 
         /// <summary>
@@ -111,7 +111,7 @@
         /// </summary>
         /// <param name="log">The log entity to create.</param>
         /// <returns>A task representing the asynchronous operation. The task result contains the operation result with an optional message.</returns>
-        protected async Task<OperationResult<string>> SetLog(Log log)
+        protected async Task<Operation<string>> SetLog(Log log)
         {
             var bearerToken = await GetToken();
 
@@ -132,7 +132,7 @@
                 return OperationBuilder<string>.FailExternal(failedSetLog);
             }
             var successfullySetLog = _resourceHandler.GetResource("FailedGetToken");
-            return OperationResult<string>.Success(string.Empty, successfullySetLog);
+            return Operation<string>.Success(string.Empty, successfullySetLog);
         }
 
         /// <summary>

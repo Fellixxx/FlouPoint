@@ -51,7 +51,7 @@
         /// <param name="entityModified">The updated user entity with new values.</param>
         /// <param name="entityUnmodified">The original user entity before changes.</param>
         /// <returns>An operation result indicating the success or failure of the update operation.</returns>
-        public override async Task<OperationResult<User>> UpdateEntity(User entityModified, User entityUnmodified)
+        public override async Task<Operation<User>> UpdateEntity(User entityModified, User entityUnmodified)
         {
             // Validate the modified entity using the UpdateUserRules validator
             UpdateUserRules validatorModified = new UpdateUserRules();
@@ -103,7 +103,7 @@
             // Return a success operation result
             var successfullySearchGeneric = _resourceHandler.GetResource("UpdateSuccessfullySearchGeneric");
             var successMessage = string.Format(successfullySearchGeneric, typeof(User).Name);
-            return OperationResult<User>.Success(entityUnmodified, successMessage);
+            return Operation<User>.Success(entityUnmodified, successMessage);
         }
 
         /// <summary>

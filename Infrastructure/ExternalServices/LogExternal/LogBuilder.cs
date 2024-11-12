@@ -32,7 +32,7 @@
         /// <param name="entity">The entity</param>
         /// <param name="operation">The operation</param>
         /// <returns>The log</returns>
-        public OperationResult<Log> Trace(string message, object entity, OperationExecute operation)
+        public Operation<Log> Trace(string message, object entity, OperationExecute operation)
         {
             return CreateLog.CreateLogIfValid(message, entity, operation, LogLevel.Trace);
         }
@@ -44,7 +44,7 @@
         /// <param name="entity">The entity</param>
         /// <param name="operation">The operation</param>
         /// <returns>The log</returns>
-        public OperationResult<Log> Debug(string message, object entity, OperationExecute operation)
+        public Operation<Log> Debug(string message, object entity, OperationExecute operation)
         {
             return CreateLog.CreateLogIfValid(message, entity, operation, LogLevel.Debug);
         }
@@ -56,7 +56,7 @@
         /// <param name="entity">The entity</param>
         /// <param name="operation">The operation</param>
         /// <returns>The log</returns>
-        public OperationResult<Log> Information(string message, object entity, OperationExecute operation)
+        public Operation<Log> Information(string message, object entity, OperationExecute operation)
         {
             return CreateLog.CreateLogIfValid(message, entity, operation, LogLevel.Information);
         }
@@ -68,7 +68,7 @@
         /// <param name="entity">The entity</param>
         /// <param name="operation">The operation</param>
         /// <returns>The log</returns>
-        public OperationResult<Log> Warning(string message, object entity, OperationExecute operation)
+        public Operation<Log> Warning(string message, object entity, OperationExecute operation)
         {
             return CreateLog.CreateLogIfValid(message, entity, operation, LogLevel.Warning);
         }
@@ -80,7 +80,7 @@
         /// <param name="entity">The entity</param>
         /// <param name="operation">The operation</param>
         /// <returns>The log</returns>
-        public OperationResult<Log> Error(string message, object entity, OperationExecute operation)
+        public Operation<Log> Error(string message, object entity, OperationExecute operation)
         {
             return CreateLog.CreateLogIfValid(message, entity, operation, LogLevel.Error);
         }
@@ -92,7 +92,7 @@
         /// <param name="entity">The entity</param>
         /// <param name="operation">The operation</param>
         /// <returns>The log</returns>
-        public OperationResult<Log> Fatal(string message, object entity, OperationExecute operation)
+        public Operation<Log> Fatal(string message, object entity, OperationExecute operation)
         {
             return CreateLog.CreateLogIfValid(message, entity, operation, LogLevel.Fatal);
         }

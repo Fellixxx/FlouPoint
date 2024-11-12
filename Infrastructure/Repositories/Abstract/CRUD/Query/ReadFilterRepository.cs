@@ -44,7 +44,7 @@
         /// </summary>
         /// <param name="predicate">The filter predicate.</param>
         /// <returns>A task representing the asynchronous operation with the filtered entities.</returns>
-        public new async Task<OperationResult<IQueryable<T>>> ReadFilter(Expression<Func<T, bool>> predicate)
+        public new async Task<Operation<IQueryable<T>>> ReadFilter(Expression<Func<T, bool>> predicate)
         {
             try
             {
@@ -52,13 +52,13 @@
                 await ResourceHandler.CreateAsync(_resourceProvider, _resourceKeys);
                 var successfullySearchGeneric = _resourceHandler.GetResource("SuccessfullySearchGeneric");
                 var messageSuccessfully = string.Format(successfullySearchGeneric, typeof(T).Name);
-                return OperationResult<IQueryable<T>>.Success(result, messageSuccessfully);
+                return Operation<IQueryable<T>>.Success(result, messageSuccessfully);
             }
             catch (Exception ex)
             {
                 // Create a log entry for the exception
                 Log log = Util.GetLogError(ex, predicate, OperationExecute.GetAllByFilter);
-                OperationResult<string> result = await _logService.CreateLog(log);
+                Operation<string> result = await _logService.CreateLog(log);
 
                 // Handle logging failure
                 if (!result.IsSuccessful)

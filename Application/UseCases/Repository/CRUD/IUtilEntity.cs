@@ -5,6 +5,6 @@
 
     public interface IUtilEntity<T> where T : class, IEntity
     {
-        Task<OperationResult<T>> HasEntity(T entity);
+        Task<Operation<T>> HasEntity(T entity);
     }
 }

@@ -12,7 +12,7 @@
         /// Adds a new User entity to the repository.
         /// </summary>
         /// <param name="entity">The User entity to add.</param>
-        /// <returns>An <see cref="OperationResult{T}"/> containing the ID of the added entity.</returns>
-        Task<OperationResult<string>> Create(User entity);
+        /// <returns>An <see cref="Operation{T}"/> containing the ID of the added entity.</returns>
+        Task<Operation<string>> Create(User entity);
     }
 }

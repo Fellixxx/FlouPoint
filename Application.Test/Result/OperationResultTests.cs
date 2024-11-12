@@ -15,7 +15,7 @@ namespace Application.Test.Result
             var expectedData = "TestData";
 
             // Act
-            var result = OperationResult<string>.Success(expectedData, expectedMessage);
+            var result = Operation<string>.Success(expectedData, expectedMessage);
 
             // Assert
             Assert.IsNotNull(result);
@@ -31,7 +31,7 @@ namespace Application.Test.Result
             var expectedData = "TestData";
 
             // Act
-            var result = OperationResult<string>.Success(expectedData);
+            var result = Operation<string>.Success(expectedData);
 
             // Assert
             Assert.IsNotNull(result);
@@ -48,7 +48,7 @@ namespace Application.Test.Result
             var expectedErrorType = ErrorTypes.BusinessValidation;
 
             // Act
-            var result = OperationResult<string>.Failure(expectedMessage, expectedErrorType);
+            var result = Operation<string>.Failure(expectedMessage, expectedErrorType);
 
             // Assert
             Assert.IsNotNull(result);
@@ -61,7 +61,7 @@ namespace Application.Test.Result
         public void AsType_Should_Convert_Failure_Result_To_Different_Generic_Type()
         {
             // Arrange
-            var failureResult = OperationResult<string>.Failure("Business error", ErrorTypes.BusinessValidation);
+            var failureResult = Operation<string>.Failure("Business error", ErrorTypes.BusinessValidation);
 
             // Act
             var convertedResult = failureResult.AsType<int>();
@@ -77,7 +77,7 @@ namespace Application.Test.Result
         public void AsType_Should_Throw_InvalidOperationResultException_If_IsSuccessful_Is_True()
         {
             // Arrange
-            var successResult = OperationResult<string>.Success("Success");
+            var successResult = Operation<string>.Success("Success");
 
             // Act & Assert
             var exception = Assert.ThrowsException<InvalidOperation>(() => successResult.AsType<int>());
@@ -89,7 +89,7 @@ namespace Application.Test.Result
         public void ToResultWithBoolType_Should_Convert_To_Bool_Type_When_Failure()
         {
             // Arrange
-            var failureResult = OperationResult<string>.Failure("Failure occurred", ErrorTypes.BusinessValidation);
+            var failureResult = Operation<string>.Failure("Failure occurred", ErrorTypes.BusinessValidation);
 
             // Act
             var boolResult = failureResult.ToResultWithBoolType();
@@ -105,7 +105,7 @@ namespace Application.Test.Result
         public void ToResultWithIntType_Should_Convert_To_Int_Type_When_Failure()
         {
             // Arrange
-            var failureResult = OperationResult<string>.Failure("Failure occurred", ErrorTypes.Database);
+            var failureResult = Operation<string>.Failure("Failure occurred", ErrorTypes.Database);
 
             // Act
             var intResult = failureResult.ToResultWithIntType();
@@ -121,7 +121,7 @@ namespace Application.Test.Result
         public void ToResultWithStringType_Should_Convert_To_String_Type_When_Failure()
         {
             // Arrange
-            var failureResult = OperationResult<int>.Failure("Failure occurred", ErrorTypes.ExternalService);
+            var failureResult = Operation<int>.Failure("Failure occurred", ErrorTypes.ExternalService);
 
             // Act
             var stringResult = failureResult.ToResultWithStringType();
@@ -137,7 +137,7 @@ namespace Application.Test.Result
         public void ToResultWithGenericType_Should_Return_Original_Generic_Type()
         {
             // Arrange
-            var failureResult = OperationResult<string>.Failure("Generic failure", ErrorTypes.Unexpected);
+            var failureResult = Operation<string>.Failure("Generic failure", ErrorTypes.Unexpected);
 
             // Act
             var genericResult = failureResult.ToResultWithGenericType();
@@ -153,7 +153,7 @@ namespace Application.Test.Result
         public void ToResultWithXType_Should_Convert_To_Specified_Generic_Type_When_Failure()
         {
             // Arrange
-            var failureResult = OperationResult<string>.Failure("Failure occurred", ErrorTypes.Network);
+            var failureResult = Operation<string>.Failure("Failure occurred", ErrorTypes.Network);
 
             // Act
             var xResult = failureResult.ToResultWithXType<DateTime>();

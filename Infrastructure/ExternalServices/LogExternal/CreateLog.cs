@@ -20,7 +20,7 @@
         /// <param name="operation">The operation being executed.</param>
         /// <param name="level">The severity level of the log.</param>
         /// <returns>Operation result containing the log entry if successful, or an error message if validation fails.</returns>
-        public static OperationResult<Log> CreateLogIfValid(string message, object entity, OperationExecute operation, LogLevel level)
+        public static Operation<Log> CreateLogIfValid(string message, object entity, OperationExecute operation, LogLevel level)
         {
             try
             {
@@ -36,7 +36,7 @@
 
                 // Build the log entry
                 Log log = LogBuilderHelpers.GetLog(message, entityName, entityValue, level, operation);
-                return OperationResult<Log>.Success(log, MessageConstants.Log.ValidationSuccess);
+                return Operation<Log>.Success(log, MessageConstants.Log.ValidationSuccess);
             }
             catch (JsonSerializationException jsonEx)
             {

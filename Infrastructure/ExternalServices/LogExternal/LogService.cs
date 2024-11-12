@@ -41,7 +41,7 @@
         /// </summary>
         /// <param name="log">The log entity to create.</param>
         /// <returns>A task representing the asynchronous operation. The task result contains the operation result with an optional message.</returns>
-        public async Task<OperationResult<string>> CreateLog(Log log)
+        public async Task<Operation<string>> CreateLog(Log log)
         {
             try
             {
@@ -52,7 +52,7 @@
                 }
                 await ResourceHandler.CreateAsync(_resourceProvider, _resourceKeys);
                 var successfullyLogCreate = _resourceHandler.GetResource("LogSuccessfullyGenericActiveated");
-                return OperationResult<string>.Success(string.Empty, successfullyLogCreate);
+                return Operation<string>.Success(string.Empty, successfullyLogCreate);
             }
             catch (Exception ex)
             {

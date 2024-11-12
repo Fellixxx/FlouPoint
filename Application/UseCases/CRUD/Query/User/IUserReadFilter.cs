@@ -11,6 +11,6 @@
         /// </summary>
         /// <param name="predicate">The predicate</param>
         /// <returns>The result of the operation</returns>
-        Task<OperationResult<IQueryable<User>>> ReadFilter(Expression<Func<User, bool>> predicate);
+        Task<Operation<IQueryable<User>>> ReadFilter(Expression<Func<User, bool>> predicate);
     }
 }

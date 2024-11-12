@@ -17,27 +17,27 @@
             //_authFlowDbContext = context ?? throw new ArgumentNullException(nameof(context));
             _logService = logService ?? throw new ArgumentNullException(nameof(logService));
         }
-        public Task<OperationResult<ResourceEntry>> ReadByBearer(string bearerToken)
+        public Task<Operation<ResourceEntry>> ReadByBearer(string bearerToken)
         {
             throw new NotImplementedException();
         }
 
-        public Task<OperationResult<int>> ReadFilterCount(string filter)
+        public Task<Operation<int>> ReadFilterCount(string filter)
         {
             throw new NotImplementedException();
         }
 
-        public Task<OperationResult<IQueryable<ResourceEntry>>> ReadFilterPage(int pageNumber, int pageSize, string filter)
+        public Task<Operation<IQueryable<ResourceEntry>>> ReadFilterPage(int pageNumber, int pageSize, string filter)
         {
             throw new NotImplementedException();
         }
 
-        public Task<OperationResult<ResourceEntry>> ReadId(string id)
+        public Task<Operation<ResourceEntry>> ReadId(string id)
         {
             throw new NotImplementedException();
         }
 
-        Task<OperationResult<IQueryable<ResourceEntry>>> IResourceEntryReadFilter.ReadFilter(Expression<Func<ResourceEntry, bool>> predicate)
+        Task<Operation<IQueryable<ResourceEntry>>> IResourceEntryReadFilter.ReadFilter(Expression<Func<ResourceEntry, bool>> predicate)
         {
             throw new NotImplementedException();
         }

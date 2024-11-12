@@ -11,7 +11,7 @@
         /// Deactivates an active entity in the repository.
         /// </summary>
         /// <param name="id">The ID of the entity to deactivate.</param>
-        /// <returns>An <see cref="OperationResult{T}"/> containing a boolean that indicates whether the deactivation was successful.</returns>
-        Task<OperationResult<bool>> Deactivate(string id);
+        /// <returns>An <see cref="Operation{T}"/> containing a boolean that indicates whether the deactivation was successful.</returns>
+        Task<Operation<bool>> Deactivate(string id);
     }
 }

@@ -14,11 +14,11 @@
         /// </summary>
         /// <param name="id">The string representation of a GUID to validate.</param>
         /// <returns>
-        /// An <see cref="OperationResult{T}"/> which indicates the result of the validation.
+        /// An <see cref="Operation{T}"/> which indicates the result of the validation.
         /// If the validation is successful, it contains the valid GUID as a string.
         /// If the validation fails, it contains an error message.
         /// </returns>
-        public static OperationResult<string> HasGuid(string id)
+        public static Operation<string> HasGuid(string id)
         {
             // Try to parse the provided string to check if it's a valid GUID.
             var resultConversion = Guid.TryParse(id, out _);
@@ -30,7 +30,7 @@
             }
 
             // If it's a valid GUID, return a success result.
-            return OperationResult<string>.Success(id, MessageConstants.GuidValidator.Success);
+            return Operation<string>.Success(id, MessageConstants.GuidValidator.Success);
         }
     }
 }

@@ -32,7 +32,7 @@
             string message = string.Format(MessageConstants.Utility.LogEntryFormat,ex.Message ,ex.StackTrace);
             LogBuilder logBuilder = LogBuilder.GetLogBuilder();
             // Create the log entry
-            OperationResult<Log> result = logBuilder.Error(message, entity, operation);
+            Operation<Log> result = logBuilder.Error(message, entity, operation);
             // Return the log entry
             Log data = result?.Data?? new Log();
             return data;

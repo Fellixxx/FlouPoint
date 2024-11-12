@@ -45,7 +45,7 @@
         /// </summary>
         /// <param name="filter">The filter expression.</param>
         /// <returns>A task representing the asynchronous operation with the count result.</returns>
-        public async Task<OperationResult<int>> ReadFilterCount(string filter)
+        public async Task<Operation<int>> ReadFilterCount(string filter)
         {
             try
             {
@@ -53,7 +53,7 @@
                 int result = await ReadCountFilter(predicate);
                 await ResourceHandler.CreateAsync(_resourceProvider, _resourceKeys);
                 var messageSuccessfully = _resourceHandler.GetResource("SuccessfullySearchGeneric");
-                return OperationResult<int>.Success(result, messageSuccessfully);
+                return Operation<int>.Success(result, messageSuccessfully);
             }
             catch (Exception ex)
             {

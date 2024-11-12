@@ -21,7 +21,7 @@
             _resourceEntryQuery = resourceEntryQuery;
         }
 
-        public async Task<OperationResult<ResourceEntry>> GetMessage(string key)
+        public async Task<Operation<ResourceEntry>> GetMessage(string key)
         {
             var resource = _resourceEntryQuery.ReadFilter(r => r.Name.Equals(key));
             var resources = await GetResourceEntries();
@@ -39,7 +39,7 @@
                 return OperationBuilder<ResourceEntry>.FailBusiness(MessageConstants.ResourceProvider.MultipleResourcesWithSameKey);
             }
 
-            return OperationResult<ResourceEntry>.Success(resources.Data.FirstOrDefault());
+            return Operation<ResourceEntry>.Success(resources.Data.FirstOrDefault());
         }
 
         public async Task<string> GetMessageValueOrDefault(string key, string defaultValue = MessageConstants.ResourceProvider.KeyNotFound)
@@ -52,7 +52,7 @@
             return defaultValue;
         }
 
-        public async Task<OperationResult<IQueryable<ResourceEntry>>> GetResourceEntries()
+        public async Task<Operation<IQueryable<ResourceEntry>>> GetResourceEntries()
         {
             var entries = _resourceEntryQuery.ReadFilter(r => r.Active);
             if (entries is null)
@@ -65,7 +65,7 @@
                 return OperationBuilder<IQueryable<ResourceEntry>>.FailBusiness(MessageConstants.ResourceProvider.KeyNotFound);
             }
 
-            return OperationResult<IQueryable<ResourceEntry>>.Success(entries.Result.Data);
+            return Operation<IQueryable<ResourceEntry>>.Success(entries.Result.Data);
         }
     }
 }

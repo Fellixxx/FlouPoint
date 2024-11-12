@@ -15,6 +15,6 @@
         /// </summary>
         /// <param name="entity">The entity to add.</param>
         /// <returns>An OperationResult containing the ID of the newly added entity.</returns>
-        Task<OperationResult<string>> Create(T entity);
+        Task<Operation<string>> Create(T entity);
     }
 }

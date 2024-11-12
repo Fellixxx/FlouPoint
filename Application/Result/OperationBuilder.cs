@@ -10,10 +10,10 @@
         /// </summary>
         /// <param name="message">The message</param>
         /// <returns>The operation result</returns>
-        public static OperationResult<T> FailBusiness(string? message)
+        public static Operation<T> FailBusiness(string? message)
         {
             ValidateMessage(message);
-            return OperationResult<T>.Failure(message, ErrorTypes.BusinessValidation);
+            return Operation<T>.Failure(message, ErrorTypes.BusinessValidation);
         }
 
 
@@ -22,10 +22,10 @@
         /// </summary>
         /// <param name="message">The message</param>
         /// <returns>The operation result</returns>
-        public static OperationResult<T> FailConfig(string message)
+        public static Operation<T> FailConfig(string message)
         {
             ValidateMessage(message);
-            return OperationResult<T>.Failure(message, ErrorTypes.ConfigMissing);
+            return Operation<T>.Failure(message, ErrorTypes.ConfigMissing);
         }
 
         /// <summary>
@@ -33,10 +33,10 @@
         /// </summary>
         /// <param name="message">The message</param>
         /// <returns>The operation result</returns>
-        public static OperationResult<T> FailDatabase(string message)
+        public static Operation<T> FailDatabase(string message)
         {
             ValidateMessage(message);
-            return OperationResult<T>.Failure(message, ErrorTypes.Database);
+            return Operation<T>.Failure(message, ErrorTypes.Database);
         }
 
         /// <summary>
@@ -44,10 +44,10 @@
         /// </summary>
         /// <param name="message">The message</param>
         /// <returns>The operation result</returns>
-        public static OperationResult<T> FailInvalidData(string message)
+        public static Operation<T> FailInvalidData(string message)
         {
             ValidateMessage(message);
-            return OperationResult<T>.Failure(message, ErrorTypes.InvalidData);
+            return Operation<T>.Failure(message, ErrorTypes.InvalidData);
         }
 
         /// <summary>
@@ -55,10 +55,10 @@
         /// </summary>
         /// <param name="message">The message</param>
         /// <returns>The operation result</returns>
-        public static OperationResult<T> FailExternal(string message)
+        public static Operation<T> FailExternal(string message)
         {
             ValidateMessage(message);
-            return OperationResult<T>.Failure(message, ErrorTypes.ExternalService);
+            return Operation<T>.Failure(message, ErrorTypes.ExternalService);
         }
 
         /// <summary>
@@ -66,10 +66,10 @@
         /// </summary>
         /// <param name="message">The message</param>
         /// <returns>The operation result</returns>
-        public static OperationResult<T> FailUnexpected(string message)
+        public static Operation<T> FailUnexpected(string message)
         {
             ValidateMessage(message);
-            return OperationResult<T>.Failure(message, ErrorTypes.Unexpected);
+            return Operation<T>.Failure(message, ErrorTypes.Unexpected);
         }
 
         /// <summary>
@@ -77,10 +77,10 @@
         /// </summary>
         /// <param name="message">The message</param>
         /// <returns>The operation result</returns>
-        public static OperationResult<T> FailNetwork(string message)
+        public static Operation<T> FailNetwork(string message)
         {
             ValidateMessage(message);
-            return OperationResult<T>.Failure(message, ErrorTypes.Network);
+            return Operation<T>.Failure(message, ErrorTypes.Network);
         }
 
         private static void ValidateMessage(string? message)

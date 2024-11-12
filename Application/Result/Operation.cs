@@ -3,9 +3,9 @@
     using Application.Result.Error;
     using Application.Result.Exceptions;
 
-    public class OperationResult<T> : Result<T>
+    public class Operation<T> : Result<T>
     {
-        private OperationResult()
+        private Operation()
         {
 
         }
@@ -27,10 +27,10 @@
         /// <summary>
         /// Creates a new OperationResult with the specified generic type based on the current result.
         /// </summary>
-        public OperationResult<U> AsType<U>()
+        public Operation<U> AsType<U>()
         {
             EnsureIsFailure();
-            return new OperationResult<U>
+            return new Operation<U>
             {
                 IsSuccessful = false,
                 Message = this.Message,
@@ -44,9 +44,9 @@
         /// <param name="data">Data result return</param>
         /// <param name="message">The message</param>
         /// <returns>The operation result</returns>
-        public static OperationResult<T> Success(T? data, string? message = "")
+        public static Operation<T> Success(T? data, string? message = "")
         {
-            return new OperationResult<T>
+            return new Operation<T>
             {
                 IsSuccessful = true,
                 Data = data,
@@ -58,7 +58,7 @@
         /// <summary>
         /// Converts the current result to a boolean type.
         /// </summary>
-        public OperationResult<bool> ToResultWithBoolType()
+        public Operation<bool> ToResultWithBoolType()
         {
             return AsType<bool>();
         }
@@ -66,7 +66,7 @@
         /// <summary>
         /// Converts the current result to an integer type.
         /// </summary>
-        public OperationResult<int> ToResultWithIntType()
+        public Operation<int> ToResultWithIntType()
         {
             return AsType<int>();
         }
@@ -74,7 +74,7 @@
         /// <summary>
         /// Converts the current result to an string type.
         /// </summary>
-        public OperationResult<string> ToResultWithStringType()
+        public Operation<string> ToResultWithStringType()
         {
             return AsType<string>();
         }
@@ -82,7 +82,7 @@
         /// <summary>
         /// Converts the current result to an integer type.
         /// </summary>
-        public OperationResult<X> ToResultWithXType<X>()
+        public Operation<X> ToResultWithXType<X>()
         {
             return AsType<X>();
         }
@@ -90,7 +90,7 @@
         /// <summary>
         /// Converts the current result to its generic type.
         /// </summary>
-        public OperationResult<T> ToResultWithGenericType()
+        public Operation<T> ToResultWithGenericType()
         {
             return AsType<T>();
         }
@@ -101,9 +101,9 @@
         /// <param name="message">The message</param>
         /// <param name="errorTypes">The error type</param>
         /// <returns>The operation result</returns>
-        public static OperationResult<T> Failure(string message, ErrorTypes errorTypes)
+        public static Operation<T> Failure(string message, ErrorTypes errorTypes)
         {
-            return new OperationResult<T> { IsSuccessful = false, Message = message, ErrorType = errorTypes };
+            return new Operation<T> { IsSuccessful = false, Message = message, ErrorType = errorTypes };
         }
     }
 }

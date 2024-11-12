@@ -12,7 +12,7 @@
         /// </summary>
         /// <param name="email">The email address for which the OTP was generated.</param>
         /// <param name="otp">The OTP to validate.</param>
-        /// <returns>An <see cref="OperationResult{T}"/> containing a boolean that indicates whether the OTP validation was successful.</returns>
-        Task<OperationResult<bool>> ValidateOtp(string email, string otp);
+        /// <returns>An <see cref="Operation{T}"/> containing a boolean that indicates whether the OTP validation was successful.</returns>
+        Task<Operation<bool>> ValidateOtp(string email, string otp);
     }
 }

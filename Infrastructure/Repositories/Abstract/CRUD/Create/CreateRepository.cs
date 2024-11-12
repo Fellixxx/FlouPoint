@@ -46,18 +46,18 @@
         /// </summary>
         /// <param name="entity">The entity to add.</param>
         /// <returns>A task representing the asynchronous operation with the added entity's ID.</returns>
-        public new async Task<OperationResult<string>> Create(T entity)
+        public new async Task<Operation<string>> Create(T entity)
         {
             try
             {
-                OperationResult<T> hasEntity = await _utilEntity.HasEntity(entity);
+                Operation<T> hasEntity = await _utilEntity.HasEntity(entity);
                 if (!hasEntity.IsSuccessful)
                 {
                     return hasEntity.ToResultWithStringType();
                 }
 
                 // Validate the entity
-                OperationResult<T> validationResult = await CreateEntity(entity);
+                Operation<T> validationResult = await CreateEntity(entity);
                 if (!validationResult.IsSuccessful)
                 {
                     return validationResult.ToResultWithStringType();
@@ -70,12 +70,12 @@
 
                 // Create a success message and return the success result
                 var successMessage = string.Format(successfullyGeneric, typeof(T).Name);
-                return OperationResult<string>.Success(addedEntityResult, successMessage);
+                return Operation<string>.Success(addedEntityResult, successMessage);
             }
             catch (Exception ex)
             {
                 Log log = Util.GetLogError(ex, entity, OperationExecute.Add);
-                OperationResult<string> result = await _logService.CreateLog(log);
+                Operation<string> result = await _logService.CreateLog(log);
                 if (!result.IsSuccessful)
                 {
                     result.ToResultWithStringType();
@@ -90,6 +90,6 @@
         /// </summary>
         /// <param name="entity">The entity to validate.</param>
         /// <returns>A task representing the asynchronous operation with the validation result.</returns>
-        protected abstract Task<OperationResult<T>> CreateEntity(T entity);
+        protected abstract Task<Operation<T>> CreateEntity(T entity);
     }
 }

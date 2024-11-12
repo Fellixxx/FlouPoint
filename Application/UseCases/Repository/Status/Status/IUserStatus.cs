@@ -5,7 +5,7 @@
 
     public interface IUserStatus : IStatusRepository
     {
-        Task<OperationResult<bool>> Activate(string id);
-        Task<OperationResult<bool>> Deactivate(string id);
+        Task<Operation<bool>> Activate(string id);
+        Task<Operation<bool>> Deactivate(string id);
     }
 }

@@ -22,7 +22,7 @@
         /// </summary>
         /// <param name="bearerToken">The JWT token with the Bearer prefix.</param>
         /// <returns>The user data ID or null if not found.</returns>
-        public static OperationResult<string> ExtractJwtPayload(string bearerToken)
+        public static Operation<string> ExtractJwtPayload(string bearerToken)
         {
             if (string.IsNullOrWhiteSpace(bearerToken))
             {
@@ -58,7 +58,7 @@
         /// </summary>
         /// <param name="jwt">The JWT string.</param>
         /// <returns>The extracted payload or an error result.</returns>
-        private static OperationResult<string> ExtractPayloadFromJwt(string jwt)
+        private static Operation<string> ExtractPayloadFromJwt(string jwt)
         {
             var tokenParts = jwt.Split('.');
             if (tokenParts.Length != 3)
@@ -74,13 +74,13 @@
         /// </summary>
         /// <param name="payload">The JWT payload string.</param>
         /// <returns>The user data ID or an error result.</returns>
-        private static OperationResult<string> ParsePayloadForUserData(string payload)
+        private static Operation<string> ParsePayloadForUserData(string payload)
         {
             try
             {
                 var jsonObject = JObject.Parse(payload);
                 var idPayload = jsonObject[MessageConstants.JwtHelper.UserDataClaim]?.ToString() ?? string.Empty;
-                return OperationResult<string>.Success(RemoveFirsAndLastCharacters(idPayload), MessageConstants.JwtHelper.Success);
+                return Operation<string>.Success(RemoveFirsAndLastCharacters(idPayload), MessageConstants.JwtHelper.Success);
             }
             catch
             {
@@ -104,7 +104,7 @@
         /// </summary>
         /// <param name="base64Url">The Base64Url encoded string.</param>
         /// <returns>The decoded string or an error result.</returns>
-        private static OperationResult<string> Base64UrlDecode(string base64Url)
+        private static Operation<string> Base64UrlDecode(string base64Url)
         {
             var padded = base64Url.Length % 4 == 0 ? base64Url : GetBase64Url(base64Url);
             var base64 = padded.Replace("_", "/").Replace("-", "+");
@@ -119,7 +119,7 @@
                 return OperationBuilder<string>.FailBusiness(MessageConstants.JwtHelper.InvalidBase64UrlFormat);
             }
 
-            return OperationResult<string>.Success(Encoding.UTF8.GetString(bytes), MessageConstants.JwtHelper.Success);
+            return Operation<string>.Success(Encoding.UTF8.GetString(bytes), MessageConstants.JwtHelper.Success);
         }
 
         /// <summary>

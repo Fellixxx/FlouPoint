@@ -51,7 +51,7 @@
         /// <param name="base64String">The base64 representation of the image.</param>
         /// <param name="filename">The name of the file being uploaded.</param>
         /// <returns>A result indicating the success or failure of the operation.</returns>
-        public async Task<OperationResult<bool>> UploadAsync(string base64String, string filename)
+        public async Task<Operation<bool>> UploadAsync(string base64String, string filename)
         {
             try
             {
@@ -73,12 +73,12 @@
                 var successfullyUpload = _resourceHandler.GetResource("ImageSuccessfullyUpload");
                 // Upload operation commented out; possibly uploads to Google Drive or another location.
                 // var result = UploadFileAsync(streamCompress);
-                return OperationResult<bool>.Success(true, successfullyUpload);
+                return Operation<bool>.Success(true, successfullyUpload);
             }
             catch (Exception ex)
             {
                 Log log = Util.GetLogError(ex, filename, OperationExecute.CreateCustomOperation("Validate",MessageConstants.ImageManagement.GeneralValidation));
-                OperationResult<string> result = await _logService.CreateLog(log);
+                Operation<string> result = await _logService.CreateLog(log);
                 if (!result.IsSuccessful)
                 {
                     return OperationBuilder<bool>.FailExternal(MessageConstants.FailedToUploadImage);
@@ -93,7 +93,7 @@
         /// </summary>
         /// <param name="base64String">The base64 representation of the data.</param>
         /// <returns>A result containing the converted stream or an error.</returns>
-        private async Task<OperationResult<Stream>> ConvertBase64ToStream(string base64String)
+        private async Task<Operation<Stream>> ConvertBase64ToStream(string base64String)
         {
             try
             {
@@ -112,12 +112,12 @@
                 MemoryStream memoryStream = new MemoryStream(bytes);
                 await ResourceHandler.CreateAsync(_resourceProvider, _resourceKeys);
                 var imageGlobalOkMessage = _resourceHandler.GetResource("ImageGlobalOkMessage");
-                return OperationResult<Stream>.Success(memoryStream, imageGlobalOkMessage);
+                return Operation<Stream>.Success(memoryStream, imageGlobalOkMessage);
             }
             catch (Exception ex)
             {
                 Log log = Util.GetLogError(ex, base64String, OperationExecute.CreateCustomOperation("Validate", "General validation operation."));
-                OperationResult<string> result = await _logService.CreateLog(log);
+                Operation<string> result = await _logService.CreateLog(log);
                 if (!result.IsSuccessful)
                 {
                     return OperationBuilder<Stream>.FailExternal(MessageConstants.FailedToUploadImage);

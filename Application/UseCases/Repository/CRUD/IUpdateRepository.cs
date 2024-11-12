@@ -15,6 +15,6 @@
         /// </summary>
         /// <param name="entity">The entity to update.</param>
         /// <returns>An OperationResult containing a boolean that indicates whether the update was successful.</returns>
-        Task<OperationResult<bool>> Update(T entity);
+        Task<Operation<bool>> Update(T entity);
     }
 }

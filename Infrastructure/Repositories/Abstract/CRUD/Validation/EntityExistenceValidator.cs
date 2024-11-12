@@ -41,7 +41,7 @@
         /// </summary>
         /// <param name="id">The ID of the entity to validate.</param>
         /// <returns>Operation result indicating whether the entity exists or not.</returns>
-        public virtual async Task<OperationResult<T>> HasEntity(string id)
+        public virtual async Task<Operation<T>> HasEntity(string id)
         {
             // Validate the provided ID
             if (id.Equals(string.Empty))
@@ -64,7 +64,7 @@
                 return OperationBuilder<T>.FailBusiness(messageExist);
             }
             var validationGlobalOkMessage = _resourceHandler.GetResource("ValidationGlobalOkMessage");
-            return OperationResult<T>.Success(entityUnmodified, validationGlobalOkMessage);
+            return Operation<T>.Success(entityUnmodified, validationGlobalOkMessage);
         }
 
 
@@ -73,7 +73,7 @@
         /// </summary>
         /// <param name="id">The ID of the entity to validate.</param>
         /// <returns>Operation result indicating whether the entity exists or not.</returns>
-        public virtual async Task<OperationResult<T>> HasId(string id)
+        public virtual async Task<Operation<T>> HasId(string id)
         {
             await ResourceHandler.CreateAsync(_resourceProvider, _resourceKeys);
             var failedNecesaryData = _resourceHandler.GetResource("FailedNecesaryData");

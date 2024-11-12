@@ -45,7 +45,7 @@ namespace Infrastructure.Repositories.Implementation.CRUD.User.Create
         /// </summary>
         /// <param name="entity">The user entity to be created and stored.</param>
         /// <returns>An operation result indicating the outcome of the user creation.</returns>
-        protected override async Task<OperationResult<User>> CreateEntity(User entity)
+        protected override async Task<Operation<User>> CreateEntity(User entity)
         {
             // Validate the user entity using the defined rules
             CreateUserRules validatorAdd = new CreateUserRules();
@@ -78,7 +78,7 @@ namespace Infrastructure.Repositories.Implementation.CRUD.User.Create
 
             // Create and return the user entity
             User entityAdd = GetUser(entity ?? new User());
-            return OperationResult<User>.Success(entityAdd);
+            return Operation<User>.Success(entityAdd);
         }
 
         /// <summary>

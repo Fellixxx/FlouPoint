@@ -44,7 +44,7 @@
         /// </summary>
         /// <param name="predicate">The filter predicate.</param>
         /// <returns>An operation result with the queried user entities.</returns>
-        public Task<OperationResult<IQueryable<User>>> ReadFilter(Expression<Func<User, bool>> predicate)
+        public Task<Operation<IQueryable<User>>> ReadFilter(Expression<Func<User, bool>> predicate)
         {
             return _userReadFilter.ReadFilter(predicate);
         }
@@ -54,7 +54,7 @@
         /// </summary>
         /// <param name="filter">The filter expression.</param>
         /// <returns>An operation result with the count of user entities.</returns>
-        public Task<OperationResult<int>> ReadFilterCount(string filter)
+        public Task<Operation<int>> ReadFilterCount(string filter)
         {
             return _userReadFilterCount.ReadFilterCount(filter);
         }
@@ -66,7 +66,7 @@
         /// <param name="pageSize">The page size.</param>
         /// <param name="filter">The filter expression.</param>
         /// <returns>An operation result with the queried page of user entities.</returns>
-        public Task<OperationResult<IQueryable<User>>> ReadFilterPage(int pageNumber, int pageSize, string filter)
+        public Task<Operation<IQueryable<User>>> ReadFilterPage(int pageNumber, int pageSize, string filter)
         {
             return _userReadFilterPage.ReadFilterPage(pageNumber, pageSize, filter);
         }
@@ -76,7 +76,7 @@
         /// </summary>
         /// <param name="id">The ID of the user.</param>
         /// <returns>An operation result with the queried user entity.</returns>
-        public Task<OperationResult<User>> ReadId(string id)
+        public Task<Operation<User>> ReadId(string id)
         {
             return _userReadId.ReadId(id);
         }
@@ -86,7 +86,7 @@
         /// </summary>
         /// <param name="id">The ID of the user.</param>
         /// <returns>An operation result with the queried user entity.</returns>
-        public Task<OperationResult<User>> ReadByBearer(string bearerToken)
+        public Task<Operation<User>> ReadByBearer(string bearerToken)
         {
             return _userReadId.ReadByBearer(bearerToken);
         }

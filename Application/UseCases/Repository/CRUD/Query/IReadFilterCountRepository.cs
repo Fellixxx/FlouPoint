@@ -13,6 +13,6 @@
         /// </summary>
         /// <param name="filter">The filter criteria to apply.</param>
         /// <returns>An OperationResult containing the count of items that match the filter.</returns>
-        Task<OperationResult<int>> ReadFilterCount(string filter);
+        Task<Operation<int>> ReadFilterCount(string filter);
     }
 }

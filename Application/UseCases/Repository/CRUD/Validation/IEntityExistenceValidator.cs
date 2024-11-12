@@ -12,7 +12,7 @@
         /// Checks if an entity with the given ID exists in the repository.
         /// </summary>
         /// <param name="id">The ID of the entity to check.</param>
-        /// <returns>An <see cref="OperationResult{T}"/> containing the entity if it exists, or null if it does not.</returns>
-        Task<OperationResult<T>> HasEntity(string id);
+        /// <returns>An <see cref="Operation{T}"/> containing the entity if it exists, or null if it does not.</returns>
+        Task<Operation<T>> HasEntity(string id);
     }
 }

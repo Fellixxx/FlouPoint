@@ -13,6 +13,6 @@
         /// <param name="stream">The stream of the file to upload.</param>
         /// <param name="filename">The name of the file.</param>
         /// <returns>An OperationResult indicating the success or failure of the upload operation.</returns>
-        Task<OperationResult<bool>> UploadAsync(string base64String, string filename);
+        Task<Operation<bool>> UploadAsync(string base64String, string filename);
     }
 }

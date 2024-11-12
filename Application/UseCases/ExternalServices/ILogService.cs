@@ -13,6 +13,6 @@
         /// </summary>
         /// <param name="log">The log</param>
         /// <returns>The result of operation</returns>
-        Task<OperationResult<string>> CreateLog(Log log);
+        Task<Operation<string>> CreateLog(Log log);
     }
 }

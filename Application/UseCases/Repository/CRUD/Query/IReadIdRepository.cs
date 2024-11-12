@@ -15,13 +15,13 @@
         /// </summary>
         /// <param name="id">The Id of the entity to retrieve.</param>
         /// <returns>An OperationResult containing the entity that matches the specified Id.</returns>
-        Task<OperationResult<T>> ReadId(string id);
+        Task<Operation<T>> ReadId(string id);
 
         /// <summary>
         /// Retrieves an entity by its Id.
         /// </summary>
         /// <param name="id">The Id of the entity to retrieve.</param>
         /// <returns>An OperationResult containing the entity that matches the specified Id.</returns>
-        Task<OperationResult<T>> ReadByBearer(string bearerToken);
+        Task<Operation<T>> ReadByBearer(string bearerToken);
     }
 }

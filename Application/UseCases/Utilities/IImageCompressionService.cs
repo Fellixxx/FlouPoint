@@ -16,6 +16,6 @@
         /// An OperationResult containing the compressed image stream if successful, 
         /// or error details if unsuccessful.
         /// </returns>
-        Task<OperationResult<Stream>> CompressImage(Stream inputStream, int quality = 75);
+        Task<Operation<Stream>> CompressImage(Stream inputStream, int quality = 75);
     }
 }

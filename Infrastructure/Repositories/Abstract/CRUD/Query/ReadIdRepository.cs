@@ -43,11 +43,11 @@
         /// </summary>
         /// <param name="id">The ID of the entity to read.</param>
         /// <returns>A task representing the asynchronous operation with the read entity.</returns>
-        public async Task<OperationResult<T>> ReadId(string id)
+        public async Task<Operation<T>> ReadId(string id)
         {
             try
             {
-                OperationResult<T> validationResult = await HasId(id);
+                Operation<T> validationResult = await HasId(id);
                 if (!validationResult.IsSuccessful)
                 {
                     return validationResult.ToResultWithGenericType();
@@ -55,13 +55,13 @@
                 T? entity = validationResult.Data;
                 await ResourceHandler.CreateAsync(_resourceProvider, _resourceKeys);
                 var successfullyFind = _resourceHandler.GetResource("SuccessfullySearchGeneric");
-                return OperationResult<T>.Success(entity, successfullyFind);
+                return Operation<T>.Success(entity, successfullyFind);
             }
             catch (Exception ex)
             {
                 // Create a log entry for the exception
                 Log log = Util.GetLogError(ex, id, OperationExecute.GetUserById);
-                OperationResult<string> result = await _logService.CreateLog(log);
+                Operation<string> result = await _logService.CreateLog(log);
 
                 // Handle logging failure
                 if (!result.IsSuccessful)
@@ -79,7 +79,7 @@
         /// </summary>
         /// <param name="id">The ID of the entity to read.</param>
         /// <returns>A task representing the asynchronous operation with the read entity.</returns>
-        public async Task<OperationResult<T>> ReadByBearer(string bearerToken)
+        public async Task<Operation<T>> ReadByBearer(string bearerToken)
         {
             try
             {
@@ -91,7 +91,7 @@
                 }
 
                 // Get entities from the database based on the provided filter expression
-                OperationResult<T> validationResult = await HasId(resultbearer.Data);
+                Operation<T> validationResult = await HasId(resultbearer.Data);
 
                 // If validation is not successful, return a failure operation result
                 if (!validationResult.IsSuccessful)
@@ -102,7 +102,7 @@
                 T? entity = validationResult.Data;
                 await ResourceHandler.CreateAsync(_resourceProvider, _resourceKeys);
                 var successfullyFind = _resourceHandler.GetResource("SuccessfullyFind");
-                return OperationResult<T>.Success(entity, successfullyFind);
+                return Operation<T>.Success(entity, successfullyFind);
             }
             catch (Exception ex)
             {

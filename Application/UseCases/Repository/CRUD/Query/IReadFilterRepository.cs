@@ -16,6 +16,6 @@
         /// </summary>
         /// <param name="predicate">A lambda expression representing the filter criteria.</param>
         /// <returns>An OperationResult containing an IQueryable of items that satisfy the specified predicate.</returns>
-        Task<OperationResult<IQueryable<T>>> ReadFilter(Expression<Func<T, bool>> predicate);
+        Task<Operation<IQueryable<T>>> ReadFilter(Expression<Func<T, bool>> predicate);
     }
 }

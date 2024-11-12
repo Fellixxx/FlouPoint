@@ -12,7 +12,7 @@
         /// Checks if a User entity with the given ID exists in the repository.
         /// </summary>
         /// <param name="id">The ID of the User entity to check.</param>
-        /// <returns>An <see cref="OperationResult{T}"/> containing the User entity if it exists, or null if it does not.</returns>
-        Task<OperationResult<User>> HasEntity(string id);
+        /// <returns>An <see cref="Operation{T}"/> containing the User entity if it exists, or null if it does not.</returns>
+        Task<Operation<User>> HasEntity(string id);
     }
 }

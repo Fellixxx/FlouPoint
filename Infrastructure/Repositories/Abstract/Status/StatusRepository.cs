@@ -41,12 +41,12 @@
             ];
         }
 
-        public async Task<OperationResult<bool>> Activate(string id)
+        public async Task<Operation<bool>> Activate(string id)
         {
             try
             {
                 // Validate if the entity with the provided ID exists
-                OperationResult<T> validationResult = await HasEntity(id);
+                Operation<T> validationResult = await HasEntity(id);
 
                 // If validation is not successful, return a failure operation result
                 if (!validationResult.IsSuccessful)
@@ -67,12 +67,12 @@
                 var messageSuccess = string.Format(successfullyGenericActiveated, typeof(T).Name);
 
                 // Return a success operation result
-                return OperationResult<bool>.Success(result, messageSuccess);
+                return Operation<bool>.Success(result, messageSuccess);
             }
             catch (Exception ex)
             {
                 Log log = Util.GetLogError(ex, id, OperationExecute.Activate);
-                OperationResult<string> result = await _logService.CreateLog(log);
+                Operation<string> result = await _logService.CreateLog(log);
                 if (!result.IsSuccessful)
                 {
                     result.ToResultWithBoolType();
@@ -85,12 +85,12 @@
 
 
         // This method deactivates an entity by setting its 'Active' status to false.
-        public async Task<OperationResult<bool>> Deactivate(string id)
+        public async Task<Operation<bool>> Deactivate(string id)
         {
             try
             {
                 // Validate if the entity with the provided ID exists
-                OperationResult<T> validationResult = await HasEntity(id);
+                Operation<T> validationResult = await HasEntity(id);
 
                 // If validation is not successful, return a failure operation result
                 if (!validationResult.IsSuccessful)
@@ -110,12 +110,12 @@
                 string messageSuccess = string.Format(successfullyGenericActiveated, typeof(T).Name);
 
                 // Return a success operation result
-                return OperationResult<bool>.Success(result, messageSuccess);
+                return Operation<bool>.Success(result, messageSuccess);
             }
             catch (Exception ex)
             {
                 Log log = Util.GetLogError(ex, id, OperationExecute.Deactivate);
-                OperationResult<string> result = await _logService.CreateLog(log);
+                Operation<string> result = await _logService.CreateLog(log);
                 if (!result.IsSuccessful)
                 {
                     result.ToResultWithBoolType();
@@ -125,7 +125,7 @@
             }
         }
 
-        private async Task<OperationResult<T>> HasEntity(string id)
+        private async Task<Operation<T>> HasEntity(string id)
         {
             await ResourceHandler.CreateAsync(_resourceProvider, _resourceKeys);
             var statusFailedNecesaryData = _resourceHandler.GetResource("StatusFailedNecesaryData");
@@ -147,7 +147,7 @@
             }
             var statusGlobalOkMessage = _resourceHandler.GetResource("StatusGlobalOkMessage");
             // If the entity exists, return a success operation result
-            return OperationResult<T>.Success(entityUnmodified, "statusGlobalOkMessage");
+            return Operation<T>.Success(entityUnmodified, "statusGlobalOkMessage");
         }
     }
 }

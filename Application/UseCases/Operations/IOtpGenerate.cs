@@ -11,7 +11,7 @@
         /// Asynchronously generates a One-Time Password (OTP) and sends it to the specified email address.
         /// </summary>
         /// <param name="email">The email address to which the OTP should be sent.</param>
-        /// <returns>An <see cref="OperationResult{T}"/> containing a boolean that indicates whether the OTP generation and sending was successful.</returns>
-        Task<OperationResult<bool>> GenerateOtp(string email);
+        /// <returns>An <see cref="Operation{T}"/> containing a boolean that indicates whether the OTP generation and sending was successful.</returns>
+        Task<Operation<bool>> GenerateOtp(string email);
     }
 }

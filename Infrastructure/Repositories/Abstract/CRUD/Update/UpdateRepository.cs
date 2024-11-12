@@ -46,23 +46,23 @@
         /// </summary>
         /// <param name="entity">The entity to update.</param>
         /// <returns>A task representing the asynchronous operation with the update result.</returns>
-        public new async Task<OperationResult<bool>> Update(T entity)
+        public new async Task<Operation<bool>> Update(T entity)
         {
             try
             {
-                OperationResult<T> hasEntity = await _utilEntity.HasEntity(entity);
+                Operation<T> hasEntity = await _utilEntity.HasEntity(entity);
                 if (!hasEntity.IsSuccessful)
                 {
                     return hasEntity.ToResultWithBoolType();
                 }
 
-                OperationResult<T> resultExist = await HasId(entity.Id);
+                Operation<T> resultExist = await HasId(entity.Id);
                 if (!resultExist.IsSuccessful)
                 {
                     return resultExist.ToResultWithBoolType();
                 }
 
-                OperationResult<T> resultModifyEntity = await UpdateEntity(entity, resultExist.Data);
+                Operation<T> resultModifyEntity = await UpdateEntity(entity, resultExist.Data);
                 if (!resultModifyEntity.IsSuccessful)
                 {
                     return resultModifyEntity.ToResultWithBoolType();
@@ -77,13 +77,13 @@
                 string messageSuccess = string.Format(successfullyGenericActiveated, typeof(T).Name);
 
                 // Return a success operation result
-                return OperationResult<bool>.Success(updateResult, messageSuccess);
+                return Operation<bool>.Success(updateResult, messageSuccess);
 
             }
             catch (Exception ex)
             {
                 Log log = Other.Util.GetLogError(ex, entity, OperationExecute.Modified);
-                OperationResult<string> result = await _logService.CreateLog(log);
+                Operation<string> result = await _logService.CreateLog(log);
                 if (!result.IsSuccessful)
                 {
                     result.ToResultWithBoolType();
@@ -99,11 +99,11 @@
         /// <param name="entityModified">The modified entity.</param>
         /// <param name="entityUnmodified">The original unmodified entity.</param>
         /// <returns>A task representing the asynchronous operation with the update result.</returns>
-        public virtual async Task<OperationResult<T>> UpdateEntity(T entityModified, T entityUnmodified)
+        public virtual async Task<Operation<T>> UpdateEntity(T entityModified, T entityUnmodified)
         {
             // Custom success message
             string messageSuccessfully = string.Format(ResourceQuery.SuccessfullySearchGeneric, typeof(T).Name);
-            return OperationResult<T>.Success(entityModified, messageSuccessfully);
+            return Operation<T>.Success(entityModified, messageSuccessfully);
         }
     }
 }

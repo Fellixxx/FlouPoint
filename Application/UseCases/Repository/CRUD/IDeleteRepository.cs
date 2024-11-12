@@ -15,6 +15,6 @@
         /// </summary>
         /// <param name="id">The ID of the entity to delete.</param>
         /// <returns>An OperationResult containing a boolean that indicates whether the deletion was successful.</returns>
-        Task<OperationResult<bool>> Delete(string id);
+        Task<Operation<bool>> Delete(string id);
     }
 }

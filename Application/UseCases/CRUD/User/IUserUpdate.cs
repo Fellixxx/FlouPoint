@@ -12,7 +12,7 @@
         /// Updates an existing User entity in the repository.
         /// </summary>
         /// <param name="entity">The User entity to update.</param>
-        /// <returns>An <see cref="OperationResult{T}"/> containing a boolean that indicates whether the update was successful.</returns>
-        Task<OperationResult<bool>> Update(User entity);
+        /// <returns>An <see cref="Operation{T}"/> containing a boolean that indicates whether the update was successful.</returns>
+        Task<Operation<bool>> Update(User entity);
     }
 }

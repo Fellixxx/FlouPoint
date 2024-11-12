@@ -46,7 +46,7 @@
         /// <param name="pageSize">The page size.</param>
         /// <param name="filter">The filter expression.</param>
         /// <returns>A task representing the asynchronous operation with the filtered entities.</returns>
-        public async Task<OperationResult<IQueryable<T>>> ReadFilterPage(int pageNumber, int pageSize, string filter)
+        public async Task<Operation<IQueryable<T>>> ReadFilterPage(int pageNumber, int pageSize, string filter)
         {
             try
             {
@@ -55,7 +55,7 @@
                 await ResourceHandler.CreateAsync(_resourceProvider, _resourceKeys);
                 var successfullySearchGeneric = _resourceHandler.GetResource("SuccessfullySearchGeneric");
                 var messageSuccessfully = string.Format(successfullySearchGeneric, typeof(T).Name);
-                return OperationResult<IQueryable<T>>.Success(result, messageSuccessfully);
+                return Operation<IQueryable<T>>.Success(result, messageSuccessfully);
             }
             catch (Exception ex)
             {
@@ -66,7 +66,7 @@
                     Filter = filter
                 };
                 Log log = Util.GetLogError(ex, filterValue, OperationExecute.GetPageByFilter);
-                OperationResult<string> result = await _logService.CreateLog(log);
+                Operation<string> result = await _logService.CreateLog(log);
                 if (!result.IsSuccessful)
                 {
                     result.ToResultWithXType<IQueryable<T>>();

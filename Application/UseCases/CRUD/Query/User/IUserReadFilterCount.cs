@@ -9,6 +9,6 @@
         /// </summary>
         /// <param name="filter">The filter.</param>
         /// <returns>The result of the operation.</returns>
-        Task<OperationResult<int>> ReadFilterCount(string filter);
+        Task<Operation<int>> ReadFilterCount(string filter);
     }
 }

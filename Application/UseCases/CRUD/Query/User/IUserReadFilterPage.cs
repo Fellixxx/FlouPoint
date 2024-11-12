@@ -17,7 +17,7 @@
         /// <param name="pageNumber">The page number to retrieve.</param>
         /// <param name="pageSize">The size of each page.</param>
         /// <param name="filter">The filter string to apply.</param>
-        /// <returns>An <see cref="OperationResult{T}"/> containing an IQueryable of User entities that match the filter criteria.</returns>
-        Task<OperationResult<IQueryable<User>>> ReadFilterPage(int pageNumber, int pageSize, string filter);
+        /// <returns>An <see cref="Operation{T}"/> containing an IQueryable of User entities that match the filter criteria.</returns>
+        Task<Operation<IQueryable<User>>> ReadFilterPage(int pageNumber, int pageSize, string filter);
     }
 }

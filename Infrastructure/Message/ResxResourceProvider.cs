@@ -47,7 +47,7 @@
             return name.EndsWith(".resources", StringComparison.OrdinalIgnoreCase);
         }
 
-        public async Task<OperationResult<ResourceEntry>> GetMessage(string key)
+        public async Task<Operation<ResourceEntry>> GetMessage(string key)
         {
             var entries = await GetResourceEntries();
             if (!entries.IsSuccessful)
@@ -67,7 +67,7 @@
                 return OperationBuilder<ResourceEntry>.FailBusiness(MessageConstants.ResourceProvider.MultipleResourcesWithSameKey);
             }
 
-            return OperationResult<ResourceEntry>.Success(resources.FirstOrDefault());
+            return Operation<ResourceEntry>.Success(resources.FirstOrDefault());
         }
         public async Task<string> GetMessageValueOrDefault(string key, string defaultValue = MessageConstants.ResourceProvider.KeyNotFound)
         {
@@ -78,7 +78,7 @@
             }
             return defaultValue;
         }
-        public async Task<OperationResult<IQueryable<ResourceEntry>>> GetResourceEntries()
+        public async Task<Operation<IQueryable<ResourceEntry>>> GetResourceEntries()
         {
             var entries = GetEntries();
             if (entries is null)
@@ -101,7 +101,7 @@
                 Active = true
             }).AsQueryable();
 
-            return OperationResult<IQueryable<ResourceEntry>>.Success(resourceEntries);
+            return Operation<IQueryable<ResourceEntry>>.Success(resourceEntries);
         }
     }
 }

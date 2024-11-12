@@ -46,7 +46,7 @@ namespace Infrastructure.Test.Repositories.Implementation.CRUD.Query.User
             // Arrange
             Expression<Func<User, bool>> predicate = user => user.Active;
 
-            var expectedReturnValue = OperationResult<IQueryable<User>>.Success(new Mock<IQueryable<User>>().Object, "Success");
+            var expectedReturnValue = Operation<IQueryable<User>>.Success(new Mock<IQueryable<User>>().Object, "Success");
             _userReadFilter.Setup(mock => mock.ReadFilter(predicate)).ReturnsAsync(expectedReturnValue);
 
             // Act
@@ -63,7 +63,7 @@ namespace Infrastructure.Test.Repositories.Implementation.CRUD.Query.User
             // Arrange
             var filter = "ActiveUsers";
 
-            var expectedReturnValue = OperationResult<int>.Success(10, "Success");
+            var expectedReturnValue = Operation<int>.Success(10, "Success");
             _userReadFilterCount.Setup(mock => mock.ReadFilterCount(filter)).ReturnsAsync(expectedReturnValue);
 
             // Act
@@ -82,7 +82,7 @@ namespace Infrastructure.Test.Repositories.Implementation.CRUD.Query.User
             var pageSize = 10;
             var filter = "ActiveUsers";
 
-            var expectedReturnValue = OperationResult<IQueryable<User>>.Success(new Mock<IQueryable<User>>().Object, "Success");
+            var expectedReturnValue = Operation<IQueryable<User>>.Success(new Mock<IQueryable<User>>().Object, "Success");
             _userReadFilterPage.Setup(mock => mock.ReadFilterPage(pageNumber, pageSize, filter)).ReturnsAsync(expectedReturnValue);
 
             // Act
@@ -105,7 +105,7 @@ namespace Infrastructure.Test.Repositories.Implementation.CRUD.Query.User
                 Name = "John Doe",
                 Active = true
             };
-            var expectedReturnValue = OperationResult<User>.Success(expectedUser, "Success");
+            var expectedReturnValue = Operation<User>.Success(expectedUser, "Success");
             _userReadId.Setup(mock => mock.ReadId(id)).ReturnsAsync(expectedReturnValue);
 
             // Act
@@ -128,7 +128,7 @@ namespace Infrastructure.Test.Repositories.Implementation.CRUD.Query.User
                 Name = "John Doe",
                 Active = true
             };
-            var expectedReturnValue = OperationResult<User>.Success(expectedUser, "Success");
+            var expectedReturnValue = Operation<User>.Success(expectedUser, "Success");
             _userReadId.Setup(mock => mock.ReadByBearer(bearerToken)).ReturnsAsync(expectedReturnValue);
 
             // Act

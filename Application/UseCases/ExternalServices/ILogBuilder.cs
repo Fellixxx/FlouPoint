@@ -17,7 +17,7 @@
         /// <param name="entity">The entity</param>
         /// <param name="operation">The operation</param>
         /// <returns>The result of operation</returns>
-        OperationResult<T> Trace(string message, object entity, OperationExecute operation);
+        Operation<T> Trace(string message, object entity, OperationExecute operation);
 
         /// <summary>
         /// Creates a debug log entry with the given message, entity, and operation details.
@@ -26,7 +26,7 @@
         /// <param name="entity">The entity</param>
         /// <param name="operation">The operation</param>
         /// <returns>The result of operation</returns>
-        OperationResult<T> Debug(string message, object entity, OperationExecute operation);
+        Operation<T> Debug(string message, object entity, OperationExecute operation);
 
         /// <summary>
         /// Creates an informational log entry with the given message, entity, and operation details.
@@ -35,7 +35,7 @@
         /// <param name="entity">The entity</param>
         /// <param name="operation">The operation</param>
         /// <returns>The result of operation</returns>
-        OperationResult<T> Information(string message, object entity, OperationExecute operation);
+        Operation<T> Information(string message, object entity, OperationExecute operation);
 
         /// <summary>
         /// Creates a warning log entry with the given message, entity, and operation details.
@@ -44,7 +44,7 @@
         /// <param name="entity">The entity</param>
         /// <param name="operation">The operation</param>
         /// <returns>The result of operation</returns>
-        OperationResult<T> Warning(string message, object entity, OperationExecute operation);
+        Operation<T> Warning(string message, object entity, OperationExecute operation);
 
         /// <summary>
         /// Creates an error log entry with the given message, entity, and operation details.
@@ -53,7 +53,7 @@
         /// <param name="entity">The entity</param>
         /// <param name="operation"></param>
         /// <returns>The result of operation</returns>
-        OperationResult<T> Error(string message, object entity, OperationExecute operation);
+        Operation<T> Error(string message, object entity, OperationExecute operation);
 
         /// <summary>
         /// Creates a fatal error log entry with the given message, entity, and operation details.
@@ -62,6 +62,6 @@
         /// <param name="entity">The entity</param>
         /// <param name="operation">The operation</param>
         /// <returns>The result of operation</returns>
-        OperationResult<T> Fatal(string message, object entity, OperationExecute operation);
+        Operation<T> Fatal(string message, object entity, OperationExecute operation);
     }
 }

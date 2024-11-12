@@ -48,7 +48,7 @@
         /// An OperationResult containing the compressed image stream if successful, 
         /// or error details if unsuccessful.
         /// </returns>
-        public async Task<OperationResult<Stream>> CompressImage(Stream inputStream, int quality = 75)
+        public async Task<Operation<Stream>> CompressImage(Stream inputStream, int quality = 75)
         {
             try
             {
@@ -66,12 +66,12 @@
                 outputStream.Seek(0, SeekOrigin.Begin);
                 await ResourceHandler.CreateAsync(_resourceProvider, _resourceKeys);
                 var successCompressed = _resourceHandler.GetResource("SuccessCompressed");
-                return OperationResult<Stream>.Success(outputStream, successCompressed); ;
+                return Operation<Stream>.Success(outputStream, successCompressed); ;
             }
             catch (Exception ex)
             {
                 Log log = Util.GetLogError(ex, inputStream, OperationExecute.CreateCustomOperation("Validate", "General validation operation."));
-                OperationResult<string> result = await _logService.CreateLog(log);
+                Operation<string> result = await _logService.CreateLog(log);
                 if (!result.IsSuccessful)
                 {
                     return OperationBuilder<Stream>.FailUnexpected(MessageConstants.FailedToCompressImage);
