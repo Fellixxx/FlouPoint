@@ -59,17 +59,17 @@
 
             if (!resources.Any())
             {
-                return OperationBuilder<ResourceEntry>.FailureBusinessValidation(ExceptionMessages.ResourceProvider.KeyNotFound);
+                return OperationBuilder<ResourceEntry>.FailureBusinessValidation(MessageConstants.ResourceProvider.KeyNotFound);
             }
 
             if (resources.Count > 1)
             {
-                return OperationBuilder<ResourceEntry>.FailureBusinessValidation(ExceptionMessages.ResourceProvider.MultipleResourcesWithSameKey);
+                return OperationBuilder<ResourceEntry>.FailureBusinessValidation(MessageConstants.ResourceProvider.MultipleResourcesWithSameKey);
             }
 
             return OperationResult<ResourceEntry>.Success(resources.FirstOrDefault());
         }
-        public async Task<string> GetMessageValueOrDefault(string key, string defaultValue = ExceptionMessages.ResourceProvider.KeyNotFound)
+        public async Task<string> GetMessageValueOrDefault(string key, string defaultValue = MessageConstants.ResourceProvider.KeyNotFound)
         {
             var result = await GetMessage(key);
             if (result.IsSuccessful)
@@ -83,12 +83,12 @@
             var entries = GetEntries();
             if (entries is null)
             {
-                return OperationBuilder<IQueryable<ResourceEntry>>.FailureBusinessValidation(ExceptionMessages.ResourceProvider.UnableToReadResourceFile);
+                return OperationBuilder<IQueryable<ResourceEntry>>.FailureBusinessValidation(MessageConstants.ResourceProvider.UnableToReadResourceFile);
             }
 
             if (entries.Keys.Count == 0)
             {
-                return OperationBuilder<IQueryable<ResourceEntry>>.FailureBusinessValidation(ExceptionMessages.ResourceProvider.KeyNotFound);
+                return OperationBuilder<IQueryable<ResourceEntry>>.FailureBusinessValidation(MessageConstants.ResourceProvider.KeyNotFound);
             }
 
 
