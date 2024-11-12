@@ -66,8 +66,8 @@ namespace Infrastructure.Test.Repositories.Implementation.CRUD
             _userDelete = new UserDelete(_dbContext, _logService.Object, _resourceProvider, _resourceHandler);
             _userUpdate = new UserUpdate(_dbContext, _logService.Object, _utilEntity, _resourceProvider, _resourceHandler);
             _userStatus = new UserStatus(_dbContext, _logService.Object, _resourceProvider, _resourceHandler);
-            _userReadFilter = new UserReadFilter(_dbContext, _logService.Object, _resourceProvider);
-            _userReadFilterCount = new UserReadFilterCount(_dbContext, _logService.Object, _resourceProvider);
+            _userReadFilter = new UserReadFilter(_dbContext, _logService.Object, _resourceProvider, _resourceHandler);
+            _userReadFilterCount = new UserReadFilterCount(_dbContext, _logService.Object, _resourceProvider, _resourceHandler);
         }
 
         private IResourceHandler SetupResourceHandlerMock()

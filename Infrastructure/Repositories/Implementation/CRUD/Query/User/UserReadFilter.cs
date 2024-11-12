@@ -5,6 +5,7 @@
     using User = Domain.Entities.User;
     using Application.UseCases.ExternalServices;
     using Persistence.BaseDbContext;
+    using Application.UseCases.Repository;
 
 
     /// <summary>
@@ -20,7 +21,8 @@
         public UserReadFilter(
             CommonDbContext context, 
             ILogService logService,
-            IResourceProvider resourceProvider) : base(context, logService, resourceProvider)
+            IResourceProvider resourceProvider,
+            IResourceHandler resourceHandler) : base(context, logService, resourceProvider, resourceHandler)
         {
         }
     }

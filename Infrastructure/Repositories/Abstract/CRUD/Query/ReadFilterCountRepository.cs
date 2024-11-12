@@ -29,10 +29,11 @@
         /// </summary>
         /// <param name="context">The database context.</param>
         /// <param name="logService">The log service.</param>
-        protected ReadFilterCountRepository(DbContext context, ILogService logService, IResourceProvider resourceProvider) : base(context)
+        protected ReadFilterCountRepository(DbContext context, ILogService logService, IResourceProvider resourceProvider, IResourceHandler resourceHandler) : base(context)
         {
             _logService = logService;
             _resourceProvider = resourceProvider;
+            _resourceHandler = resourceHandler;
             _resourceKeys =
             [
                 "SuccessfullySearchGeneric"
