@@ -225,14 +225,8 @@
   <data name="SuccessfullyEmail" xml:space="preserve">
     <value>The email was sent successfully.</value>
   </data>
-  <data name="SuccessfullyGeneric" xml:space="preserve">
-    <value>{0} was created successfully.</value>
-  </data>
   <data name="SuccessfullyGenericActiveated" xml:space="preserve">
     <value>{0} was activated successfully.</value>
-  </data>
-  <data name="SuccessfullyGenericDeleted" xml:space="preserve">
-    <value>{0} was deleted successfully.</value>
   </data>
   <data name="SuccessfullyGenericDisabled" xml:space="preserve">
     <value>{0} was disabled successfully.</value>

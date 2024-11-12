@@ -6,12 +6,12 @@ namespace Infrastructure.Repositories.Implementation.CRUD.User
     using Application.UseCases.ExternalServices;
     using Application.Validators.User;
     using Domain.Entities;
-    using Infrastructure.Repositories.Abstract.CRUD;
     using Persistence.BaseDbContext;
     using UtilitiesLayer;
     using FluentValidation.Results;
     using Application.UseCases.Repository.CRUD;
     using Application.UseCases.Repository;
+    using Infrastructure.Repositories.Abstract.CRUD.Create;
 
     /// <summary>
     /// Implementation of the user creation repository.
@@ -29,6 +29,14 @@ namespace Infrastructure.Repositories.Implementation.CRUD.User
         /// <param name="logService">The logging service for tracking operations.</param>
         public UserCreate(CommonDbContext context, ILogService logService, IUtilEntity<User> utilEntity, IResourceProvider resourceProvider, IResourceHandler resourceHandler) : base(context, logService, utilEntity, resourceProvider, resourceHandler)
         {
+            _resourceProvider = resourceProvider;
+            _resourceHandler = resourceHandler;
+            _resourceKeys =
+            [
+                "FailedDataSizeCharacter",
+                "FailedEmailInvalidFormat",
+                "FailedAlreadyRegisteredEmail"
+            ];
         }
 
         /// <summary>

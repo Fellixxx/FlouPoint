@@ -34,6 +34,14 @@
         {
             _logService = logService;
             _imageCompressionService = imageCompressionService;
+            _resourceProvider = resourceProvider;
+            _resourceHandler = resourceHandler;
+            _resourceKeys =
+            [
+                "FailedDataSizeCharacter",
+                "FailedEmailInvalidFormat",
+                "FailedAlreadyRegisteredEmail"
+            ];
         }
 
         /// <summary>

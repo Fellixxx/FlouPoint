@@ -1,4 +1,4 @@
-﻿namespace Infrastructure.Repositories.Abstract.CRUD
+﻿namespace Infrastructure.Repositories.Abstract.CRUD.Create
 {
     using Application.Result;
     using Application.UseCases.ExternalServices;
@@ -37,7 +37,7 @@
             _resourceHandler = resourceHandler;
             _resourceKeys =
             [
-                "LogSuccessfullyGenericActiveated"
+                "SuccessfullyGeneric"
             ];
         }
 
@@ -65,9 +65,11 @@
 
                 // If validation is successful, add the entity to the database
                 var addedEntityResult = await base.Create(validationResult.Data);
+                await ResourceHandler.CreateAsync(_resourceProvider, _resourceKeys);
+                var successfullyGeneric = _resourceHandler.GetResource("SuccessfullyGeneric");
 
                 // Create a success message and return the success result
-                var successMessage = string.Format(Resource.SuccessfullyGeneric, typeof(T).Name);
+                var successMessage = string.Format(successfullyGeneric, typeof(T).Name);
                 return OperationResult<string>.Success(addedEntityResult, successMessage);
             }
             catch (Exception ex)

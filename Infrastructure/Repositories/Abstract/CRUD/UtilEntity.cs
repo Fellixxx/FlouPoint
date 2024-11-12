@@ -42,7 +42,8 @@
             }
 
             // Return a success result if the entity is not null
-            return OperationResult<T>.Success(entity, Resource.GlobalOkMessage);
+            var utilGlobalOkMessage = _resourceHandler.GetResource("UtilGlobalOkMessage");
+            return OperationResult<T>.Success(entity, utilGlobalOkMessage);
         }
     }
 }

@@ -63,7 +63,9 @@
                 bool result = await Delete(entity);
 
                 // Custom success message
-                string messageSuccess = string.Format(Resource.SuccessfullyGenericDeleted, typeof(T).Name);
+                await ResourceHandler.CreateAsync(_resourceProvider, _resourceKeys);
+                var successfullyGenericDeleted = _resourceHandler.GetResource("SuccessfullyGenericDeleted");
+                string messageSuccess = string.Format(successfullyGenericDeleted, typeof(T).Name);
 
                 // Return a success operation result
                 return OperationResult<bool>.Success(result, messageSuccess);

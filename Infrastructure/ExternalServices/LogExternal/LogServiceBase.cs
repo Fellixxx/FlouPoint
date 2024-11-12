@@ -63,8 +63,9 @@
             await ResourceHandler.CreateAsync(_resourceProvider, _resourceKeys);
             if (HasParameter())
             {
+                await ResourceHandler.CreateAsync(_resourceProvider, _resourceKeys);
                 var failureConfigurationMissingError = _resourceHandler.GetResource("FailureConfigurationMissingError");
-                var message = Resource.FailureConfigurationMissingError;
+                var message = failureConfigurationMissingError;
                 return OperationBuilder<string>.FailureConfigurationMissingError(message);
             }
 

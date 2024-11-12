@@ -39,19 +39,23 @@ namespace Infrastructure.Test.Repositories.Implementation.CRUD
         private readonly Dictionary<string, string> _resourceMessages = new()
         {
             { "EntityFailedNecesaryData", "Necessary data was not provided." },
-            { "StatusFailedNecesaryData", "Necessary data was not provided." },
-            { "FailedNecesaryData", "Necessary data was not provided." },
-            { "ValidationGlobalOkMessage", "Operation completed successfully." },
-            { "GenericExistValidation", "The {0} does not exist." },
-            { "SuccessfullyGenericActiveated", "{0} was activated successfully." },
-            { "LogSuccessfullyGenericActiveated", "{0} was activated successfully." },
-            { "StatusGlobalOkMessage", "Ok" },
-            { "FailureConfigurationMissingError", "The configuration for the log services is missing the username, password, or URL." },
             { "FailedGetToken", "The log services token got failed." },
-            { "SuccessfullyGetToken", "Token got successfully." },
+            { "FailedNecesaryData", "Necessary data was not provided." },
             { "FailedSetLog", "The log creation got failed." },
-            { "SuccessfullySetLog", "The successfully SetLog." }
+            { "FailureConfigurationMissingError", "The configuration for the log services is missing the username, password, or URL." },
+            { "GenericExistValidation", "The {0} does not exist." },
+            { "LogSuccessfullyGenericActiveated", "{0} was activated successfully." },
+            { "StatusFailedNecesaryData", "Necessary data was not provided." },
+            { "StatusGlobalOkMessage", "Ok" },
+            { "SuccessfullyGeneric", "{0} was created successfully." },
+            { "SuccessfullyGenericActiveated", "{0} was activated successfully." },
+            { "SuccessfullyGenericDeleted", "{0} was deleted successfully." },
+            { "SuccessfullyGetToken", "Token got successfully." },
+            { "SuccessfullySetLog", "The successfully SetLog." },
+            { "ValidationGlobalOkMessage", "Operation completed successfully." },
+            { "UtilGlobalOkMessage", "Ok" },
         };
+
 
         [TestInitialize]
         public void SetUp()
@@ -73,6 +77,17 @@ namespace Infrastructure.Test.Repositories.Implementation.CRUD
             _userStatus = new UserStatus(_dbContext, _logService.Object, _resourceProvider, _resourceHandler);
             _userReadFilter = new UserReadFilter(_dbContext, _logService.Object, _resourceProvider, _resourceHandler);
             _userReadFilterCount = new UserReadFilterCount(_dbContext, _logService.Object, _resourceProvider, _resourceHandler);
+        }
+
+        [TestMethod]
+        public void ExistAllItems()
+        {
+            // Act
+            var instance = new ResxResourceProvider();
+            var entries = instance.GetResourceEntries();
+
+            // Assert
+            //Assert.IsNotNull(instance);
         }
 
         private IResourceHandler SetupResourceHandlerMock()

@@ -28,6 +28,14 @@
         public ImageCompressionService(ILogService logService, IResourceProvider resourceProvider, IResourceHandler resourceHandler)
         {
             _logService = logService;
+            _resourceProvider = resourceProvider;
+            _resourceHandler = resourceHandler;
+            _resourceKeys =
+            [
+                "FailedDataSizeCharacter",
+                "FailedEmailInvalidFormat",
+                "FailedAlreadyRegisteredEmail"
+            ];
         }
 
         /// <summary>
