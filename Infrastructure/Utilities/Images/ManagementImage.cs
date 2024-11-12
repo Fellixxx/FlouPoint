@@ -1,4 +1,4 @@
-﻿namespace Infrastructure.Utilities
+﻿namespace Infrastructure.Utilities.Images
 {
     using Application.Result;
     using Application.UseCases.ExternalServices;
@@ -70,7 +70,7 @@
 
                 Stream streamCompress = resultCompress.Data ?? new MemoryStream();
                 await ResourceHandler.CreateAsync(_resourceProvider, _resourceKeys);
-                var successfullyUpload = _resourceHandler.GetResource("SuccessfullyUpload");
+                var successfullyUpload = _resourceHandler.GetResource("ImageSuccessfullyUpload");
                 // Upload operation commented out; possibly uploads to Google Drive or another location.
                 // var result = UploadFileAsync(streamCompress);
                 return OperationResult<bool>.Success(true, successfullyUpload);
@@ -110,7 +110,9 @@
 
                 byte[] bytes = Convert.FromBase64String(base64String);
                 MemoryStream memoryStream = new MemoryStream(bytes);
-                return OperationResult<Stream>.Success(memoryStream, Resource.GlobalOkMessage);
+                await ResourceHandler.CreateAsync(_resourceProvider, _resourceKeys);
+                var imageGlobalOkMessage = _resourceHandler.GetResource("ImageGlobalOkMessage");
+                return OperationResult<Stream>.Success(memoryStream, imageGlobalOkMessage);
             }
             catch (Exception ex)
             {
