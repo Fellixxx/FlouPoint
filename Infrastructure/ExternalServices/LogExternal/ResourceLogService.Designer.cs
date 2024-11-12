@@ -79,6 +79,15 @@ namespace Infrastructure.ExternalServices.LogExternal {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The configuration for the log services is missing the username, password, or URL..
+        /// </summary>
+        internal static string FailureConfigurationMissingError {
+            get {
+                return ResourceManager.GetString("FailureConfigurationMissingError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to {0} was activated successfully..
         /// </summary>
         internal static string LogSuccessfullyGenericActiveated {

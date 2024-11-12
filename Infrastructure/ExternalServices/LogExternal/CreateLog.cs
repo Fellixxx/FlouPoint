@@ -26,7 +26,7 @@
                 // Validation for message and entity
                 if (string.IsNullOrWhiteSpace(message) || entity is null)
                 {
-                    return OperationBuilder<Log>.FailureDataSubmittedInvalid(Resource.FailedLogBuilderDataNotExist);
+                    return OperationBuilder<Log>.FailureDataSubmittedInvalid("The message or enitty was not submitted.");
                 }
 
                 // Get the name of the entity and serialize its value
@@ -35,7 +35,7 @@
 
                 // Build the log entry
                 Log log = LogBuilderHelpers.GetLog(message, entityName, entityValue, level, operation);
-                return OperationResult<Log>.Success(log, Resource.SuccessfullyValidationOperationResult);
+                return OperationResult<Log>.Success(log, "The Log validation of the OperationResult was successfully.");
             }
             catch (JsonSerializationException jsonEx)
             {

@@ -31,11 +31,11 @@
             // If it's not a valid GUID, return a failure result.
             if (!resultConversion)
             {
-                return OperationBuilder<string>.FailureBusinessValidation(Resource.FailedIntegerConversion); // This error message seems mismatched. Shouldn't it be related to a GUID conversion failure?
+                return OperationBuilder<string>.FailureBusinessValidation("The submitted value was invalid."); // This error message seems mismatched. Shouldn't it be related to a GUID conversion failure?
             }
 
             // If it's a valid GUID, return a success result.
-            return OperationResult<string>.Success(id, Resource.GlobalOkMessage);
+            return OperationResult<string>.Success(id, "Ok");
         }
     }
 }

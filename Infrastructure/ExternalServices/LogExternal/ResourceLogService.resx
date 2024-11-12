@@ -123,6 +123,9 @@
   <data name="FailedSetLog" xml:space="preserve">
     <value>The log creation got failed.</value>
   </data>
+  <data name="FailureConfigurationMissingError" xml:space="preserve">
+    <value>The configuration for the log services is missing the username, password, or URL.</value>
+  </data>
   <data name="LogSuccessfullyGenericActiveated" xml:space="preserve">
     <value>{0} was activated successfully.</value>
   </data>

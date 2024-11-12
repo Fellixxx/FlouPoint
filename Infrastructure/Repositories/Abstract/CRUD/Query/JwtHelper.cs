@@ -85,7 +85,7 @@
             {
                 var jsonObject = JObject.Parse(payload);
                 var idPayload = jsonObject[UserData]?.ToString() ?? string.Empty;
-                return OperationResult<string>.Success(RemoveFirsAndLastCharacters(idPayload), Resource.GlobalOkMessage);
+                return OperationResult<string>.Success(RemoveFirsAndLastCharacters(idPayload), "Ok");
             }
             catch
             {
@@ -124,7 +124,7 @@
                 return OperationBuilder<string>.FailureBusinessValidation(InvalidBase64Url);
             }
 
-            return OperationResult<string>.Success(Encoding.UTF8.GetString(bytes), Resource.GlobalOkMessage);
+            return OperationResult<string>.Success(Encoding.UTF8.GetString(bytes), "Ok");
         }
 
         /// <summary>

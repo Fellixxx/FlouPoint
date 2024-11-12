@@ -133,10 +133,6 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>ResourceUpdate.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Update="Resource.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resource.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
     <EmbeddedResource Update="Utilities\Compress\ResourceCompress.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>ResourceCompress.Designer.cs</LastGenOutput>
