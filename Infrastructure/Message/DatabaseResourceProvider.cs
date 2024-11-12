@@ -31,18 +31,18 @@
             }
             if (!resources.Data.Any())
             {
-                return OperationBuilder<ResourceEntry>.FailureBusinessValidation(ExceptionMessages.DBResorceProvider.KeyNotFound);
+                return OperationBuilder<ResourceEntry>.FailureBusinessValidation(ExceptionMessages.ResourceProvider.KeyNotFound);
             }
 
             if (resources.Data.Count() > 1)
             {
-                return OperationBuilder<ResourceEntry>.FailureBusinessValidation(ExceptionMessages.DBResorceProvider.MultipleResources);
+                return OperationBuilder<ResourceEntry>.FailureBusinessValidation(ExceptionMessages.ResourceProvider.MultipleResourcesWithSameKey);
             }
 
             return OperationResult<ResourceEntry>.Success(resources.Data.FirstOrDefault());
         }
 
-        public async Task<string> GetMessageValueOrDefault(string key, string defaultValue = ExceptionMessages.DBResorceProvider.KeyNotFound)
+        public async Task<string> GetMessageValueOrDefault(string key, string defaultValue = ExceptionMessages.ResourceProvider.KeyNotFound)
         {
             var result = await GetMessage(key);
             if (result.IsSuccessful)
@@ -57,12 +57,12 @@
             var entries = _resourceEntryQuery.ReadFilter(r => r.Active);
             if (entries is null)
             {
-                return OperationBuilder<IQueryable<ResourceEntry>>.FailureBusinessValidation(ExceptionMessages.DBResorceProvider.UnableToRead);
+                return OperationBuilder<IQueryable<ResourceEntry>>.FailureBusinessValidation(ExceptionMessages.ResourceProvider.UnableToReadResourceFile);
             }
 
             if (entries is not null && entries.Result is not null && entries.Result.Data is not null && !entries.Result.Data.Any())
             {
-                return OperationBuilder<IQueryable<ResourceEntry>>.FailureBusinessValidation(ExceptionMessages.DBResorceProvider.NoKeysFound);
+                return OperationBuilder<IQueryable<ResourceEntry>>.FailureBusinessValidation(ExceptionMessages.ResourceProvider.KeyNotFound);
             }
 
             return OperationResult<IQueryable<ResourceEntry>>.Success(entries.Result.Data);

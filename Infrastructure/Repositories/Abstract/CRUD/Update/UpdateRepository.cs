@@ -89,7 +89,7 @@
                     result.ToResultWithBoolType();
                 }
 
-                return OperationBuilder<bool>.FailureDatabase(ExceptionMessages.FailedOccurredDataLayer);
+                return OperationBuilder<bool>.FailureDatabase(ExceptionMessages.ErrorOccurredDataLayer);
             }
         }
 

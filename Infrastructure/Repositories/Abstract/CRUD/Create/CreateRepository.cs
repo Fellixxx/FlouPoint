@@ -81,7 +81,7 @@
                     result.ToResultWithStringType();
                 }
 
-                return OperationBuilder<string>.FailureDatabase(ExceptionMessages.FailedOccurredDataLayer);
+                return OperationBuilder<string>.FailureDatabase(ExceptionMessages.ErrorOccurredDataLayer);
             }
         }
 

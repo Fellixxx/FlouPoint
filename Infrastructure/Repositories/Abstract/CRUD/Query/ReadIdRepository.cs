@@ -70,7 +70,7 @@
                 }
 
                 // Return a failure operation result for database issues
-                return OperationBuilder<T>.FailureDatabase(ExceptionMessages.FailedOccurredDataLayer);
+                return OperationBuilder<T>.FailureDatabase(ExceptionMessages.ErrorOccurredDataLayer);
             }
         }
 
@@ -117,7 +117,7 @@
                 }
 
                 // Return a failure operation result for database issues
-                return OperationBuilder<T>.FailureDatabase(ExceptionMessages.FailedOccurredDataLayer);
+                return OperationBuilder<T>.FailureDatabase(ExceptionMessages.ErrorOccurredDataLayer);
             }
         }
     }

@@ -71,7 +71,7 @@
                 {
                     result.ToResultWithXType<IQueryable<T>>();
                 }
-                return OperationBuilder<IQueryable<T>>.FailureDatabase(ExceptionMessages.FailedOccurredDataLayer);
+                return OperationBuilder<IQueryable<T>>.FailureDatabase(ExceptionMessages.ErrorOccurredDataLayer);
             }
         }
 

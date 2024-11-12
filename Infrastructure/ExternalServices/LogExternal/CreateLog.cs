@@ -27,7 +27,7 @@
                 // Validation for message and entity
                 if (string.IsNullOrWhiteSpace(message) || entity is null)
                 {
-                    return OperationBuilder<Log>.FailureDataSubmittedInvalid(ExceptionMessages.Log.FailureDataSubmittedInvalid);
+                    return OperationBuilder<Log>.FailureDataSubmittedInvalid(ExceptionMessages.Log.InvalidDataSubmitted);
                 }
 
                 // Get the name of the entity and serialize its value
@@ -36,24 +36,24 @@
 
                 // Build the log entry
                 Log log = LogBuilderHelpers.GetLog(message, entityName, entityValue, level, operation);
-                return OperationResult<Log>.Success(log, ExceptionMessages.Log.Success);
+                return OperationResult<Log>.Success(log, ExceptionMessages.Log.ValidationSuccess);
             }
             catch (JsonSerializationException jsonEx)
             {
                 // Handle exceptions related to JSON serialization
-                var failedSerialize = string.Format(ExceptionMessages.Log.FailedSerialize, jsonEx.Message);
+                var failedSerialize = string.Format(ExceptionMessages.Log.FailedToSerializeEntity, jsonEx.Message);
                 return OperationBuilder<Log>.FailureDataSubmittedInvalid(failedSerialize);
             }
             catch (NullReferenceException nullEx)
             {
                 // Handle null reference exceptions
-                var failedSerialize = string.Format(ExceptionMessages.Log.UnexpectedNullError, nullEx.Message);
+                var failedSerialize = string.Format(ExceptionMessages.Log.NullReferenceEncountered, nullEx.Message);
                 return OperationBuilder<Log>.FailureUnexpectedError(failedSerialize);
             }
             catch (Exception ex)
             {
                 // General error handling for unexpected issues
-                var unknowledgeableError = string.Format(ExceptionMessages.Log.UnexpectedNullError, ex.Message);
+                var unknowledgeableError = string.Format(ExceptionMessages.Log.NullReferenceEncountered, ex.Message);
                 return OperationBuilder<Log>.FailureUnexpectedError(unknowledgeableError);
             }
         }

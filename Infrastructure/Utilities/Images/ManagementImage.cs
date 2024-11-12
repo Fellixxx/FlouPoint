@@ -77,14 +77,14 @@
             }
             catch (Exception ex)
             {
-                Log log = Util.GetLogError(ex, filename, OperationExecute.CreateCustomOperation("Validate",ExceptionMessages.ManagementImage.General));
+                Log log = Util.GetLogError(ex, filename, OperationExecute.CreateCustomOperation("Validate",ExceptionMessages.ImageManagement.GeneralValidation));
                 OperationResult<string> result = await _logService.CreateLog(log);
                 if (!result.IsSuccessful)
                 {
-                    return OperationBuilder<bool>.FailureExtenalService(ExceptionMessages.FailedUpload);
+                    return OperationBuilder<bool>.FailureExtenalService(ExceptionMessages.FailedToUploadImage);
                 }
 
-                return OperationBuilder<bool>.FailureExtenalService(ExceptionMessages.FailedUpload);
+                return OperationBuilder<bool>.FailureExtenalService(ExceptionMessages.FailedToUploadImage);
             }
         }
 
@@ -99,7 +99,7 @@
             {
                 if (base64String == null)
                 {
-                    throw new Exception(ExceptionMessages.ManagementImage.ParameterNull);
+                    throw new Exception(ExceptionMessages.ImageManagement.ParameterIsNull);
                 }
 
                 // Removing the base64 prefix if it exists.
@@ -120,10 +120,10 @@
                 OperationResult<string> result = await _logService.CreateLog(log);
                 if (!result.IsSuccessful)
                 {
-                    return OperationBuilder<Stream>.FailureExtenalService(ExceptionMessages.FailedUpload);
+                    return OperationBuilder<Stream>.FailureExtenalService(ExceptionMessages.FailedToUploadImage);
                 }
 
-                return OperationBuilder<Stream>.FailureExtenalService(ExceptionMessages.FailedUpload);
+                return OperationBuilder<Stream>.FailureExtenalService(ExceptionMessages.FailedToUploadImage);
             }
         }
     }

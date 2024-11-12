@@ -26,17 +26,17 @@
         {
             if (string.IsNullOrWhiteSpace(bearerToken))
             {
-                return OperationBuilder<string>.FailureBusinessValidation(ExceptionMessages.JwtHelper.Whitespace);
+                return OperationBuilder<string>.FailureBusinessValidation(ExceptionMessages.JwtHelper.TokenCannotBeWhitespace);
             }
 
             if (!bearerToken.StartsWith(ExceptionMessages.JwtHelper.BearerPrefix, StringComparison.OrdinalIgnoreCase))
             {
-                return OperationBuilder<string>.FailureBusinessValidation(ExceptionMessages.JwtHelper.StartBearer);
+                return OperationBuilder<string>.FailureBusinessValidation(ExceptionMessages.JwtHelper.TokenMustStartWithBearer);
             }
 
             if (ExceptionMessages.JwtHelper.BearerPrefix.Length >= bearerToken.Length)
             {
-                return OperationBuilder<string>.FailureBusinessValidation(ExceptionMessages.JwtHelper.LengthBearer);
+                return OperationBuilder<string>.FailureBusinessValidation(ExceptionMessages.JwtHelper.InvalidBearerTokenLength);
             }
 
             var jwt = bearerToken[ExceptionMessages.JwtHelper.BearerPrefix.Length..].Trim();
@@ -63,7 +63,7 @@
             var tokenParts = jwt.Split('.');
             if (tokenParts.Length != 3)
             {
-                return OperationBuilder<string>.FailureBusinessValidation(ExceptionMessages.JwtHelper.InvalidJwt);
+                return OperationBuilder<string>.FailureBusinessValidation(ExceptionMessages.JwtHelper.InvalidJwtPayloadFormat);
             }
 
             return Base64UrlDecode(tokenParts[1]);
@@ -79,12 +79,12 @@
             try
             {
                 var jsonObject = JObject.Parse(payload);
-                var idPayload = jsonObject[ExceptionMessages.JwtHelper.UserData]?.ToString() ?? string.Empty;
-                return OperationResult<string>.Success(RemoveFirsAndLastCharacters(idPayload), ExceptionMessages.JwtHelper.Suceesss);
+                var idPayload = jsonObject[ExceptionMessages.JwtHelper.UserDataClaim]?.ToString() ?? string.Empty;
+                return OperationResult<string>.Success(RemoveFirsAndLastCharacters(idPayload), ExceptionMessages.JwtHelper.Success);
             }
             catch
             {
-                return OperationBuilder<string>.FailureBusinessValidation(ExceptionMessages.JwtHelper.InvalidJwt);
+                return OperationBuilder<string>.FailureBusinessValidation(ExceptionMessages.JwtHelper.InvalidJwtPayloadFormat);
             }
         }
 
@@ -116,10 +116,10 @@
             }
             catch
             {
-                return OperationBuilder<string>.FailureBusinessValidation(ExceptionMessages.JwtHelper.InvalidBase64Url);
+                return OperationBuilder<string>.FailureBusinessValidation(ExceptionMessages.JwtHelper.InvalidBase64UrlFormat);
             }
 
-            return OperationResult<string>.Success(Encoding.UTF8.GetString(bytes), ExceptionMessages.JwtHelper.Suceesss);
+            return OperationResult<string>.Success(Encoding.UTF8.GetString(bytes), ExceptionMessages.JwtHelper.Success);
         }
 
         /// <summary>
