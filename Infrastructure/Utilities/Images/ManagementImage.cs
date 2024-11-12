@@ -81,10 +81,10 @@
                 OperationResult<string> result = await _logService.CreateLog(log);
                 if (!result.IsSuccessful)
                 {
-                    return OperationBuilder<bool>.FailureExtenalService(MessageConstants.FailedToUploadImage);
+                    return OperationBuilder<bool>.FailExternal(MessageConstants.FailedToUploadImage);
                 }
 
-                return OperationBuilder<bool>.FailureExtenalService(MessageConstants.FailedToUploadImage);
+                return OperationBuilder<bool>.FailExternal(MessageConstants.FailedToUploadImage);
             }
         }
 
@@ -120,10 +120,10 @@
                 OperationResult<string> result = await _logService.CreateLog(log);
                 if (!result.IsSuccessful)
                 {
-                    return OperationBuilder<Stream>.FailureExtenalService(MessageConstants.FailedToUploadImage);
+                    return OperationBuilder<Stream>.FailExternal(MessageConstants.FailedToUploadImage);
                 }
 
-                return OperationBuilder<Stream>.FailureExtenalService(MessageConstants.FailedToUploadImage);
+                return OperationBuilder<Stream>.FailExternal(MessageConstants.FailedToUploadImage);
             }
         }
     }

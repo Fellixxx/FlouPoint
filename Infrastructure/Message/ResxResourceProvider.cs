@@ -59,12 +59,12 @@
 
             if (!resources.Any())
             {
-                return OperationBuilder<ResourceEntry>.FailureBusinessValidation(MessageConstants.ResourceProvider.KeyNotFound);
+                return OperationBuilder<ResourceEntry>.FailBusiness(MessageConstants.ResourceProvider.KeyNotFound);
             }
 
             if (resources.Count > 1)
             {
-                return OperationBuilder<ResourceEntry>.FailureBusinessValidation(MessageConstants.ResourceProvider.MultipleResourcesWithSameKey);
+                return OperationBuilder<ResourceEntry>.FailBusiness(MessageConstants.ResourceProvider.MultipleResourcesWithSameKey);
             }
 
             return OperationResult<ResourceEntry>.Success(resources.FirstOrDefault());
@@ -83,12 +83,12 @@
             var entries = GetEntries();
             if (entries is null)
             {
-                return OperationBuilder<IQueryable<ResourceEntry>>.FailureBusinessValidation(MessageConstants.ResourceProvider.UnableToReadResourceFile);
+                return OperationBuilder<IQueryable<ResourceEntry>>.FailBusiness(MessageConstants.ResourceProvider.UnableToReadResourceFile);
             }
 
             if (entries.Keys.Count == 0)
             {
-                return OperationBuilder<IQueryable<ResourceEntry>>.FailureBusinessValidation(MessageConstants.ResourceProvider.KeyNotFound);
+                return OperationBuilder<IQueryable<ResourceEntry>>.FailBusiness(MessageConstants.ResourceProvider.KeyNotFound);
             }
 
 

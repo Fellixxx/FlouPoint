@@ -14,7 +14,7 @@ namespace Application.Test.Result
             var message = "TestValue879633508";
 
             // Act
-            var result = OperationBuilder<string>.FailureBusinessValidation(message);
+            var result = OperationBuilder<string>.FailBusiness(message);
 
             // Assert
             Assert.IsNotNull(result);
@@ -30,7 +30,7 @@ namespace Application.Test.Result
             string message = null;
 
             // Act & Assert
-            Assert.ThrowsException<ArgumentNullException>(() => OperationBuilder<string>.FailureBusinessValidation(message));
+            Assert.ThrowsException<ArgumentNullException>(() => OperationBuilder<string>.FailBusiness(message));
         }
 
         [TestMethod]
@@ -40,7 +40,7 @@ namespace Application.Test.Result
             var message = "TestValue826283408";
 
             // Act
-            var result = OperationBuilder<string>.FailureConfigurationMissingError(message);
+            var result = OperationBuilder<string>.FailConfig(message);
 
             // Assert
             Assert.IsNotNull(result);
@@ -56,7 +56,7 @@ namespace Application.Test.Result
             string message = null;
 
             // Act & Assert
-            Assert.ThrowsException<ArgumentNullException>(() => OperationBuilder<string>.FailureConfigurationMissingError(message));
+            Assert.ThrowsException<ArgumentNullException>(() => OperationBuilder<string>.FailConfig(message));
         }
 
         [TestMethod]
@@ -66,7 +66,7 @@ namespace Application.Test.Result
             var message = "TestValue1736562805";
 
             // Act
-            var result = OperationBuilder<string>.FailureDatabase(message);
+            var result = OperationBuilder<string>.FailDatabase(message);
 
             // Assert
             Assert.IsNotNull(result);
@@ -82,7 +82,7 @@ namespace Application.Test.Result
             string message = null;
 
             // Act & Assert
-            Assert.ThrowsException<ArgumentNullException>(() => OperationBuilder<string>.FailureDatabase(message));
+            Assert.ThrowsException<ArgumentNullException>(() => OperationBuilder<string>.FailDatabase(message));
         }
 
         [TestMethod]
@@ -92,7 +92,7 @@ namespace Application.Test.Result
             var message = "TestValue1393732451";
 
             // Act
-            var result = OperationBuilder<string>.FailureDataSubmittedInvalid(message);
+            var result = OperationBuilder<string>.FailInvalidData(message);
 
             // Assert
             Assert.IsNotNull(result);
@@ -108,7 +108,7 @@ namespace Application.Test.Result
             string message = null;
 
             // Act & Assert
-            Assert.ThrowsException<ArgumentNullException>(() => OperationBuilder<string>.FailureDataSubmittedInvalid(message));
+            Assert.ThrowsException<ArgumentNullException>(() => OperationBuilder<string>.FailInvalidData(message));
         }
 
         [TestMethod]
@@ -118,7 +118,7 @@ namespace Application.Test.Result
             var message = "TestValue1769803281";
 
             // Act
-            var result = OperationBuilder<string>.FailureExtenalService(message);
+            var result = OperationBuilder<string>.FailExternal(message);
 
             // Assert
             Assert.IsNotNull(result);
@@ -133,7 +133,7 @@ namespace Application.Test.Result
             string message = null;
 
             // Act & Assert
-            Assert.ThrowsException<ArgumentNullException>(() => OperationBuilder<string>.FailureExtenalService(message));
+            Assert.ThrowsException<ArgumentNullException>(() => OperationBuilder<string>.FailExternal(message));
         }
 
         [TestMethod]
@@ -143,7 +143,7 @@ namespace Application.Test.Result
             var message = "TestValue2015692524";
 
             // Act
-            var result = OperationBuilder<string>.FailureUnexpectedError(message);
+            var result = OperationBuilder<string>.FailUnexpected(message);
 
             // Assert
             Assert.IsNotNull(result);
@@ -159,7 +159,7 @@ namespace Application.Test.Result
             string message = null;
 
             // Act & Assert
-            Assert.ThrowsException<ArgumentNullException>(() => OperationBuilder<string>.FailureUnexpectedError(message));
+            Assert.ThrowsException<ArgumentNullException>(() => OperationBuilder<string>.FailUnexpected(message));
         }
 
         [TestMethod]
@@ -169,7 +169,7 @@ namespace Application.Test.Result
             var message = "TestValue2053465";
 
             // Act
-            var result = OperationBuilder<string>.FailureNetworkError(message);
+            var result = OperationBuilder<string>.FailNetwork(message);
 
             // Assert
             Assert.IsNotNull(result);
@@ -185,7 +185,7 @@ namespace Application.Test.Result
             string message = null;
 
             // Act & Assert
-            Assert.ThrowsException<ArgumentNullException>(() => OperationBuilder<string>.FailureNetworkError(message));
+            Assert.ThrowsException<ArgumentNullException>(() => OperationBuilder<string>.FailNetwork(message));
         }
         [TestMethod]
         public void FailureBusinessValidation_Should_Return_OperationResult_With_BusinessValidationError()
@@ -194,7 +194,7 @@ namespace Application.Test.Result
             var expectedMessage = "Business validation failed.";
 
             // Act
-            var result = OperationBuilder<string>.FailureBusinessValidation(expectedMessage);
+            var result = OperationBuilder<string>.FailBusiness(expectedMessage);
 
             // Assert
             Assert.IsNotNull(result);
@@ -207,7 +207,7 @@ namespace Application.Test.Result
         public void FailureBusinessValidation_Should_Throw_ArgumentNullException_When_Message_Is_Null()
         {
             // Act & Assert
-            Assert.ThrowsException<ArgumentNullException>(() => OperationBuilder<string>.FailureBusinessValidation(null));
+            Assert.ThrowsException<ArgumentNullException>(() => OperationBuilder<string>.FailBusiness(null));
         }
 
         [TestMethod]
@@ -217,7 +217,7 @@ namespace Application.Test.Result
             var expectedMessage = "Configuration is missing.";
 
             // Act
-            var result = OperationBuilder<string>.FailureConfigurationMissingError(expectedMessage);
+            var result = OperationBuilder<string>.FailConfig(expectedMessage);
 
             // Assert
             Assert.IsNotNull(result);
@@ -233,7 +233,7 @@ namespace Application.Test.Result
             var expectedMessage = "Database failure occurred.";
 
             // Act
-            var result = OperationBuilder<string>.FailureDatabase(expectedMessage);
+            var result = OperationBuilder<string>.FailDatabase(expectedMessage);
 
             // Assert
             Assert.IsNotNull(result);
@@ -249,7 +249,7 @@ namespace Application.Test.Result
             var expectedMessage = "Data submitted is invalid.";
 
             // Act
-            var result = OperationBuilder<string>.FailureDataSubmittedInvalid(expectedMessage);
+            var result = OperationBuilder<string>.FailInvalidData(expectedMessage);
 
             // Assert
             Assert.IsNotNull(result);
@@ -265,7 +265,7 @@ namespace Application.Test.Result
             var expectedMessage = "External service failed.";
 
             // Act
-            var result = OperationBuilder<string>.FailureExtenalService(expectedMessage);
+            var result = OperationBuilder<string>.FailExternal(expectedMessage);
 
             // Assert
             Assert.IsNotNull(result);
@@ -281,7 +281,7 @@ namespace Application.Test.Result
             var expectedMessage = "An unexpected error occurred.";
 
             // Act
-            var result = OperationBuilder<string>.FailureUnexpectedError(expectedMessage);
+            var result = OperationBuilder<string>.FailUnexpected(expectedMessage);
 
             // Assert
             Assert.IsNotNull(result);
@@ -298,7 +298,7 @@ namespace Application.Test.Result
             var expectedMessage = "Network error occurred.";
 
             // Act
-            var result = OperationBuilder<string>.FailureNetworkError(expectedMessage);
+            var result = OperationBuilder<string>.FailNetwork(expectedMessage);
 
             // Assert
             Assert.IsNotNull(result);
@@ -314,7 +314,7 @@ namespace Application.Test.Result
             string message = "";
 
             // Act & Assert
-            Assert.ThrowsException<ArgumentException>(() => OperationBuilder<string>.FailureBusinessValidation(message));
+            Assert.ThrowsException<ArgumentException>(() => OperationBuilder<string>.FailBusiness(message));
         }
 
         [TestMethod]
@@ -324,7 +324,7 @@ namespace Application.Test.Result
             string message = "";
 
             // Act & Assert
-            Assert.ThrowsException<ArgumentException>(() => OperationBuilder<string>.FailureConfigurationMissingError(message));
+            Assert.ThrowsException<ArgumentException>(() => OperationBuilder<string>.FailConfig(message));
         }
 
         [TestMethod]
@@ -334,7 +334,7 @@ namespace Application.Test.Result
             string message = "";
 
             // Act & Assert
-            Assert.ThrowsException<ArgumentException>(() => OperationBuilder<string>.FailureDatabase(message));
+            Assert.ThrowsException<ArgumentException>(() => OperationBuilder<string>.FailDatabase(message));
         }
 
         [TestMethod]
@@ -344,7 +344,7 @@ namespace Application.Test.Result
             string message = "";
 
             // Act & Assert
-            Assert.ThrowsException<ArgumentException>(() => OperationBuilder<string>.FailureDataSubmittedInvalid(message));
+            Assert.ThrowsException<ArgumentException>(() => OperationBuilder<string>.FailInvalidData(message));
         }
 
         [TestMethod]
@@ -354,7 +354,7 @@ namespace Application.Test.Result
             string message = "";
 
             // Act & Assert
-            Assert.ThrowsException<ArgumentException>(() => OperationBuilder<string>.FailureExtenalService(message));
+            Assert.ThrowsException<ArgumentException>(() => OperationBuilder<string>.FailExternal(message));
         }
 
         [TestMethod]
@@ -364,7 +364,7 @@ namespace Application.Test.Result
             string message = "";
 
             // Act & Assert
-            Assert.ThrowsException<ArgumentException>(() => OperationBuilder<string>.FailureUnexpectedError(message));
+            Assert.ThrowsException<ArgumentException>(() => OperationBuilder<string>.FailUnexpected(message));
         }
 
         [TestMethod]
@@ -374,7 +374,7 @@ namespace Application.Test.Result
             string message = "";
 
             // Act & Assert
-            Assert.ThrowsException<ArgumentException>(() => OperationBuilder<string>.FailureNetworkError(message));
+            Assert.ThrowsException<ArgumentException>(() => OperationBuilder<string>.FailNetwork(message));
         }
 
         // Additional tests for whitespace message
@@ -385,7 +385,7 @@ namespace Application.Test.Result
             string message = "   ";
 
             // Act & Assert
-            Assert.ThrowsException<ArgumentException>(() => OperationBuilder<string>.FailureBusinessValidation(message));
+            Assert.ThrowsException<ArgumentException>(() => OperationBuilder<string>.FailBusiness(message));
         }
 
         [TestMethod]
@@ -395,7 +395,7 @@ namespace Application.Test.Result
             string message = "   ";
 
             // Act & Assert
-            Assert.ThrowsException<ArgumentException>(() => OperationBuilder<string>.FailureConfigurationMissingError(message));
+            Assert.ThrowsException<ArgumentException>(() => OperationBuilder<string>.FailConfig(message));
         }
 
         [TestMethod]
@@ -405,7 +405,7 @@ namespace Application.Test.Result
             string message = "   ";
 
             // Act & Assert
-            Assert.ThrowsException<ArgumentException>(() => OperationBuilder<string>.FailureDatabase(message));
+            Assert.ThrowsException<ArgumentException>(() => OperationBuilder<string>.FailDatabase(message));
         }
 
         [TestMethod]
@@ -415,7 +415,7 @@ namespace Application.Test.Result
             string message = "   ";
 
             // Act & Assert
-            Assert.ThrowsException<ArgumentException>(() => OperationBuilder<string>.FailureDataSubmittedInvalid(message));
+            Assert.ThrowsException<ArgumentException>(() => OperationBuilder<string>.FailInvalidData(message));
         }
 
         [TestMethod]
@@ -425,7 +425,7 @@ namespace Application.Test.Result
             string message = "   ";
 
             // Act & Assert
-            Assert.ThrowsException<ArgumentException>(() => OperationBuilder<string>.FailureExtenalService(message));
+            Assert.ThrowsException<ArgumentException>(() => OperationBuilder<string>.FailExternal(message));
         }
 
         [TestMethod]
@@ -435,7 +435,7 @@ namespace Application.Test.Result
             string message = "   ";
 
             // Act & Assert
-            Assert.ThrowsException<ArgumentException>(() => OperationBuilder<string>.FailureUnexpectedError(message));
+            Assert.ThrowsException<ArgumentException>(() => OperationBuilder<string>.FailUnexpected(message));
         }
 
         [TestMethod]
@@ -445,7 +445,7 @@ namespace Application.Test.Result
             string message = "   ";
 
             // Act & Assert
-            Assert.ThrowsException<ArgumentException>(() => OperationBuilder<string>.FailureNetworkError(message));
+            Assert.ThrowsException<ArgumentException>(() => OperationBuilder<string>.FailNetwork(message));
         }
 
         // Additional assertions for Data field being null
@@ -456,7 +456,7 @@ namespace Application.Test.Result
             var message = "Business validation failed.";
 
             // Act
-            var result = OperationBuilder<string>.FailureBusinessValidation(message);
+            var result = OperationBuilder<string>.FailBusiness(message);
 
             // Assert
             Assert.IsNull(result.Data);
@@ -469,7 +469,7 @@ namespace Application.Test.Result
             var message = "Configuration is missing.";
 
             // Act
-            var result = OperationBuilder<string>.FailureConfigurationMissingError(message);
+            var result = OperationBuilder<string>.FailConfig(message);
 
             // Assert
             Assert.IsNull(result.Data);
@@ -482,7 +482,7 @@ namespace Application.Test.Result
             var message = "Database failure occurred.";
 
             // Act
-            var result = OperationBuilder<string>.FailureDatabase(message);
+            var result = OperationBuilder<string>.FailDatabase(message);
 
             // Assert
             Assert.IsNull(result.Data);
@@ -495,7 +495,7 @@ namespace Application.Test.Result
             var message = "Data submitted is invalid.";
 
             // Act
-            var result = OperationBuilder<string>.FailureDataSubmittedInvalid(message);
+            var result = OperationBuilder<string>.FailInvalidData(message);
 
             // Assert
             Assert.IsNull(result.Data);
@@ -508,7 +508,7 @@ namespace Application.Test.Result
             var message = "External service failed.";
 
             // Act
-            var result = OperationBuilder<string>.FailureExtenalService(message);
+            var result = OperationBuilder<string>.FailExternal(message);
 
             // Assert
             Assert.IsNull(result.Data);
@@ -521,7 +521,7 @@ namespace Application.Test.Result
             var message = "An unexpected error occurred.";
 
             // Act
-            var result = OperationBuilder<string>.FailureUnexpectedError(message);
+            var result = OperationBuilder<string>.FailUnexpected(message);
 
             // Assert
             Assert.IsNull(result.Data);
@@ -534,7 +534,7 @@ namespace Application.Test.Result
             var message = "Network error occurred.";
 
             // Act
-            var result = OperationBuilder<string>.FailureNetworkError(message);
+            var result = OperationBuilder<string>.FailNetwork(message);
 
             // Assert
             Assert.IsNull(result.Data);

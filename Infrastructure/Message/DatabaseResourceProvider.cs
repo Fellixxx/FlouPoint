@@ -31,12 +31,12 @@
             }
             if (!resources.Data.Any())
             {
-                return OperationBuilder<ResourceEntry>.FailureBusinessValidation(MessageConstants.ResourceProvider.KeyNotFound);
+                return OperationBuilder<ResourceEntry>.FailBusiness(MessageConstants.ResourceProvider.KeyNotFound);
             }
 
             if (resources.Data.Count() > 1)
             {
-                return OperationBuilder<ResourceEntry>.FailureBusinessValidation(MessageConstants.ResourceProvider.MultipleResourcesWithSameKey);
+                return OperationBuilder<ResourceEntry>.FailBusiness(MessageConstants.ResourceProvider.MultipleResourcesWithSameKey);
             }
 
             return OperationResult<ResourceEntry>.Success(resources.Data.FirstOrDefault());
@@ -57,12 +57,12 @@
             var entries = _resourceEntryQuery.ReadFilter(r => r.Active);
             if (entries is null)
             {
-                return OperationBuilder<IQueryable<ResourceEntry>>.FailureBusinessValidation(MessageConstants.ResourceProvider.UnableToReadResourceFile);
+                return OperationBuilder<IQueryable<ResourceEntry>>.FailBusiness(MessageConstants.ResourceProvider.UnableToReadResourceFile);
             }
 
             if (entries is not null && entries.Result is not null && entries.Result.Data is not null && !entries.Result.Data.Any())
             {
-                return OperationBuilder<IQueryable<ResourceEntry>>.FailureBusinessValidation(MessageConstants.ResourceProvider.KeyNotFound);
+                return OperationBuilder<IQueryable<ResourceEntry>>.FailBusiness(MessageConstants.ResourceProvider.KeyNotFound);
             }
 
             return OperationResult<IQueryable<ResourceEntry>>.Success(entries.Result.Data);

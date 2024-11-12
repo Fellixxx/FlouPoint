@@ -38,7 +38,7 @@
             if (entity is null)
             {
                 // Return a failure result if the entity is null
-                return OperationBuilder<T>.FailureBusinessValidation(failedNecesaryData);
+                return OperationBuilder<T>.FailBusiness(failedNecesaryData);
             }
 
             // Return a success result if the entity is not null

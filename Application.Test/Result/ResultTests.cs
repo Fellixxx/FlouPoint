@@ -46,7 +46,7 @@ namespace Application.Test.Result
         public void Result_Should_Return_Correct_Error_Custom_Name()
         {
             // Arrange
-            var result = new TestResult(false, "An error occurred", "TestData", ErrorTypes.DatabaseError);
+            var result = new TestResult(false, "An error occurred", "TestData", ErrorTypes.Database);
 
             // Act
             var errorName = result.Error;
@@ -84,7 +84,7 @@ namespace Application.Test.Result
         public void Result_Should_Indicate_Failure_With_ErrorType()
         {
             // Arrange
-            var result = new TestResult(false, "An unexpected error occurred", null, ErrorTypes.UnexpectedError);
+            var result = new TestResult(false, "An unexpected error occurred", null, ErrorTypes.Unexpected);
 
             // Assert
             Assert.IsFalse(result.IsSuccessful);

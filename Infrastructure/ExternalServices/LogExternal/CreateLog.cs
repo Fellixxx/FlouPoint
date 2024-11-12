@@ -27,7 +27,7 @@
                 // Validation for message and entity
                 if (string.IsNullOrWhiteSpace(message) || entity is null)
                 {
-                    return OperationBuilder<Log>.FailureDataSubmittedInvalid(MessageConstants.Log.InvalidDataSubmitted);
+                    return OperationBuilder<Log>.FailInvalidData(MessageConstants.Log.InvalidDataSubmitted);
                 }
 
                 // Get the name of the entity and serialize its value
@@ -42,19 +42,19 @@
             {
                 // Handle exceptions related to JSON serialization
                 var failedSerialize = string.Format(MessageConstants.Log.FailedToSerializeEntity, jsonEx.Message);
-                return OperationBuilder<Log>.FailureDataSubmittedInvalid(failedSerialize);
+                return OperationBuilder<Log>.FailInvalidData(failedSerialize);
             }
             catch (NullReferenceException nullEx)
             {
                 // Handle null reference exceptions
                 var failedSerialize = string.Format(MessageConstants.Log.NullReferenceEncountered, nullEx.Message);
-                return OperationBuilder<Log>.FailureUnexpectedError(failedSerialize);
+                return OperationBuilder<Log>.FailUnexpected(failedSerialize);
             }
             catch (Exception ex)
             {
                 // General error handling for unexpected issues
                 var unknowledgeableError = string.Format(MessageConstants.Log.NullReferenceEncountered, ex.Message);
-                return OperationBuilder<Log>.FailureUnexpectedError(unknowledgeableError);
+                return OperationBuilder<Log>.FailUnexpected(unknowledgeableError);
             }
         }
     }

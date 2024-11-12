@@ -74,9 +74,9 @@
                 OperationResult<string> result = await _logService.CreateLog(log);
                 if (!result.IsSuccessful)
                 {
-                    return OperationBuilder<Stream>.FailureUnexpectedError(MessageConstants.FailedToCompressImage);
+                    return OperationBuilder<Stream>.FailUnexpected(MessageConstants.FailedToCompressImage);
                 }
-                return OperationBuilder<Stream>.FailureUnexpectedError(MessageConstants.FailedToCompressImage);
+                return OperationBuilder<Stream>.FailUnexpected(MessageConstants.FailedToCompressImage);
             }
         }
     }

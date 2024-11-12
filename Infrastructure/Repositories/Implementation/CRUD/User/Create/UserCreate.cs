@@ -56,7 +56,7 @@ namespace Infrastructure.Repositories.Implementation.CRUD.User.Create
             {
                 string errorMessage = GetErrorMessage(result);
                 var failedDataSizeCharacter = _resourceHandler.GetResource("FailedDataSizeCharacter");
-                return OperationBuilder<User>.FailureBusinessValidation(string.Format(failedDataSizeCharacter, errorMessage));
+                return OperationBuilder<User>.FailBusiness(string.Format(failedDataSizeCharacter, errorMessage));
             }
 
             // Check for a valid email format
@@ -64,7 +64,7 @@ namespace Infrastructure.Repositories.Implementation.CRUD.User.Create
             if (!CredentialUtility.IsValidEmail(email))
             {
                 var failedEmailInvalidFormat = _resourceHandler.GetResource("FailedEmailInvalidFormat");
-                return OperationBuilder<User>.FailureBusinessValidation(failedEmailInvalidFormat);
+                return OperationBuilder<User>.FailBusiness(failedEmailInvalidFormat);
             }
 
             // Ensure email uniqueness by checking if it's already used by another user
@@ -73,7 +73,7 @@ namespace Infrastructure.Repositories.Implementation.CRUD.User.Create
             if (userExistByEmail is not null)
             {
                 var failedEmailInvalidFormat = _resourceHandler.GetResource("FailedAlreadyRegisteredEmail");
-                return OperationBuilder<User>.FailureBusinessValidation(failedEmailInvalidFormat);
+                return OperationBuilder<User>.FailBusiness(failedEmailInvalidFormat);
             }
 
             // Create and return the user entity

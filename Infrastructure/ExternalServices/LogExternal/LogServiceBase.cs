@@ -66,7 +66,7 @@
                 await ResourceHandler.CreateAsync(_resourceProvider, _resourceKeys);
                 var failureConfigurationMissingError = _resourceHandler.GetResource("FailureConfigurationMissingError");
                 var message = failureConfigurationMissingError;
-                return OperationBuilder<string>.FailureConfigurationMissingError(message);
+                return OperationBuilder<string>.FailConfig(message);
             }
 
             var url = GetUrl();
@@ -75,7 +75,7 @@
             if (!response.IsSuccessStatusCode)
             {
                 var failedGetToken = _resourceHandler.GetResource("FailedGetToken");
-                return OperationBuilder<string>.FailureExtenalService(failedGetToken);
+                return OperationBuilder<string>.FailExternal(failedGetToken);
             }
 
             var result = await _httpContentWrapper.ReadAsStringAsync(response.Content);
@@ -129,7 +129,7 @@
             if (!response.IsSuccessStatusCode)
             {
                 var failedSetLog = _resourceHandler.GetResource("FailedGetToken");
-                return OperationBuilder<string>.FailureExtenalService(failedSetLog);
+                return OperationBuilder<string>.FailExternal(failedSetLog);
             }
             var successfullySetLog = _resourceHandler.GetResource("FailedGetToken");
             return OperationResult<string>.Success(string.Empty, successfullySetLog);

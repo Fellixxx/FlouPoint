@@ -26,17 +26,17 @@
         {
             if (string.IsNullOrWhiteSpace(bearerToken))
             {
-                return OperationBuilder<string>.FailureBusinessValidation(MessageConstants.JwtHelper.TokenCannotBeWhitespace);
+                return OperationBuilder<string>.FailBusiness(MessageConstants.JwtHelper.TokenCannotBeWhitespace);
             }
 
             if (!bearerToken.StartsWith(MessageConstants.JwtHelper.BearerPrefix, StringComparison.OrdinalIgnoreCase))
             {
-                return OperationBuilder<string>.FailureBusinessValidation(MessageConstants.JwtHelper.TokenMustStartWithBearer);
+                return OperationBuilder<string>.FailBusiness(MessageConstants.JwtHelper.TokenMustStartWithBearer);
             }
 
             if (MessageConstants.JwtHelper.BearerPrefix.Length >= bearerToken.Length)
             {
-                return OperationBuilder<string>.FailureBusinessValidation(MessageConstants.JwtHelper.InvalidBearerTokenLength);
+                return OperationBuilder<string>.FailBusiness(MessageConstants.JwtHelper.InvalidBearerTokenLength);
             }
 
             var jwt = bearerToken[MessageConstants.JwtHelper.BearerPrefix.Length..].Trim();
@@ -63,7 +63,7 @@
             var tokenParts = jwt.Split('.');
             if (tokenParts.Length != 3)
             {
-                return OperationBuilder<string>.FailureBusinessValidation(MessageConstants.JwtHelper.InvalidJwtPayloadFormat);
+                return OperationBuilder<string>.FailBusiness(MessageConstants.JwtHelper.InvalidJwtPayloadFormat);
             }
 
             return Base64UrlDecode(tokenParts[1]);
@@ -84,7 +84,7 @@
             }
             catch
             {
-                return OperationBuilder<string>.FailureBusinessValidation(MessageConstants.JwtHelper.InvalidJwtPayloadFormat);
+                return OperationBuilder<string>.FailBusiness(MessageConstants.JwtHelper.InvalidJwtPayloadFormat);
             }
         }
 
@@ -116,7 +116,7 @@
             }
             catch
             {
-                return OperationBuilder<string>.FailureBusinessValidation(MessageConstants.JwtHelper.InvalidBase64UrlFormat);
+                return OperationBuilder<string>.FailBusiness(MessageConstants.JwtHelper.InvalidBase64UrlFormat);
             }
 
             return OperationResult<string>.Success(Encoding.UTF8.GetString(bytes), MessageConstants.JwtHelper.Success);

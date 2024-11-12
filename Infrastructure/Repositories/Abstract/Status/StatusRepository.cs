@@ -78,7 +78,7 @@
                     result.ToResultWithBoolType();
                 }
 
-                return OperationBuilder<bool>.FailureDatabase(MessageConstants.ErrorOccurredDataLayer);
+                return OperationBuilder<bool>.FailDatabase(MessageConstants.ErrorOccurredDataLayer);
             }
         }
 
@@ -121,7 +121,7 @@
                     result.ToResultWithBoolType();
                 }
 
-                return OperationBuilder<bool>.FailureDatabase(MessageConstants.ErrorOccurredDataLayer);
+                return OperationBuilder<bool>.FailDatabase(MessageConstants.ErrorOccurredDataLayer);
             }
         }
 
@@ -132,7 +132,7 @@
             // Validate the provided ID
             if (string.IsNullOrWhiteSpace(id))
             {
-                return OperationBuilder<T>.FailureBusinessValidation(statusFailedNecesaryData);
+                return OperationBuilder<T>.FailBusiness(statusFailedNecesaryData);
             }
 
             // Get the existing user from the repository
@@ -143,7 +143,7 @@
             if (!hasEntity)
             {
                 string messageExist = string.Format(genericExistValidation, typeof(T).Name);
-                return OperationBuilder<T>.FailureBusinessValidation(messageExist);
+                return OperationBuilder<T>.FailBusiness(messageExist);
             }
             var statusGlobalOkMessage = _resourceHandler.GetResource("StatusGlobalOkMessage");
             // If the entity exists, return a success operation result

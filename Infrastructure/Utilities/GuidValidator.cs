@@ -2,8 +2,6 @@
 {
     using System; // This is required for Guid.TryParse method.
     using Application.Result;
-    using Application.UseCases.ExternalServices;
-    using Application.UseCases.Repository;
     using Infrastructure.Constants;
 
     /// <summary>
@@ -11,10 +9,6 @@
     /// </summary>
     public class GuidValidator
     {
-        private readonly IResourceProvider _resourceProvider;
-        private IResourceHandler _resourceHandler;
-        private readonly List<string> _resourceKeys;
-
         /// <summary>
         /// Validates if the provided string is a valid GUID.
         /// </summary>
@@ -32,7 +26,7 @@
             // If it's not a valid GUID, return a failure result.
             if (!resultConversion)
             {
-                return OperationBuilder<string>.FailureBusinessValidation(MessageConstants.GuidValidator.InvalidGuid); // This error message seems mismatched. Shouldn't it be related to a GUID conversion failure?
+                return OperationBuilder<string>.FailBusiness(MessageConstants.GuidValidator.InvalidGuid); // This error message seems mismatched. Shouldn't it be related to a GUID conversion failure?
             }
 
             // If it's a valid GUID, return a success result.

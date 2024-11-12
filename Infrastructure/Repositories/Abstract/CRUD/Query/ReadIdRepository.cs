@@ -70,7 +70,7 @@
                 }
 
                 // Return a failure operation result for database issues
-                return OperationBuilder<T>.FailureDatabase(MessageConstants.ErrorOccurredDataLayer);
+                return OperationBuilder<T>.FailDatabase(MessageConstants.ErrorOccurredDataLayer);
             }
         }
 
@@ -87,7 +87,7 @@
 
                 if (!resultbearer.IsSuccessful)
                 {
-                    return OperationBuilder<T>.FailureDatabase(resultbearer.Message);
+                    return OperationBuilder<T>.FailDatabase(resultbearer.Message);
                 }
 
                 // Get entities from the database based on the provided filter expression
@@ -117,7 +117,7 @@
                 }
 
                 // Return a failure operation result for database issues
-                return OperationBuilder<T>.FailureDatabase(MessageConstants.ErrorOccurredDataLayer);
+                return OperationBuilder<T>.FailDatabase(MessageConstants.ErrorOccurredDataLayer);
             }
         }
     }
