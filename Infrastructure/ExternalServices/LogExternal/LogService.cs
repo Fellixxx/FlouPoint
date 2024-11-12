@@ -32,7 +32,7 @@
             _resourceHandler=resourceHandler;
             _resourceKeys =
             [
-                "SuccessfullyLogCreate"
+                "LogSuccessfullyGenericActiveated"
             ];
         }
 

@@ -187,15 +187,6 @@ namespace Infrastructure {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The Exception was not submitted..
-        /// </summary>
-        internal static string FailedLogValidException {
-            get {
-                return ResourceManager.GetString("FailedLogValidException", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to The maximum token size is surpassed..
         /// </summary>
         internal static string FailedMaximumToken {

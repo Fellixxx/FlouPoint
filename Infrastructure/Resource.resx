@@ -159,9 +159,6 @@
   <data name="FailedLogBuilderDataNotExist" xml:space="preserve">
     <value>The message or enitty was not submitted.</value>
   </data>
-  <data name="FailedLogValidException" xml:space="preserve">
-    <value>The Exception was not submitted.</value>
-  </data>
   <data name="FailedMaximumToken" xml:space="preserve">
     <value>The maximum token size is surpassed.</value>
   </data>

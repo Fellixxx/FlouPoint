@@ -3,6 +3,7 @@
     using Application.Result;
     using Domain.DTO.Logging;
     using Domain.EnumType;
+    using Infrastructure.Constants;
     using Infrastructure.ExternalServices.LogExternal;
     using System;
     using System.Runtime.CompilerServices;
@@ -24,7 +25,7 @@
         {
             if (ex == null)
             {
-                throw new Exception(Resource.FailedLogValidException);
+                throw new Exception(ExceptionMessages.FailedLogValidException);
             }
 
             // Prepare the message for the log entry
