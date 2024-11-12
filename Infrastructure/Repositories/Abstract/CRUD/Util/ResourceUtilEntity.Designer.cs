@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Infrastructure.Repositories.Abstract.CRUD {
+namespace Infrastructure.Repositories.Abstract.CRUD.Util {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace Infrastructure.Repositories.Abstract.CRUD {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Infrastructure.Repositories.Abstract.CRUD.ResourceUtilEntity", typeof(ResourceUtilEntity).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Infrastructure.Repositories.Abstract.CRUD.Util.ResourceUtilEntity", typeof(ResourceUtilEntity).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -66,6 +66,15 @@ namespace Infrastructure.Repositories.Abstract.CRUD {
         internal static string EntityFailedNecesaryData {
             get {
                 return ResourceManager.GetString("EntityFailedNecesaryData", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ok.
+        /// </summary>
+        internal static string UtilGlobalOkMessage {
+            get {
+                return ResourceManager.GetString("UtilGlobalOkMessage", resourceCulture);
             }
         }
     }

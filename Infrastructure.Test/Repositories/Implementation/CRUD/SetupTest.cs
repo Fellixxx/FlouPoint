@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using Application.UseCases.CRUD.Query.User;
+﻿using Application.UseCases.CRUD.Query.User;
 using Application.UseCases.CRUD.User;
 using Application.UseCases.ExternalServices;
 using Application.UseCases.Repository.CRUD;
 using Application.UseCases.Repository;
 using Application.UseCases.Repository.Status.Status;
-using Infrastructure.Message;
-using Infrastructure.Repositories.Abstract.CRUD;
 using Infrastructure.Repositories.Implementation.CRUD.Query.User;
 using Infrastructure.Repositories.Implementation.CRUD.User;
 using Infrastructure.Repositories.Implementation.Status;
@@ -16,13 +11,13 @@ using Microsoft.EntityFrameworkCore;
 using Moq;
 using Persistence.BaseDbContext;
 using Persistence.CreateStruture.Constants.ColumnType;
-using Application.Result;
-using Domain.Entities;
+using Infrastructure.Repositories.Abstract.CRUD.Util;
+
 
 namespace Infrastructure.Test.Repositories.Implementation.CRUD
 {
     [TestClass]
-    public class ResourceProviderTests
+    public class SetupTest
     {
         protected DbContextOptions<CommonDbContext> _options;
         protected CommonDbContext _dbContext;
@@ -37,7 +32,7 @@ namespace Infrastructure.Test.Repositories.Implementation.CRUD
         protected IResourceHandler _resourceHandler;
         protected IUtilEntity<Domain.Entities.User> _utilEntity;
 
-        private readonly Dictionary<string, string> _resourceMessages = new()
+        protected readonly Dictionary<string, string> _resourceMessages = new()
         {
             { "EntityFailedNecesaryData", "Necessary data was not provided." },
             { "FailedGetToken", "The log services token got failed." },
@@ -77,40 +72,6 @@ namespace Infrastructure.Test.Repositories.Implementation.CRUD
             _userStatus = new UserStatus(_dbContext, _logService.Object, _resourceProvider, _resourceHandler);
             _userReadFilter = new UserReadFilter(_dbContext, _logService.Object, _resourceProvider, _resourceHandler);
             _userReadFilterCount = new UserReadFilterCount(_dbContext, _logService.Object, _resourceProvider, _resourceHandler);
-        }
-
-        [TestMethod]
-        public async Task AllResourceKeysExistInResourceProvider()
-        {
-            // Arrange
-            var instance = new ResxResourceProvider();
-            var entriesResult = await instance.GetResourceEntries();
-
-            // Assert early if entries result is null or contains no data
-            Assert.IsNotNull(entriesResult?.Data, "Resource entries are null or empty.");
-
-            var entries = entriesResult.Data.ToList(); // Cache to avoid multiple enumerations
-
-            // Act
-            var missingKeys = _resourceMessages.Keys.Where(key => !ResourceExists(entries, key)).ToList();
-
-            // Assert
-
-            //Please ensure all items are added to the appropriate resource file.
-
-            var missingResorces = string.Join(", ", missingKeys);
-            Assert.IsTrue(missingKeys.Count == 0, $"Missing resource keys: {missingResorces}");
-        }
-
-        private static bool ResourceExists(IEnumerable<ResourceEntry> entries, string key)
-        {
-            return entries.Any(entry => entry.Name.Contains(key));
-        }
-
-
-        private static bool ExistResorce(OperationResult<IQueryable<ResourceEntry>>? entries, string key)
-        {
-            return !(entries is not null && entries.Data is not null && entries.Data.Where(r => r.Name == key).Any());
         }
 
         private IResourceHandler SetupResourceHandlerMock()

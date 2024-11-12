@@ -1,10 +1,10 @@
-﻿namespace Infrastructure.Repositories.Abstract.CRUD
+﻿namespace Infrastructure.Repositories.Abstract.CRUD.Util
 {
     using Application.UseCases.ExternalServices;
     using Application.UseCases.Repository;
     using Application.UseCases.Repository.CRUD;
     using Domain.Interfaces.Entity;
-    using global::Application.Result;
+    using Application.Result;
 
     /// <summary>
     /// Utility class for entity validation operations.

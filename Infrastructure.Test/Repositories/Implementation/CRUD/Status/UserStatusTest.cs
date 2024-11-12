@@ -12,7 +12,7 @@
     using UtilitiesLayer;
 
     [TestClass]
-    public class UserStatusTests : ResourceProviderTests
+    public class UserStatusTests : SetupTest
     {
         [TestMethod]
         public void CanConstruct()

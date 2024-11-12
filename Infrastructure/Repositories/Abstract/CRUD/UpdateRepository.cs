@@ -4,7 +4,6 @@
     using Application.UseCases.ExternalServices;
     using Application.UseCases.Repository.CRUD;
     using Domain.Interfaces.Entity;
-    using Infrastructure.Other;
     using Infrastructure.Repositories.Abstract.CRUD.Validation;
     using Microsoft.EntityFrameworkCore;
     using Domain.DTO.Logging;
@@ -81,7 +80,7 @@
             }
             catch (Exception ex)
             {
-                Log log = Util.GetLogError(ex, entity, OperationExecute.Modified);
+                Log log = Other.Util.GetLogError(ex, entity, OperationExecute.Modified);
                 OperationResult<string> result = await _logService.CreateLog(log);
                 if (!result.IsSuccessful)
                 {
