@@ -88,15 +88,6 @@ namespace Infrastructure {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The image was not compressed successfully due to an unexpected error..
-        /// </summary>
-        internal static string FailedCompress {
-            get {
-                return ResourceManager.GetString("FailedCompress", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to One or more data from the User have been submitted with errors {0}.
         /// </summary>
         internal static string FailedDataSizeCharacter {
@@ -282,15 +273,6 @@ namespace Infrastructure {
         internal static string FailedTokenUserDoesNotExit {
             get {
                 return ResourceManager.GetString("FailedTokenUserDoesNotExit", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The image was not uploaded successfully due to an unexpected error..
-        /// </summary>
-        internal static string FailedUpload {
-            get {
-                return ResourceManager.GetString("FailedUpload", resourceCulture);
             }
         }
         

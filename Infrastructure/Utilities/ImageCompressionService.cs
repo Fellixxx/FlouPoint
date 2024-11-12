@@ -5,6 +5,7 @@
     using Application.UseCases.Utilities;
     using Domain.DTO.Logging;
     using Domain.EnumType;
+    using Infrastructure.Constants;
     using Infrastructure.Other;
     using SixLabors.ImageSharp.Formats.Jpeg;
 
@@ -58,9 +59,9 @@
                 OperationResult<string> result = await _logService.CreateLog(log);
                 if (!result.IsSuccessful)
                 {
-                    return OperationBuilder<Stream>.FailureUnexpectedError(Resource.FailedCompress);
+                    return OperationBuilder<Stream>.FailureUnexpectedError(ExceptionMessages.FailedCompress);
                 }
-                return OperationBuilder<Stream>.FailureUnexpectedError(Resource.FailedCompress);
+                return OperationBuilder<Stream>.FailureUnexpectedError(ExceptionMessages.FailedCompress);
             }
         }
     }

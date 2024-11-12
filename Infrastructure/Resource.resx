@@ -126,9 +126,6 @@
   <data name="FailedAlreadyRegisteredUser" xml:space="preserve">
     <value>A user is already registered with this username.</value>
   </data>
-  <data name="FailedCompress" xml:space="preserve">
-    <value>The image was not compressed successfully due to an unexpected error.</value>
-  </data>
   <data name="FailedDataSizeCharacter" xml:space="preserve">
     <value>One or more data from the User have been submitted with errors {0}</value>
   </data>
@@ -191,9 +188,6 @@
   </data>
   <data name="FailedTokenUserDoesNotExit" xml:space="preserve">
     <value>The submitted token corresponds to a user that doesn't exist.</value>
-  </data>
-  <data name="FailedUpload" xml:space="preserve">
-    <value>The image was not uploaded successfully due to an unexpected error.</value>
   </data>
   <data name="FailedUserDoesNotExist" xml:space="preserve">
     <value>The user does not exist.</value>

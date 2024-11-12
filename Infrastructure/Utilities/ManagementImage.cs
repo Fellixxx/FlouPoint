@@ -5,6 +5,7 @@
     using Application.UseCases.Utilities;
     using Domain.DTO.Logging;
     using Domain.EnumType;
+    using Infrastructure.Constants;
     using Infrastructure.Other;
 
     /// <summary>
@@ -66,10 +67,10 @@
                 OperationResult<string> result = await _logService.CreateLog(log);
                 if (!result.IsSuccessful)
                 {
-                    return OperationBuilder<bool>.FailureExtenalService(Resource.FailedUpload);
+                    return OperationBuilder<bool>.FailureExtenalService(ExceptionMessages.FailedUpload);
                 }
 
-                return OperationBuilder<bool>.FailureExtenalService(Resource.FailedUpload);
+                return OperationBuilder<bool>.FailureExtenalService(ExceptionMessages.FailedUpload);
             }
         }
 
@@ -103,10 +104,10 @@
                 OperationResult<string> result = await _logService.CreateLog(log);
                 if (!result.IsSuccessful)
                 {
-                    return OperationBuilder<Stream>.FailureExtenalService(Resource.FailedUpload);
+                    return OperationBuilder<Stream>.FailureExtenalService(ExceptionMessages.FailedUpload);
                 }
 
-                return OperationBuilder<Stream>.FailureExtenalService(Resource.FailedUpload);
+                return OperationBuilder<Stream>.FailureExtenalService(ExceptionMessages.FailedUpload);
             }
         }
     }
