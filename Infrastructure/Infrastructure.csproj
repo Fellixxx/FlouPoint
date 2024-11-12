@@ -40,6 +40,11 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>ResourceCreateRepository.resx</DependentUpon>
     </Compile>
+    <Compile Update="Repositories\Abstract\CRUD\Delete\ResourceDeleteRepository.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ResourceDeleteRepository.resx</DependentUpon>
+    </Compile>
     <Compile Update="Repositories\Abstract\CRUD\Query\ResourceQuery.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -70,6 +75,10 @@
     <EmbeddedResource Update="Repositories\Abstract\CRUD\Create\ResourceCreateRepository.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>ResourceCreateRepository.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Repositories\Abstract\CRUD\Delete\ResourceDeleteRepository.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ResourceDeleteRepository.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Update="Repositories\Abstract\CRUD\Query\ResourceQuery.resx">
       <Generator>ResXFileCodeGenerator</Generator>

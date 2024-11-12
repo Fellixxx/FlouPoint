@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Infrastructure.ExternalServices.LogExternal {
+namespace Infrastructure.Repositories.Abstract.CRUD.Delete {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace Infrastructure.ExternalServices.LogExternal {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class ResourceLogService {
+    internal class ResourceDeleteRepository {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal ResourceLogService() {
+        internal ResourceDeleteRepository() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace Infrastructure.ExternalServices.LogExternal {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Infrastructure.ExternalServices.LogExternal.ResourceLogService", typeof(ResourceLogService).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Infrastructure.Repositories.Abstract.CRUD.Delete.ResourceDeleteRepository", typeof(ResourceDeleteRepository).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,47 +61,11 @@ namespace Infrastructure.ExternalServices.LogExternal {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The log services token got failed..
+        ///   Looks up a localized string similar to {0} was deleted successfully..
         /// </summary>
-        internal static string FailedGetToken {
+        internal static string SuccessfullyGenericDeleted {
             get {
-                return ResourceManager.GetString("FailedGetToken", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The log creation got failed..
-        /// </summary>
-        internal static string FailedSetLog {
-            get {
-                return ResourceManager.GetString("FailedSetLog", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to {0} was activated successfully..
-        /// </summary>
-        internal static string LogSuccessfullyGenericActiveated {
-            get {
-                return ResourceManager.GetString("LogSuccessfullyGenericActiveated", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Token got successfully..
-        /// </summary>
-        internal static string SuccessfullyGetToken {
-            get {
-                return ResourceManager.GetString("SuccessfullyGetToken", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The successfully SetLog..
-        /// </summary>
-        internal static string SuccessfullySetLog {
-            get {
-                return ResourceManager.GetString("SuccessfullySetLog", resourceCulture);
+                return ResourceManager.GetString("SuccessfullyGenericDeleted", resourceCulture);
             }
         }
     }

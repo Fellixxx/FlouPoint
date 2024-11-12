@@ -2,12 +2,12 @@
 namespace Infrastructure.Repositories.Implementation.CRUD.User
 {
     using Application.UseCases.CRUD.User;
-    using Infrastructure.Repositories.Abstract.CRUD;
     using Application.UseCases.ExternalServices;
     using Persistence.BaseDbContext;
     using Domain.Entities;
     using Application.UseCases.Repository.CRUD;
     using Application.UseCases.Repository;
+    using Infrastructure.Repositories.Abstract.CRUD.Delete;
 
     /// <summary>
     /// Repository class for deleting user entities.

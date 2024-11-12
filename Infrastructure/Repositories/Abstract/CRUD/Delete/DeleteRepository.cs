@@ -1,4 +1,4 @@
-﻿namespace Infrastructure.Repositories.Abstract.CRUD
+﻿namespace Infrastructure.Repositories.Abstract.CRUD.Delete
 {
     using Application.Result;
     using Application.UseCases.ExternalServices;
@@ -59,7 +59,7 @@
                 }
 
                 // If validation is successful, delete the entity from the database
-                var entity = RepositoryHelper.ValidateArgument<T>(validationResult.Data);
+                var entity = RepositoryHelper.ValidateArgument(validationResult.Data);
                 bool result = await Delete(entity);
 
                 // Custom success message

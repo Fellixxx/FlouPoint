@@ -9,7 +9,7 @@ namespace Infrastructure.Test.Repositories.Implementation.CRUD.User
     using UtilitiesLayer;
 
     [TestClass]
-    public class UserStatusTests : TestsBase
+    public class UserStatusTests : ResourceProviderTests
     {
         [TestMethod]
         public void CanConstruct()

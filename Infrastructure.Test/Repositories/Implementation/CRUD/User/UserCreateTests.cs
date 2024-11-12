@@ -16,7 +16,7 @@ namespace Infrastructure.Test.Repositories.Implementation.CRUD.User
     using UtilitiesLayer;
 
     [TestClass]
-    public class UserCreateTests : TestsBase
+    public class UserCreateTests : ResourceProviderTests
     {
         [TestMethod]
         public void CanConstruct()

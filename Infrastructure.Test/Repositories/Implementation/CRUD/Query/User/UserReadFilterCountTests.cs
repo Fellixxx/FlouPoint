@@ -11,7 +11,7 @@ namespace Infrastructure.Test.Repositories.Implementation.CRUD.Query.User
     using TContext = System.String;
 
     [TestClass]
-    public class UserReadFilterCountTests : TestsBase
+    public class UserReadFilterCountTests : ResourceProviderTests
     {
 
         [TestMethod]

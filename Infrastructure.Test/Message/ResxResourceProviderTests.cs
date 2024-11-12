@@ -17,7 +17,7 @@ namespace Infrastructure.Test.Message
 
             // Assert
             Assert.IsNotNull(result);
-            Assert.AreEqual(result.Count, 73);
+            Assert.AreEqual(result.Count, 78);
         }
 
         [TestMethod]

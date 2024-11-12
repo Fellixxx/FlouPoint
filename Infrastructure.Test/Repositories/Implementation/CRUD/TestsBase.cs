@@ -16,11 +16,13 @@ using Microsoft.EntityFrameworkCore;
 using Moq;
 using Persistence.BaseDbContext;
 using Persistence.CreateStruture.Constants.ColumnType;
+using Application.Result;
+using Domain.Entities;
 
 namespace Infrastructure.Test.Repositories.Implementation.CRUD
 {
     [TestClass]
-    public class TestsBase
+    public class ResourceProviderTests
     {
         protected DbContextOptions<CommonDbContext> _options;
         protected CommonDbContext _dbContext;
@@ -33,7 +35,6 @@ namespace Infrastructure.Test.Repositories.Implementation.CRUD
         protected IUserReadFilterCount _userReadFilterCount;
         protected IResourceProvider _resourceProvider;
         protected IResourceHandler _resourceHandler;
-        protected List<string> _resourceKeys;
         protected IUtilEntity<Domain.Entities.User> _utilEntity;
 
         private readonly Dictionary<string, string> _resourceMessages = new()
@@ -55,7 +56,6 @@ namespace Infrastructure.Test.Repositories.Implementation.CRUD
             { "ValidationGlobalOkMessage", "Operation completed successfully." },
             { "UtilGlobalOkMessage", "Ok" },
         };
-
 
         [TestInitialize]
         public void SetUp()
@@ -80,14 +80,37 @@ namespace Infrastructure.Test.Repositories.Implementation.CRUD
         }
 
         [TestMethod]
-        public void ExistAllItems()
+        public async Task AllResourceKeysExistInResourceProvider()
         {
-            // Act
+            // Arrange
             var instance = new ResxResourceProvider();
-            var entries = instance.GetResourceEntries();
+            var entriesResult = await instance.GetResourceEntries();
+
+            // Assert early if entries result is null or contains no data
+            Assert.IsNotNull(entriesResult?.Data, "Resource entries are null or empty.");
+
+            var entries = entriesResult.Data.ToList(); // Cache to avoid multiple enumerations
+
+            // Act
+            var missingKeys = _resourceMessages.Keys.Where(key => !ResourceExists(entries, key)).ToList();
 
             // Assert
-            //Assert.IsNotNull(instance);
+
+            //Please ensure all items are added to the appropriate resource file.
+
+            var missingResorces = string.Join(", ", missingKeys);
+            Assert.IsTrue(missingKeys.Count == 0, $"Missing resource keys: {missingResorces}");
+        }
+
+        private static bool ResourceExists(IEnumerable<ResourceEntry> entries, string key)
+        {
+            return entries.Any(entry => entry.Name.Contains(key));
+        }
+
+
+        private static bool ExistResorce(OperationResult<IQueryable<ResourceEntry>>? entries, string key)
+        {
+            return !(entries is not null && entries.Data is not null && entries.Data.Where(r => r.Name == key).Any());
         }
 
         private IResourceHandler SetupResourceHandlerMock()
