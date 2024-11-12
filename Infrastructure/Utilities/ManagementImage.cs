@@ -8,6 +8,7 @@
     using Domain.EnumType;
     using Infrastructure.Constants;
     using Infrastructure.Other;
+    using Infrastructure.Repositories;
 
     /// <summary>
     /// Provides functionality for managing images, including interacting with external services like Google Drive.
@@ -68,9 +69,11 @@
                 }
 
                 Stream streamCompress = resultCompress.Data ?? new MemoryStream();
+                await ResourceHandler.CreateAsync(_resourceProvider, _resourceKeys);
+                var successfullyUpload = _resourceHandler.GetResource("SuccessfullyUpload");
                 // Upload operation commented out; possibly uploads to Google Drive or another location.
                 // var result = UploadFileAsync(streamCompress);
-                return OperationResult<bool>.Success(true, Resource.SuccessfullyUpload);
+                return OperationResult<bool>.Success(true, successfullyUpload);
             }
             catch (Exception ex)
             {

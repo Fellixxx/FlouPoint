@@ -6,7 +6,6 @@
     using System.Linq;
     using System.Threading.Tasks;
     using System.Collections.Generic;
-    using Infrastructure.Repositories.Abstract.CRUD;
     using Application.UseCases.ExternalServices;
     using Application.UseCases.CRUD.User;
     using UtilitiesLayer;
@@ -17,6 +16,7 @@
     using Application.UseCases.Repository.CRUD;
     using Application.UseCases.Repository;
     using Infrastructure;
+    using Infrastructure.Repositories.Abstract.CRUD.Update;
 
     /// <summary>
     /// Provides methods to update user entities in the database.

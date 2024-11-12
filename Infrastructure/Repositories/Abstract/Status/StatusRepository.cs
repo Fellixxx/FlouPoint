@@ -62,9 +62,9 @@
                 bool result = await Update(entity);
 
                 await ResourceHandler.CreateAsync(_resourceProvider, _resourceKeys);
-                var failedNecesaryData = _resourceHandler.GetResource("SuccessfullyGenericActiveated");
+                var successfullyGenericActiveated = _resourceHandler.GetResource("SuccessfullyGenericActiveated");
                 // Custom success message
-                string messageSuccess = string.Format(Resource.SuccessfullyGenericActiveated, typeof(T).Name);
+                var messageSuccess = string.Format(successfullyGenericActiveated, typeof(T).Name);
 
                 // Return a success operation result
                 return OperationResult<bool>.Success(result, messageSuccess);
@@ -104,9 +104,10 @@
 
                 // Update the entity in the database
                 bool result = await Update(entity);
-
+                await ResourceHandler.CreateAsync(_resourceProvider, _resourceKeys);
+                var successfullyGenericActiveated = _resourceHandler.GetResource("StatusSuccessfullyGenericDisabled");
                 // Custom success message
-                string messageSuccess = string.Format(Resource.SuccessfullyGenericDisabled, typeof(T).Name);
+                string messageSuccess = string.Format(successfullyGenericActiveated, typeof(T).Name);
 
                 // Return a success operation result
                 return OperationResult<bool>.Success(result, messageSuccess);

@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Infrastructure.Repositories.Abstract.Status {
+namespace Infrastructure.Repositories.Abstract.CRUD.Update {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace Infrastructure.Repositories.Abstract.Status {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class ResourceStatusRepository {
+    internal class ResourceUpdate {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal ResourceStatusRepository() {
+        internal ResourceUpdate() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace Infrastructure.Repositories.Abstract.Status {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Infrastructure.Repositories.Abstract.Status.ResourceStatusRepository", typeof(ResourceStatusRepository).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Infrastructure.Repositories.Abstract.CRUD.Update.ResourceUpdate", typeof(ResourceUpdate).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,29 +61,11 @@ namespace Infrastructure.Repositories.Abstract.Status {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Necessary data was not provided..
+        ///   Looks up a localized string similar to {0} was updated successfully..
         /// </summary>
-        internal static string StatusFailedNecesaryData {
+        internal static string SuccessfullyGenericUpdated {
             get {
-                return ResourceManager.GetString("StatusFailedNecesaryData", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Ok.
-        /// </summary>
-        internal static string StatusGlobalOkMessage {
-            get {
-                return ResourceManager.GetString("StatusGlobalOkMessage", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to {0} was disabled successfully..
-        /// </summary>
-        internal static string StatusSuccessfullyGenericDisabled {
-            get {
-                return ResourceManager.GetString("StatusSuccessfullyGenericDisabled", resourceCulture);
+                return ResourceManager.GetString("SuccessfullyGenericUpdated", resourceCulture);
             }
         }
     }

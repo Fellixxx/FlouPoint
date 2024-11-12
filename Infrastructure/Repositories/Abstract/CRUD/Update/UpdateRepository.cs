@@ -1,4 +1,4 @@
-﻿namespace Infrastructure.Repositories.Abstract.CRUD
+﻿namespace Infrastructure.Repositories.Abstract.CRUD.Update
 {
     using Application.Result;
     using Application.UseCases.ExternalServices;
@@ -37,7 +37,7 @@
             _resourceHandler = resourceHandler;
             _resourceKeys =
             [
-                "LogSuccessfullyGenericActiveated"
+                "SuccessfullyGenericUpdated"
             ];
         }
 
@@ -71,8 +71,10 @@
                 // If validation is successful, update the entity in the database
                 bool updateResult = await base.Update(resultModifyEntity.Data);
 
+                await ResourceHandler.CreateAsync(_resourceProvider, _resourceKeys);
+                var successfullyGenericActiveated = _resourceHandler.GetResource("SuccessfullyGenericUpdated");
                 // Custom success message
-                string messageSuccess = string.Format(Resource.SuccessfullyGenericUpdated, typeof(T).Name);
+                string messageSuccess = string.Format(successfullyGenericActiveated, typeof(T).Name);
 
                 // Return a success operation result
                 return OperationResult<bool>.Success(updateResult, messageSuccess);

@@ -43,6 +43,7 @@ namespace Infrastructure.Test.Repositories.Implementation.CRUD
             { "FailureConfigurationMissingError", "The configuration for the log services is missing the username, password, or URL." },
             { "GenericExistValidation", "The {0} does not exist." },
             { "LogSuccessfullyGenericActiveated", "{0} was activated successfully." },
+            { "StatusSuccessfullyGenericDisabled", "{0} was disabled successfully." },
             { "StatusFailedNecesaryData", "Necessary data was not provided." },
             { "StatusGlobalOkMessage", "Ok" },
             { "SuccessfullyGeneric", "{0} was created successfully." },
@@ -55,15 +56,17 @@ namespace Infrastructure.Test.Repositories.Implementation.CRUD
             { "FailedDataSizeCharacter", "One or more data from the User have been submitted with errors {0}" },
             { "FailedEmailInvalidFormat", "The given email is not in a valid format" },
             { "FailedAlreadyRegisteredEmail", "A user is already registered with this email." },
-
             { "CreateFailedDataSizeCharacter", "One or more data from the User have been submitted with errors {0}" },
             { "CreateFailedEmailInvalidFormat", "The given email is not in a valid format" },
             { "CreateFailedAlreadyRegisteredEmail", "A user is already registered with this email." },
-           
+
+            { "SuccessfullyGenericUpdated", "{0} was updated successfully." },
+
             { "UpdateFailedDataSizeCharacter", "One or more data from the User have been submitted with errors {0}" },
             { "UpdateFailedEmailInvalidFormat", "The given email is not in a valid format" },
             { "UpdateFailedAlreadyRegisteredEmail", "A user is already registered with this email." },
-            { "UpdateSuccessfullySearchGeneric", "The search in the {0} entity completed successfully." }
+            { "UpdateSuccessfullySearchGeneric", "The search in the {0} entity completed successfully." },
+            { "SuccessfullyUpload", "The image was uploaded successfully due to an unexpected error." },
         };
 
         [TestInitialize]
