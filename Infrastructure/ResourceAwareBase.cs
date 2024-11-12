@@ -27,11 +27,5 @@ namespace Infrastructure
                 _preloadedResources[key] = await _resourceProvider.GetMessageValueOrDefault(key, $"Default for {key}");
             }
         }
-
-        // Método para obtener un recurso precargado
-        protected string GetPreloadedResource(string key)
-        {
-            return _preloadedResources.TryGetValue(key, out var value) ? value : "Resource not found";
-        }
     }
 }
