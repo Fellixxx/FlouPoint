@@ -20,7 +20,7 @@
         {
             if (IsSuccessful.Equals(true))
             {
-                throw new InvalidOperationResultException(InvalidOperation);
+                throw new InvalidOperation(InvalidOperation);
             }
         }
 

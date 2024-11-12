@@ -80,7 +80,7 @@ namespace Application.Test.Result
             var successResult = OperationResult<string>.Success("Success");
 
             // Act & Assert
-            var exception = Assert.ThrowsException<InvalidOperationResultException>(() => successResult.AsType<int>());
+            var exception = Assert.ThrowsException<InvalidOperation>(() => successResult.AsType<int>());
 
             Assert.AreEqual("This method can only be used if the value of IsSuccessful is false.", exception.Message);
         }

@@ -7,21 +7,21 @@ namespace Application.Test.Result.Exceptions
     [TestClass]
     public class InvalidOperationResultExceptionTests
     {
-        private InvalidOperationResultException _testClass;
+        private InvalidOperation _testClass;
         private string _message;
 
         [TestInitialize]
         public void SetUp()
         {
             _message = "TestValue1658752453";
-            _testClass = new InvalidOperationResultException(_message);
+            _testClass = new InvalidOperation(_message);
         }
 
         [TestMethod]
         public void CanConstruct()
         {
             // Act
-            var instance = new InvalidOperationResultException(_message);
+            var instance = new InvalidOperation(_message);
 
             // Assert
             Assert.IsNotNull(instance);
@@ -33,7 +33,7 @@ namespace Application.Test.Result.Exceptions
         [DataRow("   ")]
         public void CannotConstructWithInvalidMessage(string value)
         {
-            Assert.ThrowsException<ArgumentNullException>(() => new InvalidOperationResultException(value));
+            Assert.ThrowsException<ArgumentNullException>(() => new InvalidOperation(value));
         }
 
         [TestMethod]
@@ -43,7 +43,7 @@ namespace Application.Test.Result.Exceptions
             var expectedMessage = "This is a custom error message for an invalid operation result.";
 
             // Act
-            var exception = new InvalidOperationResultException(expectedMessage);
+            var exception = new InvalidOperation(expectedMessage);
 
             // Assert
             Assert.IsNotNull(exception);
@@ -57,9 +57,9 @@ namespace Application.Test.Result.Exceptions
             var expectedMessage = "This operation is invalid.";
 
             // Act & Assert
-            var exception = Assert.ThrowsException<InvalidOperationResultException>(() =>
+            var exception = Assert.ThrowsException<InvalidOperation>(() =>
             {
-                throw new InvalidOperationResultException(expectedMessage);
+                throw new InvalidOperation(expectedMessage);
             });
 
             // Assert
@@ -70,7 +70,7 @@ namespace Application.Test.Result.Exceptions
         public void InvalidOperationResultException_Should_Inherit_From_Exception_Class()
         {
             // Arrange & Act
-            var exception = new InvalidOperationResultException("Test inheritance");
+            var exception = new InvalidOperation("Test inheritance");
 
             // Assert
             Assert.IsInstanceOfType(exception, typeof(Exception));
@@ -85,7 +85,7 @@ namespace Application.Test.Result.Exceptions
             var message = "Test message";
 
             // Act
-            var exception = new InvalidOperationResultException(message);
+            var exception = new InvalidOperation(message);
 
             // Assert
             Assert.IsNull(exception.InnerException);
@@ -95,7 +95,7 @@ namespace Application.Test.Result.Exceptions
         public void InvalidOperationResultException_Data_Should_Be_Empty_By_Default()
         {
             // Arrange
-            var exception = new InvalidOperationResultException("Test message");
+            var exception = new InvalidOperation("Test message");
 
             // Act & Assert
             Assert.AreEqual(0, exception.Data.Count);
@@ -105,7 +105,7 @@ namespace Application.Test.Result.Exceptions
         public void InvalidOperationResultException_Can_Add_Data()
         {
             // Arrange
-            var exception = new InvalidOperationResultException("Test message");
+            var exception = new InvalidOperation("Test message");
 
             // Act
             exception.Data["ErrorCode"] = 404;
@@ -119,7 +119,7 @@ namespace Application.Test.Result.Exceptions
         public void InvalidOperationResultException_Can_Set_And_Get_HelpLink()
         {
             // Arrange
-            var exception = new InvalidOperationResultException("Test message");
+            var exception = new InvalidOperation("Test message");
             var helpLink = "http://example.com/help";
 
             // Act
@@ -134,7 +134,7 @@ namespace Application.Test.Result.Exceptions
         {
             // Arrange
             var message = "Test message";
-            var exception = new InvalidOperationResultException(message);
+            var exception = new InvalidOperation(message);
 
             // Act
             var result = exception.ToString();
@@ -148,14 +148,14 @@ namespace Application.Test.Result.Exceptions
         {
             // Arrange
             var message = "Test message";
-            InvalidOperationResultException exception = null;
+            InvalidOperation exception = null;
 
             // Act
             try
             {
-                throw new InvalidOperationResultException(message);
+                throw new InvalidOperation(message);
             }
-            catch (InvalidOperationResultException ex)
+            catch (InvalidOperation ex)
             {
                 exception = ex;
             }
@@ -170,7 +170,7 @@ namespace Application.Test.Result.Exceptions
         public void InvalidOperationResultException_Should_Not_Inherit_From_SystemException()
         {
             // Arrange & Act
-            var exception = new InvalidOperationResultException("Test message");
+            var exception = new InvalidOperation("Test message");
 
             // Assert
             Assert.IsNotInstanceOfType(exception, typeof(SystemException));
@@ -180,7 +180,7 @@ namespace Application.Test.Result.Exceptions
         public void InvalidOperationResultException_HResult_Should_Have_Default_Value()
         {
             // Arrange
-            var exception = new InvalidOperationResultException("Test message");
+            var exception = new InvalidOperation("Test message");
 
             // Act
             var hResult = exception.HResult;
@@ -196,7 +196,7 @@ namespace Application.Test.Result.Exceptions
             var longMessage = new string('a', 10000);
 
             // Act
-            var exception = new InvalidOperationResultException(longMessage);
+            var exception = new InvalidOperation(longMessage);
 
             // Assert
             Assert.AreEqual(longMessage, exception.Message);
