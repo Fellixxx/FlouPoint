@@ -37,8 +37,8 @@ namespace Infrastructure.Repositories.Implementation.CRUD.Query.User
 
             // Define the predicate expression based on the filter
             return u => string.IsNullOrWhiteSpace(filter) ||
-            (u.Name ?? string.Empty).ToLower().Contains(filter) ||
-            (u.Email ?? string.Empty).ToLower().Contains(filter);
+            (u.Name ?? string.Empty).Contains(filter, StringComparison.CurrentCultureIgnoreCase) ||
+            (u.Email ?? string.Empty).Contains(filter, StringComparison.CurrentCultureIgnoreCase);
         }
     }
 }

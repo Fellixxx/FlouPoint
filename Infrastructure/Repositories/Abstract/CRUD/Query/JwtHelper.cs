@@ -3,6 +3,7 @@
     using Application.Result;
     using Application.UseCases.ExternalServices;
     using Application.UseCases.Repository;
+    using Infrastructure.Constants;
     using Newtonsoft.Json.Linq;
     using System.Text;
 
@@ -11,13 +12,7 @@
     /// </summary>
     public static class JwtHelper
     {
-        private const string BearerPrefix = "Bearer ";
-        private const string UserData = "http://schemas.microsoft.com/ws/2008/06/identity/claims/userdata";
-        private const string Whitespace = "Token cannot be null or whitespace.";
-        private const string StartBearer = "Token must start with 'Bearer ' prefix.";
-        private const string LengthBearer = "The length of the 'bearer' string is less than the 'bearer token' string.";
-        private const string InvalidJwt = "Invalid JWT payload format.";
-        private const string InvalidBase64Url = "Invalid Base64Url format.";
+
         //private readonly IResourceProvider _resourceProvider;
         //private IResourceHandler _resourceHandler;
         //private readonly List<string> _resourceKeys;
@@ -31,20 +26,20 @@
         {
             if (string.IsNullOrWhiteSpace(bearerToken))
             {
-                return OperationBuilder<string>.FailureBusinessValidation(Whitespace);
+                return OperationBuilder<string>.FailureBusinessValidation(ExceptionMessages.JwtHelper.Whitespace);
             }
 
-            if (!bearerToken.StartsWith(BearerPrefix, StringComparison.OrdinalIgnoreCase))
+            if (!bearerToken.StartsWith(ExceptionMessages.JwtHelper.BearerPrefix, StringComparison.OrdinalIgnoreCase))
             {
-                return OperationBuilder<string>.FailureBusinessValidation(StartBearer);
+                return OperationBuilder<string>.FailureBusinessValidation(ExceptionMessages.JwtHelper.StartBearer);
             }
 
-            if (BearerPrefix.Length >= bearerToken.Length)
+            if (ExceptionMessages.JwtHelper.BearerPrefix.Length >= bearerToken.Length)
             {
-                return OperationBuilder<string>.FailureBusinessValidation(LengthBearer);
+                return OperationBuilder<string>.FailureBusinessValidation(ExceptionMessages.JwtHelper.LengthBearer);
             }
 
-            var jwt = bearerToken[BearerPrefix.Length..].Trim();
+            var jwt = bearerToken[ExceptionMessages.JwtHelper.BearerPrefix.Length..].Trim();
 
             // Extract the payload part of the JWT
             var result = ExtractPayloadFromJwt(jwt);
@@ -68,7 +63,7 @@
             var tokenParts = jwt.Split('.');
             if (tokenParts.Length != 3)
             {
-                return OperationBuilder<string>.FailureBusinessValidation(InvalidJwt);
+                return OperationBuilder<string>.FailureBusinessValidation(ExceptionMessages.JwtHelper.InvalidJwt);
             }
 
             return Base64UrlDecode(tokenParts[1]);
@@ -84,12 +79,12 @@
             try
             {
                 var jsonObject = JObject.Parse(payload);
-                var idPayload = jsonObject[UserData]?.ToString() ?? string.Empty;
-                return OperationResult<string>.Success(RemoveFirsAndLastCharacters(idPayload), "Ok");
+                var idPayload = jsonObject[ExceptionMessages.JwtHelper.UserData]?.ToString() ?? string.Empty;
+                return OperationResult<string>.Success(RemoveFirsAndLastCharacters(idPayload), ExceptionMessages.JwtHelper.Suceesss);
             }
             catch
             {
-                return OperationBuilder<string>.FailureBusinessValidation(InvalidJwt);
+                return OperationBuilder<string>.FailureBusinessValidation(ExceptionMessages.JwtHelper.InvalidJwt);
             }
         }
 
@@ -121,10 +116,10 @@
             }
             catch
             {
-                return OperationBuilder<string>.FailureBusinessValidation(InvalidBase64Url);
+                return OperationBuilder<string>.FailureBusinessValidation(ExceptionMessages.JwtHelper.InvalidBase64Url);
             }
 
-            return OperationResult<string>.Success(Encoding.UTF8.GetString(bytes), "Ok");
+            return OperationResult<string>.Success(Encoding.UTF8.GetString(bytes), ExceptionMessages.JwtHelper.Suceesss);
         }
 
         /// <summary>

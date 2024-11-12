@@ -1,5 +1,6 @@
 ﻿using Application.UseCases.ExternalServices;
 using Application.UseCases.Repository;
+using Infrastructure.Constants;
 using System.Threading.Tasks;
 
 namespace Infrastructure.Repositories
@@ -24,7 +25,7 @@ namespace Infrastructure.Repositories
 
             if (!keys.Any())
             {
-                throw new ArgumentException("Keys collection cannot be empty.", nameof(keys));
+                throw new ArgumentException(ExceptionMessages.ResourceHandler.CollectionEmpty, nameof(keys));
             }
 
             var handler = new ResourceHandler(resourceProvider);
@@ -47,7 +48,7 @@ namespace Infrastructure.Repositories
             {
                 foreach (var key in keys)
                 {
-                    var resource = await _resourceProvider.GetMessageValueOrDefault(key, $"Default for {key}");
+                    var resource = await _resourceProvider.GetMessageValueOrDefault(string.Format(ExceptionMessages.ResourceHandler.Default, key));
                     _preloadedResources[key] = resource;
                 }
             }
@@ -61,7 +62,7 @@ namespace Infrastructure.Repositories
                 throw new ArgumentNullException(nameof(key));
             }
 
-            return _preloadedResources.TryGetValue(key, out var value) ? value : "Resource not found";
+            return _preloadedResources.TryGetValue(key, out var value) ? value : ExceptionMessages.ResourceHandler.NoKeysFound;
         }
     }
 }

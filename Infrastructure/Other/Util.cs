@@ -29,7 +29,7 @@
             }
 
             // Prepare the message for the log entry
-            string message = $"Error Message: {ex.Message}  StackTrace: {ex.StackTrace}";
+            string message = string.Format(ExceptionMessages.Util.LogEntry,ex.Message ,ex.StackTrace);
             LogBuilder logBuilder = LogBuilder.GetLogBuilder();
             // Create the log entry
             OperationResult<Log> result = logBuilder.Error(message, entity, operation);

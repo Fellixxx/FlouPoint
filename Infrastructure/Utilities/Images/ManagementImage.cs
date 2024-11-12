@@ -77,7 +77,7 @@
             }
             catch (Exception ex)
             {
-                Log log = Util.GetLogError(ex, filename, OperationExecute.CreateCustomOperation("Validate", "General validation operation."));
+                Log log = Util.GetLogError(ex, filename, OperationExecute.CreateCustomOperation("Validate",ExceptionMessages.ManagementImage.General));
                 OperationResult<string> result = await _logService.CreateLog(log);
                 if (!result.IsSuccessful)
                 {
@@ -99,7 +99,7 @@
             {
                 if (base64String == null)
                 {
-                    throw new Exception("The parameter is null.");
+                    throw new Exception(ExceptionMessages.ManagementImage.ParameterNull);
                 }
 
                 // Removing the base64 prefix if it exists.

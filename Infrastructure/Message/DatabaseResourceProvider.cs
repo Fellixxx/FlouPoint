@@ -4,7 +4,9 @@
     using Application.UseCases.ExternalServices;
     using Application.UseCases.Repository.CRUD.ResourceEntry;
     using Domain.Entities;
+    using Infrastructure.Constants;
     using Microsoft.EntityFrameworkCore;
+    using Microsoft.Extensions.Logging.Abstractions;
 
     public class DatabaseResourceProvider : IResourceProvider
     {
@@ -29,18 +31,18 @@
             }
             if (!resources.Data.Any())
             {
-                return OperationBuilder<ResourceEntry>.FailureBusinessValidation("No resource exists with the specified key.");
+                return OperationBuilder<ResourceEntry>.FailureBusinessValidation(ExceptionMessages.DBResorceProvider.KeyNotFound);
             }
 
             if (resources.Data.Count() > 1)
             {
-                return OperationBuilder<ResourceEntry>.FailureBusinessValidation("Multiple resources exist with the same key.");
+                return OperationBuilder<ResourceEntry>.FailureBusinessValidation(ExceptionMessages.DBResorceProvider.MultipleResources);
             }
 
             return OperationResult<ResourceEntry>.Success(resources.Data.FirstOrDefault());
         }
 
-        public async Task<string> GetMessageValueOrDefault(string key, string defaultValue = "Resource not found")
+        public async Task<string> GetMessageValueOrDefault(string key, string defaultValue = ExceptionMessages.DBResorceProvider.KeyNotFound)
         {
             var result = await GetMessage(key);
             if (result.IsSuccessful)
@@ -55,12 +57,12 @@
             var entries = _resourceEntryQuery.ReadFilter(r => r.Active);
             if (entries is null)
             {
-                return OperationBuilder<IQueryable<ResourceEntry>>.FailureBusinessValidation("Unable to read the resources file.");
+                return OperationBuilder<IQueryable<ResourceEntry>>.FailureBusinessValidation(ExceptionMessages.DBResorceProvider.UnableToRead);
             }
 
-            if (entries.Result.Data.Count() == 0)
+            if (entries is not null && entries.Result is not null && entries.Result.Data is not null && !entries.Result.Data.Any())
             {
-                return OperationBuilder<IQueryable<ResourceEntry>>.FailureBusinessValidation("No resource keys were found.");
+                return OperationBuilder<IQueryable<ResourceEntry>>.FailureBusinessValidation(ExceptionMessages.DBResorceProvider.NoKeysFound);
             }
 
             return OperationResult<IQueryable<ResourceEntry>>.Success(entries.Result.Data);

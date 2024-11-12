@@ -3,6 +3,7 @@
     using Application.Result;
     using Application.UseCases.ExternalServices;
     using Domain.Entities;
+    using Infrastructure.Constants;
     using System.Collections;
     using System.Collections.Generic;
     using System.Reflection;
@@ -54,21 +55,21 @@
                 return entries.ToResultWithXType<ResourceEntry>();
             }
 
-            var resources = entries.Data.Where(r => r.Name == key);
+            var resources = entries?.Data?.Where(r => r.Name == key).ToList() ?? [];
 
             if (!resources.Any())
             {
-                return OperationBuilder<ResourceEntry>.FailureBusinessValidation("No resource exists with the specified key.");
+                return OperationBuilder<ResourceEntry>.FailureBusinessValidation(ExceptionMessages.FileResorceProvider.NoKeysFound);
             }
 
-            if (resources.Count() > 1)
+            if (resources.Count > 1)
             {
-                return OperationBuilder<ResourceEntry>.FailureBusinessValidation("Multiple resources exist with the same key.");
+                return OperationBuilder<ResourceEntry>.FailureBusinessValidation(ExceptionMessages.FileResorceProvider.MultipleResources);
             }
 
             return OperationResult<ResourceEntry>.Success(resources.FirstOrDefault());
         }
-        public async Task<string> GetMessageValueOrDefault(string key, string defaultValue = "Resource not found")
+        public async Task<string> GetMessageValueOrDefault(string key, string defaultValue = ExceptionMessages.FileResorceProvider.NoKeysFound)
         {
             var result = await GetMessage(key);
             if (result.IsSuccessful)
@@ -82,12 +83,12 @@
             var entries = GetEntries();
             if (entries is null)
             {
-                return OperationBuilder<IQueryable<ResourceEntry>>.FailureBusinessValidation("Unable to read the resources file.");
+                return OperationBuilder<IQueryable<ResourceEntry>>.FailureBusinessValidation(ExceptionMessages.FileResorceProvider.UnableToRead);
             }
 
             if (entries.Keys.Count == 0)
             {
-                return OperationBuilder<IQueryable<ResourceEntry>>.FailureBusinessValidation("No resource keys were found.");
+                return OperationBuilder<IQueryable<ResourceEntry>>.FailureBusinessValidation(ExceptionMessages.FileResorceProvider.NoKeysFound);
             }
 
 

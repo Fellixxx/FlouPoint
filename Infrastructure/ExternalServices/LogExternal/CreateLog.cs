@@ -4,6 +4,7 @@
     using Newtonsoft.Json;
     using Domain.DTO.Logging;
     using Domain.EnumType;
+    using Infrastructure.Constants;
 
     public static class CreateLog
     {
@@ -26,7 +27,7 @@
                 // Validation for message and entity
                 if (string.IsNullOrWhiteSpace(message) || entity is null)
                 {
-                    return OperationBuilder<Log>.FailureDataSubmittedInvalid("The message or enitty was not submitted.");
+                    return OperationBuilder<Log>.FailureDataSubmittedInvalid(ExceptionMessages.Log.FailureDataSubmittedInvalid);
                 }
 
                 // Get the name of the entity and serialize its value
@@ -35,22 +36,25 @@
 
                 // Build the log entry
                 Log log = LogBuilderHelpers.GetLog(message, entityName, entityValue, level, operation);
-                return OperationResult<Log>.Success(log, "The Log validation of the OperationResult was successfully.");
+                return OperationResult<Log>.Success(log, ExceptionMessages.Log.Success);
             }
             catch (JsonSerializationException jsonEx)
             {
                 // Handle exceptions related to JSON serialization
-                return OperationBuilder<Log>.FailureDataSubmittedInvalid($"Failed to serialize entity: {jsonEx.Message}");
+                var failedSerialize = string.Format(ExceptionMessages.Log.FailedSerialize, jsonEx.Message);
+                return OperationBuilder<Log>.FailureDataSubmittedInvalid(failedSerialize);
             }
             catch (NullReferenceException nullEx)
             {
                 // Handle null reference exceptions
-                return OperationBuilder<Log>.FailureUnexpectedError($"Null reference encountered: {nullEx.Message}");
+                var failedSerialize = string.Format(ExceptionMessages.Log.UnexpectedNullError, nullEx.Message);
+                return OperationBuilder<Log>.FailureUnexpectedError(failedSerialize);
             }
             catch (Exception ex)
             {
                 // General error handling for unexpected issues
-                return OperationBuilder<Log>.FailureUnexpectedError($"An unexpected error occurred: {ex.Message}");
+                var unknowledgeableError = string.Format(ExceptionMessages.Log.UnexpectedNullError, ex.Message);
+                return OperationBuilder<Log>.FailureUnexpectedError(unknowledgeableError);
             }
         }
     }
