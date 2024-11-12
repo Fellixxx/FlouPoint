@@ -11,6 +11,7 @@
     using Domain.DTO.Logging;
     using Application.UseCases.ExternalServices;
     using Application.UseCases.Repository;
+    using Infrastructure.Repositories;
 
     /// <summary>
     /// Provides a base for interacting with an external logging service.
@@ -45,7 +46,11 @@
             _resourceHandler = resourceHandler;
             _resourceKeys =
             [
-                "LogSuccessfullyGenericActiveated"
+                "FailureConfigurationMissingError",
+                "FailedGetToken",
+                "SuccessfullyGetToken",
+                "FailedSetLog",
+                "SuccessfullySetLog"
             ];
         }
 
@@ -55,8 +60,10 @@
         /// <returns>A task representing the asynchronous operation. The task result contains the operation result with the authentication token or an error message.</returns>
         private async Task<OperationResult<string>> GetToken()
         {
+            await ResourceHandler.CreateAsync(_resourceProvider, _resourceKeys);
             if (HasParameter())
             {
+                var failureConfigurationMissingError = _resourceHandler.GetResource("FailureConfigurationMissingError");
                 var message = Resource.FailureConfigurationMissingError;
                 return OperationBuilder<string>.FailureConfigurationMissingError(message);
             }
@@ -66,14 +73,16 @@
 
             if (!response.IsSuccessStatusCode)
             {
-                return OperationBuilder<string>.FailureExtenalService(Resource.FailedGetToken);
+                var failedGetToken = _resourceHandler.GetResource("FailedGetToken");
+                return OperationBuilder<string>.FailureExtenalService(failedGetToken);
             }
 
             var result = await _httpContentWrapper.ReadAsStringAsync(response.Content);
             var _tokenResponse = JsonConvert.DeserializeObject<ResponseLogin>(result);
 
             string accessToken = _tokenResponse?.AccessToken ?? string.Empty;
-            return OperationResult<string>.Success(accessToken, Resource.SuccessfullyGetToken);
+            var successfullyLogCreate = _resourceHandler.GetResource("SuccessfullyGetToken");
+            return OperationResult<string>.Success(accessToken, successfullyLogCreate);
         }
 
         /// <summary>
@@ -114,15 +123,15 @@
             var json = JsonConvert.SerializeObject(log);
             var content = GetContent(json);
             var authorization = new AuthenticationHeaderValue("Bearer", bearerToken.Data);
-
             var response = await _httpContentWrapper.PostAsync(_client, url, content, authorization);
-
+            await ResourceHandler.CreateAsync(_resourceProvider, _resourceKeys);
             if (!response.IsSuccessStatusCode)
             {
-                return OperationBuilder<string>.FailureExtenalService(Resource.FailedSetLog);
+                var failedSetLog = _resourceHandler.GetResource("FailedGetToken");
+                return OperationBuilder<string>.FailureExtenalService(failedSetLog);
             }
-
-            return OperationResult<string>.Success(string.Empty, Resource.SuccessfullySetLog);
+            var successfullySetLog = _resourceHandler.GetResource("FailedGetToken");
+            return OperationResult<string>.Success(string.Empty, successfullySetLog);
         }
 
         /// <summary>

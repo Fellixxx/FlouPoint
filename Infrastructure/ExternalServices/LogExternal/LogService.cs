@@ -56,7 +56,7 @@
             }
             catch (Exception ex)
             {
-                var message = string.Format(Resource.FailedGolbalException, ex.Message, ex.StackTrace);
+                var message = string.Format(ExceptionMessages.FailedGlobalException, ex.Message, ex.StackTrace);
                 return OperationBuilder<string>.FailureUnexpectedError(ExceptionMessages.FailureUnexpectedError);
             }
         }

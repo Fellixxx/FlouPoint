@@ -138,12 +138,6 @@
   <data name="FailedEmailService" xml:space="preserve">
     <value>It happened an error in the email service.</value>
   </data>
-  <data name="FailedGetToken" xml:space="preserve">
-    <value>The log services token got failed.</value>
-  </data>
-  <data name="FailedGolbalException" xml:space="preserve">
-    <value>Exception Unknowled message:{0} stacktrace {1}</value>
-  </data>
   <data name="FailedIntegerConversion" xml:space="preserve">
     <value>The submitted value was invalid.</value>
   </data>
@@ -171,9 +165,6 @@
   <data name="FailedRefreshToken" xml:space="preserve">
     <value>The submitted refresh token is not valid.</value>
   </data>
-  <data name="FailedSetLog" xml:space="preserve">
-    <value>The log creation got failed.</value>
-  </data>
   <data name="FailedTokenCanNotRead" xml:space="preserve">
     <value>The token cannot be read.</value>
   </data>
@@ -200,9 +191,6 @@
   </data>
   <data name="FailedValidationLogUnknowled" xml:space="preserve">
     <value>The Log validation failed Exception Unknowled</value>
-  </data>
-  <data name="FailureConfigurationMissingError" xml:space="preserve">
-    <value>The configuration for the log services is missing the username, password, or URL.</value>
   </data>
   <data name="FailureConfigurationMissingErrorReCaptcha" xml:space="preserve">
     <value>The configuration for the ReCaptcha services is missing the secretKey or URL.</value>
@@ -252,9 +240,6 @@
   <data name="SuccessfullyGenericUpdated" xml:space="preserve">
     <value>{0} was updated successfully.</value>
   </data>
-  <data name="SuccessfullyGetToken" xml:space="preserve">
-    <value>Token got successfully.</value>
-  </data>
   <data name="SuccessfullyLogCreate" xml:space="preserve">
     <value>The log was create successfully.</value>
   </data>
@@ -272,9 +257,6 @@
   </data>
   <data name="SuccessfullySearchUser" xml:space="preserve">
     <value>The search in the User entity completed successfully.</value>
-  </data>
-  <data name="SuccessfullySetLog" xml:space="preserve">
-    <value>The successfully SetLog.</value>
   </data>
   <data name="SuccessfullySetNewPassword" xml:space="preserve">
     <value>The password was updated successfully.</value>

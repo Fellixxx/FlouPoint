@@ -45,8 +45,12 @@ namespace Infrastructure.Test.Repositories.Implementation.CRUD
             { "GenericExistValidation", "The {0} does not exist." },
             { "SuccessfullyGenericActiveated", "{0} was activated successfully." },
             { "LogSuccessfullyGenericActiveated", "{0} was activated successfully." },
-            { "StatusGlobalOkMessage", "Ok" }
+            { "StatusGlobalOkMessage", "Ok" },
             { "FailureConfigurationMissingError", "The configuration for the log services is missing the username, password, or URL." },
+            { "FailedGetToken", "The log services token got failed." },
+            { "SuccessfullyGetToken", "Token got successfully." },
+            { "FailedSetLog", "The log creation got failed." },
+            { "SuccessfullySetLog", "The successfully SetLog." }
         };
 
         [TestInitialize]

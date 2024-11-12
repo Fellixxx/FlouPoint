@@ -10,6 +10,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Repositories\Implementation\User\**" />
+    <EmbeddedResource Remove="Repositories\Implementation\User\**" />
+    <None Remove="Repositories\Implementation\User\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="coverlet.collector" Version="6.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.20" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="7.0.20" />
@@ -26,10 +32,6 @@
 
   <ItemGroup>
     <Using Include="Microsoft.VisualStudio.TestTools.UnitTesting" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Repositories\Implementation\User\" />
   </ItemGroup>
 
 </Project>
