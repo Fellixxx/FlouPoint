@@ -7,6 +7,7 @@ namespace Infrastructure.Test.Repositories.Implementation.CRUD.User
     using Domain.DTO.Logging;
     using Domain.Entities;
     using Infrastructure.Repositories.Implementation.CRUD.User;
+    using Infrastructure.Repositories.Implementation.CRUD.User.Create;
     using Infrastructure.Test.Repositories.Implementation.CRUD;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.VisualStudio.TestTools.UnitTesting;

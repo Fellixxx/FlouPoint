@@ -65,6 +65,16 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>ResourceStatusRepository.resx</DependentUpon>
     </Compile>
+    <Compile Update="Repositories\Implementation\CRUD\User\Create\ResourceUserCreate.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ResourceUserCreate.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Repositories\Implementation\CRUD\User\Update\ResourceUpdate.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ResourceUpdate.resx</DependentUpon>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>
@@ -95,6 +105,14 @@
     <EmbeddedResource Update="Repositories\Abstract\Status\ResourceStatusRepository.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>ResourceStatusRepository.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Repositories\Implementation\CRUD\User\Create\ResourceUserCreate.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ResourceUserCreate.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Repositories\Implementation\CRUD\User\Update\ResourceUpdate.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ResourceUpdate.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
 

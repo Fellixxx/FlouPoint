@@ -1,5 +1,5 @@
 ﻿
-namespace Infrastructure.Repositories.Implementation.CRUD.User
+namespace Infrastructure.Repositories.Implementation.CRUD.User.Create
 {
     using Application.Result;
     using Application.UseCases.CRUD.User;
@@ -12,6 +12,7 @@ namespace Infrastructure.Repositories.Implementation.CRUD.User
     using Application.UseCases.Repository.CRUD;
     using Application.UseCases.Repository;
     using Infrastructure.Repositories.Abstract.CRUD.Create;
+    using Infrastructure.Repositories;
 
     /// <summary>
     /// Implementation of the user creation repository.
@@ -49,19 +50,21 @@ namespace Infrastructure.Repositories.Implementation.CRUD.User
             // Validate the user entity using the defined rules
             CreateUserRules validatorAdd = new CreateUserRules();
             ValidationResult result = validatorAdd.Validate(entity);
+            await ResourceHandler.CreateAsync(_resourceProvider, _resourceKeys);
 
-            // Return an error result if validation fails
             if (!result.IsValid)
             {
                 string errorMessage = GetErrorMessage(result);
-                return OperationBuilder<User>.FailureBusinessValidation(string.Format(Resource.FailedDataSizeCharacter, errorMessage));
+                var failedDataSizeCharacter = _resourceHandler.GetResource("FailedDataSizeCharacter");
+                return OperationBuilder<User>.FailureBusinessValidation(string.Format(failedDataSizeCharacter, errorMessage));
             }
 
             // Check for a valid email format
             var email = entity?.Email ?? string.Empty;
             if (!CredentialUtility.IsValidEmail(email))
             {
-                return OperationBuilder<User>.FailureBusinessValidation(Resource.FailedEmailInvalidFormat);
+                var failedEmailInvalidFormat = _resourceHandler.GetResource("FailedEmailInvalidFormat");
+                return OperationBuilder<User>.FailureBusinessValidation(failedEmailInvalidFormat);
             }
 
             // Ensure email uniqueness by checking if it's already used by another user
@@ -69,7 +72,8 @@ namespace Infrastructure.Repositories.Implementation.CRUD.User
             User? userExistByEmail = userByEmail?.FirstOrDefault();
             if (userExistByEmail is not null)
             {
-                return OperationBuilder<User>.FailureBusinessValidation(Resource.FailedAlreadyRegisteredEmail);
+                var failedEmailInvalidFormat = _resourceHandler.GetResource("FailedAlreadyRegisteredEmail");
+                return OperationBuilder<User>.FailureBusinessValidation(failedEmailInvalidFormat);
             }
 
             // Create and return the user entity

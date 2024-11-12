@@ -5,6 +5,7 @@
     using Application.UseCases.Repository;
     using Domain.Entities;
     using Infrastructure.Repositories.Implementation.CRUD.User;
+    using Infrastructure.Repositories.Implementation.CRUD.User.Create;
     using Infrastructure.Repositories.Implementation.Status;
     using Infrastructure.Test.Repositories.Implementation.CRUD;
     using Microsoft.VisualStudio.TestTools.UnitTesting;

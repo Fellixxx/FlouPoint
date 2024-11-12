@@ -4,6 +4,7 @@ namespace Infrastructure.Test.Repositories.Implementation.CRUD.User
     using System.Threading.Tasks;
     using Domain.Entities;
     using Infrastructure.Repositories.Implementation.CRUD.User;
+    using Infrastructure.Repositories.Implementation.CRUD.User.Update;
     using Infrastructure.Test.Repositories.Implementation.CRUD;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using UtilitiesLayer;

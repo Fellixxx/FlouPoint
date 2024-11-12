@@ -12,6 +12,8 @@ using Moq;
 using Persistence.BaseDbContext;
 using Persistence.CreateStruture.Constants.ColumnType;
 using Infrastructure.Repositories.Abstract.CRUD.Util;
+using Infrastructure.Repositories.Implementation.CRUD.User.Create;
+using Infrastructure.Repositories.Implementation.CRUD.User.Update;
 
 
 namespace Infrastructure.Test.Repositories.Implementation.CRUD
@@ -50,6 +52,18 @@ namespace Infrastructure.Test.Repositories.Implementation.CRUD
             { "SuccessfullySetLog", "The successfully SetLog." },
             { "ValidationGlobalOkMessage", "Operation completed successfully." },
             { "UtilGlobalOkMessage", "Ok" },
+            { "FailedDataSizeCharacter", "One or more data from the User have been submitted with errors {0}" },
+            { "FailedEmailInvalidFormat", "The given email is not in a valid format" },
+            { "FailedAlreadyRegisteredEmail", "A user is already registered with this email." },
+
+            { "CreateFailedDataSizeCharacter", "One or more data from the User have been submitted with errors {0}" },
+            { "CreateFailedEmailInvalidFormat", "The given email is not in a valid format" },
+            { "CreateFailedAlreadyRegisteredEmail", "A user is already registered with this email." },
+           
+            { "UpdateFailedDataSizeCharacter", "One or more data from the User have been submitted with errors {0}" },
+            { "UpdateFailedEmailInvalidFormat", "The given email is not in a valid format" },
+            { "UpdateFailedAlreadyRegisteredEmail", "A user is already registered with this email." },
+            { "UpdateSuccessfullySearchGeneric", "The search in the {0} entity completed successfully." }
         };
 
         [TestInitialize]
