@@ -66,7 +66,7 @@
                 outputStream.Seek(0, SeekOrigin.Begin);
                 await ResourceHandler.CreateAsync(_resourceProvider, _resourceKeys);
                 var successCompressed = _resourceHandler.GetResource("SuccessCompressed");
-                return OperationResult<Stream>.Success(outputStream, Resource.SuccessCompressed); ;
+                return OperationResult<Stream>.Success(outputStream, successCompressed); ;
             }
             catch (Exception ex)
             {
