@@ -17,11 +17,25 @@ namespace Infrastructure.Test.Message
 
             // Assert
             Assert.IsNotNull(result);
-            Assert.AreEqual(result.Count, 31);
+            Assert.AreEqual(result.Count, 29);
         }
 
         [TestMethod]
         public async Task CanCallGetMessage()
+        {
+            // Arrange
+            var key = "Infrastructure.ExternalServices.LogExternal.ResourceLogService.resources.SuccessfullySetLog";
+
+            // Act
+            var result = await _resxResourceProvider.GetMessage(key);
+
+            // Assert
+            Assert.IsTrue(result.IsSuccessful);
+            Assert.AreEqual(result.ErrorType, Application.Result.Error.ErrorTypes.None);
+        }
+
+        [TestMethod]
+        public async Task KeyNotFoundCallGetMessage()
         {
             // Arrange
             var key = "Infrastructure.Other.ResourceExample.resources.ResorceExample";
@@ -30,8 +44,11 @@ namespace Infrastructure.Test.Message
             var result = await _resxResourceProvider.GetMessage(key);
 
             // Assert
-            Assert.IsTrue(result.IsSuccessful);
-            Assert.AreEqual(result.ErrorType, Application.Result.Error.ErrorTypes.None);
+            Assert.IsFalse(result.IsSuccessful);
+            Assert.AreEqual(Application.Result.Error.ErrorTypes.BusinessValidation, result.ErrorType);
+            Assert.AreEqual("BUSINESS_VALIDATION_ERROR", result.Error);
+            Assert.AreEqual("Resource not found.", result.Message);
+            
         }
     }
 }
