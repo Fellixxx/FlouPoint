@@ -27,7 +27,9 @@
                 // Validation for message and entity
                 if (string.IsNullOrWhiteSpace(message) || entity is null)
                 {
-                    return OperationBuilder<Log>.FailInvalidData(Message.Log.InvalidDataSubmitted);
+                    var strategy = new NetworkErrorStrategy<Log>();
+                    var invalidDataSubmitted = Message.Log.InvalidDataSubmitted;
+                    return OperationStrategy<Log>.Fail(invalidDataSubmitted, strategy);
                 }
 
                 // Get the name of the entity and serialize its value

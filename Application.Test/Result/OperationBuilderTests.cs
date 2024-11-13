@@ -88,7 +88,7 @@ namespace Application.Test.Result
             string message = null;
 
             // Act & Assert
-            var strategy = new DatabaseStrategy<string>();
+            var strategy = new InvalidDataStrategy<string>();
             Assert.ThrowsException<ArgumentNullException>(() => OperationStrategy<string>.Fail(message, strategy));
         }
 
@@ -99,7 +99,8 @@ namespace Application.Test.Result
             var message = "TestValue1393732451";
 
             // Act
-            var result = OperationBuilder<string>.FailInvalidData(message);
+            var strategy = new InvalidDataStrategy<string>();
+            var result = OperationStrategy<string>.Fail(message, strategy);
 
             // Assert
             Assert.IsNotNull(result);
@@ -115,7 +116,8 @@ namespace Application.Test.Result
             string message = null;
 
             // Act & Assert
-            Assert.ThrowsException<ArgumentNullException>(() => OperationBuilder<string>.FailInvalidData(message));
+            var strategy = new NetworkErrorStrategy<string>();
+            Assert.ThrowsException<ArgumentNullException>(() => OperationStrategy<string>.Fail(message, strategy));
         }
 
         [TestMethod]
@@ -266,7 +268,8 @@ namespace Application.Test.Result
             var expectedMessage = "Data submitted is invalid.";
 
             // Act
-            var result = OperationBuilder<string>.FailInvalidData(expectedMessage);
+            var strategy = new InvalidDataStrategy<string>();
+            var result = OperationStrategy<string>.Fail(expectedMessage, strategy);
 
             // Assert
             Assert.IsNotNull(result);
@@ -367,7 +370,8 @@ namespace Application.Test.Result
             string message = "";
 
             // Act & Assert
-            Assert.ThrowsException<ArgumentException>(() => OperationBuilder<string>.FailInvalidData(message));
+            var strategy = new InvalidDataStrategy<string>();
+            Assert.ThrowsException<ArgumentException>(() => OperationStrategy<string>.Fail(message, strategy));
         }
 
         [TestMethod]
@@ -399,7 +403,8 @@ namespace Application.Test.Result
             string message = "";
 
             // Act & Assert
-            Assert.ThrowsException<ArgumentException>(() => OperationBuilder<string>.FailNetwork(message));
+            var strategy = new NetworkErrorStrategy<string>();
+            Assert.ThrowsException<ArgumentException>(() => OperationStrategy<string>.Fail(message, strategy));
         }
 
         // Additional tests for whitespace message
@@ -443,7 +448,8 @@ namespace Application.Test.Result
             string message = "   ";
 
             // Act & Assert
-            Assert.ThrowsException<ArgumentException>(() => OperationBuilder<string>.FailInvalidData(message));
+            var strategy = new InvalidDataStrategy<string>();
+            Assert.ThrowsException<ArgumentException>(() => OperationStrategy<string>.Fail(message, strategy));
         }
 
         [TestMethod]
@@ -475,7 +481,8 @@ namespace Application.Test.Result
             string message = "   ";
 
             // Act & Assert
-            Assert.ThrowsException<ArgumentException>(() => OperationBuilder<string>.FailNetwork(message));
+            var strategy = new NetworkErrorStrategy<string>();
+            Assert.ThrowsException<ArgumentException>(() => OperationStrategy<string>.Fail(message, strategy));
         }
 
         // Additional assertions for Data field being null
@@ -528,7 +535,8 @@ namespace Application.Test.Result
             var message = "Data submitted is invalid.";
 
             // Act
-            var result = OperationBuilder<string>.FailInvalidData(message);
+            var strategy = new InvalidDataStrategy<string>();
+            var result = OperationStrategy<string>.Fail(message, strategy);
 
             // Assert
             Assert.IsNull(result.Data);
@@ -569,7 +577,8 @@ namespace Application.Test.Result
             var message = "Network error occurred.";
 
             // Act
-            var result = OperationBuilder<string>.FailNetwork(message);
+            var strategy = new NetworkErrorStrategy<string>();
+            var result = OperationStrategy<string>.Fail(message, strategy);
 
             // Assert
             Assert.IsNull(result.Data);
