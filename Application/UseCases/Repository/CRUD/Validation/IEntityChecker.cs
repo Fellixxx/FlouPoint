@@ -6,7 +6,7 @@
     /// Defines the contract for validating the existence of an entity in the repository.
     /// </summary>
     /// <typeparam name="T">The type of the entity.</typeparam>
-    public interface IEntityExistenceValidator<T>
+    public interface IEntityChecker<T>
     {
         /// <summary>
         /// Checks if an entity with the given ID exists in the repository.

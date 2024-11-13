@@ -47,27 +47,27 @@
             return name.EndsWith(".resources", StringComparison.OrdinalIgnoreCase);
         }
 
-        public async Task<Operation<ResourceEntry>> GetMessage(string key)
+        public async Task<Operation<Resource>> GetMessage(string key)
         {
             var entries = await GetResourceEntries();
             if (!entries.IsSuccessful)
             {
-                return entries.ToResultWithXType<ResourceEntry>();
+                return entries.ToResultWithXType<Resource>();
             }
 
             var resources = entries?.Data?.Where(r => r.Name == key).ToList() ?? [];
 
             if (!resources.Any())
             {
-                return OperationBuilder<ResourceEntry>.FailBusiness(MessageConstants.ResourceProvider.KeyNotFound);
+                return OperationBuilder<Resource>.FailBusiness(MessageConstants.ResourceProvider.KeyNotFound);
             }
 
             if (resources.Count > 1)
             {
-                return OperationBuilder<ResourceEntry>.FailBusiness(MessageConstants.ResourceProvider.MultipleResourcesWithSameKey);
+                return OperationBuilder<Resource>.FailBusiness(MessageConstants.ResourceProvider.MultipleWithSameKey);
             }
 
-            return Operation<ResourceEntry>.Success(resources.FirstOrDefault());
+            return Operation<Resource>.Success(resources.FirstOrDefault());
         }
         public async Task<string> GetMessageValueOrDefault(string key, string defaultValue = MessageConstants.ResourceProvider.KeyNotFound)
         {
@@ -78,21 +78,21 @@
             }
             return defaultValue;
         }
-        public async Task<Operation<IQueryable<ResourceEntry>>> GetResourceEntries()
+        public async Task<Operation<IQueryable<Resource>>> GetResourceEntries()
         {
             var entries = GetEntries();
             if (entries is null)
             {
-                return OperationBuilder<IQueryable<ResourceEntry>>.FailBusiness(MessageConstants.ResourceProvider.UnableToReadResourceFile);
+                return OperationBuilder<IQueryable<Resource>>.FailBusiness(MessageConstants.ResourceProvider.UnableToReadFile);
             }
 
             if (entries.Keys.Count == 0)
             {
-                return OperationBuilder<IQueryable<ResourceEntry>>.FailBusiness(MessageConstants.ResourceProvider.KeyNotFound);
+                return OperationBuilder<IQueryable<Resource>>.FailBusiness(MessageConstants.ResourceProvider.KeyNotFound);
             }
 
 
-            var resourceEntries = entries.Select(entry => new ResourceEntry
+            var resourceEntries = entries.Select(entry => new Resource
             {
                 Id = Guid.NewGuid().ToString(),
                 Name = entry.Key,
@@ -101,7 +101,7 @@
                 Active = true
             }).AsQueryable();
 
-            return Operation<IQueryable<ResourceEntry>>.Success(resourceEntries);
+            return Operation<IQueryable<Resource>>.Success(resourceEntries);
         }
     }
 }

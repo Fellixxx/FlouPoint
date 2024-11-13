@@ -5,7 +5,7 @@
     /// <summary>
     /// Defines the contract for image compression services.
     /// </summary>
-    public interface IImageCompressionService
+    public interface IImageCompression
     {
         /// <summary>
         /// Compresses an image from the provided stream.

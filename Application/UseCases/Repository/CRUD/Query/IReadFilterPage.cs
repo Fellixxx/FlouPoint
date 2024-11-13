@@ -6,7 +6,7 @@
     /// Defines a contract for reading a paginated list of items based on a filter.
     /// </summary>
     /// <typeparam name="T">The type of the entity. Must implement IEntity.</typeparam>
-    public interface IReadFilterPageRepository<T> where T : class
+    public interface IReadFilterPage<T> where T : class
     {
         /// <summary>
         /// Retrieves a paginated list of items that match the specified filter.

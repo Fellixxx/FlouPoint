@@ -17,7 +17,7 @@
     /// Abstract repository class for reading and counting entities based on a filter.
     /// </summary>
     /// <typeparam name="T">The entity type.</typeparam>
-    public abstract class ReadFilterCountRepository<T> : Read<T>, IReadFilterCountRepository<T> where T : class
+    public abstract class ReadFilterCountRepository<T> : Read<T>, IReadFilterCount<T> where T : class
     {
         protected readonly ILogService _logService;
         private readonly IResourceProvider _resourceProvider;
@@ -58,7 +58,7 @@
             catch (Exception ex)
             {
                 // Create a log entry for the exception
-                var log = Util.GetLogError(ex, filter, OperationExecute.GetCountFilter);
+                var log = Util.GetLogError(ex, filter, ActionType.GetCountFilter);
                 var result = await _logService.CreateLog(log);
 
                 // Handle logging failure

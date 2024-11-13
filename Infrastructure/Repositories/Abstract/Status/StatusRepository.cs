@@ -16,7 +16,7 @@
     /// Repository class for managing the status of entities.
     /// </summary>
     /// <typeparam name="T">The entity type.</typeparam>
-    public class StatusRepository<T> : Repository<T>, IStatusRepository where T : class, IEntity
+    public class StatusRepository<T> : Repository<T>, IStatus where T : class, IEntity
     {
         private readonly ILogService _logService;
         private readonly IResourceProvider _resourceProvider;
@@ -71,7 +71,7 @@
             }
             catch (Exception ex)
             {
-                Log log = Util.GetLogError(ex, id, OperationExecute.Activate);
+                Log log = Util.GetLogError(ex, id, ActionType.Activate);
                 Operation<string> result = await _logService.CreateLog(log);
                 if (!result.IsSuccessful)
                 {
@@ -114,7 +114,7 @@
             }
             catch (Exception ex)
             {
-                Log log = Util.GetLogError(ex, id, OperationExecute.Deactivate);
+                Log log = Util.GetLogError(ex, id, ActionType.Deactivate);
                 Operation<string> result = await _logService.CreateLog(log);
                 if (!result.IsSuccessful)
                 {

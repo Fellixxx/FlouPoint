@@ -17,7 +17,7 @@
     /// Abstract repository class for reading and filtering entities with pagination.
     /// </summary>
     /// <typeparam name="T">The entity type.</typeparam>
-    public abstract class ReadFilterPageRepository<T> : Read<T>, IReadFilterPageRepository<T> where T : class
+    public abstract class ReadFilterPageRepository<T> : Read<T>, IReadFilterPage<T> where T : class
     {
         private readonly ILogService _logService;
         private readonly IResourceProvider _resourceProvider;
@@ -65,7 +65,7 @@
                     PageSize = pageSize,
                     Filter = filter
                 };
-                Log log = Util.GetLogError(ex, filterValue, OperationExecute.GetPageByFilter);
+                Log log = Util.GetLogError(ex, filterValue, ActionType.GetPageByFilter);
                 Operation<string> result = await _logService.CreateLog(log);
                 if (!result.IsSuccessful)
                 {

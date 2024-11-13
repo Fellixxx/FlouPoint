@@ -6,7 +6,7 @@
     /// <summary>
     /// Defines the contract for validating the existence of a User entity in the repository.
     /// </summary>
-    public interface IUserExistenceValidator
+    public interface IUserChecker
     {
         /// <summary>
         /// Checks if a User entity with the given ID exists in the repository.

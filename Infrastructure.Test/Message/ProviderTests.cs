@@ -34,7 +34,7 @@ namespace Infrastructure.Test.Message
             Assert.IsTrue(missingKeys.Count == 0, $"Missing resource keys: {missingResorces}");
         }
 
-        private static bool ResourceExists(IEnumerable<ResourceEntry> entries, string key)
+        private static bool ResourceExists(IEnumerable<Resource> entries, string key)
         {
             return entries.Any(entry => entry.Name.Contains(key));
         }

@@ -28,7 +28,7 @@ namespace Infrastructure.Repositories.Implementation.CRUD.User.Create
         /// </summary>
         /// <param name="context">The database context for the application.</param>
         /// <param name="logService">The logging service for tracking operations.</param>
-        public UserCreate(CommonDbContext context, ILogService logService, IUtilEntity<User> utilEntity, IResourceProvider resourceProvider, IResourceHandler resourceHandler) : base(context, logService, utilEntity, resourceProvider, resourceHandler)
+        public UserCreate(DataContext context, ILogService logService, IUtilEntity<User> utilEntity, IResourceProvider resourceProvider, IResourceHandler resourceHandler) : base(context, logService, utilEntity, resourceProvider, resourceHandler)
         {
             _resourceProvider = resourceProvider;
             _resourceHandler = resourceHandler;

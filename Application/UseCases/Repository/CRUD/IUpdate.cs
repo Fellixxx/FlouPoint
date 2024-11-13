@@ -8,7 +8,7 @@
     /// Defines a contract for updating an existing entity in the repository.
     /// </summary>
     /// <typeparam name="T">The type of the entity. Must implement IEntity.</typeparam>
-    public interface IUpdateRepository<T> where T : class, IEntity
+    public interface IUpdate<T> where T : class, IEntity
     {
         /// <summary>
         /// Updates an existing entity in the repository.

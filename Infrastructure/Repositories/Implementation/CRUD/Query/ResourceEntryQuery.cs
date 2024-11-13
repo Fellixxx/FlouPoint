@@ -2,13 +2,13 @@
 {
     using Application.Result;
     using Application.UseCases.ExternalServices;
-    using Application.UseCases.Repository.CRUD.ResourceEntry;
+    using Application.UseCases.Repository.CRUD.Resource;
     using Domain.Entities;
     using Microsoft.EntityFrameworkCore;
     using Persistence.Repositories;
     using System.Linq.Expressions;
 
-    public class ResourceEntryQuery : Read<ResourceEntry>, IResourceEntryQuery
+    public class ResourceEntryQuery : Read<Resource>, IQuery
     {
         protected readonly ILogService _logService;
 
@@ -17,7 +17,7 @@
             //_authFlowDbContext = context ?? throw new ArgumentNullException(nameof(context));
             _logService = logService ?? throw new ArgumentNullException(nameof(logService));
         }
-        public Task<Operation<ResourceEntry>> ReadByBearer(string bearerToken)
+        public Task<Operation<Resource>> ReadByBearer(string bearerToken)
         {
             throw new NotImplementedException();
         }
@@ -27,17 +27,17 @@
             throw new NotImplementedException();
         }
 
-        public Task<Operation<IQueryable<ResourceEntry>>> ReadFilterPage(int pageNumber, int pageSize, string filter)
+        public Task<Operation<IQueryable<Resource>>> ReadFilterPage(int pageNumber, int pageSize, string filter)
         {
             throw new NotImplementedException();
         }
 
-        public Task<Operation<ResourceEntry>> ReadId(string id)
+        public Task<Operation<Resource>> ReadId(string id)
         {
             throw new NotImplementedException();
         }
 
-        Task<Operation<IQueryable<ResourceEntry>>> IResourceEntryReadFilter.ReadFilter(Expression<Func<ResourceEntry, bool>> predicate)
+        Task<Operation<IQueryable<Resource>>> IReadFilter.ReadFilter(Expression<Func<Resource, bool>> predicate)
         {
             throw new NotImplementedException();
         }

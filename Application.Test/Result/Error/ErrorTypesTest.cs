@@ -26,7 +26,7 @@ namespace Application.Test.Result.Error
         {
             // Act
             var fieldInfo = errorType.GetType().GetField(errorType.ToString());
-            var attribute = fieldInfo.GetCustomAttribute<EnumMetadataAttribute>();
+            var attribute = fieldInfo.GetCustomAttribute<EnumMetadata>();
 
             // Assert
             Assert.IsNotNull(attribute, $"Enum value {errorType} is missing EnumMetadataAttribute.");
@@ -44,7 +44,7 @@ namespace Application.Test.Result.Error
             foreach (ErrorTypes errorType in errorTypes)
             {
                 var fieldInfo = errorType.GetType().GetField(errorType.ToString());
-                var attribute = fieldInfo.GetCustomAttribute<EnumMetadataAttribute>();
+                var attribute = fieldInfo.GetCustomAttribute<EnumMetadata>();
                 Assert.IsNotNull(attribute, $"Enum value {errorType} is missing EnumMetadataAttribute.");
             }
         }
@@ -59,7 +59,7 @@ namespace Application.Test.Result.Error
             string description = "Valid description";
 
             // Act & Assert
-            Assert.ThrowsException<ArgumentNullException>(() => new EnumMetadataAttribute(name, description));
+            Assert.ThrowsException<ArgumentNullException>(() => new EnumMetadata(name, description));
         }
 
         [TestMethod]
@@ -70,7 +70,7 @@ namespace Application.Test.Result.Error
             string description = "Valid description";
 
             // Act & Assert
-            Assert.ThrowsException<ArgumentNullException>(() => new EnumMetadataAttribute(name, description));
+            Assert.ThrowsException<ArgumentNullException>(() => new EnumMetadata(name, description));
         }
 
         [TestMethod]
@@ -81,7 +81,7 @@ namespace Application.Test.Result.Error
             string description = "Valid description";
 
             // Act & Assert
-            Assert.ThrowsException<ArgumentNullException>(() => new EnumMetadataAttribute(name, description));
+            Assert.ThrowsException<ArgumentNullException>(() => new EnumMetadata(name, description));
         }
 
         [TestMethod]
@@ -92,7 +92,7 @@ namespace Application.Test.Result.Error
             string description = null;
 
             // Act & Assert
-            Assert.ThrowsException<ArgumentNullException>(() => new EnumMetadataAttribute(name, description));
+            Assert.ThrowsException<ArgumentNullException>(() => new EnumMetadata(name, description));
         }
 
         [TestMethod]
@@ -103,7 +103,7 @@ namespace Application.Test.Result.Error
             string description = "";
 
             // Act & Assert
-            Assert.ThrowsException<ArgumentNullException>(() => new EnumMetadataAttribute(name, description));
+            Assert.ThrowsException<ArgumentNullException>(() => new EnumMetadata(name, description));
         }
 
         [TestMethod]
@@ -114,7 +114,7 @@ namespace Application.Test.Result.Error
             string description = "   ";
 
             // Act & Assert
-            Assert.ThrowsException<ArgumentNullException>(() => new EnumMetadataAttribute(name, description));
+            Assert.ThrowsException<ArgumentNullException>(() => new EnumMetadata(name, description));
         }
 
         // Additional tests for duplicate Names and Descriptions
@@ -130,7 +130,7 @@ namespace Application.Test.Result.Error
             foreach (ErrorTypes errorType in errorTypes)
             {
                 var fieldInfo = errorType.GetType().GetField(errorType.ToString());
-                var attribute = fieldInfo.GetCustomAttribute<EnumMetadataAttribute>();
+                var attribute = fieldInfo.GetCustomAttribute<EnumMetadata>();
                 Assert.IsNotNull(attribute, $"Enum value {errorType} is missing EnumMetadataAttribute.");
                 bool added = names.Add(attribute.Name);
                 Assert.IsTrue(added, $"Duplicate Name '{attribute.Name}' found in EnumMetadataAttribute of {errorType}.");
@@ -148,7 +148,7 @@ namespace Application.Test.Result.Error
             foreach (ErrorTypes errorType in errorTypes)
             {
                 var fieldInfo = errorType.GetType().GetField(errorType.ToString());
-                var attribute = fieldInfo.GetCustomAttribute<EnumMetadataAttribute>();
+                var attribute = fieldInfo.GetCustomAttribute<EnumMetadata>();
                 Assert.IsNotNull(attribute, $"Enum value {errorType} is missing EnumMetadataAttribute.");
                 bool added = descriptions.Add(attribute.Description);
                 Assert.IsTrue(added, $"Duplicate Description '{attribute.Description}' found in EnumMetadataAttribute of {errorType}.");

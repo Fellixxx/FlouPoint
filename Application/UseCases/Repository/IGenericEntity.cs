@@ -10,11 +10,11 @@
     /// providing a unified interface for CRUD operations and status management.
     /// </summary>
     /// <typeparam name="T">The type of the entity, which must implement IEntity.</typeparam>
-    public interface IEntityRepository<T> :
-        ICreateRepository<T>,
-        IUpdateRepository<T>,
-        IDeleteRepository<T>,
-        IStatusRepository
+    public interface IGenericEntity<T> :
+        ICreate<T>,
+        IUpdate<T>,
+        IDelete<T>,
+        IStatus
         where T : class, IEntity
     {
         // This interface is a composite of CRUD and status management interfaces.

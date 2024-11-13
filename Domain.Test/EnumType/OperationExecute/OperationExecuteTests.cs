@@ -8,7 +8,7 @@ namespace Domain.Test.EnumType.OperationExecute
     [TestClass]
     public class OperationExecuteTests
     {
-        private OperationExecute _testClass;
+        private ActionType _testClass;
 
         [TestInitialize]
         public void SetUp()
@@ -24,7 +24,7 @@ namespace Domain.Test.EnumType.OperationExecute
             var description = "TestValue1671246287";
 
             // Act
-            var result = OperationExecute.CreateCustomOperation(name, description);
+            var result = ActionType.CreateCustomOperation(name, description);
 
             // Assert
             Assert.IsNotNull(result);
@@ -38,7 +38,7 @@ namespace Domain.Test.EnumType.OperationExecute
         [DataRow("   ")]
         public void CannotCallCreateCustomOperationWithInvalidName(string value)
         {
-            Assert.ThrowsException<ArgumentNullException>(() => OperationExecute.CreateCustomOperation(value, "TestValue514114165"));
+            Assert.ThrowsException<ArgumentNullException>(() => ActionType.CreateCustomOperation(value, "TestValue514114165"));
         }
 
         [DataTestMethod]
@@ -47,7 +47,7 @@ namespace Domain.Test.EnumType.OperationExecute
         [DataRow("   ")]
         public void CannotCallCreateCustomOperationWithInvalidDescription(string value)
         {
-            Assert.ThrowsException<ArgumentNullException>(() => OperationExecute.CreateCustomOperation("TestValue1497588783", value));
+            Assert.ThrowsException<ArgumentNullException>(() => ActionType.CreateCustomOperation("TestValue1497588783", value));
         }
 
         [TestMethod]
@@ -58,7 +58,7 @@ namespace Domain.Test.EnumType.OperationExecute
             var description = "TestValue134813388";
 
             // Act
-            var result = OperationExecute.CreateCustomOperation(name, description);
+            var result = ActionType.CreateCustomOperation(name, description);
 
             // Assert
             Assert.AreEqual(name, result.Name);
@@ -71,7 +71,7 @@ namespace Domain.Test.EnumType.OperationExecute
             // Arrange
             var name = "TestValue2029983520";
             var description = "TestValue1891303237";
-            _testClass = OperationExecute.CreateCustomOperation(name, description);
+            _testClass = ActionType.CreateCustomOperation(name, description);
 
             // Assert
             Assert.IsInstanceOfType(_testClass.Name, typeof(string));
@@ -84,7 +84,7 @@ namespace Domain.Test.EnumType.OperationExecute
             // Arrange
             var name = "TestValue765520947";
             var description = "TestValue1891303237";
-            _testClass = OperationExecute.CreateCustomOperation(name, description);
+            _testClass = ActionType.CreateCustomOperation(name, description);
             // Assert
             Assert.IsInstanceOfType(_testClass.Description, typeof(string));
             Assert.AreEqual("TestValue1891303237", _testClass.Description);
@@ -94,81 +94,81 @@ namespace Domain.Test.EnumType.OperationExecute
         public void CanGetAdd()
         {
             // Assert
-            Assert.IsInstanceOfType(OperationExecute.Add, typeof(OperationExecute));
-            Assert.AreEqual("Add", OperationExecute.Add.Name);
-            Assert.AreEqual("Add a new record.", OperationExecute.Add.Description);
+            Assert.IsInstanceOfType(ActionType.Add, typeof(ActionType));
+            Assert.AreEqual("Add", ActionType.Add.Name);
+            Assert.AreEqual("Add a new record.", ActionType.Add.Description);
         }
 
         [TestMethod]
         public void CanGetModified()
         {
             // Assert
-            Assert.IsInstanceOfType(OperationExecute.Modified, typeof(OperationExecute));
-            Assert.AreEqual("Modified", OperationExecute.Modified.Name);
-            Assert.AreEqual("Modify an existing record.", OperationExecute.Modified.Description);
+            Assert.IsInstanceOfType(ActionType.Modified, typeof(ActionType));
+            Assert.AreEqual("Modified", ActionType.Modified.Name);
+            Assert.AreEqual("Modify an existing record.", ActionType.Modified.Description);
         }
 
         [TestMethod]
         public void CanGetRemove()
         {
             // Assert
-            Assert.IsInstanceOfType(OperationExecute.Remove, typeof(OperationExecute));
-            Assert.AreEqual("Remove", OperationExecute.Remove.Name);
-            Assert.AreEqual("Remove an existing record.", OperationExecute.Remove.Description);
+            Assert.IsInstanceOfType(ActionType.Remove, typeof(ActionType));
+            Assert.AreEqual("Remove", ActionType.Remove.Name);
+            Assert.AreEqual("Remove an existing record.", ActionType.Remove.Description);
         }
 
         [TestMethod]
         public void CanGetDeactivate()
         {
             // Assert
-            Assert.IsInstanceOfType(OperationExecute.Deactivate, typeof(OperationExecute));
-            Assert.AreEqual("Deactivate", OperationExecute.Deactivate.Name);
-            Assert.AreEqual("Deactivate an existing record.", OperationExecute.Deactivate.Description);
+            Assert.IsInstanceOfType(ActionType.Deactivate, typeof(ActionType));
+            Assert.AreEqual("Deactivate", ActionType.Deactivate.Name);
+            Assert.AreEqual("Deactivate an existing record.", ActionType.Deactivate.Description);
         }
 
         [TestMethod]
         public void CanGetActivate()
         {
             // Assert
-            Assert.IsInstanceOfType(OperationExecute.Activate, typeof(OperationExecute));
-            Assert.AreEqual("Activate", OperationExecute.Activate.Name);
-            Assert.AreEqual("Activate a deactivated record.", OperationExecute.Activate.Description);
+            Assert.IsInstanceOfType(ActionType.Activate, typeof(ActionType));
+            Assert.AreEqual("Activate", ActionType.Activate.Name);
+            Assert.AreEqual("Activate a deactivated record.", ActionType.Activate.Description);
         }
 
         [TestMethod]
         public void CanGetGetUserById()
         {
             // Assert
-            Assert.IsInstanceOfType(OperationExecute.GetUserById, typeof(OperationExecute));
-            Assert.AreEqual("GetUserById", OperationExecute.GetUserById.Name);
-            Assert.AreEqual("Retrieve a user by their ID.", OperationExecute.GetUserById.Description);
+            Assert.IsInstanceOfType(ActionType.GetUserById, typeof(ActionType));
+            Assert.AreEqual("GetUserById", ActionType.GetUserById.Name);
+            Assert.AreEqual("Retrieve a user by their ID.", ActionType.GetUserById.Description);
         }
 
         [TestMethod]
         public void CanGetGetAllByFilter()
         {
             // Assert
-            Assert.IsInstanceOfType(OperationExecute.GetAllByFilter, typeof(OperationExecute));
-            Assert.AreEqual("GetAllByFilter", OperationExecute.GetAllByFilter.Name);
-            Assert.AreEqual("Retrieve all records that match a given filter.", OperationExecute.GetAllByFilter.Description);
+            Assert.IsInstanceOfType(ActionType.GetAllByFilter, typeof(ActionType));
+            Assert.AreEqual("GetAllByFilter", ActionType.GetAllByFilter.Name);
+            Assert.AreEqual("Retrieve all records that match a given filter.", ActionType.GetAllByFilter.Description);
         }
 
         [TestMethod]
         public void CanGetGetPageByFilter()
         {
             // Assert
-            Assert.IsInstanceOfType(OperationExecute.GetPageByFilter, typeof(OperationExecute));
-            Assert.AreEqual("GetPageByFilter", OperationExecute.GetPageByFilter.Name);
-            Assert.AreEqual("Retrieve a page of records that match a given filter.", OperationExecute.GetPageByFilter.Description);
+            Assert.IsInstanceOfType(ActionType.GetPageByFilter, typeof(ActionType));
+            Assert.AreEqual("GetPageByFilter", ActionType.GetPageByFilter.Name);
+            Assert.AreEqual("Retrieve a page of records that match a given filter.", ActionType.GetPageByFilter.Description);
         }
 
         [TestMethod]
         public void CanGetGetCountFilter()
         {
             // Assert
-            Assert.IsInstanceOfType(OperationExecute.GetCountFilter, typeof(OperationExecute));
-            Assert.AreEqual("GetCountFilter", OperationExecute.GetCountFilter.Name);
-            Assert.AreEqual("Get the count of records that match a given filter.", OperationExecute.GetCountFilter.Description);
+            Assert.IsInstanceOfType(ActionType.GetCountFilter, typeof(ActionType));
+            Assert.AreEqual("GetCountFilter", ActionType.GetCountFilter.Name);
+            Assert.AreEqual("Get the count of records that match a given filter.", ActionType.GetCountFilter.Description);
         }
 
         [TestMethod]
@@ -179,18 +179,18 @@ namespace Domain.Test.EnumType.OperationExecute
             var description = "Some other description";
 
             // Act & Assert
-            Assert.ThrowsException<InvalidOperationException>(() => OperationExecute.CreateCustomOperation(name, description));
+            Assert.ThrowsException<InvalidOperationException>(() => ActionType.CreateCustomOperation(name, description));
         }
 
         [TestMethod]
         public void OperationsAreSingletons()
         {
             // Assert
-            Assert.AreSame(OperationExecute.Add, OperationExecute.Add);
-            Assert.AreSame(OperationExecute.Modified, OperationExecute.Modified);
-            Assert.AreSame(OperationExecute.Remove, OperationExecute.Remove);
-            Assert.AreSame(OperationExecute.Deactivate, OperationExecute.Deactivate);
-            Assert.AreSame(OperationExecute.Activate, OperationExecute.Activate);
+            Assert.AreSame(ActionType.Add, ActionType.Add);
+            Assert.AreSame(ActionType.Modified, ActionType.Modified);
+            Assert.AreSame(ActionType.Remove, ActionType.Remove);
+            Assert.AreSame(ActionType.Deactivate, ActionType.Deactivate);
+            Assert.AreSame(ActionType.Activate, ActionType.Activate);
         }
 
         [TestMethod]
@@ -199,7 +199,7 @@ namespace Domain.Test.EnumType.OperationExecute
             // Arrange
             var name = "TestValue2123520947";
             var description = "TestValue1891303237";
-            _testClass = OperationExecute.CreateCustomOperation(name, description);
+            _testClass = ActionType.CreateCustomOperation(name, description);
             // Assert
             Assert.IsTrue(_testClass.Equals(_testClass));
             Assert.AreEqual(_testClass.GetHashCode(), _testClass.GetHashCode());
@@ -211,7 +211,7 @@ namespace Domain.Test.EnumType.OperationExecute
             // Arrange
             var name = "TestValue76523431947";
             var description = "TestValue1891303237";
-            _testClass = OperationExecute.CreateCustomOperation(name, description);
+            _testClass = ActionType.CreateCustomOperation(name, description);
             // Assert
             Assert.IsFalse(_testClass.Equals(null));
         }
@@ -219,7 +219,7 @@ namespace Domain.Test.EnumType.OperationExecute
         public void When_AddOperation_Then_NameAndDescriptionShouldMatch()
         {
             // Given
-            var operation = OperationExecute.Add;
+            var operation = ActionType.Add;
 
             // Then
             Assert.IsNotNull(operation);
@@ -231,7 +231,7 @@ namespace Domain.Test.EnumType.OperationExecute
         public void When_ModifiedOperation_Then_NameAndDescriptionShouldMatch()
         {
             // Given
-            var operation = OperationExecute.Modified;
+            var operation = ActionType.Modified;
 
             // Then
             Assert.IsNotNull(operation);
@@ -243,7 +243,7 @@ namespace Domain.Test.EnumType.OperationExecute
         public void When_RemoveOperation_Then_NameAndDescriptionShouldMatch()
         {
             // Given
-            var operation = OperationExecute.Remove;
+            var operation = ActionType.Remove;
 
             // Then
             Assert.IsNotNull(operation);
@@ -255,7 +255,7 @@ namespace Domain.Test.EnumType.OperationExecute
         public void When_DeactivateOperation_Then_NameAndDescriptionShouldMatch()
         {
             // Given
-            var operation = OperationExecute.Deactivate;
+            var operation = ActionType.Deactivate;
 
             // Then
             Assert.IsNotNull(operation);
@@ -267,7 +267,7 @@ namespace Domain.Test.EnumType.OperationExecute
         public void When_ActivateOperation_Then_NameAndDescriptionShouldMatch()
         {
             // Given
-            var operation = OperationExecute.Activate;
+            var operation = ActionType.Activate;
 
             // Then
             Assert.IsNotNull(operation);
@@ -279,7 +279,7 @@ namespace Domain.Test.EnumType.OperationExecute
         public void When_GetUserByIdOperation_Then_NameAndDescriptionShouldMatch()
         {
             // Given
-            var operation = OperationExecute.GetUserById;
+            var operation = ActionType.GetUserById;
 
             // Then
             Assert.IsNotNull(operation);
@@ -291,7 +291,7 @@ namespace Domain.Test.EnumType.OperationExecute
         public void When_GetAllByFilterOperation_Then_NameAndDescriptionShouldMatch()
         {
             // Given
-            var operation = OperationExecute.GetAllByFilter;
+            var operation = ActionType.GetAllByFilter;
 
             // Then
             Assert.IsNotNull(operation);
@@ -303,7 +303,7 @@ namespace Domain.Test.EnumType.OperationExecute
         public void When_GetPageByFilterOperation_Then_NameAndDescriptionShouldMatch()
         {
             // Given
-            var operation = OperationExecute.GetPageByFilter;
+            var operation = ActionType.GetPageByFilter;
 
             // Then
             Assert.IsNotNull(operation);
@@ -315,7 +315,7 @@ namespace Domain.Test.EnumType.OperationExecute
         public void When_GetCountFilterOperation_Then_NameAndDescriptionShouldMatch()
         {
             // Given
-            var operation = OperationExecute.GetCountFilter;
+            var operation = ActionType.GetCountFilter;
 
             // Then
             Assert.IsNotNull(operation);
@@ -327,7 +327,7 @@ namespace Domain.Test.EnumType.OperationExecute
         public void When_CreateCustomOperation_Then_NameAndDescriptionShouldMatch()
         {
             // Given
-            var operation = OperationExecute.CreateCustomOperation("CustomOp", "This is a custom operation");
+            var operation = ActionType.CreateCustomOperation("CustomOp", "This is a custom operation");
 
             // Then
             Assert.IsNotNull(operation);
@@ -339,10 +339,10 @@ namespace Domain.Test.EnumType.OperationExecute
         public void When_GetNameForPredefinedOperation_Then_NameShouldMatch()
         {
             // Given
-            var operation = OperationExecute.Add;
+            var operation = ActionType.Add;
 
             // When
-            var name = OperationExecute.GetName(operation);
+            var name = ActionType.GetName(operation);
 
             // Then
             Assert.AreEqual("Add", name);
@@ -352,10 +352,10 @@ namespace Domain.Test.EnumType.OperationExecute
         public void When_NullOperationPassedToGetName_Then_ArgumentNullExceptionShouldBeThrown()
         {
             // Given
-            OperationExecute operation = null;
+            ActionType operation = null;
 
             // When & Then
-            Assert.ThrowsException<ArgumentNullException>(() => OperationExecute.GetName(operation));
+            Assert.ThrowsException<ArgumentNullException>(() => ActionType.GetName(operation));
         }
     }
 }

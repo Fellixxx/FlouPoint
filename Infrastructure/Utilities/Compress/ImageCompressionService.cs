@@ -14,7 +14,7 @@
     /// <summary>
     /// Provides functionality for compressing images.
     /// </summary>
-    public class ImageCompressionService : IImageCompressionService
+    public class ImageCompressionService : IImageCompression
     {
         // Service for logging operations.
         private readonly ILogService _logService;
@@ -70,7 +70,7 @@
             }
             catch (Exception ex)
             {
-                Log log = Util.GetLogError(ex, inputStream, OperationExecute.CreateCustomOperation("Validate", "General validation operation."));
+                Log log = Util.GetLogError(ex, inputStream, ActionType.CreateCustomOperation("Validate", "General validation operation."));
                 Operation<string> result = await _logService.CreateLog(log);
                 if (!result.IsSuccessful)
                 {

@@ -2,7 +2,7 @@
 {
     using Application.Result;
     using Application.UseCases.ExternalServices;
-    using Application.UseCases.Repository.CRUD.ResourceEntry;
+    using Application.UseCases.Repository.CRUD.Resource;
     using Domain.Entities;
     using Infrastructure.Constants;
     using Microsoft.EntityFrameworkCore;
@@ -12,34 +12,34 @@
     {
         
         private readonly DbContext _context;
-        private readonly DbSet<ResourceEntry> _dbSet;
-        private readonly IResourceEntryQuery _resourceEntryQuery;
+        private readonly DbSet<Resource> _dbSet;
+        private readonly IQuery _resourceEntryQuery;
 
-        public DatabaseResourceProvider(DbContext context, IResourceEntryQuery resourceEntryQuery)
+        public DatabaseResourceProvider(DbContext context, IQuery resourceEntryQuery)
         {
             _context = context;
             _resourceEntryQuery = resourceEntryQuery;
         }
 
-        public async Task<Operation<ResourceEntry>> GetMessage(string key)
+        public async Task<Operation<Resource>> GetMessage(string key)
         {
             var resource = _resourceEntryQuery.ReadFilter(r => r.Name.Equals(key));
             var resources = await GetResourceEntries();
             if (!resources.IsSuccessful)
             {
-                return resources.ToResultWithXType<ResourceEntry>();
+                return resources.ToResultWithXType<Resource>();
             }
             if (!resources.Data.Any())
             {
-                return OperationBuilder<ResourceEntry>.FailBusiness(MessageConstants.ResourceProvider.KeyNotFound);
+                return OperationBuilder<Resource>.FailBusiness(MessageConstants.ResourceProvider.KeyNotFound);
             }
 
             if (resources.Data.Count() > 1)
             {
-                return OperationBuilder<ResourceEntry>.FailBusiness(MessageConstants.ResourceProvider.MultipleResourcesWithSameKey);
+                return OperationBuilder<Resource>.FailBusiness(MessageConstants.ResourceProvider.MultipleWithSameKey);
             }
 
-            return Operation<ResourceEntry>.Success(resources.Data.FirstOrDefault());
+            return Operation<Resource>.Success(resources.Data.FirstOrDefault());
         }
 
         public async Task<string> GetMessageValueOrDefault(string key, string defaultValue = MessageConstants.ResourceProvider.KeyNotFound)
@@ -52,20 +52,20 @@
             return defaultValue;
         }
 
-        public async Task<Operation<IQueryable<ResourceEntry>>> GetResourceEntries()
+        public async Task<Operation<IQueryable<Resource>>> GetResourceEntries()
         {
             var entries = _resourceEntryQuery.ReadFilter(r => r.Active);
             if (entries is null)
             {
-                return OperationBuilder<IQueryable<ResourceEntry>>.FailBusiness(MessageConstants.ResourceProvider.UnableToReadResourceFile);
+                return OperationBuilder<IQueryable<Resource>>.FailBusiness(MessageConstants.ResourceProvider.UnableToReadFile);
             }
 
             if (entries is not null && entries.Result is not null && entries.Result.Data is not null && !entries.Result.Data.Any())
             {
-                return OperationBuilder<IQueryable<ResourceEntry>>.FailBusiness(MessageConstants.ResourceProvider.KeyNotFound);
+                return OperationBuilder<IQueryable<Resource>>.FailBusiness(MessageConstants.ResourceProvider.KeyNotFound);
             }
 
-            return Operation<IQueryable<ResourceEntry>>.Success(entries.Result.Data);
+            return Operation<IQueryable<Resource>>.Success(entries.Result.Data);
         }
     }
 }

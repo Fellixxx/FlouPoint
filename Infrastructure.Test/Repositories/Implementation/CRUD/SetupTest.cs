@@ -21,8 +21,8 @@ namespace Infrastructure.Test.Repositories.Implementation.CRUD
     [TestClass]
     public class SetupTest
     {
-        protected DbContextOptions<CommonDbContext> _options;
-        protected CommonDbContext _dbContext;
+        protected DbContextOptions<DataContext> _options;
+        protected DataContext _dbContext;
         protected Mock<ILogService> _logService;
         protected IUserReadFilter _userReadFilter;
         protected IUserCreate _userCreate;
@@ -74,13 +74,13 @@ namespace Infrastructure.Test.Repositories.Implementation.CRUD
         [TestInitialize]
         public void SetUp()
         {
-            _options = new DbContextOptionsBuilder<CommonDbContext>()
+            _options = new DbContextOptionsBuilder<DataContext>()
                 .UseInMemoryDatabase(Guid.NewGuid().ToString())
                 .EnableSensitiveDataLogging()
                 .Options;
 
             var columnTypes = new ColumnTypesPosgresql();
-            _dbContext = new CommonDbContext(_options, columnTypes);
+            _dbContext = new DataContext(_options, columnTypes);
             _logService = new Mock<ILogService>();
             _resourceHandler = SetupResourceHandlerMock();
             _resourceProvider = SetupResourceProviderMock();

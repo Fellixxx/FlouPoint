@@ -78,7 +78,7 @@
         {
             // When
             var fieldInfo = logLevel.GetType().GetField(logLevel.ToString());
-            var attribute = fieldInfo.GetCustomAttribute<EnumMetadataAttribute>();
+            var attribute = fieldInfo.GetCustomAttribute<EnumMetadata>();
 
             // Then
             Assert.IsNotNull(attribute);
@@ -92,7 +92,7 @@
             // When
             var logLevel = LogLevel.Trace; // Or any other value that has EnumMetadataAttribute
             var fieldInfo = logLevel.GetType().GetField(logLevel.ToString());
-            var attribute = fieldInfo.GetCustomAttribute<EnumMetadataAttribute>();
+            var attribute = fieldInfo.GetCustomAttribute<EnumMetadata>();
 
             // Then
             Assert.IsNotNull(attribute); // In this case, the EnumMetadataAttribute is defined for all values, so it should not be null.
@@ -108,7 +108,7 @@
             foreach (LogLevel logLevel in logLevels)
             {
                 var fieldInfo = logLevel.GetType().GetField(logLevel.ToString());
-                var attribute = fieldInfo.GetCustomAttribute<EnumMetadataAttribute>();
+                var attribute = fieldInfo.GetCustomAttribute<EnumMetadata>();
                 Assert.IsNotNull(attribute);
             }
         }
@@ -117,7 +117,7 @@
         public void EnumMetadata_Should_Have_Correct_AttributeUsage()
         {
             // When
-            var attributeUsage = typeof(EnumMetadataAttribute).GetCustomAttribute<AttributeUsageAttribute>();
+            var attributeUsage = typeof(EnumMetadata).GetCustomAttribute<AttributeUsageAttribute>();
 
             // Then
             Assert.IsNotNull(attributeUsage);

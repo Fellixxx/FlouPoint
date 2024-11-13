@@ -8,7 +8,7 @@
     /// Defines a contract for creating a new entity in the repository.
     /// </summary>
     /// <typeparam name="T">The type of the entity. Must implement IEntity.</typeparam>
-    public interface ICreateRepository<T> where T : class, IEntity
+    public interface ICreate<T> where T : class, IEntity
     {
         /// <summary>
         /// Adds a new entity to the repository.

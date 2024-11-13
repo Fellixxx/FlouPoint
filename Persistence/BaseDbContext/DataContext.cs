@@ -8,23 +8,23 @@
     /// <summary>
     /// Represents a common database context coordinating Entity Framework functionality across projects.
     /// </summary>
-    public class CommonDbContext : DbContext, ICommonDbContext
+    public class DataContext : DbContext, IDataContext
     {
         protected readonly IColumnTypes _columnTypes;
 
         /// <summary>
-        /// Represents a collection of <see cref="ResourceEntry"/> entities in the database context.
+        /// Represents a collection of <see cref="Resource"/> entities in the database context.
         /// </summary>
-        public virtual DbSet<ResourceEntry> Lists { get; set; }
+        public virtual DbSet<Resource> Lists { get; set; }
         public virtual DbSet<User> Users { get; set; }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="CommonDbContext"/> class with the specified options, column types, and logger.
+        /// Initializes a new instance of the <see cref="DataContext"/> class with the specified options, column types, and logger.
         /// </summary>
         /// <param name="options">The options to be used by the database context.</param>
         /// <param name="columnTypes">The column types to be used by the database context.</param>
         /// <param name="logger">The logger instance.</param>
-        public CommonDbContext(DbContextOptions options, IColumnTypes columnTypes) : base(options)
+        public DataContext(DbContextOptions options, IColumnTypes columnTypes) : base(options)
         {
             _columnTypes = columnTypes;
         }
@@ -51,7 +51,7 @@
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            CommonDbContextHelpers.SetTableResourceEntries(modelBuilder, _columnTypes);
+            DataContextHelpers.SetTableResourceEntries(modelBuilder, _columnTypes);
         }
     }
 }

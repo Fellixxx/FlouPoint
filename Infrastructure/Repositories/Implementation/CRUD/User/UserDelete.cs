@@ -19,7 +19,7 @@ namespace Infrastructure.Repositories.Implementation.CRUD.User
         /// </summary>
         /// <param name="context">The database context.</param>
         /// <param name="logService">The log service.</param>
-        public UserDelete(CommonDbContext context,ILogService logService, IResourceProvider resourceProvider, IResourceHandler resourceHandler) : base(context, logService, resourceProvider, resourceHandler)
+        public UserDelete(DataContext context,ILogService logService, IResourceProvider resourceProvider, IResourceHandler resourceHandler) : base(context, logService, resourceProvider, resourceHandler)
         {
         }
     }

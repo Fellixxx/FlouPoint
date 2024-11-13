@@ -22,7 +22,7 @@
         private readonly ILogService _logService;
 
         // Service responsible for image compression operations.
-        private readonly IImageCompressionService _imageCompressionService;
+        private readonly IImageCompression _imageCompressionService;
         private readonly IResourceProvider _resourceProvider;
         private IResourceHandler _resourceHandler;
         private readonly List<string> _resourceKeys;
@@ -31,7 +31,7 @@
         /// </summary>
         /// <param name="logService">Service responsible for logging operations.</param>
         /// <param name="imageCompressionService">Service responsible for image compression.</param>
-        public ManagementImage(ILogService logService, IImageCompressionService imageCompressionService, IResourceProvider resourceProvider, IResourceHandler resourceHandler)
+        public ManagementImage(ILogService logService, IImageCompression imageCompressionService, IResourceProvider resourceProvider, IResourceHandler resourceHandler)
         {
             _logService = logService;
             _imageCompressionService = imageCompressionService;
@@ -77,7 +77,7 @@
             }
             catch (Exception ex)
             {
-                Log log = Util.GetLogError(ex, filename, OperationExecute.CreateCustomOperation("Validate",MessageConstants.ImageManagement.GeneralValidation));
+                Log log = Util.GetLogError(ex, filename, ActionType.CreateCustomOperation("Validate",MessageConstants.ImageManagement.GeneralValidation));
                 Operation<string> result = await _logService.CreateLog(log);
                 if (!result.IsSuccessful)
                 {
@@ -116,7 +116,7 @@
             }
             catch (Exception ex)
             {
-                Log log = Util.GetLogError(ex, base64String, OperationExecute.CreateCustomOperation("Validate", "General validation operation."));
+                Log log = Util.GetLogError(ex, base64String, ActionType.CreateCustomOperation("Validate", "General validation operation."));
                 Operation<string> result = await _logService.CreateLog(log);
                 if (!result.IsSuccessful)
                 {

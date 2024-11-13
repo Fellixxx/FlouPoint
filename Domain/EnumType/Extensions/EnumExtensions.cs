@@ -55,14 +55,14 @@
         /// <typeparam name="TEnum">The type of the enum.</typeparam>
         /// <param name="enumValue">The enum value to get the metadata for.</param>
         /// <returns>The EnumMetadataAttribute associated with the enum value, or null if not available.</returns>
-        private static EnumMetadataAttribute? GetEnumMetadata<TEnum>(TEnum enumValue) where TEnum : Enum
+        private static EnumMetadata? GetEnumMetadata<TEnum>(TEnum enumValue) where TEnum : Enum
         {
             var type = enumValue.GetType();
             var name = Enum.GetName(type, enumValue);
             if (name is not null)
             {
                 var field = type.GetField(name);
-                if (field?.GetCustomAttribute<EnumMetadataAttribute>(false) is EnumMetadataAttribute attribute)
+                if (field?.GetCustomAttribute<EnumMetadata>(false) is EnumMetadata attribute)
                 {
                     return attribute;
                 }

@@ -1,16 +1,16 @@
-﻿namespace Application.UseCases.Repository.CRUD.ResourceEntry
+﻿namespace Application.UseCases.Repository.CRUD.Resource
 {
     using Application.Result;
 
-    using ResourceEntry = Domain.Entities.ResourceEntry;
-    public interface IResourceEntryReadId
+    using Resource = Domain.Entities.Resource;
+    public interface IReadId
     {
         /// <summary>
         /// Retrieves a ResourceEntry entity by its unique identifier.
         /// </summary>
         /// <param name="id">The unique identifier of the ResourceEntry entity to retrieve.</param>
         /// <returns>An <see cref="Operation{T}"/> containing the ResourceEntry entity if it exists, or null if it does not.</returns>
-        Task<Operation<ResourceEntry>> ReadId(string id);
+        Task<Operation<Resource>> ReadId(string id);
 
         /// <summary>
         /// Retrieves a ResourceEntry entity based on the provided bearer token.
@@ -18,6 +18,6 @@
         /// </summary>
         /// <param name="bearerToken">The bearer token used to authenticate and retrieve the ResourceEntry.</param>
         /// <returns>An <see cref="Operation{T}"/> containing the ResourceEntry entity if it exists, or null if it does not.</returns>
-        Task<Operation<ResourceEntry>> ReadByBearer(string bearerToken);
+        Task<Operation<Resource>> ReadByBearer(string bearerToken);
     }
 }

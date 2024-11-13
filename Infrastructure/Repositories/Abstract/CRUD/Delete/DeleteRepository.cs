@@ -17,7 +17,7 @@
     /// Abstract repository class for deleting an entity.
     /// </summary>
     /// <typeparam name="T">The entity type.</typeparam>
-    public abstract class DeleteRepository<T> : EntityExistenceValidator<T>, IDeleteRepository<T> where T : class, IEntity
+    public abstract class DeleteRepository<T> : EntityExistenceValidator<T>, IDelete<T> where T : class, IEntity
     {
         private readonly ILogService _logService;
         private readonly IResourceProvider _resourceProvider;
@@ -72,7 +72,7 @@
             }
             catch (Exception ex)
             {
-                Log log = Util.GetLogError(ex, id, OperationExecute.Remove);
+                Log log = Util.GetLogError(ex, id, ActionType.Remove);
                 Operation<string> result = await _logService.CreateLog(log);
                 if (!result.IsSuccessful)
                 {

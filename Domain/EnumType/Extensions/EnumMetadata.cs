@@ -7,7 +7,7 @@
     /// This includes a name and a description for each enum field.
     /// </summary>
     [AttributeUsage(AttributeTargets.Field, AllowMultiple = false)]
-    public class EnumMetadataAttribute : Attribute
+    public class EnumMetadata : Attribute
     {
         /// <summary>
         /// Gets the name representation of the enum field.
@@ -20,12 +20,12 @@
         public string Description { get; private set; }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="EnumMetadataAttribute"/> class
+        /// Initializes a new instance of the <see cref="EnumMetadata"/> class
         /// with a specified name and description for an enum field.
         /// </summary>
         /// <param name="name">The name representation of the enum field.</param>
         /// <param name="description">The description of the enum field.</param>
-        public EnumMetadataAttribute(string name, string description)
+        public EnumMetadata(string name, string description)
         {
             if (string.IsNullOrWhiteSpace(name) || string.IsNullOrWhiteSpace(description))
             {

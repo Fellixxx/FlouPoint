@@ -16,7 +16,7 @@
     /// Abstract repository class for creating a new entity.
     /// </summary>
     /// <typeparam name="T">The entity type.</typeparam>
-    public abstract class CreateRepository<T> : Repository<T>, ICreateRepository<T> where T : class, IEntity
+    public abstract class CreateRepository<T> : Repository<T>, ICreate<T> where T : class, IEntity
     {
         private readonly ILogService _logService;
         private readonly IUtilEntity<T> _utilEntity;
@@ -74,7 +74,7 @@
             }
             catch (Exception ex)
             {
-                Log log = Util.GetLogError(ex, entity, OperationExecute.Add);
+                Log log = Util.GetLogError(ex, entity, ActionType.Add);
                 Operation<string> result = await _logService.CreateLog(log);
                 if (!result.IsSuccessful)
                 {

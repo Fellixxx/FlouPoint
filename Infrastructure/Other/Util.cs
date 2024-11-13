@@ -21,7 +21,7 @@
         /// <param name="operation">Details of the operation being executed when the exception occurred.</param>
         /// <returns>A log entry with details of the exception.</returns>
         /// <exception cref="Exception">Thrown when the provided exception is null.</exception>
-        public static Log GetLogError(Exception ex, object entity, OperationExecute operation)
+        public static Log GetLogError(Exception ex, object entity, ActionType operation)
         {
             if (ex == null)
             {

@@ -16,7 +16,7 @@
     /// Abstract repository class for updating an entity.
     /// </summary>
     /// <typeparam name="T">The entity type.</typeparam>
-    public abstract class UpdateRepository<T> : EntityExistenceValidator<T>, IUpdateRepository<T> where T : class, IEntity
+    public abstract class UpdateRepository<T> : EntityExistenceValidator<T>, IUpdate<T> where T : class, IEntity
     {
         private readonly ILogService _logService;
         private readonly IUtilEntity<T> _utilEntity;
@@ -82,7 +82,7 @@
             }
             catch (Exception ex)
             {
-                Log log = Other.Util.GetLogError(ex, entity, OperationExecute.Modified);
+                Log log = Other.Util.GetLogError(ex, entity, ActionType.Modified);
                 Operation<string> result = await _logService.CreateLog(log);
                 if (!result.IsSuccessful)
                 {

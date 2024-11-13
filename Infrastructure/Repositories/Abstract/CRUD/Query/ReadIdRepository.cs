@@ -16,7 +16,7 @@
     /// Abstract repository class for reading an entity by its ID.
     /// </summary>
     /// <typeparam name="T">The entity type.</typeparam>
-    public abstract class ReadIdRepository<T> : EntityExistenceValidator<T>, IReadIdRepository<T> where T : class, IEntity
+    public abstract class ReadIdRepository<T> : EntityExistenceValidator<T>, IReadId<T> where T : class, IEntity
     {
         private readonly ILogService _logService;
         private readonly IResourceProvider _resourceProvider;
@@ -60,7 +60,7 @@
             catch (Exception ex)
             {
                 // Create a log entry for the exception
-                Log log = Util.GetLogError(ex, id, OperationExecute.GetUserById);
+                Log log = Util.GetLogError(ex, id, ActionType.GetUserById);
                 Operation<string> result = await _logService.CreateLog(log);
 
                 // Handle logging failure
@@ -107,7 +107,7 @@
             catch (Exception ex)
             {
                 // Create a log entry for the exception
-                var log = Util.GetLogError(ex, bearerToken, OperationExecute.GetUserById);
+                var log = Util.GetLogError(ex, bearerToken, ActionType.GetUserById);
                 var result = await _logService.CreateLog(log);
 
                 // Handle logging failure

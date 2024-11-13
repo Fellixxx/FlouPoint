@@ -19,7 +19,7 @@
         /// <param name="context">The database context.</param>
         /// <param name="logService">The log service.</param>
         public UserReadId(
-            CommonDbContext context, 
+            DataContext context, 
             ILogService logService, IResourceProvider resourceProvider, IResourceHandler resourceHandler) : base(context, logService, resourceProvider, resourceHandler)
         {
         }

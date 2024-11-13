@@ -16,7 +16,7 @@
     /// Abstract repository class for reading and filtering entities.
     /// </summary>
     /// <typeparam name="T">The entity type.</typeparam>
-    public abstract class ReadFilterRepository<T> : Read<T>, IReadFilterRepository<T> where T : class
+    public abstract class ReadFilterRepository<T> : Read<T>, IReadFilter<T> where T : class
     {
         private readonly ILogService _logService;
         private readonly IResourceProvider _resourceProvider;
@@ -57,7 +57,7 @@
             catch (Exception ex)
             {
                 // Create a log entry for the exception
-                Log log = Util.GetLogError(ex, predicate, OperationExecute.GetAllByFilter);
+                Log log = Util.GetLogError(ex, predicate, ActionType.GetAllByFilter);
                 Operation<string> result = await _logService.CreateLog(log);
 
                 // Handle logging failure

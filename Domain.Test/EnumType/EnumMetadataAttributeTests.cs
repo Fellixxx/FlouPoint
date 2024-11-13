@@ -7,7 +7,7 @@ namespace Domain.Test.EnumType
     [TestClass]
     public class EnumMetadataAttributeTests
     {
-        private EnumMetadataAttribute _testClass;
+        private EnumMetadata _testClass;
         private string _name;
         private string _description;
 
@@ -16,14 +16,14 @@ namespace Domain.Test.EnumType
         {
             _name="TestValue1974655783";
             _description="TestValue680922702";
-            _testClass=new EnumMetadataAttribute(_name, _description);
+            _testClass=new EnumMetadata(_name, _description);
         }
 
         [TestMethod]
         public void CanConstruct()
         {
             // Act
-            var instance = new EnumMetadataAttribute(_name, _description);
+            var instance = new EnumMetadata(_name, _description);
 
             // Assert
             Assert.IsNotNull(instance);
@@ -35,7 +35,7 @@ namespace Domain.Test.EnumType
         [DataRow("   ")]
         public void CannotConstructWithInvalidName(string value)
         {
-            Assert.ThrowsException<ArgumentNullException>(() => new EnumMetadataAttribute(value, _description));
+            Assert.ThrowsException<ArgumentNullException>(() => new EnumMetadata(value, _description));
         }
 
         [DataTestMethod]
@@ -44,7 +44,7 @@ namespace Domain.Test.EnumType
         [DataRow("   ")]
         public void CannotConstructWithInvalidDescription(string value)
         {
-            Assert.ThrowsException<ArgumentNullException>(() => new EnumMetadataAttribute(_name, value));
+            Assert.ThrowsException<ArgumentNullException>(() => new EnumMetadata(_name, value));
         }
 
         [TestMethod]
@@ -67,7 +67,7 @@ namespace Domain.Test.EnumType
             string expectedDescription = "This is a test description for the enum field.";
 
             // Act
-            var enumMetadataAttribute = new EnumMetadataAttribute(expectedName, expectedDescription);
+            var enumMetadataAttribute = new EnumMetadata(expectedName, expectedDescription);
 
             // Assert
             Assert.AreEqual(expectedName, enumMetadataAttribute.Name);
@@ -80,7 +80,7 @@ namespace Domain.Test.EnumType
             // Act & Assert
             try
             {
-                new EnumMetadataAttribute("ValidName", "Valid description.");
+                new EnumMetadata("ValidName", "Valid description.");
             }
             catch (Exception ex)
             {
@@ -96,7 +96,7 @@ namespace Domain.Test.EnumType
             var fieldInfo = enumType.GetField(nameof(TestEnumWithMetadata.TestValue));
 
             // Assert
-            var attribute = (EnumMetadataAttribute)Attribute.GetCustomAttribute(fieldInfo, typeof(EnumMetadataAttribute));
+            var attribute = (EnumMetadata)Attribute.GetCustomAttribute(fieldInfo, typeof(EnumMetadata));
             Assert.IsNotNull(attribute);
             Assert.AreEqual("TestValueName", attribute.Name);
             Assert.AreEqual("This is a description for TestValue.", attribute.Description);

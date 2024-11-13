@@ -3,7 +3,7 @@
     using Application.Result;
     using Application.UseCases.Repository.Status.StatusChange;
 
-    public interface IUserStatus : IStatusRepository
+    public interface IUserStatus : IStatus
     {
         Task<Operation<bool>> Activate(string id);
         Task<Operation<bool>> Deactivate(string id);

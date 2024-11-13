@@ -7,12 +7,12 @@ namespace Domain.Test.Entities
     [TestClass]
     public class ResourceEntryTests
     {
-        private ResourceEntry _testClass;
+        private Resource _testClass;
 
         [TestInitialize]
         public void SetUp()
         {
-            _testClass=new ResourceEntry();
+            _testClass=new Resource();
         }
 
         [TestMethod]
@@ -84,7 +84,7 @@ namespace Domain.Test.Entities
         public void ResourceEntry_Should_Have_Default_Empty_Properties_And_Inactive_Status()
         {
             // Act
-            var resourceEntry = new ResourceEntry();
+            var resourceEntry = new Resource();
 
             // Assert
             Assert.AreEqual(resourceEntry.Id, string.Empty);
@@ -101,7 +101,7 @@ namespace Domain.Test.Entities
             string expectedId = "12345";
 
             // Act
-            var resourceEntry = new ResourceEntry
+            var resourceEntry = new Resource
             {
                 Id = expectedId
             };
@@ -117,7 +117,7 @@ namespace Domain.Test.Entities
             string expectedName = "SampleResource";
 
             // Act
-            var resourceEntry = new ResourceEntry
+            var resourceEntry = new Resource
             {
                 Name = expectedName
             };
@@ -133,7 +133,7 @@ namespace Domain.Test.Entities
             string expectedValue = "ResourceValue";
 
             // Act
-            var resourceEntry = new ResourceEntry
+            var resourceEntry = new Resource
             {
                 Value = expectedValue
             };
@@ -149,7 +149,7 @@ namespace Domain.Test.Entities
             string expectedComment = "This is a test comment.";
 
             // Act
-            var resourceEntry = new ResourceEntry
+            var resourceEntry = new Resource
             {
                 Comment = expectedComment
             };
@@ -165,7 +165,7 @@ namespace Domain.Test.Entities
             bool expectedActive = true;
 
             // Act
-            var resourceEntry = new ResourceEntry
+            var resourceEntry = new Resource
             {
                 Active = expectedActive
             };

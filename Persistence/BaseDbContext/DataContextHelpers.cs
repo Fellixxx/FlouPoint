@@ -5,7 +5,7 @@
     using Persistence.CreateStruture.Constants;
     using Persistence.CreateStruture.Constants.ColumnType;
 
-    public static class CommonDbContextHelpers
+    public static class DataContextHelpers
     {
         /// <summary>
         /// Configures properties and relationships for the ResourceEntry entity.
@@ -14,8 +14,8 @@
         /// <param name="columnTypes">Column type definitions to be applied to the entity properties.</param>
         public static void SetTableResourceEntries(ModelBuilder modelBuilder, IColumnTypes columnTypes)
         {
-            modelBuilder.Entity<ResourceEntry>().ToTable(DatabaseNames.TableNameResourceEntries);
-            modelBuilder.Entity<ResourceEntry>(entity =>
+            modelBuilder.Entity<Resource>().ToTable(DatabaseNames.TableNameResourceEntries);
+            modelBuilder.Entity<Resource>(entity =>
             {
                 entity.Property(u => u.Id).HasColumnType(columnTypes.TypeVar);
                 entity.HasKey(u => u.Id);

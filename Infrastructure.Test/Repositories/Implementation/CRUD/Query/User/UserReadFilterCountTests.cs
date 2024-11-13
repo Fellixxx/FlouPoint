@@ -27,7 +27,7 @@ namespace Infrastructure.Test.Repositories.Implementation.CRUD.Query.User
         [TestMethod]
         public void CannotConstructWithNullContext()
         {
-            Assert.ThrowsException<ArgumentNullException>(() => new UserReadFilterCount(default(CommonDbContext), _logService.Object, _resourceProvider, _resourceHandler));
+            Assert.ThrowsException<ArgumentNullException>(() => new UserReadFilterCount(default(DataContext), _logService.Object, _resourceProvider, _resourceHandler));
         }
     }
 }

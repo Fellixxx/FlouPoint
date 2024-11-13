@@ -31,19 +31,19 @@
         /// <summary>
         /// Initializes a new instance of the <see cref="LogServiceBase"/> class.
         /// </summary>
-        /// <param name="clientFactory">Factory for creating instances of <see cref="HttpClient"/>.</param>
-        /// <param name="configuration">Application's configuration interface.</param>
-        /// <param name="httpContentWrapper">Wrapper for handling HTTP content.</param>
-        protected LogServiceBase(IHttpClientFactory clientFactory, IConfiguration configuration, IWrapper httpContentWrapper, IResourceProvider resourceProvider, IResourceHandler resourceHandler)
+        /// <param name="factory">Factory for creating instances of <see cref="HttpClient"/>.</param>
+        /// <param name="config">Application's configuration interface.</param>
+        /// <param name="wrapper">Wrapper for handling HTTP content.</param>
+        protected LogServiceBase(IHttpClientFactory factory, IConfiguration config, IWrapper wrapper, IResourceProvider provider, IResourceHandler handler)
         {
-            _client = clientFactory.CreateClient();
-            _configuration = configuration;
+            _client = factory.CreateClient();
+            _configuration = config;
             _username = _configuration.GetSection("mongodb:username").Value ?? string.Empty;
             _password = _configuration.GetSection("mongodb:password").Value ?? string.Empty;
             _urlLogservice = _configuration.GetSection("logService:urlLogservice").Value ?? string.Empty;
-            _httpContentWrapper = httpContentWrapper;
-            _resourceProvider = resourceProvider;
-            _resourceHandler = resourceHandler;
+            _httpContentWrapper = wrapper;
+            _resourceProvider = provider;
+            _resourceHandler = handler;
             _resourceKeys =
             [
                 "FailureConfigurationMissingError",

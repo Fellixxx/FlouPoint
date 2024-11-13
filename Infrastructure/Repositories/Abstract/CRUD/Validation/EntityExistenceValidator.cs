@@ -14,7 +14,7 @@
     /// Abstract class for validating the existence of an entity.
     /// </summary>
     /// <typeparam name="T">The entity type.</typeparam>
-    public abstract class EntityExistenceValidator<T> : Repository<T>, IEntityExistenceValidator<T> where T : class, IEntity
+    public abstract class EntityExistenceValidator<T> : Repository<T>, IEntityChecker<T> where T : class, IEntity
     {
         private readonly IResourceProvider _resourceProvider;
         private IResourceHandler _resourceHandler;

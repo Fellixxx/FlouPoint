@@ -32,9 +32,9 @@
         /// <param name="entity">The entity</param>
         /// <param name="operation">The operation</param>
         /// <returns>The log</returns>
-        public Operation<Log> Trace(string message, object entity, OperationExecute operation)
+        public Operation<Log> Trace(string message, object entity, ActionType operation)
         {
-            return CreateLog.CreateLogIfValid(message, entity, operation, LogLevel.Trace);
+            return CreateLog.TryCreate(message, entity, operation, LogLevel.Trace);
         }
 
         /// <summary>
@@ -44,9 +44,9 @@
         /// <param name="entity">The entity</param>
         /// <param name="operation">The operation</param>
         /// <returns>The log</returns>
-        public Operation<Log> Debug(string message, object entity, OperationExecute operation)
+        public Operation<Log> Debug(string message, object entity, ActionType operation)
         {
-            return CreateLog.CreateLogIfValid(message, entity, operation, LogLevel.Debug);
+            return CreateLog.TryCreate(message, entity, operation, LogLevel.Debug);
         }
 
         /// <summary>
@@ -56,9 +56,9 @@
         /// <param name="entity">The entity</param>
         /// <param name="operation">The operation</param>
         /// <returns>The log</returns>
-        public Operation<Log> Information(string message, object entity, OperationExecute operation)
+        public Operation<Log> Information(string message, object entity, ActionType operation)
         {
-            return CreateLog.CreateLogIfValid(message, entity, operation, LogLevel.Information);
+            return CreateLog.TryCreate(message, entity, operation, LogLevel.Information);
         }
 
         /// <summary>
@@ -68,9 +68,9 @@
         /// <param name="entity">The entity</param>
         /// <param name="operation">The operation</param>
         /// <returns>The log</returns>
-        public Operation<Log> Warning(string message, object entity, OperationExecute operation)
+        public Operation<Log> Warning(string message, object entity, ActionType operation)
         {
-            return CreateLog.CreateLogIfValid(message, entity, operation, LogLevel.Warning);
+            return CreateLog.TryCreate(message, entity, operation, LogLevel.Warning);
         }
 
         /// <summary>
@@ -80,9 +80,9 @@
         /// <param name="entity">The entity</param>
         /// <param name="operation">The operation</param>
         /// <returns>The log</returns>
-        public Operation<Log> Error(string message, object entity, OperationExecute operation)
+        public Operation<Log> Error(string message, object entity, ActionType operation)
         {
-            return CreateLog.CreateLogIfValid(message, entity, operation, LogLevel.Error);
+            return CreateLog.TryCreate(message, entity, operation, LogLevel.Error);
         }
 
         /// <summary>
@@ -92,9 +92,9 @@
         /// <param name="entity">The entity</param>
         /// <param name="operation">The operation</param>
         /// <returns>The log</returns>
-        public Operation<Log> Fatal(string message, object entity, OperationExecute operation)
+        public Operation<Log> Fatal(string message, object entity, ActionType operation)
         {
-            return CreateLog.CreateLogIfValid(message, entity, operation, LogLevel.Fatal);
+            return CreateLog.TryCreate(message, entity, operation, LogLevel.Fatal);
         }
     }
 }

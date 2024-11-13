@@ -6,7 +6,7 @@
     /// Defines a contract for reading the count of items based on a filter.
     /// </summary>
     /// <typeparam name="T">The type of the entity. Must implement IEntity.</typeparam>
-    public interface IReadFilterCountRepository<T> where T : class
+    public interface IReadFilterCount<T> where T : class
     {
         /// <summary>
         /// Retrieves the count of items that match the specified filter.

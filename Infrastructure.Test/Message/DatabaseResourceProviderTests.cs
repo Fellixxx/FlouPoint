@@ -2,7 +2,7 @@ namespace Infrastructure.Test.Message
 {
     using System;
     using System.Threading.Tasks;
-    using Application.UseCases.Repository.CRUD.ResourceEntry;
+    using Application.UseCases.Repository.CRUD.Resource;
     using Infrastructure.Message;
     using Infrastructure.Test.Repositories.Implementation;
     using Microsoft.EntityFrameworkCore;

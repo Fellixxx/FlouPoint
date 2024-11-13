@@ -1,7 +1,7 @@
-﻿namespace Application.UseCases.Repository.CRUD.ResourceEntry
+﻿namespace Application.UseCases.Repository.CRUD.Resource
 {
     using Application.Result;
-    public interface IResourceEntryReadFilterCount
+    public interface IReadFilterCount
     {
         /// <summary>
         /// Retrieves the count of ResourceEntry entities that match the specified filter.

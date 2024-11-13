@@ -2,7 +2,7 @@
 {
     using Domain.Interfaces.Entity;
 
-    public class ResourceEntry : IEntity
+    public class Resource : IEntity
     {
         /// <summary>
         /// Gets or sets the unique identifier for the resource entry.

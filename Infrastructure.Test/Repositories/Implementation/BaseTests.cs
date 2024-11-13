@@ -3,7 +3,7 @@ using Application.UseCases.CRUD.User;
 using Application.UseCases.CRUD.Validation;
 using Application.UseCases.ExternalServices;
 using Application.UseCases.Operations;
-using Application.UseCases.Repository.CRUD.ResourceEntry;
+using Application.UseCases.Repository.CRUD.Resource;
 using Application.UseCases.Repository.Status.StatusChange;
 using Domain.Entities;
 using Infrastructure.Message;
@@ -25,9 +25,9 @@ namespace Infrastructure.Test.Repositories.Implementation
     [TestClass]
     public class BaseTests
     {
-        protected CommonDbContext _dbContext;
-        protected Mock<ICommonDbContext> _dbContextMock;
-        protected DbContextOptions<CommonDbContext> _options;
+        protected DataContext _dbContext;
+        protected Mock<IDataContext> _dbContextMock;
+        protected DbContextOptions<DataContext> _options;
         protected Mock<ILogService> _logService;
         protected Mock<IConfiguration> _configuration;
         protected Mock<IConfigurationSection> _configurationSection;
@@ -41,14 +41,14 @@ namespace Infrastructure.Test.Repositories.Implementation
         protected IUserCreate _userCreate;
         protected IUserDelete _userDelete;
         protected IUserUpdate _userUpdate;
-        protected IStatusRepository _userStatus;
-        protected IUserExistenceValidator _userExistenceValidator;
+        protected IStatus _userStatus;
+        protected IUserChecker _userExistenceValidator;
         protected Mock<IDistributedCache> _distributedCacheMock;
         protected IUserReadFilterPage _userReadFilterPage;
         protected IUserReadId _userReadId;
         protected IResourceProvider _resxResourceProvider;
         protected IResourceProvider _databaseResourceProvider;
-        protected IResourceEntryQuery _resourceEntryQuery;
+        protected IQuery _resourceEntryQuery;
 
         [TestInitialize]
         public virtual void Setup()
@@ -66,7 +66,7 @@ namespace Infrastructure.Test.Repositories.Implementation
             _configuration.Setup(config => config.GetSection(It.IsAny<string>()))
                 .Returns(_configurationSection.Object);
 
-            _options = new DbContextOptionsBuilder<CommonDbContext>()
+            _options = new DbContextOptionsBuilder<DataContext>()
                .UseInMemoryDatabase(databaseName: "testdb")
                .EnableSensitiveDataLogging(true)
                .Options;
@@ -102,7 +102,7 @@ namespace Infrastructure.Test.Repositories.Implementation
 
 
             IColumnTypes _columnTypes = new ColumnTypesPosgresql();
-            _dbContext = new CommonDbContext(_options, _columnTypes);
+            _dbContext = new DataContext(_options, _columnTypes);
 
             _resxResourceProvider = new ResxResourceProvider();
             _resourceEntryQuery = new ResourceEntryQuery(_dbContext, _logService.Object);

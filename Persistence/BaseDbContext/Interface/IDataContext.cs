@@ -7,7 +7,7 @@
     /// <summary>
     /// Interface for the CommonDbContext class, representing a common database context coordinating Entity Framework functionality across projects.
     /// </summary>
-    public interface ICommonDbContext
+    public interface IDataContext
     {
         /// <summary>
         /// Ensures the database is migrated to the latest version.

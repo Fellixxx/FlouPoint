@@ -5,7 +5,7 @@
     /// <summary>
     /// Defines the contract for activating a deactivated entity in the repository.
     /// </summary>
-    public interface IActivateRepository
+    public interface IActivate
     {
         /// <summary>
         /// Activates a deactivated entity in the repository.

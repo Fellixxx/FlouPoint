@@ -21,19 +21,19 @@
     // Sample enum for testing, decorated with EnumMetadataAttribute
     public enum SampleEnum
     {
-        [EnumMetadata("FIRST_VALUE", "First value description.")]
+        [EnumType.EnumMetadata("FIRST_VALUE", "First value description.")]
         FirstValue,
 
-        [EnumMetadata("SECOND_VALUE", "Second value description.")]
+        [EnumType.EnumMetadata("SECOND_VALUE", "Second value description.")]
         SecondValue,
 
         // Enum value without metadata to test default behavior
         NoMetadataValue,
 
-        [EnumMetadata("DUPLICATE_NAME", "First duplicate description.")]
+        [EnumType.EnumMetadata("DUPLICATE_NAME", "First duplicate description.")]
         DuplicateValueOne,
 
-        [EnumMetadata("DUPLICATE_NAME", "Second duplicate description.")]
+        [EnumType.EnumMetadata("DUPLICATE_NAME", "Second duplicate description.")]
         DuplicateValueTwo,
         ValueWithMetadata,
         ValueWithoutMetadata

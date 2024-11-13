@@ -1,8 +1,8 @@
-﻿namespace Application.UseCases.Repository.CRUD.ResourceEntry
+﻿namespace Application.UseCases.Repository.CRUD.Resource
 {
     using Application.Result;
-    using ResourceEntry = Domain.Entities.ResourceEntry;
-    public interface IResourceEntryReadFilterPage
+    using Resource = Domain.Entities.Resource;
+    public interface IReadFilterPage
     {
         /// <summary>
         /// Retrieves a paginated list of ResourceEntry entities based on the provided filter string.
@@ -12,6 +12,6 @@
         /// <param name="pageSize">The size of each page.</param>
         /// <param name="filter">The filter string to apply to the query.</param>
         /// <returns>An <see cref="Operation{T}"/> containing an IQueryable of ResourceEntry entities that match the filter criteria.</returns>
-        Task<Operation<IQueryable<ResourceEntry>>> ReadFilterPage(int pageNumber, int pageSize, string filter);
+        Task<Operation<IQueryable<Resource>>> ReadFilterPage(int pageNumber, int pageSize, string filter);
     }
 }

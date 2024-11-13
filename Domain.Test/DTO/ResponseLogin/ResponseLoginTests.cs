@@ -447,7 +447,7 @@
         public void CanSerializeAndDeserialize()
         {
             // Arrange
-            var resourceEntry = new ResourceEntry
+            var resourceEntry = new Resource
             {
                 Id = "123",
                 Name = "Resource",
@@ -458,7 +458,7 @@
 
             // Act
             var json = JsonConvert.SerializeObject(resourceEntry);
-            var deserializedResourceEntry = JsonConvert.DeserializeObject<ResourceEntry>(json);
+            var deserializedResourceEntry = JsonConvert.DeserializeObject<Resource>(json);
 
             // Assert
             Assert.AreEqual(resourceEntry.Id, deserializedResourceEntry.Id);
@@ -472,9 +472,9 @@
         public void CanAddResourceEntryToCollection()
         {
             // Arrange
-            var resourceEntry1 = new ResourceEntry { Id = "1", Name = "Resource1" };
-            var resourceEntry2 = new ResourceEntry { Id = "2", Name = "Resource2" };
-            var resourceEntries = new List<ResourceEntry>();
+            var resourceEntry1 = new Resource { Id = "1", Name = "Resource1" };
+            var resourceEntry2 = new Resource { Id = "2", Name = "Resource2" };
+            var resourceEntries = new List<Resource>();
 
             // Act
             resourceEntries.Add(resourceEntry1);
@@ -509,7 +509,7 @@
             Assert.AreEqual("Extra Data", extendedResourceEntry.AdditionalInfo);
         }
 
-        public class ExtendedResourceEntry : ResourceEntry
+        public class ExtendedResourceEntry : Resource
         {
             public string AdditionalInfo { get; set; }
         }
@@ -518,7 +518,7 @@
         public void ResourceEntryProperties_CanBeAccessedConcurrently()
         {
             // Arrange
-            var resourceEntry = new ResourceEntry();
+            var resourceEntry = new Resource();
             var tasks = new List<Task>();
             var exceptionOccurred = false;
 

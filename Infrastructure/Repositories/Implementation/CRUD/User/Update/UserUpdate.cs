@@ -33,7 +33,7 @@
         /// </summary>
         /// <param name="context">The database context.</param>
         /// <param name="logService">The service used for logging operations.</param>
-        public UserUpdate(CommonDbContext context, ILogService logService, IUtilEntity<User> utilEntity, IResourceProvider resourceProvider, IResourceHandler resourceHandler) : base(context, logService, utilEntity, resourceProvider, resourceHandler)
+        public UserUpdate(DataContext context, ILogService logService, IUtilEntity<User> utilEntity, IResourceProvider resourceProvider, IResourceHandler resourceHandler) : base(context, logService, utilEntity, resourceProvider, resourceHandler)
         {
             _resourceProvider = resourceProvider;
             _resourceHandler = resourceHandler;

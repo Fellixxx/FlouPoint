@@ -8,7 +8,7 @@
     /// Defines a contract for reading an entity based on its Id.
     /// </summary>
     /// <typeparam name="T">The type of the entity. Must implement IEntity.</typeparam>
-    public interface IReadIdRepository<T> where T : class, IEntity
+    public interface IReadId<T> where T : class, IEntity
     {
         /// <summary>
         /// Retrieves an entity by its Id.

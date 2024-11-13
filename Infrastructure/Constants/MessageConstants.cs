@@ -14,18 +14,18 @@
         {
             public const string InvalidDataSubmitted = "The message or entity was not submitted.";
             public const string ValidationSuccess = "The log validation of the OperationResult was successful.";
-            public const string FailedExceptionSubmission = "The exception was not submitted.";
-            public const string FailedToSerializeEntity = "Failed to serialize entity: {0}";
-            public const string NullReferenceEncountered = "Null reference encountered: {0}";
+            public const string FailedException = "The exception was not submitted.";
+            public const string FailedToSerialize = "Failed to serialize entity: {0}";
+            public const string NullReference = "Null reference encountered: {0}";
             public const string UnknownError = "An unexpected error occurred: {0}";
         }
 
         public static class ResourceProvider
         {
             public const string KeyNotFound = "Resource not found.";
-            public const string MultipleResourcesWithSameKey = "Multiple resources exist with the same key.";
-            public const string UnableToReadResourceFile = "Unable to read the resource file.";
-            public const string NoResourceKeysFound = "No resource keys were found.";
+            public const string MultipleWithSameKey = "Multiple resources exist with the same key.";
+            public const string UnableToReadFile = "Unable to read the resource file.";
+            public const string NoKeysFound = "No resource keys were found.";
         }
 
         public static class Utility

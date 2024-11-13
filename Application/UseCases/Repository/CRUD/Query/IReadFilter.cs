@@ -9,7 +9,7 @@
     /// Defines a contract for reading items based on a filter expression.
     /// </summary>
     /// <typeparam name="T">The type of the entity. Must implement IEntity.</typeparam>
-    public interface IReadFilterRepository<T> where T : class
+    public interface IReadFilter<T> where T : class
     {
         /// <summary>
         /// Retrieves all items that satisfy the specified predicate.
