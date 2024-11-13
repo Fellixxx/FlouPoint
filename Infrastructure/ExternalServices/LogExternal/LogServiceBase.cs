@@ -24,8 +24,8 @@
         private readonly string _urlLogservice;
         private readonly IWrapper _httpContentWrapper;
         private readonly HttpClient _client;
-        private readonly IResorcesProvider _resourceProvider;
-        private IResourceHandler _resourceHandler;
+        private readonly IResorcesProvider _provider;
+        private IResourceHandler _handler;
         private readonly List<string> _resourceKeys;
 
         /// <summary>
@@ -42,8 +42,8 @@
             _password = _configuration.GetSection("mongodb:password").Value ?? string.Empty;
             _urlLogservice = _configuration.GetSection("logService:urlLogservice").Value ?? string.Empty;
             _httpContentWrapper = wrapper;
-            _resourceProvider = provider;
-            _resourceHandler = handler;
+            _provider = provider;
+            _handler = handler;
             _resourceKeys =
             [
                 "FailureConfigurationMissingError",
@@ -60,11 +60,11 @@
         /// <returns>A task representing the asynchronous operation. The task result contains the operation result with the authentication token or an error message.</returns>
         private async Task<Operation<string>> GetToken()
         {
-            await ResourceHandler.CreateAsync(_resourceProvider, _resourceKeys);
+            await ResourceHandler.CreateAsync(_provider, _resourceKeys);
             if (HasParameter())
             {
-                await ResourceHandler.CreateAsync(_resourceProvider, _resourceKeys);
-                var failureConfigurationMissingError = _resourceHandler.GetResource("FailureConfigurationMissingError");
+                await ResourceHandler.CreateAsync(_provider, _resourceKeys);
+                var failureConfigurationMissingError = _handler.GetResource("FailureConfigurationMissingError");
                 var message = failureConfigurationMissingError;
                 return OperationBuilder<string>.FailConfig(message);
             }
@@ -74,7 +74,7 @@
 
             if (!response.IsSuccessStatusCode)
             {
-                var failedGetToken = _resourceHandler.GetResource("FailedGetToken");
+                var failedGetToken = _handler.GetResource("FailedGetToken");
                 return OperationBuilder<string>.FailExternal(failedGetToken);
             }
 
@@ -82,7 +82,7 @@
             var _tokenResponse = JsonConvert.DeserializeObject<ResponseLogin>(result);
 
             string accessToken = _tokenResponse?.AccessToken ?? string.Empty;
-            var successfullyLogCreate = _resourceHandler.GetResource("SuccessfullyGetToken");
+            var successfullyLogCreate = _handler.GetResource("SuccessfullyGetToken");
             return Operation<string>.Success(accessToken, successfullyLogCreate);
         }
 
@@ -125,13 +125,13 @@
             var content = GetContent(json);
             var authorization = new AuthenticationHeaderValue("Bearer", bearerToken.Data);
             var response = await _httpContentWrapper.PostAsync(_client, url, content, authorization);
-            await ResourceHandler.CreateAsync(_resourceProvider, _resourceKeys);
+            await ResourceHandler.CreateAsync(_provider, _resourceKeys);
             if (!response.IsSuccessStatusCode)
             {
-                var failedSetLog = _resourceHandler.GetResource("FailedGetToken");
+                var failedSetLog = _handler.GetResource("FailedGetToken");
                 return OperationBuilder<string>.FailExternal(failedSetLog);
             }
-            var successfullySetLog = _resourceHandler.GetResource("FailedGetToken");
+            var successfullySetLog = _handler.GetResource("FailedGetToken");
             return Operation<string>.Success(string.Empty, successfullySetLog);
         }
 

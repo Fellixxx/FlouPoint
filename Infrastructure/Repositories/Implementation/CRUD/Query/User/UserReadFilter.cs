@@ -22,8 +22,8 @@
         public UserReadFilter(
             DataContext context, 
             ILogService logService,
-            IResorcesProvider resourceProvider,
-            IResourceHandler resourceHandler) : base(context, logService, resourceProvider, resourceHandler)
+            IResorcesProvider provider,
+            IResourceHandler handler) : base(context, logService, provider, handler)
         {
         }
     }

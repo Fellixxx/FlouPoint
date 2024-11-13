@@ -20,8 +20,8 @@
     public class StatusRepository<T> : Repository<T>, IStatus where T : class, IEntity
     {
         private readonly ILogService _logService;
-        private readonly IResorcesProvider _resourceProvider;
-        private IResourceHandler _resourceHandler;
+        private readonly IResorcesProvider _provider;
+        private IResourceHandler _handler;
         private readonly List<string> _resourceKeys;
 
         /// <summary>
@@ -32,8 +32,8 @@
         public StatusRepository(DbContext context, ILogService logService, IResorcesProvider resourceProvider, IResourceHandler resourceHandler) : base(context)
         {
             _logService = logService;
-            _resourceProvider = resourceProvider;
-            _resourceHandler = resourceHandler;
+            _provider = resourceProvider;
+            _handler = resourceHandler;
             _resourceKeys =
             [
                 "SuccessfullyGenericActiveated",
@@ -62,8 +62,8 @@
                 // Update the entity in the database
                 bool result = await Update(entity);
 
-                await ResourceHandler.CreateAsync(_resourceProvider, _resourceKeys);
-                var successfullyGenericActiveated = _resourceHandler.GetResource("SuccessfullyGenericActiveated");
+                await ResourceHandler.CreateAsync(_provider, _resourceKeys);
+                var successfullyGenericActiveated = _handler.GetResource("SuccessfullyGenericActiveated");
                 // Custom success message
                 var messageSuccess = string.Format(successfullyGenericActiveated, typeof(T).Name);
 
@@ -105,8 +105,8 @@
 
                 // Update the entity in the database
                 bool result = await Update(entity);
-                await ResourceHandler.CreateAsync(_resourceProvider, _resourceKeys);
-                var successfullyGenericActiveated = _resourceHandler.GetResource("StatusSuccessfullyGenericDisabled");
+                await ResourceHandler.CreateAsync(_provider, _resourceKeys);
+                var successfullyGenericActiveated = _handler.GetResource("StatusSuccessfullyGenericDisabled");
                 // Custom success message
                 string messageSuccess = string.Format(successfullyGenericActiveated, typeof(T).Name);
 
@@ -128,8 +128,8 @@
 
         private async Task<Operation<T>> HasEntity(string id)
         {
-            await ResourceHandler.CreateAsync(_resourceProvider, _resourceKeys);
-            var statusFailedNecesaryData = _resourceHandler.GetResource("StatusFailedNecesaryData");
+            await ResourceHandler.CreateAsync(_provider, _resourceKeys);
+            var statusFailedNecesaryData = _handler.GetResource("StatusFailedNecesaryData");
             // Validate the provided ID
             if (string.IsNullOrWhiteSpace(id))
             {
@@ -140,13 +140,13 @@
             IQueryable<T> entityRepo = await ReadFilter(e => e.Id.Equals(id));
             T? entityUnmodified = entityRepo?.FirstOrDefault();
             bool hasEntity = entityUnmodified is not null;
-            var genericExistValidation = _resourceHandler.GetResource("GenericExistValidation");
+            var genericExistValidation = _handler.GetResource("GenericExistValidation");
             if (!hasEntity)
             {
                 string messageExist = string.Format(genericExistValidation, typeof(T).Name);
                 return OperationBuilder<T>.FailBusiness(messageExist);
             }
-            var statusGlobalOkMessage = _resourceHandler.GetResource("StatusGlobalOkMessage");
+            var statusGlobalOkMessage = _handler.GetResource("StatusGlobalOkMessage");
             // If the entity exists, return a success operation result
             return Operation<T>.Success(entityUnmodified, "statusGlobalOkMessage");
         }

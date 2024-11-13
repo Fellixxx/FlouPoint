@@ -17,11 +17,11 @@
     /// Abstract repository class for reading an entity by its ID.
     /// </summary>
     /// <typeparam name="T">The entity type.</typeparam>
-    public abstract class ReadIdRepository<T> : EntityExistenceValidator<T>, IReadId<T> where T : class, IEntity
+    public abstract class ReadIdRepository<T> : EntityChecker<T>, IReadId<T> where T : class, IEntity
     {
         private readonly ILogService _logService;
-        private readonly IResorcesProvider _resourceProvider;
-        private IResourceHandler _resourceHandler;
+        private readonly IResorcesProvider _provider;
+        private IResourceHandler _handler;
         private readonly List<string> _resourceKeys;
 
         /// <summary>
@@ -29,10 +29,10 @@
         /// </summary>
         /// <param name="context">The database context.</param>
         /// <param name="logService">The log service.</param>
-        protected ReadIdRepository(DbContext context, ILogService logService, IResorcesProvider resourceProvider, IResourceHandler resourceHandler) : base(context, resourceProvider, resourceHandler)
+        protected ReadIdRepository(DbContext context, ILogService logService, IResorcesProvider provider, IResourceHandler handler) : base(context, provider, handler)
         {
             _logService = logService;
-            _resourceProvider = resourceProvider;
+            _provider = provider;
             _resourceKeys =
             [
                 "SuccessfullyFind"
@@ -54,8 +54,8 @@
                     return validationResult.ConvertTo<T>();
                 }
                 T? entity = validationResult.Data;
-                await ResourceHandler.CreateAsync(_resourceProvider, _resourceKeys);
-                var successfullyFind = _resourceHandler.GetResource("SuccessfullySearchGeneric");
+                await ResourceHandler.CreateAsync(_provider, _resourceKeys);
+                var successfullyFind = _handler.GetResource("SuccessfullySearchGeneric");
                 return Operation<T>.Success(entity, successfullyFind);
             }
             catch (Exception ex)
@@ -101,8 +101,8 @@
                 }
 
                 T? entity = validationResult.Data;
-                await ResourceHandler.CreateAsync(_resourceProvider, _resourceKeys);
-                var successfullyFind = _resourceHandler.GetResource("SuccessfullyFind");
+                await ResourceHandler.CreateAsync(_provider, _resourceKeys);
+                var successfullyFind = _handler.GetResource("SuccessfullyFind");
                 return Operation<T>.Success(entity, successfullyFind);
             }
             catch (Exception ex)

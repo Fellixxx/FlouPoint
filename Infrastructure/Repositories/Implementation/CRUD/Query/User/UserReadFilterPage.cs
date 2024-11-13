@@ -22,7 +22,7 @@ namespace Infrastructure.Repositories.Implementation.CRUD.Query.User
         public UserReadFilterPage(
             DataContext context, 
             ILogService logService,
-            IResorcesProvider resourceProvider) : base(context, logService, resourceProvider)
+            IResorcesProvider provider) : base(context, logService, provider)
         {
         }
 

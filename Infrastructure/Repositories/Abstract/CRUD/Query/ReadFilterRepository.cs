@@ -20,8 +20,8 @@
     public abstract class ReadFilterRepository<T> : Read<T>, IReadFilter<T> where T : class
     {
         private readonly ILogService _logService;
-        private readonly IResorcesProvider _resourceProvider;
-        private IResourceHandler _resourceHandler;
+        private readonly IResorcesProvider _provider;
+        private IResourceHandler _handler;
         private readonly List<string> _resourceKeys;
 
         /// <summary>
@@ -29,11 +29,11 @@
         /// </summary>
         /// <param name="context">The database context.</param>
         /// <param name="logService">The log service.</param>
-        protected ReadFilterRepository(DbContext context, ILogService logService, IResorcesProvider resourceProvider, IResourceHandler resourceHandler) : base(context)
+        protected ReadFilterRepository(DbContext context, ILogService logService, IResorcesProvider provider, IResourceHandler handler) : base(context)
         {
             _logService = logService;
-            _resourceProvider = resourceProvider;
-            _resourceHandler = resourceHandler;
+            _provider = provider;
+            _handler = handler;
             _resourceKeys =
             [
                 "SuccessfullySearchGeneric"
@@ -50,8 +50,8 @@
             try
             {
                 IQueryable<T> result = await base.ReadFilter(predicate);
-                await ResourceHandler.CreateAsync(_resourceProvider, _resourceKeys);
-                var successfullySearchGeneric = _resourceHandler.GetResource("SuccessfullySearchGeneric");
+                await ResourceHandler.CreateAsync(_provider, _resourceKeys);
+                var successfullySearchGeneric = _handler.GetResource("SuccessfullySearchGeneric");
                 var messageSuccessfully = string.Format(successfullySearchGeneric, typeof(T).Name);
                 return Operation<IQueryable<T>>.Success(result, messageSuccessfully);
             }

@@ -21,8 +21,8 @@
     {
         private readonly ILogService _logService;
         private readonly IUtilEntity<T> _utilEntity;
-        private readonly IResorcesProvider _resourceProvider;
-        private IResourceHandler _resourceHandler;
+        private readonly IResorcesProvider _provider;
+        private IResourceHandler _handler;
         private readonly List<string> _resourceKeys;
 
         /// <summary>
@@ -30,12 +30,12 @@
         /// </summary>
         /// <param name="context">The database context.</param>
         /// <param name="logService">The log service.</param>
-        public CreateRepository(DbContext context, ILogService logService, IUtilEntity<T> utilEntity, IResorcesProvider resourceProvider, IResourceHandler resourceHandler) : base(context)
+        public CreateRepository(DbContext context, ILogService logService, IUtilEntity<T> utilEntity, IResorcesProvider provider, IResourceHandler handler) : base(context)
         {
             _logService = logService;
             _utilEntity = utilEntity;
-            _resourceProvider = resourceProvider;
-            _resourceHandler = resourceHandler;
+            _provider = provider;
+            _handler = handler;
             _resourceKeys =
             [
                 "SuccessfullyGeneric"
@@ -66,8 +66,8 @@
 
                 // If validation is successful, add the entity to the database
                 var addedEntityResult = await base.Create(validationResult.Data);
-                await ResourceHandler.CreateAsync(_resourceProvider, _resourceKeys);
-                var successfullyGeneric = _resourceHandler.GetResource("SuccessfullyGeneric");
+                await ResourceHandler.CreateAsync(_provider, _resourceKeys);
+                var successfullyGeneric = _handler.GetResource("SuccessfullyGeneric");
 
                 // Create a success message and return the success result
                 var successMessage = string.Format(successfullyGeneric, typeof(T).Name);

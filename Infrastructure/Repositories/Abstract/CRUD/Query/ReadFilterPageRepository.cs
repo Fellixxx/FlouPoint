@@ -21,8 +21,8 @@
     public abstract class ReadFilterPageRepository<T> : Read<T>, IReadFilterPage<T> where T : class
     {
         private readonly ILogService _logService;
-        private readonly IResorcesProvider _resourceProvider;
-        private IResourceHandler _resourceHandler;
+        private readonly IResorcesProvider _provider;
+        private IResourceHandler _handler;
         private readonly List<string> _resourceKeys;
 
         /// <summary>
@@ -30,10 +30,10 @@
         /// </summary>
         /// <param name="context">The database context.</param>
         /// <param name="logService">The log service.</param>
-        protected ReadFilterPageRepository(DbContext context, ILogService logService, IResorcesProvider resourceProvider) : base(context)
+        protected ReadFilterPageRepository(DbContext context, ILogService logService, IResorcesProvider provider) : base(context)
         {
             _logService = logService;
-            _resourceProvider = resourceProvider;
+            _provider = provider;
             _resourceKeys =
             [
                 "SuccessfullySearchGeneric"
@@ -53,8 +53,8 @@
             {
                 Expression<Func<T, bool>> predicate = GetPredicate(filter);
                 IQueryable<T> result = await ReadPageByFilter(predicate, pageNumber, pageSize);
-                await ResourceHandler.CreateAsync(_resourceProvider, _resourceKeys);
-                var successfullySearchGeneric = _resourceHandler.GetResource("SuccessfullySearchGeneric");
+                await ResourceHandler.CreateAsync(_provider, _resourceKeys);
+                var successfullySearchGeneric = _handler.GetResource("SuccessfullySearchGeneric");
                 var messageSuccessfully = string.Format(successfullySearchGeneric, typeof(T).Name);
                 return Operation<IQueryable<T>>.Success(result, messageSuccessfully);
             }

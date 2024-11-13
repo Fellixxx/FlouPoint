@@ -12,14 +12,14 @@
     /// <typeparam name="T">The entity type.</typeparam>
     public class UtilEntity<T> : IUtilEntity<T> where T : class, IEntity
     {
-        private readonly IResorcesProvider _resourceProvider;
-        private IResourceHandler _resourceHandler;
+        private readonly IResorcesProvider _provider;
+        private IResourceHandler _handler;
         private readonly List<string> _resourceKeys;
 
         public UtilEntity(IResorcesProvider resourceProvider, IResourceHandler resourceHandler)
         {
-            _resourceProvider = resourceProvider;
-            _resourceHandler = resourceHandler;
+            _provider = resourceProvider;
+            _handler = resourceHandler;
             _resourceKeys =
             [
                 "EntityFailedNecesaryData"
@@ -33,8 +33,8 @@
         /// <returns>An operation result indicating whether the entity exists or not.</returns>
         public async Task<Operation<T>> HasEntity(T entity)
         {
-            await ResourceHandler.CreateAsync(_resourceProvider, _resourceKeys);
-            var failedNecesaryData = _resourceHandler.GetResource("EntityFailedNecesaryData");
+            await ResourceHandler.CreateAsync(_provider, _resourceKeys);
+            var failedNecesaryData = _handler.GetResource("EntityFailedNecesaryData");
             if (entity is null)
             {
                 // Return a failure result if the entity is null
@@ -42,7 +42,7 @@
             }
 
             // Return a success result if the entity is not null
-            var utilGlobalOkMessage = _resourceHandler.GetResource("UtilGlobalOkMessage");
+            var utilGlobalOkMessage = _handler.GetResource("UtilGlobalOkMessage");
             return Operation<T>.Success(entity, utilGlobalOkMessage);
         }
     }

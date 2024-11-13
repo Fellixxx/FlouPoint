@@ -25,8 +25,8 @@
     /// </summary>
     public class UserUpdate : UpdateRepository<User>, IUserUpdate
     {
-        private readonly IResorcesProvider _resourceProvider;
-        private IResourceHandler _resourceHandler;
+        private readonly IResorcesProvider _provider;
+        private IResourceHandler _handler;
         private readonly List<string> _resourceKeys;
 
         /// <summary>
@@ -34,10 +34,19 @@
         /// </summary>
         /// <param name="context">The database context.</param>
         /// <param name="logService">The service used for logging operations.</param>
-        public UserUpdate(DataContext context, ILogService logService, IUtilEntity<User> utilEntity, IResorcesProvider resourceProvider, IResourceHandler resourceHandler) : base(context, logService, utilEntity, resourceProvider, resourceHandler)
+        public UserUpdate(
+            DataContext context, 
+            ILogService logService, 
+            IUtilEntity<User> utilEntity, 
+            IResorcesProvider provider, 
+            IResourceHandler handler) : base(context,
+                logService,
+                utilEntity,
+                provider,
+                handler)
         {
-            _resourceProvider = resourceProvider;
-            _resourceHandler = resourceHandler;
+            _provider = provider;
+            _handler = handler;
             _resourceKeys =
             [
                 "UpdateFailedDataSizeCharacter",
@@ -57,13 +66,13 @@
             // Validate the modified entity using the UpdateUserRules validator
             UpdateUserRules validatorModified = new UpdateUserRules();
             ValidationResult result = validatorModified.Validate(entityModified);
-            await ResourceHandler.CreateAsync(_resourceProvider, _resourceKeys);
+            await ResourceHandler.CreateAsync(_provider, _resourceKeys);
 
             // If validation fails, construct an error message and return a failed operation result
             if (!result.IsValid)
             {
                 string errorMessage = GetErrorMessage(result);
-                var failedDataSizeCharacter = _resourceHandler.GetResource("UpdateFailedDataSizeCharacter");
+                var failedDataSizeCharacter = _handler.GetResource("UpdateFailedDataSizeCharacter");
                 string message = string.Format(failedDataSizeCharacter, errorMessage);
                 return OperationBuilder<User>.FailBusiness(message);
             }
@@ -72,7 +81,7 @@
             var email = entityModified?.Email ?? string.Empty;
             if (!CredentialUtility.IsValidEmail(email))
             {
-                var failedDataSizeCharacter = _resourceHandler.GetResource("UpdateFailedEmailInvalidFormat");
+                var failedDataSizeCharacter = _handler.GetResource("UpdateFailedEmailInvalidFormat");
                 return OperationBuilder<User>.FailBusiness(failedDataSizeCharacter);
             }
 
@@ -82,7 +91,7 @@
             User? userExistByEmail = userByEmail?.FirstOrDefault();
             if (userExistByEmail is not null)
             {
-                var failedDataSizeCharacter = _resourceHandler.GetResource("UpdateFailedAlreadyRegisteredEmail");
+                var failedDataSizeCharacter = _handler.GetResource("UpdateFailedAlreadyRegisteredEmail");
                 return OperationBuilder<User>.FailBusiness(failedDataSizeCharacter);
             }
 
@@ -102,7 +111,7 @@
             entityUnmodified.Password = CredentialUtility.ComputeSha256Hash(password);
 
             // Return a success operation result
-            var successfullySearchGeneric = _resourceHandler.GetResource("UpdateSuccessfullySearchGeneric");
+            var successfullySearchGeneric = _handler.GetResource("UpdateSuccessfullySearchGeneric");
             var successMessage = string.Format(successfullySearchGeneric, typeof(User).Name);
             return Operation<User>.Success(entityUnmodified, successMessage);
         }

@@ -21,8 +21,8 @@
     public abstract class ReadFilterCountRepository<T> : Read<T>, IReadFilterCount<T> where T : class
     {
         protected readonly ILogService _logService;
-        private readonly IResorcesProvider _resourceProvider;
-        private IResourceHandler _resourceHandler;
+        private readonly IResorcesProvider _provider;
+        private IResourceHandler _handler;
         private readonly List<string> _resourceKeys;
 
         /// <summary>
@@ -30,11 +30,11 @@
         /// </summary>
         /// <param name="context">The database context.</param>
         /// <param name="logService">The log service.</param>
-        protected ReadFilterCountRepository(DbContext context, ILogService logService, IResorcesProvider resourceProvider, IResourceHandler resourceHandler) : base(context)
+        protected ReadFilterCountRepository(DbContext context, ILogService logService, IResorcesProvider provider, IResourceHandler handler) : base(context)
         {
             _logService = logService;
-            _resourceProvider = resourceProvider;
-            _resourceHandler = resourceHandler;
+            _provider = provider;
+            _handler = handler;
             _resourceKeys =
             [
                 "SuccessfullySearchGeneric"
@@ -52,8 +52,8 @@
             {
                 Expression<Func<T, bool>> predicate = GetPredicate(filter);
                 int result = await ReadCountFilter(predicate);
-                await ResourceHandler.CreateAsync(_resourceProvider, _resourceKeys);
-                var messageSuccessfully = _resourceHandler.GetResource("SuccessfullySearchGeneric");
+                await ResourceHandler.CreateAsync(_provider, _resourceKeys);
+                var messageSuccessfully = _handler.GetResource("SuccessfullySearchGeneric");
                 return Operation<int>.Success(result, messageSuccessfully);
             }
             catch (Exception ex)

@@ -21,7 +21,9 @@
         /// <param name="logService">The log service.</param>
         public UserReadId(
             DataContext context, 
-            ILogService logService, IResorcesProvider resourceProvider, IResourceHandler resourceHandler) : base(context, logService, resourceProvider, resourceHandler)
+            ILogService logService,
+            IResorcesProvider provider,
+            IResourceHandler handler) : base(context, logService, provider, handler)
         {
         }
     }

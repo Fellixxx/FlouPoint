@@ -18,11 +18,11 @@
     /// Abstract repository class for deleting an entity.
     /// </summary>
     /// <typeparam name="T">The entity type.</typeparam>
-    public abstract class DeleteRepository<T> : EntityExistenceValidator<T>, IDelete<T> where T : class, IEntity
+    public abstract class DeleteRepository<T> : EntityChecker<T>, IDelete<T> where T : class, IEntity
     {
         private readonly ILogService _logService;
-        private readonly IResorcesProvider _resourceProvider;
-        private IResourceHandler _resourceHandler;
+        private readonly IResorcesProvider _provider;
+        private IResourceHandler _handler;
         private readonly List<string> _resourceKeys;
 
         /// <summary>
@@ -30,11 +30,11 @@
         /// </summary>
         /// <param name="context">The database context.</param>
         /// <param name="logService">The log service.</param>
-        protected DeleteRepository(DbContext context, ILogService logService, IResorcesProvider resourceProvider, IResourceHandler resourceHandler) : base(context, resourceProvider, resourceHandler)
+        protected DeleteRepository(DbContext context, ILogService logService, IResorcesProvider provider, IResourceHandler handler) : base(context, provider, handler)
         {
             _logService = logService;
-            _resourceProvider = resourceProvider;
-            _resourceHandler = resourceHandler;
+            _provider = provider;
+            _handler = handler;
             _resourceKeys =
             [
                 "LogSuccessfullyGenericActiveated"
@@ -64,8 +64,8 @@
                 bool result = await Delete(entity);
 
                 // Custom success message
-                await ResourceHandler.CreateAsync(_resourceProvider, _resourceKeys);
-                var successfullyGenericDeleted = _resourceHandler.GetResource("SuccessfullyGenericDeleted");
+                await ResourceHandler.CreateAsync(_provider, _resourceKeys);
+                var successfullyGenericDeleted = _handler.GetResource("SuccessfullyGenericDeleted");
                 string messageSuccess = string.Format(successfullyGenericDeleted, typeof(T).Name);
 
                 // Return a success operation result

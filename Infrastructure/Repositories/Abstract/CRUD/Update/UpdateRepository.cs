@@ -17,12 +17,12 @@
     /// Abstract repository class for updating an entity.
     /// </summary>
     /// <typeparam name="T">The entity type.</typeparam>
-    public abstract class UpdateRepository<T> : EntityExistenceValidator<T>, IUpdate<T> where T : class, IEntity
+    public abstract class UpdateRepository<T> : EntityChecker<T>, IUpdate<T> where T : class, IEntity
     {
         private readonly ILogService _logService;
         private readonly IUtilEntity<T> _utilEntity;
-        private readonly IResorcesProvider _resourceProvider;
-        private IResourceHandler _resourceHandler;
+        private readonly IResorcesProvider _provider;
+        private IResourceHandler _handler;
         private readonly List<string> _resourceKeys;
 
         /// <summary>
@@ -30,12 +30,12 @@
         /// </summary>
         /// <param name="context">The database context.</param>
         /// <param name="logService">The log service.</param>
-        protected UpdateRepository(DbContext context, ILogService logService, IUtilEntity<T> utilEntity, IResorcesProvider resourceProvider, IResourceHandler resourceHandler) : base(context, resourceProvider, resourceHandler)
+        protected UpdateRepository(DbContext context, ILogService logService, IUtilEntity<T> utilEntity, IResorcesProvider provider, IResourceHandler handler) : base(context, provider, handler)
         {
             _logService = logService;
             _utilEntity = utilEntity;
-            _resourceProvider = resourceProvider;
-            _resourceHandler = resourceHandler;
+            _provider = provider;
+            _handler = handler;
             _resourceKeys =
             [
                 "SuccessfullyGenericUpdated"
@@ -72,8 +72,8 @@
                 // If validation is successful, update the entity in the database
                 bool updateResult = await base.Update(resultModifyEntity.Data);
 
-                await ResourceHandler.CreateAsync(_resourceProvider, _resourceKeys);
-                var successfullyGenericActiveated = _resourceHandler.GetResource("SuccessfullyGenericUpdated");
+                await ResourceHandler.CreateAsync(_provider, _resourceKeys);
+                var successfullyGenericActiveated = _handler.GetResource("SuccessfullyGenericUpdated");
                 // Custom success message
                 string messageSuccess = string.Format(successfullyGenericActiveated, typeof(T).Name);
 

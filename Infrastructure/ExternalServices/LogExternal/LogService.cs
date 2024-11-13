@@ -16,8 +16,8 @@
     /// </summary>
     public class LogService : LogServiceBase, ILogService
     {
-        private readonly IResorcesProvider _resourceProvider;
-        private IResourceHandler _resourceHandler;
+        private readonly IResorcesProvider _provider;
+        private IResourceHandler _handler;
         private readonly List<string> _resourceKeys;
 
         /// <summary>
@@ -26,11 +26,11 @@
         /// <param name="clientFactory">Factory for creating instances of <see cref="HttpClient"/>.</param>
         /// <param name="configuration">Application's configuration interface.</param>
         /// <param name="httpContentWrapper">Wrapper for handling HTTP content.</param>
-        public LogService(IHttpClientFactory clientFactory, IConfiguration configuration, IWrapper httpContentWrapper, IResorcesProvider resourceProvider, IResourceHandler resourceHandler) :
-            base(clientFactory, configuration, httpContentWrapper, resourceProvider, resourceHandler)
+        public LogService(IHttpClientFactory clientFactory, IConfiguration configuration, IWrapper httpContentWrapper, IResorcesProvider provider, IResourceHandler handler) :
+            base(clientFactory, configuration, httpContentWrapper, provider, handler)
         {
-            _resourceProvider=resourceProvider;
-            _resourceHandler=resourceHandler;
+            _provider=provider;
+            _handler=handler;
             _resourceKeys =
             [
                 "LogSuccessfullyGenericActiveated"
@@ -51,8 +51,8 @@
                 {
                     return result.Result;
                 }
-                await ResourceHandler.CreateAsync(_resourceProvider, _resourceKeys);
-                var successfullyLogCreate = _resourceHandler.GetResource("LogSuccessfullyGenericActiveated");
+                await ResourceHandler.CreateAsync(_provider, _resourceKeys);
+                var successfullyLogCreate = _handler.GetResource("LogSuccessfullyGenericActiveated");
                 return Operation<string>.Success(string.Empty, successfullyLogCreate);
             }
             catch (Exception ex)

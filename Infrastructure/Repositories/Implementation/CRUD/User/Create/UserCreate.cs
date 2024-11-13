@@ -20,8 +20,8 @@ namespace Infrastructure.Repositories.Implementation.CRUD.User.Create
     /// </summary>
     public class UserCreate : CreateRepository<User>, IUserCreate
     {
-        private readonly IResorcesProvider _resourceProvider;
-        private IResourceHandler _resourceHandler;
+        private readonly IResorcesProvider _provider;
+        private IResourceHandler _handler;
         private readonly List<string> _resourceKeys;
 
         /// <summary>
@@ -29,10 +29,14 @@ namespace Infrastructure.Repositories.Implementation.CRUD.User.Create
         /// </summary>
         /// <param name="context">The database context for the application.</param>
         /// <param name="logService">The logging service for tracking operations.</param>
-        public UserCreate(DataContext context, ILogService logService, IUtilEntity<User> utilEntity, IResorcesProvider resourceProvider, IResourceHandler resourceHandler) : base(context, logService, utilEntity, resourceProvider, resourceHandler)
+        public UserCreate(DataContext context, 
+            ILogService logService, 
+            IUtilEntity<User> utilEntity, 
+            IResorcesProvider provider, 
+            IResourceHandler handler) : base(context, logService, utilEntity, provider, handler)
         {
-            _resourceProvider = resourceProvider;
-            _resourceHandler = resourceHandler;
+            _provider = provider;
+            _handler = handler;
             _resourceKeys =
             [
                 "FailedDataSizeCharacter",
@@ -51,12 +55,12 @@ namespace Infrastructure.Repositories.Implementation.CRUD.User.Create
             // Validate the user entity using the defined rules
             CreateUserRules validatorAdd = new CreateUserRules();
             ValidationResult result = validatorAdd.Validate(entity);
-            await ResourceHandler.CreateAsync(_resourceProvider, _resourceKeys);
+            await ResourceHandler.CreateAsync(_provider, _resourceKeys);
 
             if (!result.IsValid)
             {
                 string errorMessage = GetErrorMessage(result);
-                var failedDataSizeCharacter = _resourceHandler.GetResource("FailedDataSizeCharacter");
+                var failedDataSizeCharacter = _handler.GetResource("FailedDataSizeCharacter");
                 return OperationBuilder<User>.FailBusiness(string.Format(failedDataSizeCharacter, errorMessage));
             }
 
@@ -64,7 +68,7 @@ namespace Infrastructure.Repositories.Implementation.CRUD.User.Create
             var email = entity?.Email ?? string.Empty;
             if (!CredentialUtility.IsValidEmail(email))
             {
-                var failedEmailInvalidFormat = _resourceHandler.GetResource("FailedEmailInvalidFormat");
+                var failedEmailInvalidFormat = _handler.GetResource("FailedEmailInvalidFormat");
                 return OperationBuilder<User>.FailBusiness(failedEmailInvalidFormat);
             }
 
@@ -73,7 +77,7 @@ namespace Infrastructure.Repositories.Implementation.CRUD.User.Create
             User? userExistByEmail = userByEmail?.FirstOrDefault();
             if (userExistByEmail is not null)
             {
-                var failedEmailInvalidFormat = _resourceHandler.GetResource("FailedAlreadyRegisteredEmail");
+                var failedEmailInvalidFormat = _handler.GetResource("FailedAlreadyRegisteredEmail");
                 return OperationBuilder<User>.FailBusiness(failedEmailInvalidFormat);
             }
 
