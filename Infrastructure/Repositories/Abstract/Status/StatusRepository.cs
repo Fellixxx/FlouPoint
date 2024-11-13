@@ -1,4 +1,4 @@
-﻿namespace Infrastructure.Repositories.Abstract.Status
+namespace Infrastructure.Repositories.Abstract.Status
 {
     using Application.Result;
     using Application.UseCases.ExternalServices;
@@ -15,58 +15,59 @@
     /// <summary>
     /// Repository class for managing the status of entities.
     /// </summary>
-    /// <typeparam name="T">The entity type.</typeparam>
+    /// <typeparam name = "T">The entity type.</typeparam>
     public class StatusRepository<T> : Repository<T>, IStatus where T : class, IEntity
     {
         private readonly ILogService _logService;
         private readonly IResourcesProvider _provider;
-        private IResourceHandler _handler;
+        private readonly IResourceHandler _handler;
         private readonly List<string> _resourceKeys;
-
         /// <summary>
-        /// Constructor with dependency injection.
+        /// Initializes a new instance of the <see cref = "StatusRepository{T}"/> class with specified dependencies.
         /// </summary>
-        /// <param name="context">The database context.</param>
-        /// <param name="externalLogService">The external log service.</param>
+        /// <param name = "context">The database context to be used.</param>
+        /// <param name = "logService">Service for logging actions and errors.</param>
+        /// <param name = "resourceProvider">Provides resource keys for localization or customization.</param>
+        /// <param name = "resourceHandler">Handles resource retrieval using the provided keys.</param>
         public StatusRepository(DbContext context, ILogService logService, IResourcesProvider resourceProvider, IResourceHandler resourceHandler) : base(context)
         {
             _logService = logService;
             _provider = resourceProvider;
             _handler = resourceHandler;
-            _resourceKeys =
-            [
+            _resourceKeys = new List<string>
+            {
                 "SuccessfullyGenericActiveated",
                 "StatusFailedNecesaryData",
                 "GenericExistValidation"
-            ];
+            };
         }
 
+        /// <summary>
+        /// Activates an entity by setting its 'Active' status to true.
+        /// </summary>
+        /// <param name = "id">The ID of the entity to activate.</param>
+        /// <returns>An operation result indicating success or failure of the operation.</returns>
         public async Task<Operation<bool>> Activate(string id)
         {
             try
             {
-                // Validate if the entity with the provided ID exists
+                // Validate the presence of the entity with the provided ID.
                 Operation<T> validationResult = await HasEntity(id);
-
-                // If validation is not successful, return a failure operation result
                 if (!validationResult.IsSuccessful)
                 {
                     return validationResult.ConvertTo<bool>();
                 }
 
-                // If validation is successful, set the entity as active
+                // Mark the entity as active.
                 T? entity = validationResult.Data;
                 entity.Active = true;
-
-                // Update the entity in the database
+                // Update the entity in the database.
                 bool result = await Update(entity);
-
                 await ResourceHandler.CreateAsync(_provider, _resourceKeys);
                 var successfullyGenericActiveated = _handler.GetResource("SuccessfullyGenericActiveated");
-                // Custom success message
+                // Generate success message.
                 var messageSuccess = string.Format(successfullyGenericActiveated, typeof(T).Name);
-
-                // Return a success operation result
+                // Return the success operation result.
                 return Operation<bool>.Success(result, messageSuccess);
             }
             catch (Exception ex)
@@ -77,40 +78,39 @@
                 {
                     result.ConvertTo<bool>();
                 }
+
                 var strategy = new DatabaseStrategy<bool>();
                 var errorOccurredDataLayer = Message.ErrorOccurredDataLayer;
                 return OperationStrategy<bool>.Fail(errorOccurredDataLayer, strategy);
             }
         }
 
-
-
-        // This method deactivates an entity by setting its 'Active' status to false.
+        /// <summary>
+        /// Deactivates an entity by setting its 'Active' status to false.
+        /// </summary>
+        /// <param name = "id">The ID of the entity to deactivate.</param>
+        /// <returns>An operation result indicating success or failure of the operation.</returns>
         public async Task<Operation<bool>> Deactivate(string id)
         {
             try
             {
-                // Validate if the entity with the provided ID exists
+                // Validate the presence of the entity with the provided ID.
                 Operation<T> validationResult = await HasEntity(id);
-
-                // If validation is not successful, return a failure operation result
                 if (!validationResult.IsSuccessful)
                 {
                     return validationResult.ConvertTo<bool>();
                 }
 
-                // If validation is successful, set the entity as inactive
+                // Mark the entity as inactive.
                 T? entity = validationResult.Data;
                 entity.Active = false;
-
-                // Update the entity in the database
+                // Update the entity in the database.
                 bool result = await Update(entity);
                 await ResourceHandler.CreateAsync(_provider, _resourceKeys);
                 var successfullyGenericActiveated = _handler.GetResource("StatusSuccessfullyGenericDisabled");
-                // Custom success message
+                // Generate success message.
                 string messageSuccess = string.Format(successfullyGenericActiveated, typeof(T).Name);
-
-                // Return a success operation result
+                // Return the success operation result.
                 return Operation<bool>.Success(result, messageSuccess);
             }
             catch (Exception ex)
@@ -121,23 +121,29 @@
                 {
                     result.ConvertTo<bool>();
                 }
+
                 var strategy = new DatabaseStrategy<bool>();
                 var errorOccurredDataLayer = Message.ErrorOccurredDataLayer;
                 return OperationStrategy<bool>.Fail(errorOccurredDataLayer, strategy);
             }
         }
 
+        /// <summary>
+        /// Validates if an entity with the specified ID exists.
+        /// </summary>
+        /// <param name = "id">The ID of the entity to validate.</param>
+        /// <returns>An operation result indicating the existence and success or failure of the validation.</returns>
         private async Task<Operation<T>> HasEntity(string id)
         {
             await ResourceHandler.CreateAsync(_provider, _resourceKeys);
             var statusFailedNecesaryData = _handler.GetResource("StatusFailedNecesaryData");
-            // Validate the provided ID
+            // Validate the ID.
             if (string.IsNullOrWhiteSpace(id))
             {
                 return OperationStrategy<T>.Fail(statusFailedNecesaryData, new BusinessStrategy<T>());
             }
 
-            // Get the existing user from the repository
+            // Retrieve the entity from the repository.
             IQueryable<T> entityRepo = await ReadFilter(e => e.Id.Equals(id));
             T? entityUnmodified = entityRepo?.FirstOrDefault();
             bool hasEntity = entityUnmodified is not null;
@@ -147,8 +153,9 @@
                 string messageExist = string.Format(genericExistValidation, typeof(T).Name);
                 return OperationStrategy<T>.Fail(messageExist, new BusinessStrategy<T>());
             }
+
             var statusGlobalOkMessage = _handler.GetResource("StatusGlobalOkMessage");
-            // If the entity exists, return a success operation result
+            // Return the success operation result indicating the entity exists.
             return Operation<T>.Success(entityUnmodified, "statusGlobalOkMessage");
         }
     }

@@ -1,4 +1,4 @@
-﻿using Application.UseCases.CRUD.Query.User;
+using Application.UseCases.CRUD.Query.User;
 using Application.UseCases.CRUD.User;
 using Application.UseCases.ExternalServices;
 using Application.UseCases.Repository.CRUD;
@@ -15,12 +15,15 @@ using Infrastructure.Repositories.Implementation.CRUD.User.Create;
 using Infrastructure.Repositories.Implementation.CRUD.User.Update;
 using Application.UseCases.ExternalServices.Resources;
 
-
 namespace Infrastructure.Test.Repositories.Implementation.CRUD
 {
+    /// <summary>
+    /// Class to set up the test environment for CRUD operations and related services.
+    /// </summary>
     [TestClass]
     public class SetupTest
     {
+        // Test configuration fields
         protected DbContextOptions<DataContext> _options;
         protected DataContext _dbContext;
         protected Mock<ILogService> _logService;
@@ -33,58 +36,149 @@ namespace Infrastructure.Test.Repositories.Implementation.CRUD
         protected IResourcesProvider _resourceProvider;
         protected IResourceHandler _resourceHandler;
         protected IUtilEntity<Domain.Entities.User> _utilEntity;
-
         protected readonly Dictionary<string, string> _resourceMessages = new()
         {
-            { "EntityFailedNecesaryData", "Necessary data was not provided." },
-            { "FailedGetToken", "The log services token got failed." },
-            { "FailedNecesaryData", "Necessary data was not provided." },
-            { "FailedSetLog", "The log creation got failed." },
-            { "FailureConfigurationMissingError", "The configuration for the log services is missing the username, password, or URL." },
-            { "GenericExistValidation", "The {0} does not exist." },
-            { "LogSuccessfullyGenericActiveated", "{0} was activated successfully." },
-            { "StatusSuccessfullyGenericDisabled", "{0} was disabled successfully." },
-            { "StatusFailedNecesaryData", "Necessary data was not provided." },
-            { "StatusGlobalOkMessage", "Ok" },
-            { "SuccessfullyGeneric", "{0} was created successfully." },
-            { "SuccessfullyGenericActiveated", "{0} was activated successfully." },
-            { "SuccessfullyGenericDeleted", "{0} was deleted successfully." },
-            { "SuccessfullyGetToken", "Token got successfully." },
-            { "SuccessfullySetLog", "The successfully SetLog." },
-            { "ValidationGlobalOkMessage", "Operation completed successfully." },
-            { "UtilGlobalOkMessage", "Ok" },
-            { "FailedDataSizeCharacter", "One or more data from the User have been submitted with errors {0}" },
-            { "FailedEmailInvalidFormat", "The given email is not in a valid format" },
-            { "FailedAlreadyRegisteredEmail", "A user is already registered with this email." },
-            { "CreateFailedDataSizeCharacter", "One or more data from the User have been submitted with errors {0}" },
-            { "CreateFailedEmailInvalidFormat", "The given email is not in a valid format" },
-            { "CreateFailedAlreadyRegisteredEmail", "A user is already registered with this email." },
-
-            { "SuccessfullyGenericUpdated", "{0} was updated successfully." },
-
-            { "UpdateFailedDataSizeCharacter", "One or more data from the User have been submitted with errors {0}" },
-            { "UpdateFailedEmailInvalidFormat", "The given email is not in a valid format" },
-            { "UpdateFailedAlreadyRegisteredEmail", "A user is already registered with this email." },
-            { "UpdateSuccessfullySearchGeneric", "The search in the {0} entity completed successfully." },
-            { "ImageSuccessfullyUpload", "The image was uploaded successfully due to an unexpected error." },
-            { "ImageGlobalOkMessage", "Ok." },
-            { "SuccessCompressed", "The image was compressed successfully." }
+            {
+                "EntityFailedNecesaryData",
+                "Necessary data was not provided."
+            },
+            {
+                "FailedGetToken",
+                "The log services token got failed."
+            },
+            {
+                "FailedNecesaryData",
+                "Necessary data was not provided."
+            },
+            {
+                "FailedSetLog",
+                "The log creation got failed."
+            },
+            {
+                "FailureConfigurationMissingError",
+                "The configuration for the log services is missing the username, password, or URL."
+            },
+            {
+                "GenericExistValidation",
+                "The {0} does not exist."
+            },
+            {
+                "LogSuccessfullyGenericActiveated",
+                "{0} was activated successfully."
+            },
+            {
+                "StatusSuccessfullyGenericDisabled",
+                "{0} was disabled successfully."
+            },
+            {
+                "StatusFailedNecesaryData",
+                "Necessary data was not provided."
+            },
+            {
+                "StatusGlobalOkMessage",
+                "Ok"
+            },
+            {
+                "SuccessfullyGeneric",
+                "{0} was created successfully."
+            },
+            {
+                "SuccessfullyGenericActiveated",
+                "{0} was activated successfully."
+            },
+            {
+                "SuccessfullyGenericDeleted",
+                "{0} was deleted successfully."
+            },
+            {
+                "SuccessfullyGetToken",
+                "Token got successfully."
+            },
+            {
+                "SuccessfullySetLog",
+                "The successfully SetLog."
+            },
+            {
+                "ValidationGlobalOkMessage",
+                "Operation completed successfully."
+            },
+            {
+                "UtilGlobalOkMessage",
+                "Ok"
+            },
+            {
+                "FailedDataSizeCharacter",
+                "One or more data from the User have been submitted with errors {0}"
+            },
+            {
+                "FailedEmailInvalidFormat",
+                "The given email is not in a valid format"
+            },
+            {
+                "FailedAlreadyRegisteredEmail",
+                "A user is already registered with this email."
+            },
+            {
+                "CreateFailedDataSizeCharacter",
+                "One or more data from the User have been submitted with errors {0}"
+            },
+            {
+                "CreateFailedEmailInvalidFormat",
+                "The given email is not in a valid format"
+            },
+            {
+                "CreateFailedAlreadyRegisteredEmail",
+                "A user is already registered with this email."
+            },
+            {
+                "SuccessfullyGenericUpdated",
+                "{0} was updated successfully."
+            },
+            {
+                "UpdateFailedDataSizeCharacter",
+                "One or more data from the User have been submitted with errors {0}"
+            },
+            {
+                "UpdateFailedEmailInvalidFormat",
+                "The given email is not in a valid format"
+            },
+            {
+                "UpdateFailedAlreadyRegisteredEmail",
+                "A user is already registered with this email."
+            },
+            {
+                "UpdateSuccessfullySearchGeneric",
+                "The search in the {0} entity completed successfully."
+            },
+            {
+                "ImageSuccessfullyUpload",
+                "The image was uploaded successfully due to an unexpected error."
+            },
+            {
+                "ImageGlobalOkMessage",
+                "Ok."
+            },
+            {
+                "SuccessCompressed",
+                "The image was compressed successfully."
+            }
         };
-
+        /// <summary>
+        /// Initialize the test data and services needed for the tests.
+        /// </summary>
         [TestInitialize]
         public void SetUp()
         {
-            _options = new DbContextOptionsBuilder<DataContext>()
-                .UseInMemoryDatabase(Guid.NewGuid().ToString())
-                .EnableSensitiveDataLogging()
-                .Options;
-
+            // Setup in-memory database options and context
+            _options = new DbContextOptionsBuilder<DataContext>().UseInMemoryDatabase(Guid.NewGuid().ToString()).EnableSensitiveDataLogging().Options;
             var columnTypes = new ColumnTypesPosgresql();
             _dbContext = new DataContext(_options, columnTypes);
+            // Initialize mocks and other test services
             _logService = new Mock<ILogService>();
             _resourceHandler = SetupResourceHandlerMock();
             _resourceProvider = SetupResourceProviderMock();
             _utilEntity = new UtilEntity<Domain.Entities.User>(_resourceProvider, _resourceHandler);
+            // Initializing the User related services
             _userCreate = new UserCreate(_dbContext, _logService.Object, _utilEntity, _resourceProvider, _resourceHandler);
             _userDelete = new UserDelete(_dbContext, _logService.Object, _resourceProvider, _resourceHandler);
             _userUpdate = new UserUpdate(_dbContext, _logService.Object, _utilEntity, _resourceProvider, _resourceHandler);
@@ -93,29 +187,29 @@ namespace Infrastructure.Test.Repositories.Implementation.CRUD
             _userReadFilterCount = new UserReadFilterCount(_dbContext, _logService.Object, _resourceProvider, _resourceHandler);
         }
 
+        /// <summary>
+        /// Setup a mock resource handler that returns predefined resource messages.
+        /// </summary>
         private IResourceHandler SetupResourceHandlerMock()
         {
             var mockResourceHandler = new Mock<IResourceHandler>();
-
             foreach (var resource in _resourceMessages)
             {
-                mockResourceHandler
-                    .Setup(rh => rh.GetResource(resource.Key))
-                    .Returns(resource.Value);
+                mockResourceHandler.Setup(rh => rh.GetResource(resource.Key)).Returns(resource.Value);
             }
 
             return mockResourceHandler.Object;
         }
 
+        /// <summary>
+        /// Setup a mock resources provider to simulate fetching of resource messages.
+        /// </summary>
         private IResourcesProvider SetupResourceProviderMock()
         {
             var mockResourceProvider = new Mock<IResourcesProvider>();
-
             foreach (var resource in _resourceMessages)
             {
-                mockResourceProvider
-                    .Setup(rp => rp.GetMessageValueOrDefault(resource.Key, It.IsAny<string>()))
-                    .ReturnsAsync(resource.Value);
+                mockResourceProvider.Setup(rp => rp.GetMessageValueOrDefault(resource.Key, It.IsAny<string>())).ReturnsAsync(resource.Value);
             }
 
             return mockResourceProvider.Object;
