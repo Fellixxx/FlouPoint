@@ -1,12 +1,21 @@
-﻿using Application.Result.Error;
+using Application.Result.Error;
 using Domain.EnumType.Extensions;
 using System.Reflection;
 
 namespace Application.Test.Result.Error
 {
+    /// <summary>
+    /// Unit tests for validating the <see cref = "ErrorTypes"/> enum and associated <see cref = "EnumMetadata"/> attributes.
+    /// </summary>
     [TestClass]
     public class ErrorTypesTest
     {
+        /// <summary>
+        /// Tests that each <see cref = "ErrorTypes"/> enum value has the correct <see cref = "EnumMetadata"/> attribute with expected name and description.
+        /// </summary>
+        /// <param name = "errorType">The <see cref = "ErrorTypes"/> enum value to test.</param>
+        /// <param name = "expectedName">The expected name in the <see cref = "EnumMetadata"/> attribute.</param>
+        /// <param name = "expectedDescription">The expected description in the <see cref = "EnumMetadata"/> attribute.</param>
         [DataTestMethod]
         [DataRow(ErrorTypes.None, "NONE", "Represents no error.")]
         [DataRow(ErrorTypes.BusinessValidation, "BUSINESS_VALIDATION_ERROR", "Represents errors related to business logic validation.")]
@@ -27,19 +36,20 @@ namespace Application.Test.Result.Error
             // Act
             var fieldInfo = errorType.GetType().GetField(errorType.ToString());
             var attribute = fieldInfo.GetCustomAttribute<EnumMetadata>();
-
             // Assert
             Assert.IsNotNull(attribute, $"Enum value {errorType} is missing EnumMetadataAttribute.");
             Assert.AreEqual(expectedName, attribute.Name);
             Assert.AreEqual(expectedDescription, attribute.Description);
         }
 
+        /// <summary>
+        /// Verifies that each <see cref = "ErrorTypes"/> enum value has an associated <see cref = "EnumMetadata"/> attribute.
+        /// </summary>
         [TestMethod]
         public void EnumMetadata_Should_Be_Applied_To_All_ErrorTypes_Values()
         {
             // Given
             var errorTypes = Enum.GetValues(typeof(ErrorTypes));
-
             // Act & Assert
             foreach (ErrorTypes errorType in errorTypes)
             {
@@ -49,83 +59,93 @@ namespace Application.Test.Result.Error
             }
         }
 
-        // Additional tests for EnumMetadataAttribute constructor
-
+        /// <summary>
+        /// Tests that the <see cref = "EnumMetadata"/> attribute constructor throws <see cref = "ArgumentNullException"/> when the name is null.
+        /// </summary>
         [TestMethod]
         public void EnumMetadataAttribute_Should_Throw_ArgumentNullException_When_Name_Is_Null()
         {
             // Arrange
             string name = null;
             string description = "Valid description";
-
             // Act & Assert
             Assert.ThrowsException<ArgumentNullException>(() => new EnumMetadata(name, description));
         }
 
+        /// <summary>
+        /// Tests that the <see cref = "EnumMetadata"/> attribute constructor throws <see cref = "ArgumentNullException"/> when the name is empty.
+        /// </summary>
         [TestMethod]
         public void EnumMetadataAttribute_Should_Throw_ArgumentNullException_When_Name_Is_Empty()
         {
             // Arrange
             string name = "";
             string description = "Valid description";
-
             // Act & Assert
             Assert.ThrowsException<ArgumentNullException>(() => new EnumMetadata(name, description));
         }
 
+        /// <summary>
+        /// Tests that the <see cref = "EnumMetadata"/> attribute constructor throws <see cref = "ArgumentNullException"/> when the name is whitespace.
+        /// </summary>
         [TestMethod]
         public void EnumMetadataAttribute_Should_Throw_ArgumentNullException_When_Name_Is_Whitespace()
         {
             // Arrange
             string name = "   ";
             string description = "Valid description";
-
             // Act & Assert
             Assert.ThrowsException<ArgumentNullException>(() => new EnumMetadata(name, description));
         }
 
+        /// <summary>
+        /// Tests that the <see cref = "EnumMetadata"/> attribute constructor throws <see cref = "ArgumentNullException"/> when the description is null.
+        /// </summary>
         [TestMethod]
         public void EnumMetadataAttribute_Should_Throw_ArgumentNullException_When_Description_Is_Null()
         {
             // Arrange
             string name = "Valid name";
             string description = null;
-
             // Act & Assert
             Assert.ThrowsException<ArgumentNullException>(() => new EnumMetadata(name, description));
         }
 
+        /// <summary>
+        /// Tests that the <see cref = "EnumMetadata"/> attribute constructor throws <see cref = "ArgumentNullException"/> when the description is empty.
+        /// </summary>
         [TestMethod]
         public void EnumMetadataAttribute_Should_Throw_ArgumentNullException_When_Description_Is_Empty()
         {
             // Arrange
             string name = "Valid name";
             string description = "";
-
             // Act & Assert
             Assert.ThrowsException<ArgumentNullException>(() => new EnumMetadata(name, description));
         }
 
+        /// <summary>
+        /// Tests that the <see cref = "EnumMetadata"/> attribute constructor throws <see cref = "ArgumentNullException"/> when the description is whitespace.
+        /// </summary>
         [TestMethod]
         public void EnumMetadataAttribute_Should_Throw_ArgumentNullException_When_Description_Is_Whitespace()
         {
             // Arrange
             string name = "Valid name";
             string description = "   ";
-
             // Act & Assert
             Assert.ThrowsException<ArgumentNullException>(() => new EnumMetadata(name, description));
         }
 
-        // Additional tests for duplicate Names and Descriptions
-
+        /// <summary>
+        /// Ensures that all names in the <see cref = "EnumMetadata"/> attributes of <see cref = "ErrorTypes"/> enum are unique.
+        /// </summary>
         [TestMethod]
         public void ErrorTypes_Should_Have_Unique_Names_In_Metadata()
         {
             // Arrange
             var names = new HashSet<string>();
             var errorTypes = Enum.GetValues(typeof(ErrorTypes));
-
             // Act & Assert
             foreach (ErrorTypes errorType in errorTypes)
             {
@@ -137,13 +157,15 @@ namespace Application.Test.Result.Error
             }
         }
 
+        /// <summary>
+        /// Ensures that all descriptions in the <see cref = "EnumMetadata"/> attributes of <see cref = "ErrorTypes"/> enum are unique.
+        /// </summary>
         [TestMethod]
         public void ErrorTypes_Should_Have_Unique_Descriptions_In_Metadata()
         {
             // Arrange
             var descriptions = new HashSet<string>();
             var errorTypes = Enum.GetValues(typeof(ErrorTypes));
-
             // Act & Assert
             foreach (ErrorTypes errorType in errorTypes)
             {
