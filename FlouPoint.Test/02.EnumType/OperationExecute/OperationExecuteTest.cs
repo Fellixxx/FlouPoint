@@ -1,4 +1,4 @@
-﻿namespace FlouPoint.Test.EnumType.OperationExecute
+namespace FlouPoint.Test.EnumType.OperationExecute
 {
     using NUnit.Framework;
     using FluentAssertions;
@@ -7,9 +7,20 @@
     using Domain.EnumType;
     using Domain.EnumType.OperationExecute;
 
+    /// <summary>
+    /// Test class for verifying the correctness of metadata associated with 
+    /// the OperationExecute enumeration.
+    /// </summary>
     [TestFixture]
     public class OperationExecuteTests
     {
+        /// <summary>
+        /// Test to ensure each OperationExecute enum value is associated with the correct 
+        /// EnumMetadataAttribute containing expected name and description.
+        /// </summary>
+        /// <param name = "operation">The enum value being tested.</param>
+        /// <param name = "expectedName">The expected name for the enum value.</param>
+        /// <param name = "expectedDescription">The expected description for the enum value.</param>
         [TestCase(OperationExecute.Add, "Add", "Add a new record.")]
         [TestCase(OperationExecute.Modified, "Modified", "Modify an existing record.")]
         [TestCase(OperationExecute.Remove, "Remove", "Remove an existing record.")]
@@ -33,33 +44,37 @@
             // When
             var fieldInfo = operation.GetType().GetField(operation.ToString());
             var attribute = fieldInfo.GetCustomAttribute<EnumMetadataAttribute>();
-
             // Then
             attribute.Should().NotBeNull();
             attribute.Name.Should().Be(expectedName);
             attribute.Description.Should().Be(expectedDescription);
         }
 
+        /// <summary>
+        /// Test to ensure that even the default operation has associated metadata, 
+        /// since all operations should have it.
+        /// </summary>
         [Test]
         public void OperationExecute_Without_EnumMetadataAttribute_Should_Return_Null()
         {
             // Given
             var operation = OperationExecute.Add;
-
             // When
             var fieldInfo = operation.GetType().GetField(operation.ToString());
             var attribute = fieldInfo.GetCustomAttribute<EnumMetadataAttribute>();
-
             // Then
             attribute.Should().NotBeNull(); // All values in OperationExecute should have metadata, so attribute should not be null
         }
 
+        /// <summary>
+        /// Test to ensure that every value in the OperationExecute enumeration
+        /// has an associated EnumMetadataAttribute.
+        /// </summary>
         [Test]
         public void EnumMetadata_Should_Be_Applied_To_All_OperationExecute_Values()
         {
             // Given
             var operations = Enum.GetValues(typeof(OperationExecute));
-
             // When & Then
             foreach (OperationExecute operation in operations)
             {
@@ -69,12 +84,15 @@
             }
         }
 
+        /// <summary>
+        /// Test to verify that the EnumMetadataAttribute is correctly configured
+        /// to be applied only to fields, and is not allowed multiple times on a single field.
+        /// </summary>
         [Test]
         public void EnumMetadata_Should_Have_Correct_AttributeUsage()
         {
             // When
             var attributeUsage = typeof(EnumMetadataAttribute).GetCustomAttribute<AttributeUsageAttribute>();
-
             // Then
             attributeUsage.Should().NotBeNull();
             attributeUsage.ValidOn.Should().Be(AttributeTargets.Field);
@@ -82,4 +100,3 @@
         }
     }
 }
-

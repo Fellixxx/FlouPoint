@@ -1,4 +1,4 @@
-﻿namespace Infrastructure.Utilities.Compress
+namespace Infrastructure.Utilities.Compress
 {
     using Application.Result;
     using Application.UseCases.ExternalServices;
@@ -18,32 +18,32 @@
     {
         // Service for logging operations.
         private readonly ILogService _logService;
+        // Provider for fetching resources.
         private readonly IResourcesProvider _resourceProvider;
+        // Handler for managing resources.
         private IResourceHandler _resourceHandler;
+        // List of keys to access specific resource strings.
         private readonly List<string> _resourceKeys;
-
         /// <summary>
         /// Initializes a new instance of the ImageCompressionService class.
         /// </summary>
-        /// <param name="logService">Service for logging operations.</param>
+        /// <param name = "logService">Service for logging operations.</param>
+        /// <param name = "resourceProvider">Provider for fetching resources.</param>
+        /// <param name = "resourceHandler">Handler for managing resources.</param>
         public ImageCompressionService(ILogService logService, IResourcesProvider resourceProvider, IResourceHandler resourceHandler)
         {
             _logService = logService;
             _resourceProvider = resourceProvider;
             _resourceHandler = resourceHandler;
-            _resourceKeys =
-            [
-                "FailedDataSizeCharacter",
-                "FailedEmailInvalidFormat",
-                "FailedAlreadyRegisteredEmail"
-            ];
+            // Initialize predefined keys for resource messages.
+            _resourceKeys = ["FailedDataSizeCharacter", "FailedEmailInvalidFormat", "FailedAlreadyRegisteredEmail"];
         }
 
         /// <summary>
         /// Compresses an image from a given stream.
         /// </summary>
-        /// <param name="inputStream">The stream of the image to compress.</param>
-        /// <param name="quality">The compression quality. Defaults to 75.</param>
+        /// <param name = "inputStream">The stream of the image to compress.</param>
+        /// <param name = "quality">The compression quality. Defaults to 75 (range: 1-100).</param>
         /// <returns>
         /// An OperationResult containing the compressed image stream if successful, 
         /// or error details if unsuccessful.
@@ -52,33 +52,44 @@
         {
             try
             {
+                // Create a new memory stream to store the compressed image.
                 var outputStream = new MemoryStream();
+                // Load the image from the input stream using ImageSharp.
                 using (var image = Image.Load(inputStream))
                 {
+                    // Configure JPEG encoder with the specified quality setting.
                     var encoder = new JpegEncoder()
                     {
                         Quality = quality
                     };
-
+                    // Save the compressed image to the output stream.
                     image.Save(outputStream, encoder);
                 }
 
+                // Reset the output stream position to the beginning.
                 outputStream.Seek(0, SeekOrigin.Begin);
+                // Asynchronously create resources using the resource handler.
                 await ResourceHandler.CreateAsync(_resourceProvider, _resourceKeys);
                 var successCompressed = _resourceHandler.GetResource("SuccessCompressed");
-                return Operation<Stream>.Success(outputStream, successCompressed); ;
+                // Return a successful operation result with the compressed image stream.
+                return Operation<Stream>.Success(outputStream, successCompressed);
             }
             catch (Exception ex)
             {
+                // Log the error with details of the exception and input stream.
                 Log log = Util.GetLogError(ex, inputStream, ActionType.CreateCustomOperation("Validate", "General validation operation."));
                 Operation<string> result = await _logService.CreateLog(log);
+                // Define a strategy for handling unexpected errors.
                 var strategy = new UnexpectedErrorStrategy<Stream>();
+                // Define the message to be returned on failure.
                 var message = Message.FailedToCompressImage;
+                // Return a failed operation result if log creation was unsuccessful.
                 if (!result.IsSuccessful)
                 {
-                    
                     return OperationStrategy<Stream>.Fail(message, strategy);
                 }
+
+                // Return a failed operation result for other failures.
                 return OperationStrategy<Stream>.Fail(message, strategy);
             }
         }
