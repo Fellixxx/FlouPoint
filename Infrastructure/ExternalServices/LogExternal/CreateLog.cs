@@ -42,7 +42,8 @@
             {
                 // Handle exceptions related to JSON serialization
                 var failedSerialize = string.Format(Message.Log.FailedToSerialize, jsonEx.Message);
-                return OperationBuilder<Log>.FailInvalidData(failedSerialize);
+                var strategy = new DatabaseStrategy<Log>();
+                return OperationStrategy<Log>.Fail(failedSerialize, strategy);
             }
             catch (NullReferenceException nullEx)
             {

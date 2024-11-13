@@ -74,7 +74,8 @@
                 string errorMessage = GetErrorMessage(result);
                 var failedDataSizeCharacter = _handler.GetResource("UpdateFailedDataSizeCharacter");
                 string message = string.Format(failedDataSizeCharacter, errorMessage);
-                return OperationBuilder<User>.FailBusiness(message);
+                var failedAlreadyRegisteredEmail = _handler.GetResource("FailedAlreadyRegisteredEmail");
+                return OperationStrategy<User>.Fail(failedAlreadyRegisteredEmail, new BusinessStrategy<User>());
             }
 
             // Check for email validity
@@ -82,7 +83,7 @@
             if (!CredentialUtility.IsValidEmail(email))
             {
                 var failedDataSizeCharacter = _handler.GetResource("UpdateFailedEmailInvalidFormat");
-                return OperationBuilder<User>.FailBusiness(failedDataSizeCharacter);
+                return OperationStrategy<User>.Fail(failedDataSizeCharacter, new BusinessStrategy<User>());
             }
 
             string id = entityModified?.Id ?? string.Empty;
@@ -92,7 +93,7 @@
             if (userExistByEmail is not null)
             {
                 var failedDataSizeCharacter = _handler.GetResource("UpdateFailedAlreadyRegisteredEmail");
-                return OperationBuilder<User>.FailBusiness(failedDataSizeCharacter);
+                return OperationStrategy<User>.Fail(failedDataSizeCharacter, new BusinessStrategy<User>());
             }
 
             // Check for changes in the email and update relevant properties

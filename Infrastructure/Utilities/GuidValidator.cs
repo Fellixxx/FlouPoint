@@ -26,7 +26,9 @@
             // If it's not a valid GUID, return a failure result.
             if (!resultConversion)
             {
-                return OperationBuilder<string>.FailBusiness(Message.GuidValidator.InvalidGuid); // This error message seems mismatched. Shouldn't it be related to a GUID conversion failure?
+                var business = new BusinessStrategy<string>();
+                var invalidGuid = Message.GuidValidator.InvalidGuid;
+                return OperationStrategy<string>.Fail(invalidGuid, business); // This error message seems mismatched. Shouldn't it be related to a GUID conversion failure?
             }
 
             // If it's a valid GUID, return a success result.

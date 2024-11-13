@@ -70,8 +70,9 @@
                     result.ConvertTo<T>();
                 }
 
-                // Return a failure operation result for database issues
-                return OperationBuilder<T>.FailDatabase(Message.ErrorOccurredDataLayer);
+                var strategy = new DatabaseStrategy<T>();
+                var errorOccurredDataLayer = Message.ErrorOccurredDataLayer;
+                return OperationStrategy<T>.Fail(errorOccurredDataLayer, strategy);
             }
         }
 
@@ -88,7 +89,8 @@
 
                 if (!resultbearer.IsSuccessful)
                 {
-                    return OperationBuilder<T>.FailDatabase(resultbearer.Message);
+                    var strategy = new DatabaseStrategy<T>();
+                    return OperationStrategy<T>.Fail(resultbearer.Message, strategy);
                 }
 
                 // Get entities from the database based on the provided filter expression
@@ -118,7 +120,9 @@
                 }
 
                 // Return a failure operation result for database issues
-                return OperationBuilder<T>.FailDatabase(Message.ErrorOccurredDataLayer);
+                var strategy = new DatabaseStrategy<T>();
+                var errorOccurredDataLayer = Message.ErrorOccurredDataLayer;
+                return OperationStrategy<T>.Fail(errorOccurredDataLayer, strategy);
             }
         }
     }

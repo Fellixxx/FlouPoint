@@ -59,12 +59,16 @@
 
             if (!resources.Any())
             {
-                return OperationBuilder<Resource>.FailBusiness(Message.ResourceProvider.KeyNotFound);
+                var business = new BusinessStrategy<Resource>();
+                var keyNotFound = Message.ResourceProvider.KeyNotFound;
+                return OperationStrategy<Resource>.Fail(keyNotFound, business);
             }
 
             if (resources.Count > 1)
             {
-                return OperationBuilder<Resource>.FailBusiness(Message.ResourceProvider.MultipleWithSameKey);
+                var business = new BusinessStrategy<Resource>();
+                var multipleWithSameKey = Message.ResourceProvider.MultipleWithSameKey;
+                return OperationStrategy<Resource>.Fail(multipleWithSameKey, business);
             }
 
             return Operation<Resource>.Success(resources.FirstOrDefault());
@@ -83,12 +87,16 @@
             var entries = GetEntries();
             if (entries is null)
             {
-                return OperationBuilder<IQueryable<Resource>>.FailBusiness(Message.ResourceProvider.UnableToReadFile);
+                var business = new BusinessStrategy<IQueryable<Resource>>();
+                var unableToReadFile = Message.ResourceProvider.UnableToReadFile;
+                return OperationStrategy<IQueryable<Resource>>.Fail(unableToReadFile, business);
             }
 
             if (entries.Keys.Count == 0)
             {
-                return OperationBuilder<IQueryable<Resource>>.FailBusiness(Message.ResourceProvider.KeyNotFound);
+                var business = new BusinessStrategy<IQueryable<Resource>>();
+                var keyNotFound = Message.ResourceProvider.KeyNotFound;
+                return OperationStrategy<IQueryable<Resource>>.Fail(keyNotFound, business);
             }
 
 

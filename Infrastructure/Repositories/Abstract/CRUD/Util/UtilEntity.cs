@@ -5,6 +5,7 @@
     using Domain.Interfaces.Entity;
     using Application.Result;
     using Application.UseCases.ExternalServices.Resorces;
+    using Infrastructure.Constants;
 
     /// <summary>
     /// Utility class for entity validation operations.
@@ -37,8 +38,7 @@
             var failedNecesaryData = _handler.GetResource("EntityFailedNecesaryData");
             if (entity is null)
             {
-                // Return a failure result if the entity is null
-                return OperationBuilder<T>.FailBusiness(failedNecesaryData);
+                return OperationStrategy<T>.Fail(failedNecesaryData, new BusinessStrategy<T>());
             }
 
             // Return a success result if the entity is not null

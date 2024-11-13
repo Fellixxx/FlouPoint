@@ -68,7 +68,9 @@
                 }
 
                 // Return a failure operation result for database issues
-                return OperationBuilder<IQueryable<T>>.FailDatabase(Message.ErrorOccurredDataLayer);
+                var strategy = new DatabaseStrategy<IQueryable<T>>();
+                var errorOccurredDataLayer = Message.ErrorOccurredDataLayer;
+                return OperationStrategy<IQueryable<T>>.Fail(errorOccurredDataLayer, strategy);
             }
         }
     }

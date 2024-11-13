@@ -3,15 +3,96 @@
     using Application.Result.Error;
     using System;
 
+    public interface IErrorCreationStrategy<T>
+    {
+        Operation<T> CreateFailure(string message);
+    }
+    public class BusinessStrategy<T> : IErrorCreationStrategy<T>
+    {
+        public Operation<T> CreateFailure(string message)
+        {
+            return Operation<T>.Failure(message, ErrorTypes.BusinessValidation);
+        }
+    }
+
+    public class ConfigMissingStrategy<T> : IErrorCreationStrategy<T>
+    {
+        public Operation<T> CreateFailure(string message)
+        {
+            return Operation<T>.Failure(message, ErrorTypes.ConfigMissing);
+        }
+    }
+
+    public class DatabaseStrategy<T> : IErrorCreationStrategy<T>
+    {
+        public Operation<T> CreateFailure(string message)
+        {
+            return Operation<T>.Failure(message, ErrorTypes.Database);
+        }
+    }
+
+    public class InvalidDataStrategy<T> : IErrorCreationStrategy<T>
+    {
+        public Operation<T> CreateFailure(string message)
+        {
+            return Operation<T>.Failure(message, ErrorTypes.InvalidData);
+        }
+    }
+
+    public class ExternalServiceStrategy<T> : IErrorCreationStrategy<T>
+    {
+        public Operation<T> CreateFailure(string message)
+        {
+            return Operation<T>.Failure(message, ErrorTypes.ExternalService);
+        }
+    }
+
+    public class UnexpectedErrorStrategy<T> : IErrorCreationStrategy<T>
+    {
+        public Operation<T> CreateFailure(string message)
+        {
+            return Operation<T>.Failure(message, ErrorTypes.Unexpected);
+        }
+    }
+
+    public class NetworkErrorStrategy<T> : IErrorCreationStrategy<T>
+    {
+        public Operation<T> CreateFailure(string message)
+        {
+            return Operation<T>.Failure(message, ErrorTypes.Network);
+        }
+    }
+
+
+    public static class OperationStrategy<T>
+    {
+        public static Operation<T> Fail(string message, IErrorCreationStrategy<T> strategy)
+        {
+            ValidateMessage(message);
+            return strategy.CreateFailure(message);
+        }
+
+        private static void ValidateMessage(string? message)
+        {
+            var errorMessage = $"{nameof(ValidateMessage)}: The 'message' parameter cannot be null, empty, or whitespace.";
+            Validate(message, errorMessage);
+        }
+
+        private static void Validate(string? field, string errorMessage)
+        {
+            if (field == null)
+            {
+                throw new ArgumentNullException(nameof(field), errorMessage);
+            }
+            else if (string.IsNullOrWhiteSpace(field))
+            {
+                throw new ArgumentException(errorMessage, nameof(field));
+            }
+        }
+    }
+
     public static class OperationBuilder<T>
     {
-        /// <summary>
-        /// Creates a failed operation result for a business validation error.
-        /// </summary>
-        /// <param name="message">The message describing the validation failure.</param>
-        /// <returns>An <see cref="Operation{T}"/> representing the failure.</returns>
-        public static Operation<T> FailBusiness(string? message)
-            => CreateFailure(message, ErrorTypes.BusinessValidation);
 
         /// <summary>
         /// Creates a failed operation result for a missing configuration error.
@@ -21,13 +102,6 @@
         public static Operation<T> FailConfig(string message)
             => CreateFailure(message, ErrorTypes.ConfigMissing);
 
-        /// <summary>
-        /// Creates a failed operation result for a database-related error.
-        /// </summary>
-        /// <param name="message">The message describing the database error.</param>
-        /// <returns>An <see cref="Operation{T}"/> representing the failure.</returns>
-        public static Operation<T> FailDatabase(string message)
-            => CreateFailure(message, ErrorTypes.Database);
 
         /// <summary>
         /// Creates a failed operation result for an invalid data submission.

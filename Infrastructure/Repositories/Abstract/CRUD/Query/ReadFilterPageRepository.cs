@@ -72,7 +72,9 @@
                 {
                     result.ConvertTo<IQueryable<T>>();
                 }
-                return OperationBuilder<IQueryable<T>>.FailDatabase(Message.ErrorOccurredDataLayer);
+                var strategy = new DatabaseStrategy<IQueryable<T>>();
+                var errorOccurredDataLayer = Message.ErrorOccurredDataLayer;
+                return OperationStrategy<IQueryable<T>>.Fail(errorOccurredDataLayer, strategy);
             }
         }
 

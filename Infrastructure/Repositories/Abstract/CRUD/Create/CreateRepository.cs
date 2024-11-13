@@ -82,7 +82,9 @@
                     result.ConvertTo<string>();
                 }
 
-                return OperationBuilder<string>.FailDatabase(Message.ErrorOccurredDataLayer);
+                var strategy = new DatabaseStrategy<string>();
+                var errorOccurredDataLayer = Message.ErrorOccurredDataLayer;
+                return OperationStrategy<string>.Fail(errorOccurredDataLayer, strategy);
             }
         }
 

@@ -1,12 +1,13 @@
 ﻿namespace Application.UseCases.Repository.CRUD.Validation
 {
     using Application.Result;
+    using Domain.Interfaces.Entity;
 
     /// <summary>
     /// Defines the contract for validating the existence of an entity in the repository.
     /// </summary>
     /// <typeparam name="T">The type of the entity.</typeparam>
-    public interface IEntityChecker<T>
+    public interface IEntityChecker<T> where T : class, IEntity
     {
         /// <summary>
         /// Checks if an entity with the given ID exists in the repository.

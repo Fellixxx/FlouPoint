@@ -2,6 +2,8 @@ namespace Application.Test.Result
 {
     using System;
     using Application.Result;
+    using Domain.Entities;
+    using Microsoft.VisualStudio.TestPlatform.CommunicationUtilities;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     [TestClass]
@@ -14,7 +16,7 @@ namespace Application.Test.Result
             var message = "TestValue879633508";
 
             // Act
-            var result = OperationBuilder<string>.FailBusiness(message);
+            var result = OperationStrategy<string>.Fail(message, new BusinessStrategy<string>());
 
             // Assert
             Assert.IsNotNull(result);
@@ -30,7 +32,8 @@ namespace Application.Test.Result
             string message = null;
 
             // Act & Assert
-            Assert.ThrowsException<ArgumentNullException>(() => OperationBuilder<string>.FailBusiness(message));
+            var business = new BusinessStrategy<string>();
+            Assert.ThrowsException<ArgumentNullException>(() => OperationStrategy<string>.Fail(message, business));
         }
 
         [TestMethod]
@@ -66,7 +69,8 @@ namespace Application.Test.Result
             var message = "TestValue1736562805";
 
             // Act
-            var result = OperationBuilder<string>.FailDatabase(message);
+            var strategy = new DatabaseStrategy<string>();
+            var result = OperationStrategy<string>.Fail(message, strategy);
 
             // Assert
             Assert.IsNotNull(result);
@@ -82,7 +86,8 @@ namespace Application.Test.Result
             string message = null;
 
             // Act & Assert
-            Assert.ThrowsException<ArgumentNullException>(() => OperationBuilder<string>.FailDatabase(message));
+            var strategy = new DatabaseStrategy<string>();
+            Assert.ThrowsException<ArgumentNullException>(() => OperationStrategy<string>.Fail(message, strategy));
         }
 
         [TestMethod]
@@ -194,7 +199,8 @@ namespace Application.Test.Result
             var expectedMessage = "Business validation failed.";
 
             // Act
-            var result = OperationBuilder<string>.FailBusiness(expectedMessage);
+            var business = new BusinessStrategy<string>();
+            var result = OperationStrategy<string>.Fail(expectedMessage, business);
 
             // Assert
             Assert.IsNotNull(result);
@@ -207,7 +213,8 @@ namespace Application.Test.Result
         public void FailureBusinessValidation_Should_Throw_ArgumentNullException_When_Message_Is_Null()
         {
             // Act & Assert
-            Assert.ThrowsException<ArgumentNullException>(() => OperationBuilder<string>.FailBusiness(null));
+            var business = new BusinessStrategy<string>();
+            Assert.ThrowsException<ArgumentNullException>(() => OperationStrategy<string>.Fail(null, business));
         }
 
         [TestMethod]
@@ -233,7 +240,8 @@ namespace Application.Test.Result
             var expectedMessage = "Database failure occurred.";
 
             // Act
-            var result = OperationBuilder<string>.FailDatabase(expectedMessage);
+            var strategy = new DatabaseStrategy<string>();
+            var result = OperationStrategy<string>.Fail(expectedMessage, strategy);
 
             // Assert
             Assert.IsNotNull(result);
@@ -314,7 +322,8 @@ namespace Application.Test.Result
             string message = "";
 
             // Act & Assert
-            Assert.ThrowsException<ArgumentException>(() => OperationBuilder<string>.FailBusiness(message));
+            var business = new BusinessStrategy<string>();
+            Assert.ThrowsException<ArgumentException>(() => OperationStrategy<string>.Fail(message, business));
         }
 
         [TestMethod]
@@ -334,7 +343,8 @@ namespace Application.Test.Result
             string message = "";
 
             // Act & Assert
-            Assert.ThrowsException<ArgumentException>(() => OperationBuilder<string>.FailDatabase(message));
+            var strategy = new DatabaseStrategy<string>();
+            Assert.ThrowsException<ArgumentException>(() => OperationStrategy<string>.Fail(message, strategy));
         }
 
         [TestMethod]
@@ -385,7 +395,8 @@ namespace Application.Test.Result
             string message = "   ";
 
             // Act & Assert
-            Assert.ThrowsException<ArgumentException>(() => OperationBuilder<string>.FailBusiness(message));
+            var business = new BusinessStrategy<string>();
+            Assert.ThrowsException<ArgumentException>(() => OperationStrategy<string>.Fail(message, business));
         }
 
         [TestMethod]
@@ -405,7 +416,8 @@ namespace Application.Test.Result
             string message = "   ";
 
             // Act & Assert
-            Assert.ThrowsException<ArgumentException>(() => OperationBuilder<string>.FailDatabase(message));
+            var strategy = new DatabaseStrategy<string>();
+            Assert.ThrowsException<ArgumentException>(() => OperationStrategy<string>.Fail(message, strategy));
         }
 
         [TestMethod]
@@ -456,7 +468,8 @@ namespace Application.Test.Result
             var message = "Business validation failed.";
 
             // Act
-            var result = OperationBuilder<string>.FailBusiness(message);
+            var business = new BusinessStrategy<string>();
+            var result = OperationStrategy<string>.Fail(message, business); 
 
             // Assert
             Assert.IsNull(result.Data);
@@ -482,7 +495,8 @@ namespace Application.Test.Result
             var message = "Database failure occurred.";
 
             // Act
-            var result = OperationBuilder<string>.FailDatabase(message);
+            var strategy = new DatabaseStrategy<string>();
+            var result = OperationStrategy<string>.Fail(message, strategy);
 
             // Assert
             Assert.IsNull(result.Data);

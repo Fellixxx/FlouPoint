@@ -89,8 +89,9 @@
                 {
                     result.ConvertTo<bool>();
                 }
-
-                return OperationBuilder<bool>.FailDatabase(Message.ErrorOccurredDataLayer);
+                var strategy = new DatabaseStrategy<bool>();
+                var errorOccurredDataLayer = Message.ErrorOccurredDataLayer;
+                return OperationStrategy<bool>.Fail(errorOccurredDataLayer, strategy);
             }
         }
 

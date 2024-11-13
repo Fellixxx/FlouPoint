@@ -12,7 +12,6 @@
     /// </summary>
     public static class JwtHelper
     {
-
         //private readonly IResourceProvider _resourceProvider;
         //private IResourceHandler _resourceHandler;
         //private readonly List<string> _resourceKeys;
@@ -24,19 +23,23 @@
         /// <returns>The user data ID or null if not found.</returns>
         public static Operation<string> ExtractJwtPayload(string bearerToken)
         {
+            var strategy = new BusinessStrategy<string>();
             if (string.IsNullOrWhiteSpace(bearerToken))
             {
-                return OperationBuilder<string>.FailBusiness(Message.JwtHelper.TokenCannotBeWhitespace);
+                var tokenCannotBeWhitespace = Message.JwtHelper.TokenCannotBeWhitespace;
+                return OperationStrategy<string>.Fail(tokenCannotBeWhitespace, strategy);
             }
 
             if (!bearerToken.StartsWith(Message.JwtHelper.BearerPrefix, StringComparison.OrdinalIgnoreCase))
             {
-                return OperationBuilder<string>.FailBusiness(Message.JwtHelper.TokenMustStartWithBearer);
+                var tokenMustStartWithBearer = Message.JwtHelper.TokenMustStartWithBearer;
+                return OperationStrategy<string>.Fail(tokenMustStartWithBearer, strategy);
             }
 
             if (Message.JwtHelper.BearerPrefix.Length >= bearerToken.Length)
             {
-                return OperationBuilder<string>.FailBusiness(Message.JwtHelper.InvalidBearerTokenLength);
+                var invalidBearerTokenLength = Message.JwtHelper.InvalidBearerTokenLength;
+                return OperationStrategy<string>.Fail(invalidBearerTokenLength, strategy);
             }
 
             var jwt = bearerToken[Message.JwtHelper.BearerPrefix.Length..].Trim();
@@ -63,7 +66,9 @@
             var tokenParts = jwt.Split('.');
             if (tokenParts.Length != 3)
             {
-                return OperationBuilder<string>.FailBusiness(Message.JwtHelper.InvalidJwtPayloadFormat);
+                var invalidJwtPayloadFormat = Message.JwtHelper.InvalidJwtPayloadFormat;
+                var strategy = new BusinessStrategy<string>();
+                return OperationStrategy<string>.Fail(invalidJwtPayloadFormat, strategy);
             }
 
             return Base64UrlDecode(tokenParts[1]);
@@ -84,7 +89,9 @@
             }
             catch
             {
-                return OperationBuilder<string>.FailBusiness(Message.JwtHelper.InvalidJwtPayloadFormat);
+                var strategy = new BusinessStrategy<string>();
+                var invalidBearerTokenLength = Message.JwtHelper.InvalidBearerTokenLength;
+                return OperationStrategy<string>.Fail(invalidBearerTokenLength, strategy);
             }
         }
 
@@ -116,7 +123,8 @@
             }
             catch
             {
-                return OperationBuilder<string>.FailBusiness(Message.JwtHelper.InvalidBase64UrlFormat);
+                var strategy = new BusinessStrategy<string>();
+                return OperationStrategy<string>.Fail(Message.JwtHelper.InvalidBase64UrlFormat, strategy);
             }
 
             return Operation<string>.Success(Encoding.UTF8.GetString(bytes), Message.JwtHelper.Success);

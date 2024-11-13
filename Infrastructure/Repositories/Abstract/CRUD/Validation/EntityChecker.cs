@@ -48,7 +48,7 @@
             {
                 await ResourceHandler.CreateAsync(_provider, _resourceKeys);
                 var failedNecesaryData = _handler.GetResource("FailedNecesaryData");
-                return OperationBuilder<T>.FailBusiness(failedNecesaryData);
+                return OperationStrategy<T>.Fail(failedNecesaryData, new BusinessStrategy<T>());
             }
 
             // Get the existing user from the repository
@@ -60,8 +60,8 @@
             {
                
                 var genericExistValidation = _handler.GetResource("GenericExistValidation");
-                string messageExist = string.Format(genericExistValidation, typeof(T).Name);
-                return OperationBuilder<T>.FailBusiness(messageExist);
+                var messageExist = string.Format(genericExistValidation, typeof(T).Name);
+                return OperationStrategy<T>.Fail(messageExist, new BusinessStrategy<T>());
             }
             var validationGlobalOkMessage = _handler.GetResource("ValidationGlobalOkMessage");
             return Operation<T>.Success(entityUnmodified, validationGlobalOkMessage);
@@ -79,7 +79,7 @@
             var failedNecesaryData = _handler.GetResource("FailedNecesaryData");
             if (string.IsNullOrWhiteSpace(id))
             {
-                return OperationBuilder<T>.FailBusiness(failedNecesaryData);
+                return OperationStrategy<T>.Fail(failedNecesaryData, new BusinessStrategy<T>());
             }
             var result = GuidValidator.HasGuid(id);
             if (!result.IsSuccessful)
