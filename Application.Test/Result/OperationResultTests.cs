@@ -54,7 +54,7 @@ namespace Application.Test.Result
             Assert.IsNotNull(result);
             Assert.IsFalse(result.IsSuccessful);
             Assert.AreEqual(expectedMessage, result.Message);
-            Assert.AreEqual(expectedErrorType, result.ErrorType);
+            Assert.AreEqual(expectedErrorType, result.Type);
         }
 
         [TestMethod]
@@ -70,7 +70,7 @@ namespace Application.Test.Result
             Assert.IsNotNull(convertedResult);
             Assert.IsFalse(convertedResult.IsSuccessful);
             Assert.AreEqual(failureResult.Message, convertedResult.Message);
-            Assert.AreEqual(failureResult.ErrorType, convertedResult.ErrorType);
+            Assert.AreEqual(failureResult.Type, convertedResult.Type);
         }
 
         [TestMethod]
@@ -98,7 +98,7 @@ namespace Application.Test.Result
             Assert.IsNotNull(boolResult);
             Assert.IsFalse(boolResult.IsSuccessful);
             Assert.AreEqual(failureResult.Message, boolResult.Message);
-            Assert.AreEqual(failureResult.ErrorType, boolResult.ErrorType);
+            Assert.AreEqual(failureResult.Type, boolResult.Type);
         }
 
         [TestMethod]
@@ -114,7 +114,7 @@ namespace Application.Test.Result
             Assert.IsNotNull(intResult);
             Assert.IsFalse(intResult.IsSuccessful);
             Assert.AreEqual(failureResult.Message, intResult.Message);
-            Assert.AreEqual(failureResult.ErrorType, intResult.ErrorType);
+            Assert.AreEqual(failureResult.Type, intResult.Type);
         }
 
         [TestMethod]
@@ -130,7 +130,7 @@ namespace Application.Test.Result
             Assert.IsNotNull(stringResult);
             Assert.IsFalse(stringResult.IsSuccessful);
             Assert.AreEqual(failureResult.Message, stringResult.Message);
-            Assert.AreEqual(failureResult.ErrorType, stringResult.ErrorType);
+            Assert.AreEqual(failureResult.Type, stringResult.Type);
         }
 
         [TestMethod]
@@ -146,7 +146,7 @@ namespace Application.Test.Result
             Assert.IsNotNull(genericResult);
             Assert.IsFalse(genericResult.IsSuccessful);
             Assert.AreEqual(failureResult.Message, genericResult.Message);
-            Assert.AreEqual(failureResult.ErrorType, genericResult.ErrorType);
+            Assert.AreEqual(failureResult.Type, genericResult.Type);
         }
 
         [TestMethod]
@@ -162,7 +162,7 @@ namespace Application.Test.Result
             Assert.IsNotNull(xResult);
             Assert.IsFalse(xResult.IsSuccessful);
             Assert.AreEqual(failureResult.Message, xResult.Message);
-            Assert.AreEqual(failureResult.ErrorType, xResult.ErrorType);
+            Assert.AreEqual(failureResult.Type, xResult.Type);
         }
     }
 }

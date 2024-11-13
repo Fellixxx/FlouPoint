@@ -20,7 +20,7 @@ namespace Application.Test.Result
                 IsSuccessful = isSuccess;
                 Message = message;
                 Data = data;
-                ErrorType = errorType;
+                Type = errorType;
             }
         }
 

@@ -31,7 +31,7 @@ namespace Infrastructure.Test.Message
 
             // Assert
             Assert.IsTrue(result.IsSuccessful);
-            Assert.AreEqual(result.ErrorType, Application.Result.Error.ErrorTypes.None);
+            Assert.AreEqual(result.Type, Application.Result.Error.ErrorTypes.None);
         }
 
         [TestMethod]
@@ -45,7 +45,7 @@ namespace Infrastructure.Test.Message
 
             // Assert
             Assert.IsFalse(result.IsSuccessful);
-            Assert.AreEqual(Application.Result.Error.ErrorTypes.BusinessValidation, result.ErrorType);
+            Assert.AreEqual(Application.Result.Error.ErrorTypes.BusinessValidation, result.Type);
             Assert.AreEqual("BUSINESS_VALIDATION_ERROR", result.Error);
             Assert.AreEqual("Resource not found.", result.Message);
             

@@ -34,7 +34,7 @@
             {
                 IsSuccessful = false,
                 Message = this.Message,
-                ErrorType = this.ErrorType
+                Type = this.Type
             };
         }
 
@@ -51,7 +51,7 @@
                 IsSuccessful = true,
                 Data = data,
                 Message = message ?? string.Empty,
-                ErrorType = ErrorTypes.None
+                Type = ErrorTypes.None
             };
         }
 
@@ -103,7 +103,7 @@
         /// <returns>The operation result</returns>
         public static Operation<T> Failure(string message, ErrorTypes errorTypes)
         {
-            return new Operation<T> { IsSuccessful = false, Message = message, ErrorType = errorTypes };
+            return new Operation<T> { IsSuccessful = false, Message = message, Type = errorTypes };
         }
     }
 }

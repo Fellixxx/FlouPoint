@@ -12,7 +12,7 @@
         /// <summary>
         /// Specifies the type of error, if any, that occurred during the operation.
         /// </summary>
-        public ErrorTypes ErrorType { get; set; }
+        public ErrorTypes Type { get; set; }
 
         /// <summary>
         /// Indicates if the operation was successful.
@@ -32,6 +32,6 @@
         /// <summary>
         /// Specifies the type of error, if any, that occurred during the operation as a string.
         /// </summary>
-        public string Error => this.ErrorType.GetCustomName();
+        public string Error => this.Type.GetCustomName();
     }
 }
