@@ -15,7 +15,7 @@
             Description = description;
         }
 
-        private static ActionType RegisterOperation(string name, string description)
+        private static ActionType Register(string name, string description)
         {
             if (_operations.ContainsKey(name))
             {
@@ -28,15 +28,15 @@
         }
 
         // Predefined Operations
-        public static ActionType Add => RegisterOperation("Add", "Add a new record.");
-        public static ActionType Modified => RegisterOperation("Modified", "Modify an existing record.");
-        public static ActionType Remove => RegisterOperation("Remove", "Remove an existing record.");
-        public static ActionType Deactivate => RegisterOperation("Deactivate", "Deactivate an existing record.");
-        public static ActionType Activate => RegisterOperation("Activate", "Activate a deactivated record.");
-        public static ActionType GetUserById => RegisterOperation("GetUserById", "Retrieve a user by their ID.");
-        public static ActionType GetAllByFilter => RegisterOperation("GetAllByFilter", "Retrieve all records that match a given filter.");
-        public static ActionType GetPageByFilter => RegisterOperation("GetPageByFilter", "Retrieve a page of records that match a given filter.");
-        public static ActionType GetCountFilter => RegisterOperation("GetCountFilter", "Get the count of records that match a given filter.");
+        public static ActionType Add => Register("Add", "Add a new record.");
+        public static ActionType Modified => Register("Modified", "Modify an existing record.");
+        public static ActionType Remove => Register("Remove", "Remove an existing record.");
+        public static ActionType Deactivate => Register("Deactivate", "Deactivate an existing record.");
+        public static ActionType Activate => Register("Activate", "Activate a deactivated record.");
+        public static ActionType GetUserById => Register("GetUserById", "Retrieve a user by their ID.");
+        public static ActionType GetAllByFilter => Register("GetAllByFilter", "Retrieve all records that match a given filter.");
+        public static ActionType GetPageByFilter => Register("GetPageByFilter", "Retrieve a page of records that match a given filter.");
+        public static ActionType GetCountFilter => Register("GetCountFilter", "Get the count of records that match a given filter.");
 
         // Allow for dynamic operations to be created
         public static ActionType CreateCustomOperation(string name, string description)
@@ -53,7 +53,7 @@
             {
                 throw new InvalidOperationException($"An operation with the name '{name}' already exists.");
             }
-            return RegisterOperation(name, description);
+            return Register(name, description);
         }
 
         public static string? GetName(ActionType enumType)
