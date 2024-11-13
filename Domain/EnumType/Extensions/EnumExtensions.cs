@@ -1,5 +1,6 @@
 ﻿namespace Domain.EnumType.Extensions
 {
+    using Domain.Constants;
     using System;
     using System.Reflection;
 
@@ -16,7 +17,7 @@
         /// <returns>A custom name as defined in EnumMetadataAttribute, or "UNKNOWN" if not defined.</returns>
         public static string GetCustomName<TEnum>(this TEnum enumValue) where TEnum : struct, Enum
         {
-            return GetEnumMetadata(enumValue)?.Name ?? "UNKNOWN";
+            return GetEnumMetadata(enumValue)?.Name ?? Messages.EnumExtensions.Unknown;
         }
 
         /// <summary>
@@ -27,7 +28,7 @@
         /// <returns>A description as defined in EnumMetadataAttribute, or a default message if not defined.</returns>
         public static string GetDescription<TEnum>(this TEnum enumValue) where TEnum : struct, Enum
         {
-            return GetEnumMetadata(enumValue)?.Description ?? "Description not available.";
+            return GetEnumMetadata(enumValue)?.Description ?? Messages.EnumExtensions.DescriptionNotAvailable;
         }
 
         /// <summary>
@@ -45,7 +46,7 @@
             }
             else
             {
-                throw new ArgumentException($"No enum value found for {_value} in {typeof(TEnum)}");
+                throw new ArgumentException(string.Format(Messages.EnumExtensions.NoEnumValueFound, _value, typeof(TEnum)));
             }
         }
 

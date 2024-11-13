@@ -1,5 +1,6 @@
 ﻿namespace Domain.EnumType.Extensions
 {
+    using Domain.Constants;
     using System;
 
     /// <summary>
@@ -29,7 +30,7 @@
         {
             if (string.IsNullOrWhiteSpace(name) || string.IsNullOrWhiteSpace(description))
             {
-                throw new ArgumentNullException("For name or description, null, empty, and whitespace are not allowed.");
+                throw new ArgumentNullException(Messages.EnumMetadata.ForNameOrDescription);
             }
 
             Name = name;

@@ -1,4 +1,6 @@
-﻿namespace Domain.EnumType
+﻿using Domain.Constants;
+
+namespace Domain.EnumType
 {
     /// <summary>
     /// Defines the types of operations that can be executed.
@@ -28,30 +30,30 @@
         }
 
         // Predefined Operations
-        public static ActionType Add => Register("Add", "Add a new record.");
-        public static ActionType Modified => Register("Modified", "Modify an existing record.");
-        public static ActionType Remove => Register("Remove", "Remove an existing record.");
-        public static ActionType Deactivate => Register("Deactivate", "Deactivate an existing record.");
-        public static ActionType Activate => Register("Activate", "Activate a deactivated record.");
-        public static ActionType GetUserById => Register("GetUserById", "Retrieve a user by their ID.");
-        public static ActionType GetAllByFilter => Register("GetAllByFilter", "Retrieve all records that match a given filter.");
-        public static ActionType GetPageByFilter => Register("GetPageByFilter", "Retrieve a page of records that match a given filter.");
-        public static ActionType GetCountFilter => Register("GetCountFilter", "Get the count of records that match a given filter.");
+        public static ActionType Add => Register(Messages.ActionType.KeyAdd, Messages.ActionType.Add);
+        public static ActionType Modified => Register(Messages.ActionType.KeyModified, Messages.ActionType.Modified);
+        public static ActionType Remove => Register(Messages.ActionType.KeyRemove, Messages.ActionType.Remove);
+        public static ActionType Deactivate => Register(Messages.ActionType.KeyDeactivate, Messages.ActionType.Deactivate);
+        public static ActionType Activate => Register(Messages.ActionType.KeyActivate, Messages.ActionType.Activate);
+        public static ActionType GetUserById => Register(Messages.ActionType.KeyGetUserById, Messages.ActionType.GetUserById);
+        public static ActionType GetAllByFilter => Register(Messages.ActionType.KeyGetAllByFilter, Messages.ActionType.GetAllByFilter);
+        public static ActionType GetPageByFilter => Register(Messages.ActionType.KeyGetPageByFilter, Messages.ActionType.GetPageByFilter);
+        public static ActionType GetCountFilter => Register(Messages.ActionType.KeyGetCountFilter, Messages.ActionType.GetCountFilter);
 
         // Allow for dynamic operations to be created
         public static ActionType CreateCustomOperation(string name, string description)
         {
             if (string.IsNullOrWhiteSpace(name))
             {
-                throw new ArgumentNullException(nameof(name), "The 'name' parameter cannot be null, empty, or whitespace.");
+                throw new ArgumentNullException(nameof(name), Messages.ActionType.ArgumentNullExceptionName);
             }
             if (string.IsNullOrWhiteSpace(description))
             {
-                throw new ArgumentNullException(nameof(description), "The 'description' parameter cannot be null, empty, or whitespace.");
+                throw new ArgumentNullException(nameof(description), Messages.ActionType.ArgumentNullExceptionDescription);
             }
             if (_operations.ContainsKey(name))
             {
-                throw new InvalidOperationException($"An operation with the name '{name}' already exists.");
+                throw new InvalidOperationException(string.Format(Messages.ActionType.InvalidOperationException, name));
             }
             return Register(name, description);
         }
