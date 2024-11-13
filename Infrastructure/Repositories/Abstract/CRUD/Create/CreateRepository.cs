@@ -54,14 +54,14 @@
                 Operation<T> hasEntity = await _utilEntity.HasEntity(entity);
                 if (!hasEntity.IsSuccessful)
                 {
-                    return hasEntity.ToResultWithStringType();
+                    return hasEntity.ConvertTo<string>();
                 }
 
                 // Validate the entity
                 Operation<T> validationResult = await CreateEntity(entity);
                 if (!validationResult.IsSuccessful)
                 {
-                    return validationResult.ToResultWithStringType();
+                    return validationResult.ConvertTo<string>();
                 }
 
                 // If validation is successful, add the entity to the database
@@ -79,7 +79,7 @@
                 Operation<string> result = await _logService.CreateLog(log);
                 if (!result.IsSuccessful)
                 {
-                    result.ToResultWithStringType();
+                    result.ConvertTo<string>();
                 }
 
                 return OperationBuilder<string>.FailDatabase(Message.ErrorOccurredDataLayer);

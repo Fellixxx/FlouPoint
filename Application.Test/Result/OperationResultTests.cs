@@ -92,7 +92,7 @@ namespace Application.Test.Result
             var failureResult = Operation<string>.Failure("Failure occurred", ErrorTypes.BusinessValidation);
 
             // Act
-            var boolResult = failureResult.ToResultWithBoolType();
+            var boolResult = failureResult.ConvertTo<bool>();
 
             // Assert
             Assert.IsNotNull(boolResult);
@@ -108,7 +108,7 @@ namespace Application.Test.Result
             var failureResult = Operation<string>.Failure("Failure occurred", ErrorTypes.Database);
 
             // Act
-            var intResult = failureResult.ToResultWithIntType();
+            var intResult = failureResult.ConvertTo<int>();
 
             // Assert
             Assert.IsNotNull(intResult);
@@ -124,7 +124,7 @@ namespace Application.Test.Result
             var failureResult = Operation<int>.Failure("Failure occurred", ErrorTypes.ExternalService);
 
             // Act
-            var stringResult = failureResult.ToResultWithStringType();
+            var stringResult = failureResult.ConvertTo<string>();
 
             // Assert
             Assert.IsNotNull(stringResult);
@@ -140,7 +140,7 @@ namespace Application.Test.Result
             var failureResult = Operation<string>.Failure("Generic failure", ErrorTypes.Unexpected);
 
             // Act
-            var genericResult = failureResult.ToResultWithGenericType();
+            var genericResult = failureResult.ConvertTo<string>();
 
             // Assert
             Assert.IsNotNull(genericResult);
@@ -156,7 +156,7 @@ namespace Application.Test.Result
             var failureResult = Operation<string>.Failure("Failure occurred", ErrorTypes.Network);
 
             // Act
-            var xResult = failureResult.ToResultWithXType<DateTime>();
+            var xResult = failureResult.ConvertTo<DateTime>();
 
             // Assert
             Assert.IsNotNull(xResult);

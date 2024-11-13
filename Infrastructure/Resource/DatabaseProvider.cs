@@ -27,7 +27,7 @@
             var resources = await GetResourceEntries();
             if (!resources.IsSuccessful)
             {
-                return resources.ToResultWithXType<Resource>();
+                return resources.ConvertTo<Resource>();
             }
             if (!resources.Data.Any())
             {

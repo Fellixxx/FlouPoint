@@ -51,7 +51,7 @@
                 Operation<T> validationResult = await HasId(id);
                 if (!validationResult.IsSuccessful)
                 {
-                    return validationResult.ToResultWithGenericType();
+                    return validationResult.ConvertTo<T>();
                 }
                 T? entity = validationResult.Data;
                 await ResourceHandler.CreateAsync(_resourceProvider, _resourceKeys);
@@ -67,7 +67,7 @@
                 // Handle logging failure
                 if (!result.IsSuccessful)
                 {
-                    result.ToResultWithXType<T>();
+                    result.ConvertTo<T>();
                 }
 
                 // Return a failure operation result for database issues
@@ -97,7 +97,7 @@
                 // If validation is not successful, return a failure operation result
                 if (!validationResult.IsSuccessful)
                 {
-                    return validationResult.ToResultWithGenericType();
+                    return validationResult.ConvertTo<T>();
                 }
 
                 T? entity = validationResult.Data;
@@ -114,7 +114,7 @@
                 // Handle logging failure
                 if (!result.IsSuccessful)
                 {
-                    result.ToResultWithXType<T>();
+                    result.ConvertTo<T>();
                 }
 
                 // Return a failure operation result for database issues

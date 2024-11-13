@@ -52,7 +52,7 @@
                 // If validation is not successful, return a failure operation result
                 if (!validationResult.IsSuccessful)
                 {
-                    return validationResult.ToResultWithBoolType();
+                    return validationResult.ConvertTo<bool>();
                 }
 
                 // If validation is successful, set the entity as active
@@ -76,7 +76,7 @@
                 Operation<string> result = await _logService.CreateLog(log);
                 if (!result.IsSuccessful)
                 {
-                    result.ToResultWithBoolType();
+                    result.ConvertTo<bool>();
                 }
 
                 return OperationBuilder<bool>.FailDatabase(Message.ErrorOccurredDataLayer);
@@ -96,7 +96,7 @@
                 // If validation is not successful, return a failure operation result
                 if (!validationResult.IsSuccessful)
                 {
-                    return validationResult.ToResultWithBoolType();
+                    return validationResult.ConvertTo<bool>();
                 }
 
                 // If validation is successful, set the entity as inactive
@@ -119,7 +119,7 @@
                 Operation<string> result = await _logService.CreateLog(log);
                 if (!result.IsSuccessful)
                 {
-                    result.ToResultWithBoolType();
+                    result.ConvertTo<bool>();
                 }
 
                 return OperationBuilder<bool>.FailDatabase(Message.ErrorOccurredDataLayer);

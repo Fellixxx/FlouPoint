@@ -59,14 +59,14 @@
                 var resultStream = await ConvertBase64ToStream(base64String);
                 if (!resultStream.IsSuccessful)
                 {
-                    return resultStream.ToResultWithBoolType();
+                    return resultStream.ConvertTo<bool>();
                 }
 
                 var stream = resultStream.Data ?? new MemoryStream();
                 var resultCompress = await _imageCompressionService.CompressImage(stream);
                 if (!resultCompress.IsSuccessful)
                 {
-                    return resultCompress.ToResultWithBoolType();
+                    return resultCompress.ConvertTo<bool>();
                 }
 
                 Stream streamCompress = resultCompress.Data ?? new MemoryStream();

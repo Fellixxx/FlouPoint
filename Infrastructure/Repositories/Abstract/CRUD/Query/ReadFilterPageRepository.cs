@@ -70,7 +70,7 @@
                 Operation<string> result = await _logService.CreateLog(log);
                 if (!result.IsSuccessful)
                 {
-                    result.ToResultWithXType<IQueryable<T>>();
+                    result.ConvertTo<IQueryable<T>>();
                 }
                 return OperationBuilder<IQueryable<T>>.FailDatabase(Message.ErrorOccurredDataLayer);
             }

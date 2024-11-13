@@ -54,19 +54,19 @@
                 Operation<T> hasEntity = await _utilEntity.HasEntity(entity);
                 if (!hasEntity.IsSuccessful)
                 {
-                    return hasEntity.ToResultWithBoolType();
+                    return hasEntity.ConvertTo<bool>();
                 }
 
                 Operation<T> resultExist = await HasId(entity.Id);
                 if (!resultExist.IsSuccessful)
                 {
-                    return resultExist.ToResultWithBoolType();
+                    return resultExist.ConvertTo<bool>();
                 }
 
                 Operation<T> resultModifyEntity = await UpdateEntity(entity, resultExist.Data);
                 if (!resultModifyEntity.IsSuccessful)
                 {
-                    return resultModifyEntity.ToResultWithBoolType();
+                    return resultModifyEntity.ConvertTo<bool>();
                 }
 
                 // If validation is successful, update the entity in the database
@@ -87,7 +87,7 @@
                 Operation<string> result = await _logService.CreateLog(log);
                 if (!result.IsSuccessful)
                 {
-                    result.ToResultWithBoolType();
+                    result.ConvertTo<bool>();
                 }
 
                 return OperationBuilder<bool>.FailDatabase(Message.ErrorOccurredDataLayer);

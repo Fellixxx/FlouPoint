@@ -52,7 +52,7 @@
             var entries = await GetResourceEntries();
             if (!entries.IsSuccessful)
             {
-                return entries.ToResultWithXType<Resource>();
+                return entries.ConvertTo<Resource>();
             }
 
             var resources = entries?.Data?.Where(r => r.Name == key).ToList() ?? [];

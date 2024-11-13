@@ -65,7 +65,7 @@
                 // Handle logging failure
                 if (!result.IsSuccessful)
                 {
-                    result.ToResultWithIntType();
+                    result.ConvertTo<int>();
                 }
 
                 // Return a failure operation result for database issues

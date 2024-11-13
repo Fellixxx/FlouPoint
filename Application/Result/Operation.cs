@@ -58,42 +58,7 @@
         /// <summary>
         /// Converts the current result to a boolean type.
         /// </summary>
-        public Operation<bool> ToResultWithBoolType()
-        {
-            return AsType<bool>();
-        }
-
-        /// <summary>
-        /// Converts the current result to an integer type.
-        /// </summary>
-        public Operation<int> ToResultWithIntType()
-        {
-            return AsType<int>();
-        }
-
-        /// <summary>
-        /// Converts the current result to an string type.
-        /// </summary>
-        public Operation<string> ToResultWithStringType()
-        {
-            return AsType<string>();
-        }
-
-        /// <summary>
-        /// Converts the current result to an integer type.
-        /// </summary>
-        public Operation<X> ToResultWithXType<X>()
-        {
-            return AsType<X>();
-        }
-
-        /// <summary>
-        /// Converts the current result to its generic type.
-        /// </summary>
-        public Operation<T> ToResultWithGenericType()
-        {
-            return AsType<T>();
-        }
+        public Operation<U> ConvertTo<U>() => AsType<U>();
 
         /// <summary>
         /// Creates a failed operation result with the given message and error type.
