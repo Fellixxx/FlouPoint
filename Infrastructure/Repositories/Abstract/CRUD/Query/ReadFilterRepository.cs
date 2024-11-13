@@ -1,4 +1,4 @@
-﻿namespace Infrastructure.Repositories.Abstract.CRUD.Query
+namespace Infrastructure.Repositories.Abstract.CRUD.Query
 {
     using Application.Result;
     using Application.UseCases.ExternalServices;
@@ -15,61 +15,59 @@
     /// <summary>
     /// Abstract repository class for reading and filtering entities.
     /// </summary>
-    /// <typeparam name="T">The entity type.</typeparam>
+    /// <typeparam name = "T">The entity type that the repository will operate on.</typeparam>
     public abstract class ReadFilterRepository<T> : Read<T>, IReadFilter<T> where T : class
     {
-        private readonly ILogService _logService;
-        private readonly IResourcesProvider _provider;
-        private IResourceHandler _handler;
-        private readonly List<string> _resourceKeys;
-
+        private readonly ILogService _logService; // Used for logging operations and errors
+        private readonly IResourcesProvider _provider; // Provides access to resource strings
+        private IResourceHandler _handler; // Handles retrieval of specific resources
+        private readonly List<string> _resourceKeys; // List of keys used to access resources
         /// <summary>
         /// Constructor with dependency injection.
+        /// Initializes a new instance of the ReadFilterRepository class.
         /// </summary>
-        /// <param name="context">The database context.</param>
-        /// <param name="logService">The log service.</param>
+        /// <param name = "context">The database context for accessing the database.</param>
+        /// <param name = "logService">The log service for logging operations and errors.</param>
+        /// <param name = "provider">The resource provider for accessing localized resource strings.</param>
+        /// <param name = "handler">The resource handler for managing resource-related operations.</param>
         protected ReadFilterRepository(DbContext context, ILogService logService, IResourcesProvider provider, IResourceHandler handler) : base(context)
         {
             _logService = logService;
             _provider = provider;
             _handler = handler;
-            _resourceKeys =
-            [
-                "SuccessfullySearchGeneric"
-            ];
+            _resourceKeys = ["SuccessfullySearchGeneric"]; // Resource keys for logging messages
         }
 
         /// <summary>
-        /// Read and filter entities based on the provided predicate.
+        /// Reads and filters entities based on the provided predicate.
         /// </summary>
-        /// <param name="predicate">The filter predicate.</param>
-        /// <returns>A task representing the asynchronous operation with the filtered entities.</returns>
+        /// <param name = "predicate">The filter predicate to apply.</param>
+        /// <returns>A task representing the asynchronous operation with the filtered entities as IQueryable.</returns>
         public new async Task<Operation<IQueryable<T>>> ReadFilter(Expression<Func<T, bool>> predicate)
         {
             try
             {
-                IQueryable<T> result = await base.ReadFilter(predicate);
-                await ResourceHandler.CreateAsync(_provider, _resourceKeys);
-                var successfullySearchGeneric = _handler.GetResource("SuccessfullySearchGeneric");
-                var messageSuccessfully = string.Format(successfullySearchGeneric, typeof(T).Name);
-                return Operation<IQueryable<T>>.Success(result, messageSuccessfully);
+                IQueryable<T> result = await base.ReadFilter(predicate); // Calls the base read filter method
+                await ResourceHandler.CreateAsync(_provider, _resourceKeys); // Initializes resources
+                var successfullySearchGeneric = _handler.GetResource("SuccessfullySearchGeneric"); // Retrieves the success message resource
+                var messageSuccessfully = string.Format(successfullySearchGeneric, typeof(T).Name); // Formats the success message
+                return Operation<IQueryable<T>>.Success(result, messageSuccessfully); // Returns a successful operation result
             }
             catch (Exception ex)
             {
-                // Create a log entry for the exception
+                // Creates a log entry for the exception that occurred during filtering
                 Log log = Util.GetLogError(ex, predicate, ActionType.GetAllByFilter);
-                Operation<string> result = await _logService.CreateLog(log);
-
-                // Handle logging failure
+                Operation<string> result = await _logService.CreateLog(log); // Logs the error
+                // If logging fails, convert the result to the appropriate type
                 if (!result.IsSuccessful)
                 {
                     result.ConvertTo<IQueryable<T>>();
                 }
 
-                // Return a failure operation result for database issues
+                // Defines a strategy for handling database layer errors
                 var strategy = new DatabaseStrategy<IQueryable<T>>();
-                var errorOccurredDataLayer = Message.ErrorOccurredDataLayer;
-                return OperationStrategy<IQueryable<T>>.Fail(errorOccurredDataLayer, strategy);
+                var errorOccurredDataLayer = Message.ErrorOccurredDataLayer; // Resource for error message
+                return OperationStrategy<IQueryable<T>>.Fail(errorOccurredDataLayer, strategy); // Returns a failed operation result
             }
         }
     }

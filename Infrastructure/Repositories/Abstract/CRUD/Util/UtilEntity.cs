@@ -1,4 +1,4 @@
-﻿namespace Infrastructure.Repositories.Abstract.CRUD.Util
+namespace Infrastructure.Repositories.Abstract.CRUD.Util
 {
     using Application.UseCases.Repository.CRUD;
     using Domain.Interfaces.Entity;
@@ -6,40 +6,52 @@
     using Application.UseCases.ExternalServices.Resources;
 
     /// <summary>
-    /// Utility class for entity validation operations.
+    /// Utility class for performing validation operations on entities.
     /// </summary>
-    /// <typeparam name="T">The entity type.</typeparam>
+    /// <typeparam name = "T">The type of the entity.</typeparam>
     public class UtilEntity<T> : IUtilEntity<T> where T : class, IEntity
     {
+        // Dependency injection for resource provider
         private readonly IResourcesProvider _provider;
+        // Dependency injection for resource handler
         private IResourceHandler _handler;
+        // List of resource keys used within the class
         private readonly List<string> _resourceKeys;
-
+        /// <summary>
+        /// Initializes a new instance of the <see cref = "UtilEntity{T}"/> class.
+        /// </summary>
+        /// <param name = "resourceProvider">The resource provider to be used for fetching resources.</param>
+        /// <param name = "resourceHandler">The resource handler to handle resource logic.</param>
         public UtilEntity(IResourcesProvider resourceProvider, IResourceHandler resourceHandler)
         {
             _provider = resourceProvider;
             _handler = resourceHandler;
-            _resourceKeys =
-            [
+            // Initialize resource keys with required keys
+            _resourceKeys = new List<string>
+            {
                 "EntityFailedNecesaryData"
-            ];
+            };
         }
 
         /// <summary>
-        /// Check if an entity exists.
+        /// Determines if the specified entity exists by checking for null values.
         /// </summary>
-        /// <param name="entity">The entity to be checked.</param>
-        /// <returns>An operation result indicating whether the entity exists or not.</returns>
+        /// <param name = "entity">The entity to be checked.</param>
+        /// <returns>A task that represents the asynchronous operation.
+        ///  The task result contains an <see cref = "Operation{T}"/> indicating success or failure.</returns>
         public async Task<Operation<T>> HasEntity(T entity)
         {
+            // Asynchronously create resources based on provided keys
             await ResourceHandler.CreateAsync(_provider, _resourceKeys);
+            // Get specific resource message for missing necessary data
             var failedNecesaryData = _handler.GetResource("EntityFailedNecesaryData");
+            // Check if the entity is null and return a failure operation if so
             if (entity is null)
             {
                 return OperationStrategy<T>.Fail(failedNecesaryData, new BusinessStrategy<T>());
             }
 
-            // Return a success result if the entity is not null
+            // If the entity is not null, return a success operation with success message
             var utilGlobalOkMessage = _handler.GetResource("UtilGlobalOkMessage");
             return Operation<T>.Success(entity, utilGlobalOkMessage);
         }

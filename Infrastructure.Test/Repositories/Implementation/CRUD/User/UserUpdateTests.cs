@@ -9,25 +9,36 @@ namespace Infrastructure.Test.Repositories.Implementation.CRUD.User
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using UtilitiesLayer;
 
+    /// <summary>
+    /// Test class for testing user status-related operations in the CRUD layer.
+    /// </summary>
     [TestClass]
     public class UserStatusTests : SetupTest
     {
+        /// <summary>
+        /// Tests if the UserUpdate class can be constructed properly.
+        /// </summary>
         [TestMethod]
         public void CanConstruct()
         {
             // Act
             var instance = new UserUpdate(_dbContext, _logService.Object, _utilEntity, _resourceProvider, _resourceHandler);
-
             // Assert
             Assert.IsNotNull(instance);
         }
 
+        /// <summary>
+        /// Tests if constructing the UserUpdate class with a null DbContext throws an ArgumentNullException.
+        /// </summary>
         [TestMethod]
         public void CannotConstructWithNullContext()
         {
             Assert.ThrowsException<ArgumentNullException>(() => new UserUpdate(null, _logService.Object, _utilEntity, _resourceProvider, _resourceHandler));
         }
 
+        /// <summary>
+        /// Tests if the UserUpdate class can be constructed with a null LogService.
+        /// </summary>
         [TestMethod]
         public void CanConstructWithNullLogService()
         {
@@ -35,6 +46,9 @@ namespace Infrastructure.Test.Repositories.Implementation.CRUD.User
             Assert.IsNotNull(userUpdate);
         }
 
+        /// <summary>
+        /// Tests creating a valid user entity and updating it successfully.
+        /// </summary>
         [TestMethod]
         public async Task When_CreateEntity_WithValidUser_ShouldReturnSuccess()
         {
@@ -47,7 +61,6 @@ namespace Infrastructure.Test.Repositories.Implementation.CRUD.User
                 Email = $"ValidEmail{id}@gmail.com",
                 Password = "ValidPassword",
             };
-
             var userUpdate = new User
             {
                 Id = id,
@@ -64,6 +77,9 @@ namespace Infrastructure.Test.Repositories.Implementation.CRUD.User
             Assert.IsTrue(resultUpdate.Data);
         }
 
+        /// <summary>
+        /// Tests creating a user entity with an invalid email format and expects a failure.
+        /// </summary>
         [TestMethod]
         public async Task When_CreateEntity_WithInvalidEmailFormat_ShouldReturnFailure()
         {
@@ -76,7 +92,6 @@ namespace Infrastructure.Test.Repositories.Implementation.CRUD.User
                 Email = "InvalidEmail",
                 Password = "ValidPassword",
             };
-
             // When
             var result = await _userCreate.Create(user);
             var userUpdate = new User
@@ -86,7 +101,6 @@ namespace Infrastructure.Test.Repositories.Implementation.CRUD.User
                 Email = $"ValidEmail{user.Id}@gmail.com",
                 Password = "ValidPassword",
             };
-
             var resultUpdate = await _userUpdate.Update(userUpdate);
             // Then
             Assert.AreEqual("The User does not exist.", resultUpdate.Message);
@@ -94,6 +108,9 @@ namespace Infrastructure.Test.Repositories.Implementation.CRUD.User
             Assert.IsFalse(resultUpdate.Data);
         }
 
+        /// <summary>
+        /// Tests creating a user entity with an already registered username and expects a failure.
+        /// </summary>
         [TestMethod]
         public async Task When_CreateEntity_WithAlreadyRegisteredUsername_ShouldReturnFailure()
         {
@@ -123,13 +140,15 @@ namespace Infrastructure.Test.Repositories.Implementation.CRUD.User
             // When
             var result = await _userCreate.Create(user2);
             var resultUpdate = await _userUpdate.Update(userUpdate);
-
             // Then
             Assert.AreEqual("A user is already registered with this email.", resultUpdate.Message);
             Assert.IsFalse(resultUpdate.IsSuccessful);
             Assert.IsFalse(resultUpdate.Data);
         }
 
+        /// <summary>
+        /// Tests creating a user entity with an already registered email and expects a failure.
+        /// </summary>
         [TestMethod]
         public async Task When_CreateEntity_WithAlreadyRegisteredEmail_ShouldReturnFailure()
         {
@@ -140,7 +159,6 @@ namespace Infrastructure.Test.Repositories.Implementation.CRUD.User
                 Email = "ExistingEmail@gmail.com",
                 Password = "ValidPassword",
             };
-
             var userUpdate = new User
             {
                 Id = user.Id,
@@ -148,37 +166,38 @@ namespace Infrastructure.Test.Repositories.Implementation.CRUD.User
                 Email = $"UniqueEmail2@gmail.com",
                 Password = "ValidPassword",
             };
-
             // When
             var result1 = await _userCreate.Create(user);
             var result2 = await _userCreate.Create(user);
             var resultUpdate = await _userUpdate.Update(userUpdate);
-
             // Then
             Assert.AreEqual("A user is already registered with this email.", result2.Message);
             Assert.IsFalse(result2.IsSuccessful);
             Assert.IsNull(result2.Data);
-
             Assert.AreEqual("Necessary data was not provided.", resultUpdate.Message);
             Assert.IsFalse(resultUpdate.IsSuccessful);
             Assert.IsFalse(resultUpdate.Data);
         }
 
+        /// <summary>
+        /// Tests updating a user entity with null data and expects a failure.
+        /// </summary>
         [TestMethod]
         public async Task When_CreateEntity_WithNullUser_ShouldReturnFailure()
         {
             // Given
             User user = null;
-
             // When
             var result = await _userUpdate.Update(user);
-
             // Then
             Assert.IsFalse(result.IsSuccessful);
             Assert.IsFalse(result.Data);
             StringAssert.Contains(result.Message, "Necessary data was not provided.");
         }
 
+        /// <summary>
+        /// Tests creating a user entity missing required fields and expects a failure.
+        /// </summary>
         [TestMethod]
         public async Task When_CreateEntity_WithMissingRequiredFields_ShouldReturnFailure()
         {
@@ -190,16 +209,17 @@ namespace Infrastructure.Test.Repositories.Implementation.CRUD.User
                 Email = "ValidEmail@gmail.com",
                 Password = "ValidPassword",
             };
-
             // When
             var result = await _userCreate.Create(user);
-
             // Then
             Assert.IsFalse(result.IsSuccessful);
             Assert.IsNull(result.Data);
             StringAssert.Contains(result.Message, "Name"); // Assuming error message mentions 'Name'
         }
 
+        /// <summary>
+        /// Tests creating a user entity with an invalid password and expects a failure.
+        /// </summary>
         [TestMethod]
         public async Task When_CreateEntity_WithInvalidPassword_ShouldReturnFailure()
         {
@@ -211,21 +231,22 @@ namespace Infrastructure.Test.Repositories.Implementation.CRUD.User
                 Email = "ValidEmail@gmail.com",
                 Password = "", // Empty password
             };
-
             // When
             var result = await _userCreate.Create(user);
-
             // Then
             Assert.IsFalse(result.IsSuccessful);
             Assert.IsNull(result.Data);
             StringAssert.Contains(result.Message, "Password"); // Assuming error message mentions 'Password'
         }
 
+        /// <summary>
+        /// Tests creating a user entity with fields that have excessively long strings and expects a failure.
+        /// </summary>
         [TestMethod]
         public async Task When_CreateEntity_WithLongStrings_ShouldReturnFailure()
         {
             // Given
-            string longName = new string('a', 256); // Assuming max length is less than 256
+            string longName = new string ('a', 256); // Assuming max length is less than 256
             var user = new User
             {
                 Id = Guid.NewGuid().ToString(),
@@ -233,16 +254,17 @@ namespace Infrastructure.Test.Repositories.Implementation.CRUD.User
                 Email = "ValidEmail@gmail.com",
                 Password = "ValidPassword",
             };
-
             // When
             var result = await _userCreate.Create(user);
-
             // Then
             Assert.IsFalse(result.IsSuccessful);
             Assert.IsNull(result.Data);
             StringAssert.Contains(result.Message, "Name"); // Assuming error message mentions 'Name'
         }
 
+        /// <summary>
+        /// Tests that the password is hashed correctly when creating a valid user entity.
+        /// </summary>
         [TestMethod]
         public async Task When_CreateEntity_WithValidUser_ShouldHashPasswordCorrectly()
         {
@@ -256,21 +278,20 @@ namespace Infrastructure.Test.Repositories.Implementation.CRUD.User
                 Email = $"ValidEmail{id}@gmail.com",
                 Password = originalPassword,
             };
-
             // When
             var result = await _userCreate.Create(user);
-
             // Then
             Assert.IsTrue(result.IsSuccessful);
-
             // Retrieve the user from the database
             var createdUser = await _dbContext.Users.FindAsync(id);
-
             Assert.IsNotNull(createdUser);
             string expectedHashedPassword = CredentialUtility.ComputeSha256Hash(originalPassword);
             Assert.AreEqual(expectedHashedPassword, createdUser.Password);
         }
 
+        /// <summary>
+        /// Tests that the CreatedAt and UpdatedAt timestamps are set correctly when creating a valid user entity.
+        /// </summary>
         [TestMethod]
         public async Task When_CreateEntity_WithValidUser_ShouldSetCreatedAtAndUpdatedAt()
         {
@@ -283,23 +304,22 @@ namespace Infrastructure.Test.Repositories.Implementation.CRUD.User
                 Email = $"ValidEmail{id}@gmail.com",
                 Password = "ValidPassword",
             };
-
             // When
             var startTime = DateTime.UtcNow;
             var result = await _userCreate.Create(user);
             var endTime = DateTime.UtcNow;
-
             // Then
             Assert.IsTrue(result.IsSuccessful);
-
             // Retrieve the user from the database
             var createdUser = await _dbContext.Users.FindAsync(id);
-
             Assert.IsNotNull(createdUser);
             Assert.IsTrue(createdUser.CreatedAt >= startTime && createdUser.CreatedAt <= endTime);
             Assert.IsTrue(createdUser.UpdatedAt >= startTime && createdUser.UpdatedAt <= endTime);
         }
 
+        /// <summary>
+        /// Tests that the Active flag is set to false when creating a valid user entity.
+        /// </summary>
         [TestMethod]
         public async Task When_CreateEntity_WithValidUser_ShouldSetActiveToFalse()
         {
@@ -312,20 +332,19 @@ namespace Infrastructure.Test.Repositories.Implementation.CRUD.User
                 Email = $"ValidEmail{id}@gmail.com",
                 Password = "ValidPassword",
             };
-
             // When
             var result = await _userCreate.Create(user);
-
             // Then
             Assert.IsTrue(result.IsSuccessful);
-
             // Retrieve the user from the database
             var createdUser = await _dbContext.Users.FindAsync(id);
-
             Assert.IsNotNull(createdUser);
             Assert.IsFalse(createdUser.Active);
         }
 
+        /// <summary>
+        /// Tests creating user entities with duplicate IDs and expects a failure.
+        /// </summary>
         [TestMethod]
         public async Task When_CreateEntity_WithDuplicateId_ShouldReturnFailure()
         {
@@ -338,7 +357,6 @@ namespace Infrastructure.Test.Repositories.Implementation.CRUD.User
                 Email = "email1@gmail.com",
                 Password = "Password1",
             };
-
             var user2 = new User
             {
                 Id = id, // Same ID as user1
@@ -346,11 +364,9 @@ namespace Infrastructure.Test.Repositories.Implementation.CRUD.User
                 Email = "email2@gmail.com",
                 Password = "Password2",
             };
-
             // When
             var result1 = await _userCreate.Create(user1);
             var result2 = await _userCreate.Create(user2);
-
             // Then
             Assert.IsFalse(result1.IsSuccessful);
             Assert.IsFalse(result2.IsSuccessful);

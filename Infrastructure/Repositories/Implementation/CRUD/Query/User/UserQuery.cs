@@ -1,4 +1,4 @@
-﻿namespace Infrastructure.Repositories.Implementation.CRUD.Query.User
+namespace Infrastructure.Repositories.Implementation.CRUD.Query.User
 {
     using Application.Result;
     using Application.UseCases.CRUD.Query.User;
@@ -10,6 +10,7 @@
 
     /// <summary>
     /// Repository class for querying user entities.
+    /// Provides methods to interact with user data using various query criteria.
     /// </summary>
     public class UserQuery : IUserQuery
     {
@@ -17,21 +18,14 @@
         private readonly IUserReadFilterCount _userReadFilterCount;
         private readonly IUserReadFilterPage _userReadFilterPage;
         private readonly IUserReadId _userReadId;
-
         /// <summary>
-        /// Constructor with dependency injection.
+        /// Initializes a new instance of the <see cref = "UserQuery"/> class with injected dependencies.
         /// </summary>
-        /// <param name="context">The database context.</param>
-        /// <param name="logService">The log service.</param>
-        /// <param name="userReadFilter">The user read filter service.</param>
-        /// <param name="userReadFilterCount">The user read filter count service.</param>
-        /// <param name="userReadFilterPage">The user read filter page service.</param>
-        /// <param name="userReadId">The user read by ID service.</param>
-        public UserQuery(
-            IUserReadFilter userReadFilter,
-            IUserReadFilterCount userReadFilterCount,
-            IUserReadFilterPage userReadFilterPage,
-            IUserReadId userReadId)
+        /// <param name = "userReadFilter">The service responsible for filtering user queries.</param>
+        /// <param name = "userReadFilterCount">The service for getting the count of users based on filters.</param>
+        /// <param name = "userReadFilterPage">The service for paginating filtered user results.</param>
+        /// <param name = "userReadId">The service to read a user by their ID.</param>
+        public UserQuery(IUserReadFilter userReadFilter, IUserReadFilterCount userReadFilterCount, IUserReadFilterPage userReadFilterPage, IUserReadId userReadId)
         {
             _userReadFilter = userReadFilter;
             _userReadFilterCount = userReadFilterCount;
@@ -40,52 +34,56 @@
         }
 
         /// <summary>
-        /// Read user entities based on the provided filter predicate.
+        /// Queries user entities based on a specified filter predicate.
+        /// Allows for flexible query composition using expressions.
         /// </summary>
-        /// <param name="predicate">The filter predicate.</param>
-        /// <returns>An operation result with the queried user entities.</returns>
+        /// <param name = "predicate">The predicate expression to filter users.</param>
+        /// <returns>An operation result containing the filtered list of user entities.</returns>
         public Task<Operation<IQueryable<User>>> ReadFilter(Expression<Func<User, bool>> predicate)
         {
             return _userReadFilter.ReadFilter(predicate);
         }
 
         /// <summary>
-        /// Read the count of user entities based on the provided filter.
+        /// Retrieves the count of user entities that match a given filter expression.
+        /// Useful for understanding the scale of data matching certain criteria.
         /// </summary>
-        /// <param name="filter">The filter expression.</param>
-        /// <returns>An operation result with the count of user entities.</returns>
+        /// <param name = "filter">A filter expression in string format.</param>
+        /// <returns>An operation result containing the count of matching user entities.</returns>
         public Task<Operation<int>> ReadFilterCount(string filter)
         {
             return _userReadFilterCount.ReadFilterCount(filter);
         }
 
         /// <summary>
-        /// Read a page of user entities based on the provided filter and pagination parameters.
+        /// Retrieves a page of user entities based on filtering and pagination parameters.
+        /// Facilitates efficient data display by using paginated results.
         /// </summary>
-        /// <param name="pageNumber">The page number.</param>
-        /// <param name="pageSize">The page size.</param>
-        /// <param name="filter">The filter expression.</param>
-        /// <returns>An operation result with the queried page of user entities.</returns>
+        /// <param name = "pageNumber">The desired page number to retrieve.</param>
+        /// <param name = "pageSize">The number of users per page.</param>
+        /// <param name = "filter">A string representing the filter criteria.</param>
+        /// <returns>An operation result containing the queried page of user entities.</returns>
         public Task<Operation<IQueryable<User>>> ReadFilterPage(int pageNumber, int pageSize, string filter)
         {
             return _userReadFilterPage.ReadFilterPage(pageNumber, pageSize, filter);
         }
 
         /// <summary>
-        /// Read a user entity by its ID.
+        /// Queries a specific user entity by their unique ID.
         /// </summary>
-        /// <param name="id">The ID of the user.</param>
-        /// <returns>An operation result with the queried user entity.</returns>
+        /// <param name = "id">The unique identifier for the user.</param>
+        /// <returns>An operation result containing the requested user entity.</returns>
         public Task<Operation<User>> ReadId(string id)
         {
             return _userReadId.ReadId(id);
         }
 
         /// <summary>
-        /// Read a user entity by its ID.
+        /// Queries a user entity based on a bearer token.
+        /// Typically used for authentication-related queries.
         /// </summary>
-        /// <param name="id">The ID of the user.</param>
-        /// <returns>An operation result with the queried user entity.</returns>
+        /// <param name = "bearerToken">The bearer token associated with the user.</param>
+        /// <returns>An operation result containing the queried user entity.</returns>
         public Task<Operation<User>> ReadByBearer(string bearerToken)
         {
             return _userReadId.ReadByBearer(bearerToken);
