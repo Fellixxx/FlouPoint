@@ -10,8 +10,7 @@
     using Domain.DTO.Logging;
     using Domain.EnumType;
     using Infrastructure.Constants;
-    using Application.UseCases.Repository;
-    using Application.UseCases.ExternalServices.Resorces;
+    using Application.UseCases.ExternalServices.Resources;
 
     /// <summary>
     /// Abstract repository class for creating a new entity.
@@ -21,7 +20,7 @@
     {
         private readonly ILogService _logService;
         private readonly IUtilEntity<T> _utilEntity;
-        private readonly IResorcesProvider _provider;
+        private readonly IResourcesProvider _provider;
         private IResourceHandler _handler;
         private readonly List<string> _resourceKeys;
 
@@ -30,7 +29,7 @@
         /// </summary>
         /// <param name="context">The database context.</param>
         /// <param name="logService">The log service.</param>
-        public CreateRepository(DbContext context, ILogService logService, IUtilEntity<T> utilEntity, IResorcesProvider provider, IResourceHandler handler) : base(context)
+        public CreateRepository(DbContext context, ILogService logService, IUtilEntity<T> utilEntity, IResourcesProvider provider, IResourceHandler handler) : base(context)
         {
             _logService = logService;
             _utilEntity = utilEntity;

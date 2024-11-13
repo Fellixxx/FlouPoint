@@ -8,8 +8,7 @@ namespace Infrastructure.Repositories.Implementation.CRUD.Query.User
     using User = Domain.Entities.User;
     using Persistence.BaseDbContext;
     using Microsoft.EntityFrameworkCore;
-    using Application.UseCases.Repository;
-    using Application.UseCases.ExternalServices.Resorces;
+    using Application.UseCases.ExternalServices.Resources;
 
     /// <summary>
     /// Repository class for reading user entity counts with filtering.
@@ -24,7 +23,7 @@ namespace Infrastructure.Repositories.Implementation.CRUD.Query.User
         public UserReadFilterCount(
             DataContext context, 
             ILogService logService, 
-            IResorcesProvider provider, 
+            IResourcesProvider provider, 
             IResourceHandler handler) : base(context, logService, provider, handler)
         {
         }

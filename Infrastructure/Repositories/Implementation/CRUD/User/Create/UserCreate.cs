@@ -10,18 +10,17 @@ namespace Infrastructure.Repositories.Implementation.CRUD.User.Create
     using UtilitiesLayer;
     using FluentValidation.Results;
     using Application.UseCases.Repository.CRUD;
-    using Application.UseCases.Repository;
     using Infrastructure.Repositories.Abstract.CRUD.Create;
     using Infrastructure.Repositories;
-    using Application.UseCases.ExternalServices.Resorces;
     using Infrastructure.Constants;
+    using Application.UseCases.ExternalServices.Resources;
 
     /// <summary>
     /// Implementation of the user creation repository.
     /// </summary>
     public class UserCreate : CreateRepository<User>, IUserCreate
     {
-        private readonly IResorcesProvider _provider;
+        private readonly IResourcesProvider _provider;
         private IResourceHandler _handler;
         private readonly List<string> _resourceKeys;
 
@@ -33,7 +32,7 @@ namespace Infrastructure.Repositories.Implementation.CRUD.User.Create
         public UserCreate(DataContext context, 
             ILogService logService, 
             IUtilEntity<User> utilEntity, 
-            IResorcesProvider provider, 
+            IResourcesProvider provider, 
             IResourceHandler handler) : base(context, logService, utilEntity, provider, handler)
         {
             _provider = provider;

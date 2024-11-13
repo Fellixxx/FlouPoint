@@ -2,7 +2,6 @@
 using Application.UseCases.CRUD.User;
 using Application.UseCases.CRUD.Validation;
 using Application.UseCases.ExternalServices;
-using Application.UseCases.ExternalServices.Resorces;
 using Application.UseCases.Operations;
 using Application.UseCases.Repository.CRUD.Resource;
 using Application.UseCases.Repository.Status.StatusChange;
@@ -20,6 +19,7 @@ using Persistence.CreateStruture.Constants.ColumnType;
 using Persistence.GenerateData.Interface;
 using System.Security.Cryptography;
 using System.Text;
+using Application.UseCases.ExternalServices.Resources;
 
 namespace Infrastructure.Test.Repositories.Implementation
 {
@@ -47,8 +47,8 @@ namespace Infrastructure.Test.Repositories.Implementation
         protected Mock<IDistributedCache> _distributedCacheMock;
         protected IUserReadFilterPage _userReadFilterPage;
         protected IUserReadId _userReadId;
-        protected IResorcesProvider _resxResourceProvider;
-        protected IResorcesProvider _databaseResourceProvider;
+        protected IResourcesProvider _resxResourceProvider;
+        protected IResourcesProvider _databaseResourceProvider;
         protected IQuery _resourceEntryQuery;
 
         [TestInitialize]

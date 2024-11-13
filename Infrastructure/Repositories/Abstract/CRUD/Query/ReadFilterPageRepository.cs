@@ -11,8 +11,7 @@
     using Domain.DTO.Logging;
     using Domain.EnumType;
     using Infrastructure.Constants;
-    using Application.UseCases.Repository;
-    using Application.UseCases.ExternalServices.Resorces;
+    using Application.UseCases.ExternalServices.Resources;
 
     /// <summary>
     /// Abstract repository class for reading and filtering entities with pagination.
@@ -21,7 +20,7 @@
     public abstract class ReadFilterPageRepository<T> : Read<T>, IReadFilterPage<T> where T : class
     {
         private readonly ILogService _logService;
-        private readonly IResorcesProvider _provider;
+        private readonly IResourcesProvider _provider;
         private IResourceHandler _handler;
         private readonly List<string> _resourceKeys;
 
@@ -30,7 +29,7 @@
         /// </summary>
         /// <param name="context">The database context.</param>
         /// <param name="logService">The log service.</param>
-        protected ReadFilterPageRepository(DbContext context, ILogService logService, IResorcesProvider provider) : base(context)
+        protected ReadFilterPageRepository(DbContext context, ILogService logService, IResourcesProvider provider) : base(context)
         {
             _logService = logService;
             _provider = provider;

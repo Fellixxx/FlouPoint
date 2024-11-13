@@ -2,8 +2,7 @@
 {
     using Application.Result;
     using Application.UseCases.ExternalServices;
-    using Application.UseCases.ExternalServices.Resorces;
-    using Application.UseCases.Repository;
+    using Application.UseCases.ExternalServices.Resources;
     using Application.UseCases.Utilities;
     using Domain.DTO.Logging;
     using Domain.EnumType;
@@ -19,7 +18,7 @@
     {
         // Service for logging operations.
         private readonly ILogService _logService;
-        private readonly IResorcesProvider _resourceProvider;
+        private readonly IResourcesProvider _resourceProvider;
         private IResourceHandler _resourceHandler;
         private readonly List<string> _resourceKeys;
 
@@ -27,7 +26,7 @@
         /// Initializes a new instance of the ImageCompressionService class.
         /// </summary>
         /// <param name="logService">Service for logging operations.</param>
-        public ImageCompressionService(ILogService logService, IResorcesProvider resourceProvider, IResourceHandler resourceHandler)
+        public ImageCompressionService(ILogService logService, IResourcesProvider resourceProvider, IResourceHandler resourceHandler)
         {
             _logService = logService;
             _resourceProvider = resourceProvider;

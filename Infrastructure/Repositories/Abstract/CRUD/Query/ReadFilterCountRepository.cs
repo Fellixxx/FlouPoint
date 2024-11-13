@@ -10,9 +10,8 @@
     using Microsoft.EntityFrameworkCore;
     using Domain.DTO.Logging;
     using Domain.EnumType;
-    using Application.UseCases.Repository;
     using Infrastructure.Constants;
-    using Application.UseCases.ExternalServices.Resorces;
+    using Application.UseCases.ExternalServices.Resources;
 
     /// <summary>
     /// Abstract repository class for reading and counting entities based on a filter.
@@ -21,7 +20,7 @@
     public abstract class ReadFilterCountRepository<T> : Read<T>, IReadFilterCount<T> where T : class
     {
         protected readonly ILogService _logService;
-        private readonly IResorcesProvider _provider;
+        private readonly IResourcesProvider _provider;
         private IResourceHandler _handler;
         private readonly List<string> _resourceKeys;
 
@@ -30,7 +29,7 @@
         /// </summary>
         /// <param name="context">The database context.</param>
         /// <param name="logService">The log service.</param>
-        protected ReadFilterCountRepository(DbContext context, ILogService logService, IResorcesProvider provider, IResourceHandler handler) : base(context)
+        protected ReadFilterCountRepository(DbContext context, ILogService logService, IResourcesProvider provider, IResourceHandler handler) : base(context)
         {
             _logService = logService;
             _provider = provider;

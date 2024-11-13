@@ -10,8 +10,7 @@
     using Domain.DTO.Logging;
     using Domain.EnumType;
     using Infrastructure.Constants;
-    using Application.UseCases.Repository;
-    using Application.UseCases.ExternalServices.Resorces;
+    using Application.UseCases.ExternalServices.Resources;
 
     /// <summary>
     /// Repository class for managing the status of entities.
@@ -20,7 +19,7 @@
     public class StatusRepository<T> : Repository<T>, IStatus where T : class, IEntity
     {
         private readonly ILogService _logService;
-        private readonly IResorcesProvider _provider;
+        private readonly IResourcesProvider _provider;
         private IResourceHandler _handler;
         private readonly List<string> _resourceKeys;
 
@@ -29,7 +28,7 @@
         /// </summary>
         /// <param name="context">The database context.</param>
         /// <param name="externalLogService">The external log service.</param>
-        public StatusRepository(DbContext context, ILogService logService, IResorcesProvider resourceProvider, IResourceHandler resourceHandler) : base(context)
+        public StatusRepository(DbContext context, ILogService logService, IResourcesProvider resourceProvider, IResourceHandler resourceHandler) : base(context)
         {
             _logService = logService;
             _provider = resourceProvider;

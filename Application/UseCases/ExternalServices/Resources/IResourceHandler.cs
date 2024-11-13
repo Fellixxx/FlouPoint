@@ -1,4 +1,4 @@
-﻿namespace Application.UseCases.Repository
+﻿namespace Application.UseCases.ExternalServices.Resources
 {
     public interface IResourceHandler
     {

@@ -1,5 +1,4 @@
-﻿using Application.UseCases.ExternalServices.Resorces;
-using Application.UseCases.Repository;
+﻿using Application.UseCases.ExternalServices.Resources;
 using Infrastructure.Constants;
 using System.Threading.Tasks;
 
@@ -7,16 +6,16 @@ namespace Infrastructure.Repositories
 {
     public class ResourceHandler : IResourceHandler
     {
-        private readonly IResorcesProvider _resourceProvider;
+        private readonly IResourcesProvider _resourceProvider;
         private Dictionary<string, string> _preloadedResources;
 
-        private ResourceHandler(IResorcesProvider resourceProvider)
+        private ResourceHandler(IResourcesProvider resourceProvider)
         {
             _resourceProvider = resourceProvider ?? throw new ArgumentNullException(nameof(resourceProvider));
             _preloadedResources = [];
         }
 
-        public static async Task<ResourceHandler> CreateAsync(IResorcesProvider resourceProvider, IEnumerable<string> keys = null)
+        public static async Task<ResourceHandler> CreateAsync(IResourcesProvider resourceProvider, IEnumerable<string> keys = null)
         {
             if (keys == null)
             {

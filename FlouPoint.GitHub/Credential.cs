@@ -1,4 +1,4 @@
-﻿namespace FlouPoint.GitHub
+namespace FlouPoint.GitHub
 {
     /// <summary>
     /// Represents user credentials for GitHub authentication.
@@ -9,22 +9,21 @@
         /// Gets the username associated with the credentials.
         /// </summary>
         public string Username { get; }
-
         /// <summary>
         /// Gets the token associated with the credentials.
         /// </summary>
         public string Token { get; }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Credential"/> class with the specified username and token.
+        /// Initializes a new instance of the <see cref = "Credential"/> class with the specified username and token.
         /// </summary>
-        /// <param name="username">The GitHub username.</param>
-        /// <param name="token">The GitHub authentication token.</param>
-        /// <exception cref="ArgumentNullException">
-        /// Thrown when <paramref name="username"/> or <paramref name="token"/> is <c>null</c>.
+        /// <param name = "username">The GitHub username.</param>
+        /// <param name = "token">The GitHub authentication token.</param>
+        /// <exception cref = "ArgumentNullException">
+        /// Thrown when <paramref name = "username"/> or <paramref name = "token"/> is <c>null</c>.
         /// </exception>
-        /// <exception cref="ArgumentException">
-        /// Thrown when <paramref name="username"/> or <paramref name="token"/> is empty or consists only of white-space characters.
+        /// <exception cref = "ArgumentException">
+        /// Thrown when <paramref name = "username"/> or <paramref name = "token"/> is empty or consists only of white-space characters.
         /// </exception>
         public Credential(string username, string token)
         {
@@ -52,12 +51,19 @@
                 throw new ArgumentException("Token cannot be empty or whitespace.", nameof(token));
             }
 
+            // Assign validated username and token to the properties.
             Username = username;
             Token = token;
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref = "Credential"/> class.
+        /// This constructor is intended for scenarios where credentials 
+        /// may be populated at a later time.
+        /// </summary>
         public Credential()
         {
+        // Default constructor, does not initialize username and token.
         }
     }
 }

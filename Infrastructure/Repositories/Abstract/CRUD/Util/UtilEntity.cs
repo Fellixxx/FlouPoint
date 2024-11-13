@@ -1,11 +1,9 @@
 ﻿namespace Infrastructure.Repositories.Abstract.CRUD.Util
 {
-    using Application.UseCases.Repository;
     using Application.UseCases.Repository.CRUD;
     using Domain.Interfaces.Entity;
     using Application.Result;
-    using Application.UseCases.ExternalServices.Resorces;
-    using Infrastructure.Constants;
+    using Application.UseCases.ExternalServices.Resources;
 
     /// <summary>
     /// Utility class for entity validation operations.
@@ -13,11 +11,11 @@
     /// <typeparam name="T">The entity type.</typeparam>
     public class UtilEntity<T> : IUtilEntity<T> where T : class, IEntity
     {
-        private readonly IResorcesProvider _provider;
+        private readonly IResourcesProvider _provider;
         private IResourceHandler _handler;
         private readonly List<string> _resourceKeys;
 
-        public UtilEntity(IResorcesProvider resourceProvider, IResourceHandler resourceHandler)
+        public UtilEntity(IResourcesProvider resourceProvider, IResourceHandler resourceHandler)
         {
             _provider = resourceProvider;
             _handler = resourceHandler;

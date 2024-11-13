@@ -11,8 +11,8 @@
     using Domain.DTO.Logging;
     using Domain.EnumType;
     using Infrastructure.Constants;
-    using Application.UseCases.Repository;
-    using Application.UseCases.ExternalServices.Resorces;
+    using Application.UseCases.ExternalServices.Resources;
+
 
     /// <summary>
     /// Abstract repository class for deleting an entity.
@@ -21,7 +21,7 @@
     public abstract class DeleteRepository<T> : EntityChecker<T>, IDelete<T> where T : class, IEntity
     {
         private readonly ILogService _logService;
-        private readonly IResorcesProvider _provider;
+        private readonly IResourcesProvider _provider;
         private IResourceHandler _handler;
         private readonly List<string> _resourceKeys;
 
@@ -30,7 +30,7 @@
         /// </summary>
         /// <param name="context">The database context.</param>
         /// <param name="logService">The log service.</param>
-        protected DeleteRepository(DbContext context, ILogService logService, IResorcesProvider provider, IResourceHandler handler) : base(context, provider, handler)
+        protected DeleteRepository(DbContext context, ILogService logService, IResourcesProvider provider, IResourceHandler handler) : base(context, provider, handler)
         {
             _logService = logService;
             _provider = provider;

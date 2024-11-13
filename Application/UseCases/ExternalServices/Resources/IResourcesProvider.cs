@@ -2,9 +2,9 @@
 using Application.Result;
 using Domain.Entities;
 
-namespace Application.UseCases.ExternalServices.Resorces
+namespace Application.UseCases.ExternalServices.Resources
 {
-    public interface IResorcesProvider
+    public interface IResourcesProvider
     {
         Task<Operation<Resource>> GetMessage(string key);
         Task<Operation<IQueryable<Resource>>> GetResourceEntries();

@@ -5,8 +5,7 @@
     using User = Domain.Entities.User;
     using Application.UseCases.ExternalServices;
     using Persistence.BaseDbContext;
-    using Application.UseCases.Repository;
-    using Application.UseCases.ExternalServices.Resorces;
+    using Application.UseCases.ExternalServices.Resources;
 
 
     /// <summary>
@@ -22,7 +21,7 @@
         public UserReadId(
             DataContext context, 
             ILogService logService,
-            IResorcesProvider provider,
+            IResourcesProvider provider,
             IResourceHandler handler) : base(context, logService, provider, handler)
         {
         }

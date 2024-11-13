@@ -1,14 +1,14 @@
 ﻿namespace Infrastructure.Resource
 {
     using Application.Result;
-    using Application.UseCases.ExternalServices.Resorces;
+    using Application.UseCases.ExternalServices.Resources;
     using Application.UseCases.Repository.CRUD.Resource;
     using Domain.Entities;
     using Infrastructure.Constants;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Logging.Abstractions;
 
-    public class DatabaseProvider : IResorcesProvider
+    public class DatabaseProvider : IResourcesProvider
     {
         
         private readonly DbContext _context;
