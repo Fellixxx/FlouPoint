@@ -180,7 +180,8 @@ namespace Application.Test.Result
             var message = "TestValue2053465";
 
             // Act
-            var result = OperationBuilder<string>.FailNetwork(message);
+            var strategy = new NetworkErrorStrategy<string>();
+            var result = OperationStrategy<string>.Fail(message, strategy);
 
             // Assert
             Assert.IsNotNull(result);
@@ -196,7 +197,8 @@ namespace Application.Test.Result
             string message = null;
 
             // Act & Assert
-            Assert.ThrowsException<ArgumentNullException>(() => OperationBuilder<string>.FailNetwork(message));
+            var strategy = new NetworkErrorStrategy<string>();
+            Assert.ThrowsException<ArgumentNullException>(() => OperationStrategy<string>.Fail(message, strategy));
         }
         [TestMethod]
         public void FailureBusinessValidation_Should_Return_OperationResult_With_BusinessValidationError()
@@ -315,7 +317,8 @@ namespace Application.Test.Result
             var expectedMessage = "Network error occurred.";
 
             // Act
-            var result = OperationBuilder<string>.FailNetwork(expectedMessage);
+            var strategy = new NetworkErrorStrategy<string>();
+            var result = OperationStrategy<string>.Fail(expectedMessage, strategy);
 
             // Assert
             Assert.IsNotNull(result);
