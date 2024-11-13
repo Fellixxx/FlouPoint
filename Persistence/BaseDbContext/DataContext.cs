@@ -1,5 +1,6 @@
 ﻿namespace Persistence.BaseDbContext
 {
+    using Persistence.Constants;
     using Domain.Entities;
     using Microsoft.EntityFrameworkCore;
     using Persistence.BaseDbContext.Interface;
@@ -40,7 +41,7 @@
             }
             catch (Exception ex)
             {
-                throw new Exception("An error occurred while migrating or initializing the database.");
+                throw new Exception(Messages.DataContext.Initialize);
             }
         }
 

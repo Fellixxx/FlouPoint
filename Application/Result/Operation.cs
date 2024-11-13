@@ -1,5 +1,6 @@
 ﻿namespace Application.Result
 {
+    using Application.Constants;
     using Application.Result.Error;
     using Application.Result.Exceptions;
 
@@ -9,7 +10,7 @@
     /// </summary>
     public class Operation<T> : Result<T>
     {
-        private const string InvalidOperation = "This method can only be used if the value of IsSuccessful is false.";
+        
         /// <summary>
         /// Private constructor to prevent direct instantiation. Use factory methods <see cref="Success"/> or <see cref="Failure"/>.
         /// </summary>
@@ -26,7 +27,7 @@
         {
             if (IsSuccessful)
             {
-                throw new InvalidOperation(InvalidOperation);
+                throw new InvalidOperation(Messages.Operation.InvalidOperation);
             }
         }
 

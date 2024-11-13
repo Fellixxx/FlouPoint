@@ -1,5 +1,6 @@
 ﻿namespace Application.Result
 {
+    using Application.Constants;
     using Application.Result.Error;
     using System;
 
@@ -73,7 +74,7 @@
 
         private static void ValidateMessage(string? message)
         {
-            var errorMessage = $"{nameof(ValidateMessage)}: The 'message' parameter cannot be null, empty, or whitespace.";
+            var errorMessage = string.Format(Messages.OperationStrategy.ErrorMessage, nameof(ValidateMessage));
             Validate(message, errorMessage);
         }
 

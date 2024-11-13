@@ -1,4 +1,6 @@
-﻿namespace Application.Result.Exceptions
+﻿using Application.Constants;
+
+namespace Application.Result.Exceptions
 {
     // Represents an exception for invalid operation results.
     public class InvalidOperation : Exception
@@ -11,7 +13,7 @@
         {
             if (string.IsNullOrWhiteSpace(message))
             {
-                throw new ArgumentNullException(nameof(message), "The 'message' parameter cannot be null, empty, or whitespace.");
+                throw new ArgumentNullException(nameof(message), Messages.InvalidOperation.NullMessage);
             }
         }
     }
