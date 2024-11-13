@@ -11,33 +11,23 @@
         /// <param name="message">The message</param>
         /// <returns>The operation result</returns>
         public static Operation<T> FailBusiness(string? message)
-        {
-            ValidateMessage(message);
-            return Operation<T>.Failure(message, ErrorTypes.BusinessValidation);
-        }
-
+            => CreateFailure(message, ErrorTypes.BusinessValidation);
 
         /// <summary>
         /// Creates a failed operation result for a configuration missing error scenario."
         /// </summary>
         /// <param name="message">The message</param>
         /// <returns>The operation result</returns>
-        public static Operation<T> FailConfig(string message)
-        {
-            ValidateMessage(message);
-            return Operation<T>.Failure(message, ErrorTypes.ConfigMissing);
-        }
+        public static Operation<T> FailConfig(string message) 
+            => CreateFailure(message, ErrorTypes.ConfigMissing);
 
         /// <summary>
         /// Creates a failed operation result for a database scenario."
         /// </summary>
         /// <param name="message">The message</param>
         /// <returns>The operation result</returns>
-        public static Operation<T> FailDatabase(string message)
-        {
-            ValidateMessage(message);
-            return Operation<T>.Failure(message, ErrorTypes.Database);
-        }
+        public static Operation<T> FailDatabase(string message) 
+            => CreateFailure(message, ErrorTypes.Database);
 
         /// <summary>
         /// Creates a failed operation result for a data sumitted invalid scenario."
@@ -45,10 +35,7 @@
         /// <param name="message">The message</param>
         /// <returns>The operation result</returns>
         public static Operation<T> FailInvalidData(string message)
-        {
-            ValidateMessage(message);
-            return Operation<T>.Failure(message, ErrorTypes.InvalidData);
-        }
+          => CreateFailure(message, ErrorTypes.InvalidData);
 
         /// <summary>
         /// Creates a failed operation result for a external service scenario."
@@ -56,10 +43,7 @@
         /// <param name="message">The message</param>
         /// <returns>The operation result</returns>
         public static Operation<T> FailExternal(string message)
-        {
-            ValidateMessage(message);
-            return Operation<T>.Failure(message, ErrorTypes.ExternalService);
-        }
+          => CreateFailure(message, ErrorTypes.ExternalService);
 
         /// <summary>
         /// Creates a failed operation result for a unexpected errror scenario."
@@ -67,10 +51,7 @@
         /// <param name="message">The message</param>
         /// <returns>The operation result</returns>
         public static Operation<T> FailUnexpected(string message)
-        {
-            ValidateMessage(message);
-            return Operation<T>.Failure(message, ErrorTypes.Unexpected);
-        }
+          => CreateFailure(message, ErrorTypes.Unexpected);
 
         /// <summary>
         /// Creates a failed operation result for a unexpected errror scenario."
@@ -78,9 +59,12 @@
         /// <param name="message">The message</param>
         /// <returns>The operation result</returns>
         public static Operation<T> FailNetwork(string message)
+         => CreateFailure(message, ErrorTypes.Network);
+
+        private static Operation<T> CreateFailure(string? message, ErrorTypes type)
         {
             ValidateMessage(message);
-            return Operation<T>.Failure(message, ErrorTypes.Network);
+            return Operation<T>.Failure(message, type);
         }
 
         private static void ValidateMessage(string? message)
