@@ -63,7 +63,6 @@
         }
     }
 
-
     public static class OperationStrategy<T>
     {
         public static Operation<T> Fail(string message, IErrorCreationStrategy<T> strategy)
