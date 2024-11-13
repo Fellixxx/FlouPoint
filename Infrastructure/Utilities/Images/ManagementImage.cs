@@ -78,14 +78,14 @@
             }
             catch (Exception ex)
             {
-                Log log = Util.GetLogError(ex, filename, ActionType.CreateCustomOperation("Validate",MessageConstants.ImageManagement.GeneralValidation));
+                Log log = Util.GetLogError(ex, filename, ActionType.CreateCustomOperation("Validate",Message.ImageManagement.GeneralValidation));
                 Operation<string> result = await _logService.CreateLog(log);
                 if (!result.IsSuccessful)
                 {
-                    return OperationBuilder<bool>.FailExternal(MessageConstants.FailedToUploadImage);
+                    return OperationBuilder<bool>.FailExternal(Message.FailedToUploadImage);
                 }
 
-                return OperationBuilder<bool>.FailExternal(MessageConstants.FailedToUploadImage);
+                return OperationBuilder<bool>.FailExternal(Message.FailedToUploadImage);
             }
         }
 
@@ -100,7 +100,7 @@
             {
                 if (base64String == null)
                 {
-                    throw new Exception(MessageConstants.ImageManagement.ParameterIsNull);
+                    throw new Exception(Message.ImageManagement.ParameterIsNull);
                 }
 
                 // Removing the base64 prefix if it exists.
@@ -121,10 +121,10 @@
                 Operation<string> result = await _logService.CreateLog(log);
                 if (!result.IsSuccessful)
                 {
-                    return OperationBuilder<Stream>.FailExternal(MessageConstants.FailedToUploadImage);
+                    return OperationBuilder<Stream>.FailExternal(Message.FailedToUploadImage);
                 }
 
-                return OperationBuilder<Stream>.FailExternal(MessageConstants.FailedToUploadImage);
+                return OperationBuilder<Stream>.FailExternal(Message.FailedToUploadImage);
             }
         }
     }

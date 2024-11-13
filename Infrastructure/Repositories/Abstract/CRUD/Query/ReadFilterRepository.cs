@@ -68,7 +68,7 @@
                 }
 
                 // Return a failure operation result for database issues
-                return OperationBuilder<IQueryable<T>>.FailDatabase(MessageConstants.ErrorOccurredDataLayer);
+                return OperationBuilder<IQueryable<T>>.FailDatabase(Message.ErrorOccurredDataLayer);
             }
         }
     }

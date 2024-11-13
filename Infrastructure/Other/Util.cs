@@ -25,11 +25,11 @@
         {
             if (ex == null)
             {
-                throw new Exception(MessageConstants.FailedLogValidation);
+                throw new Exception(Message.FailedLogValidation);
             }
 
             // Prepare the message for the log entry
-            string message = string.Format(MessageConstants.Utility.LogEntryFormat,ex.Message ,ex.StackTrace);
+            string message = string.Format(Message.Utility.LogEntryFormat,ex.Message ,ex.StackTrace);
             LogBuilder logBuilder = LogBuilder.GetLogBuilder();
             // Create the log entry
             Operation<Log> result = logBuilder.Error(message, entity, operation);

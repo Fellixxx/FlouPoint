@@ -59,17 +59,17 @@
 
             if (!resources.Any())
             {
-                return OperationBuilder<Resource>.FailBusiness(MessageConstants.ResourceProvider.KeyNotFound);
+                return OperationBuilder<Resource>.FailBusiness(Message.ResourceProvider.KeyNotFound);
             }
 
             if (resources.Count > 1)
             {
-                return OperationBuilder<Resource>.FailBusiness(MessageConstants.ResourceProvider.MultipleWithSameKey);
+                return OperationBuilder<Resource>.FailBusiness(Message.ResourceProvider.MultipleWithSameKey);
             }
 
             return Operation<Resource>.Success(resources.FirstOrDefault());
         }
-        public async Task<string> GetMessageValueOrDefault(string key, string defaultValue = MessageConstants.ResourceProvider.KeyNotFound)
+        public async Task<string> GetMessageValueOrDefault(string key, string defaultValue = Message.ResourceProvider.KeyNotFound)
         {
             var result = await GetMessage(key);
             if (result.IsSuccessful)
@@ -83,12 +83,12 @@
             var entries = GetEntries();
             if (entries is null)
             {
-                return OperationBuilder<IQueryable<Resource>>.FailBusiness(MessageConstants.ResourceProvider.UnableToReadFile);
+                return OperationBuilder<IQueryable<Resource>>.FailBusiness(Message.ResourceProvider.UnableToReadFile);
             }
 
             if (entries.Keys.Count == 0)
             {
-                return OperationBuilder<IQueryable<Resource>>.FailBusiness(MessageConstants.ResourceProvider.KeyNotFound);
+                return OperationBuilder<IQueryable<Resource>>.FailBusiness(Message.ResourceProvider.KeyNotFound);
             }
 
 

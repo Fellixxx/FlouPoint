@@ -25,7 +25,7 @@ namespace Infrastructure.Repositories
 
             if (!keys.Any())
             {
-                throw new ArgumentException(MessageConstants.ResourceHandler.EmptyKeysCollection, nameof(keys));
+                throw new ArgumentException(Message.ResourceHandler.EmptyKeysCollection, nameof(keys));
             }
 
             var handler = new ResourceHandler(resourceProvider);
@@ -48,7 +48,7 @@ namespace Infrastructure.Repositories
             {
                 foreach (var key in keys)
                 {
-                    var resource = await _resourceProvider.GetMessageValueOrDefault(string.Format(MessageConstants.ResourceHandler.DefaultResource, key));
+                    var resource = await _resourceProvider.GetMessageValueOrDefault(string.Format(Message.ResourceHandler.DefaultResource, key));
                     _preloadedResources[key] = resource;
                 }
             }
@@ -62,7 +62,7 @@ namespace Infrastructure.Repositories
                 throw new ArgumentNullException(nameof(key));
             }
 
-            return _preloadedResources.TryGetValue(key, out var value) ? value : MessageConstants.ResourceHandler.ResourceNotFound;
+            return _preloadedResources.TryGetValue(key, out var value) ? value : Message.ResourceHandler.ResourceNotFound;
         }
     }
 }

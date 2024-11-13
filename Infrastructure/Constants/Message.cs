@@ -1,6 +1,6 @@
 ﻿namespace Infrastructure.Constants
 {
-    public static class MessageConstants
+    public static class Message
     {
         // General Errors
         public const string ErrorOccurredDataLayer = "An error occurred in the data layer.";

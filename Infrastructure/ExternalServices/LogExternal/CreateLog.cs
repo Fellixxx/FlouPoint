@@ -27,7 +27,7 @@
                 // Validation for message and entity
                 if (string.IsNullOrWhiteSpace(message) || entity is null)
                 {
-                    return OperationBuilder<Log>.FailInvalidData(MessageConstants.Log.InvalidDataSubmitted);
+                    return OperationBuilder<Log>.FailInvalidData(Message.Log.InvalidDataSubmitted);
                 }
 
                 // Get the name of the entity and serialize its value
@@ -36,24 +36,24 @@
 
                 // Build the log entry
                 Log log = LogBuilderHelpers.GetLog(message, entityName, entityValue, level, type);
-                return Operation<Log>.Success(log, MessageConstants.Log.ValidationSuccess);
+                return Operation<Log>.Success(log, Message.Log.ValidationSuccess);
             }
             catch (JsonSerializationException jsonEx)
             {
                 // Handle exceptions related to JSON serialization
-                var failedSerialize = string.Format(MessageConstants.Log.FailedToSerialize, jsonEx.Message);
+                var failedSerialize = string.Format(Message.Log.FailedToSerialize, jsonEx.Message);
                 return OperationBuilder<Log>.FailInvalidData(failedSerialize);
             }
             catch (NullReferenceException nullEx)
             {
                 // Handle null reference exceptions
-                var failedSerialize = string.Format(MessageConstants.Log.NullReference, nullEx.Message);
+                var failedSerialize = string.Format(Message.Log.NullReference, nullEx.Message);
                 return OperationBuilder<Log>.FailUnexpected(failedSerialize);
             }
             catch (Exception ex)
             {
                 // General error handling for unexpected issues
-                var unknowledgeableError = string.Format(MessageConstants.Log.NullReference, ex.Message);
+                var unknowledgeableError = string.Format(Message.Log.NullReference, ex.Message);
                 return OperationBuilder<Log>.FailUnexpected(unknowledgeableError);
             }
         }

@@ -69,7 +69,7 @@
                 }
 
                 // Return a failure operation result for database issues
-                return OperationBuilder<int>.FailDatabase(MessageConstants.ErrorOccurredDataLayer);
+                return OperationBuilder<int>.FailDatabase(Message.ErrorOccurredDataLayer);
             }
         }
 
