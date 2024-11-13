@@ -3,7 +3,7 @@ namespace Infrastructure.Test.Message
     using System;
     using System.Threading.Tasks;
     using Application.UseCases.Repository.CRUD.Resource;
-    using Infrastructure.Message;
+    using Infrastructure.Resource;
     using Infrastructure.Test.Repositories.Implementation;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -17,7 +17,7 @@ namespace Infrastructure.Test.Message
         public void CanConstruct()
         {
             // Act
-            var instance = new DatabaseResourceProvider(_dbContext, _resourceEntryQuery);
+            var instance = new DatabaseProvider(_dbContext, _resourceEntryQuery);
 
             // Assert
             Assert.IsNotNull(instance);

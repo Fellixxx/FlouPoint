@@ -6,6 +6,7 @@
     using Application.UseCases.ExternalServices;
     using Persistence.BaseDbContext;
     using Application.UseCases.Repository;
+    using Application.UseCases.ExternalServices.Resorces;
 
 
     /// <summary>
@@ -21,7 +22,7 @@
         public UserReadFilter(
             DataContext context, 
             ILogService logService,
-            IResourceProvider resourceProvider,
+            IResorcesProvider resourceProvider,
             IResourceHandler resourceHandler) : base(context, logService, resourceProvider, resourceHandler)
         {
         }

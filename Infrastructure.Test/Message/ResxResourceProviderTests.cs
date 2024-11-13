@@ -2,7 +2,7 @@ namespace Infrastructure.Test.Message
 {
     using System;
     using System.Threading.Tasks;
-    using Infrastructure.Message;
+    using Infrastructure.Resource;
     using Infrastructure.Test.Repositories.Implementation;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -13,7 +13,7 @@ namespace Infrastructure.Test.Message
         public void CanCallGetEntries()
         {
             // Act
-            var result = ResxResourceProvider.GetEntries();
+            var result = ResxProvider.GetEntries();
 
             // Assert
             Assert.IsNotNull(result);

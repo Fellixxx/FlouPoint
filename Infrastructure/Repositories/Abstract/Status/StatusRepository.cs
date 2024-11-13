@@ -11,6 +11,7 @@
     using Domain.EnumType;
     using Infrastructure.Constants;
     using Application.UseCases.Repository;
+    using Application.UseCases.ExternalServices.Resorces;
 
     /// <summary>
     /// Repository class for managing the status of entities.
@@ -19,7 +20,7 @@
     public class StatusRepository<T> : Repository<T>, IStatus where T : class, IEntity
     {
         private readonly ILogService _logService;
-        private readonly IResourceProvider _resourceProvider;
+        private readonly IResorcesProvider _resourceProvider;
         private IResourceHandler _resourceHandler;
         private readonly List<string> _resourceKeys;
 
@@ -28,7 +29,7 @@
         /// </summary>
         /// <param name="context">The database context.</param>
         /// <param name="externalLogService">The external log service.</param>
-        public StatusRepository(DbContext context, ILogService logService, IResourceProvider resourceProvider, IResourceHandler resourceHandler) : base(context)
+        public StatusRepository(DbContext context, ILogService logService, IResorcesProvider resourceProvider, IResourceHandler resourceHandler) : base(context)
         {
             _logService = logService;
             _resourceProvider = resourceProvider;

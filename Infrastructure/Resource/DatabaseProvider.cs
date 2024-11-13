@@ -1,21 +1,21 @@
-﻿namespace Infrastructure.Message
+﻿namespace Infrastructure.Resource
 {
     using Application.Result;
-    using Application.UseCases.ExternalServices;
+    using Application.UseCases.ExternalServices.Resorces;
     using Application.UseCases.Repository.CRUD.Resource;
     using Domain.Entities;
     using Infrastructure.Constants;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Logging.Abstractions;
 
-    public class DatabaseResourceProvider : IResourceProvider
+    public class DatabaseProvider : IResorcesProvider
     {
         
         private readonly DbContext _context;
         private readonly DbSet<Resource> _dbSet;
         private readonly IQuery _resourceEntryQuery;
 
-        public DatabaseResourceProvider(DbContext context, IQuery resourceEntryQuery)
+        public DatabaseProvider(DbContext context, IQuery resourceEntryQuery)
         {
             _context = context;
             _resourceEntryQuery = resourceEntryQuery;

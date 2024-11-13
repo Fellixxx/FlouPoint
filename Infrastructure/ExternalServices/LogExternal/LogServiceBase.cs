@@ -9,9 +9,9 @@
     using System.Text;
     using Domain.DTO.Login;
     using Domain.DTO.Logging;
-    using Application.UseCases.ExternalServices;
     using Application.UseCases.Repository;
     using Infrastructure.Repositories;
+    using Application.UseCases.ExternalServices.Resorces;
 
     /// <summary>
     /// Provides a base for interacting with an external logging service.
@@ -24,7 +24,7 @@
         private readonly string _urlLogservice;
         private readonly IWrapper _httpContentWrapper;
         private readonly HttpClient _client;
-        private readonly IResourceProvider _resourceProvider;
+        private readonly IResorcesProvider _resourceProvider;
         private IResourceHandler _resourceHandler;
         private readonly List<string> _resourceKeys;
 
@@ -34,7 +34,7 @@
         /// <param name="factory">Factory for creating instances of <see cref="HttpClient"/>.</param>
         /// <param name="config">Application's configuration interface.</param>
         /// <param name="wrapper">Wrapper for handling HTTP content.</param>
-        protected LogServiceBase(IHttpClientFactory factory, IConfiguration config, IWrapper wrapper, IResourceProvider provider, IResourceHandler handler)
+        protected LogServiceBase(IHttpClientFactory factory, IConfiguration config, IWrapper wrapper, IResorcesProvider provider, IResourceHandler handler)
         {
             _client = factory.CreateClient();
             _configuration = config;

@@ -13,13 +13,14 @@ namespace Infrastructure.Repositories.Implementation.CRUD.User.Create
     using Application.UseCases.Repository;
     using Infrastructure.Repositories.Abstract.CRUD.Create;
     using Infrastructure.Repositories;
+    using Application.UseCases.ExternalServices.Resorces;
 
     /// <summary>
     /// Implementation of the user creation repository.
     /// </summary>
     public class UserCreate : CreateRepository<User>, IUserCreate
     {
-        private readonly IResourceProvider _resourceProvider;
+        private readonly IResorcesProvider _resourceProvider;
         private IResourceHandler _resourceHandler;
         private readonly List<string> _resourceKeys;
 
@@ -28,7 +29,7 @@ namespace Infrastructure.Repositories.Implementation.CRUD.User.Create
         /// </summary>
         /// <param name="context">The database context for the application.</param>
         /// <param name="logService">The logging service for tracking operations.</param>
-        public UserCreate(DataContext context, ILogService logService, IUtilEntity<User> utilEntity, IResourceProvider resourceProvider, IResourceHandler resourceHandler) : base(context, logService, utilEntity, resourceProvider, resourceHandler)
+        public UserCreate(DataContext context, ILogService logService, IUtilEntity<User> utilEntity, IResorcesProvider resourceProvider, IResourceHandler resourceHandler) : base(context, logService, utilEntity, resourceProvider, resourceHandler)
         {
             _resourceProvider = resourceProvider;
             _resourceHandler = resourceHandler;

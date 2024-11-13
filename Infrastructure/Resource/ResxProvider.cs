@@ -1,7 +1,7 @@
-﻿namespace Infrastructure.Message
+﻿namespace Infrastructure.Resource
 {
     using Application.Result;
-    using Application.UseCases.ExternalServices;
+    using Application.UseCases.ExternalServices.Resorces;
     using Domain.Entities;
     using Infrastructure.Constants;
     using System.Collections;
@@ -9,7 +9,7 @@
     using System.Reflection;
     using System.Resources;
 
-    public class ResxResourceProvider : IResourceProvider
+    public class ResxProvider : IResorcesProvider
     {
         public static Dictionary<string, string> GetEntries()
         {

@@ -3,7 +3,7 @@ namespace Infrastructure.Test.Message
     using System;
     using System.Threading.Tasks;
     using Domain.Entities;
-    using Infrastructure.Message;
+    using Infrastructure.Resource;
     using Infrastructure.Test.Repositories.Implementation;
     using Infrastructure.Test.Repositories.Implementation.CRUD;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -15,7 +15,7 @@ namespace Infrastructure.Test.Message
         public async Task AllResourceKeysExistInResourceProvider()
         {
             // Arrange
-            var instance = new ResxResourceProvider();
+            var instance = new ResxProvider();
             var entriesResult = await instance.GetResourceEntries();
 
             // Assert early if entries result is null or contains no data

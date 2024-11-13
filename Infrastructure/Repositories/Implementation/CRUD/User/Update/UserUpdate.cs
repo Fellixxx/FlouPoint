@@ -17,6 +17,7 @@
     using Application.UseCases.Repository;
     using Infrastructure;
     using Infrastructure.Repositories.Abstract.CRUD.Update;
+    using Application.UseCases.ExternalServices.Resorces;
 
     /// <summary>
     /// Provides methods to update user entities in the database.
@@ -24,7 +25,7 @@
     /// </summary>
     public class UserUpdate : UpdateRepository<User>, IUserUpdate
     {
-        private readonly IResourceProvider _resourceProvider;
+        private readonly IResorcesProvider _resourceProvider;
         private IResourceHandler _resourceHandler;
         private readonly List<string> _resourceKeys;
 
@@ -33,7 +34,7 @@
         /// </summary>
         /// <param name="context">The database context.</param>
         /// <param name="logService">The service used for logging operations.</param>
-        public UserUpdate(DataContext context, ILogService logService, IUtilEntity<User> utilEntity, IResourceProvider resourceProvider, IResourceHandler resourceHandler) : base(context, logService, utilEntity, resourceProvider, resourceHandler)
+        public UserUpdate(DataContext context, ILogService logService, IUtilEntity<User> utilEntity, IResorcesProvider resourceProvider, IResourceHandler resourceHandler) : base(context, logService, utilEntity, resourceProvider, resourceHandler)
         {
             _resourceProvider = resourceProvider;
             _resourceHandler = resourceHandler;

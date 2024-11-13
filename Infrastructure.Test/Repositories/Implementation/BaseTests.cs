@@ -2,11 +2,12 @@
 using Application.UseCases.CRUD.User;
 using Application.UseCases.CRUD.Validation;
 using Application.UseCases.ExternalServices;
+using Application.UseCases.ExternalServices.Resorces;
 using Application.UseCases.Operations;
 using Application.UseCases.Repository.CRUD.Resource;
 using Application.UseCases.Repository.Status.StatusChange;
 using Domain.Entities;
-using Infrastructure.Message;
+using Infrastructure.Resource;
 using Infrastructure.Repositories.Implementation.CRUD.Query;
 using Infrastructure.Repositories.Implementation.CRUD.Query.User;
 using Microsoft.EntityFrameworkCore;
@@ -46,8 +47,8 @@ namespace Infrastructure.Test.Repositories.Implementation
         protected Mock<IDistributedCache> _distributedCacheMock;
         protected IUserReadFilterPage _userReadFilterPage;
         protected IUserReadId _userReadId;
-        protected IResourceProvider _resxResourceProvider;
-        protected IResourceProvider _databaseResourceProvider;
+        protected IResorcesProvider _resxResourceProvider;
+        protected IResorcesProvider _databaseResourceProvider;
         protected IQuery _resourceEntryQuery;
 
         [TestInitialize]
@@ -104,9 +105,9 @@ namespace Infrastructure.Test.Repositories.Implementation
             IColumnTypes _columnTypes = new ColumnTypesPosgresql();
             _dbContext = new DataContext(_options, _columnTypes);
 
-            _resxResourceProvider = new ResxResourceProvider();
+            _resxResourceProvider = new ResxProvider();
             _resourceEntryQuery = new ResourceEntryQuery(_dbContext, _logService.Object);
-            _databaseResourceProvider = new DatabaseResourceProvider(_dbContext, _resourceEntryQuery);
+            _databaseResourceProvider = new DatabaseProvider(_dbContext, _resourceEntryQuery);
         }
 
 

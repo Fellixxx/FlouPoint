@@ -14,6 +14,7 @@ using Persistence.CreateStruture.Constants.ColumnType;
 using Infrastructure.Repositories.Abstract.CRUD.Util;
 using Infrastructure.Repositories.Implementation.CRUD.User.Create;
 using Infrastructure.Repositories.Implementation.CRUD.User.Update;
+using Application.UseCases.ExternalServices.Resorces;
 
 
 namespace Infrastructure.Test.Repositories.Implementation.CRUD
@@ -30,7 +31,7 @@ namespace Infrastructure.Test.Repositories.Implementation.CRUD
         protected IUserDelete _userDelete;
         protected IUserStatus _userStatus;
         protected IUserReadFilterCount _userReadFilterCount;
-        protected IResourceProvider _resourceProvider;
+        protected IResorcesProvider _resourceProvider;
         protected IResourceHandler _resourceHandler;
         protected IUtilEntity<Domain.Entities.User> _utilEntity;
 
@@ -107,9 +108,9 @@ namespace Infrastructure.Test.Repositories.Implementation.CRUD
             return mockResourceHandler.Object;
         }
 
-        private IResourceProvider SetupResourceProviderMock()
+        private IResorcesProvider SetupResourceProviderMock()
         {
-            var mockResourceProvider = new Mock<IResourceProvider>();
+            var mockResourceProvider = new Mock<IResorcesProvider>();
 
             foreach (var resource in _resourceMessages)
             {

@@ -2,6 +2,7 @@
 {
     using Application.Result;
     using Application.UseCases.ExternalServices;
+    using Application.UseCases.ExternalServices.Resorces;
     using Application.UseCases.Repository;
     using Application.UseCases.Wrapper;
     using Domain.DTO.Logging;
@@ -15,7 +16,7 @@
     /// </summary>
     public class LogService : LogServiceBase, ILogService
     {
-        private readonly IResourceProvider _resourceProvider;
+        private readonly IResorcesProvider _resourceProvider;
         private IResourceHandler _resourceHandler;
         private readonly List<string> _resourceKeys;
 
@@ -25,7 +26,7 @@
         /// <param name="clientFactory">Factory for creating instances of <see cref="HttpClient"/>.</param>
         /// <param name="configuration">Application's configuration interface.</param>
         /// <param name="httpContentWrapper">Wrapper for handling HTTP content.</param>
-        public LogService(IHttpClientFactory clientFactory, IConfiguration configuration, IWrapper httpContentWrapper, IResourceProvider resourceProvider, IResourceHandler resourceHandler) :
+        public LogService(IHttpClientFactory clientFactory, IConfiguration configuration, IWrapper httpContentWrapper, IResorcesProvider resourceProvider, IResourceHandler resourceHandler) :
             base(clientFactory, configuration, httpContentWrapper, resourceProvider, resourceHandler)
         {
             _resourceProvider=resourceProvider;

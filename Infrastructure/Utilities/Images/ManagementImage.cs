@@ -2,6 +2,7 @@
 {
     using Application.Result;
     using Application.UseCases.ExternalServices;
+    using Application.UseCases.ExternalServices.Resorces;
     using Application.UseCases.Repository;
     using Application.UseCases.Utilities;
     using Domain.DTO.Logging;
@@ -23,7 +24,7 @@
 
         // Service responsible for image compression operations.
         private readonly IImageCompression _imageCompressionService;
-        private readonly IResourceProvider _resourceProvider;
+        private readonly IResorcesProvider _resourceProvider;
         private IResourceHandler _resourceHandler;
         private readonly List<string> _resourceKeys;
         /// <summary>
@@ -31,7 +32,7 @@
         /// </summary>
         /// <param name="logService">Service responsible for logging operations.</param>
         /// <param name="imageCompressionService">Service responsible for image compression.</param>
-        public ManagementImage(ILogService logService, IImageCompression imageCompressionService, IResourceProvider resourceProvider, IResourceHandler resourceHandler)
+        public ManagementImage(ILogService logService, IImageCompression imageCompressionService, IResorcesProvider resourceProvider, IResourceHandler resourceHandler)
         {
             _logService = logService;
             _imageCompressionService = imageCompressionService;

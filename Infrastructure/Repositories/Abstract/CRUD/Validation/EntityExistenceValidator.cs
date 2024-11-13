@@ -6,9 +6,9 @@
     using Infrastructure.Utilities;
     using Persistence.Repositories;
     using Microsoft.EntityFrameworkCore;
-    using Application.UseCases.ExternalServices;
     using Application.UseCases.Repository;
     using Infrastructure.ExternalServices.LogExternal;
+    using Application.UseCases.ExternalServices.Resorces;
 
     /// <summary>
     /// Abstract class for validating the existence of an entity.
@@ -16,7 +16,7 @@
     /// <typeparam name="T">The entity type.</typeparam>
     public abstract class EntityExistenceValidator<T> : Repository<T>, IEntityChecker<T> where T : class, IEntity
     {
-        private readonly IResourceProvider _resourceProvider;
+        private readonly IResorcesProvider _resourceProvider;
         private IResourceHandler _resourceHandler;
         private readonly List<string> _resourceKeys;
 
@@ -24,7 +24,7 @@
         /// Constructor with dependency injection.
         /// </summary>
         /// <param name="context">The database context.</param>
-        protected EntityExistenceValidator(DbContext context, IResourceProvider resourceProvider, IResourceHandler resourceHandler) : base(context)
+        protected EntityExistenceValidator(DbContext context, IResorcesProvider resourceProvider, IResourceHandler resourceHandler) : base(context)
         {
             _resourceProvider = resourceProvider;
             _resourceHandler = resourceHandler;

@@ -6,7 +6,11 @@
     /// defined in IRepositoryOperations.
     /// In addition, it includes user-specific operations like Login.
     /// </summary>
-    public interface IUserQuery : IUserReadFilter, IUserReadFilterCount, IUserReadFilterPage, IUserReadId
+    public interface IUserQuery : 
+        IUserReadFilter, 
+        IUserReadFilterCount, 
+        IUserReadFilterPage, 
+        IUserReadId
     {
 
     }

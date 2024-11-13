@@ -12,6 +12,7 @@
     using Domain.EnumType;
     using Infrastructure.Constants;
     using Application.UseCases.Repository;
+    using Application.UseCases.ExternalServices.Resorces;
 
     /// <summary>
     /// Abstract repository class for deleting an entity.
@@ -20,7 +21,7 @@
     public abstract class DeleteRepository<T> : EntityExistenceValidator<T>, IDelete<T> where T : class, IEntity
     {
         private readonly ILogService _logService;
-        private readonly IResourceProvider _resourceProvider;
+        private readonly IResorcesProvider _resourceProvider;
         private IResourceHandler _resourceHandler;
         private readonly List<string> _resourceKeys;
 
@@ -29,7 +30,7 @@
         /// </summary>
         /// <param name="context">The database context.</param>
         /// <param name="logService">The log service.</param>
-        protected DeleteRepository(DbContext context, ILogService logService, IResourceProvider resourceProvider, IResourceHandler resourceHandler) : base(context, resourceProvider, resourceHandler)
+        protected DeleteRepository(DbContext context, ILogService logService, IResorcesProvider resourceProvider, IResourceHandler resourceHandler) : base(context, resourceProvider, resourceHandler)
         {
             _logService = logService;
             _resourceProvider = resourceProvider;

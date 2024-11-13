@@ -7,6 +7,7 @@ namespace Infrastructure.Repositories.Implementation.CRUD.Query.User
     using User = Domain.Entities.User;
     using Application.UseCases.ExternalServices;
     using Persistence.BaseDbContext;
+    using Application.UseCases.ExternalServices.Resorces;
 
     /// <summary>
     /// Repository class for reading user entities with filtering and paging.
@@ -21,7 +22,7 @@ namespace Infrastructure.Repositories.Implementation.CRUD.Query.User
         public UserReadFilterPage(
             DataContext context, 
             ILogService logService,
-            IResourceProvider resourceProvider) : base(context, logService, resourceProvider)
+            IResorcesProvider resourceProvider) : base(context, logService, resourceProvider)
         {
         }
 
