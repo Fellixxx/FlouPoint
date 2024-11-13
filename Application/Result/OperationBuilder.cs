@@ -112,14 +112,6 @@
             => CreateFailure(message, ErrorTypes.InvalidData);
 
         /// <summary>
-        /// Creates a failed operation result for an external service error.
-        /// </summary>
-        /// <param name="message">The message describing the external service error.</param>
-        /// <returns>An <see cref="Operation{T}"/> representing the failure.</returns>
-        public static Operation<T> FailExternal(string message)
-            => CreateFailure(message, ErrorTypes.ExternalService);
-
-        /// <summary>
         /// Creates a failed operation result for an unexpected error.
         /// </summary>
         /// <param name="message">The message describing the unexpected error.</param>

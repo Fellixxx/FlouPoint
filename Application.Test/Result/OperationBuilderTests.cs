@@ -123,7 +123,8 @@ namespace Application.Test.Result
             var message = "TestValue1769803281";
 
             // Act
-            var result = OperationBuilder<string>.FailExternal(message);
+            var strategy = new ExternalServiceStrategy<string>();
+            var result = OperationStrategy<string>.Fail(message, strategy);
 
             // Assert
             Assert.IsNotNull(result);
@@ -138,7 +139,8 @@ namespace Application.Test.Result
             string message = null;
 
             // Act & Assert
-            Assert.ThrowsException<ArgumentNullException>(() => OperationBuilder<string>.FailExternal(message));
+            var strategy = new ExternalServiceStrategy<string>();
+            Assert.ThrowsException<ArgumentNullException>(() => OperationStrategy<string>.Fail(message, strategy));
         }
 
         [TestMethod]
@@ -273,7 +275,8 @@ namespace Application.Test.Result
             var expectedMessage = "External service failed.";
 
             // Act
-            var result = OperationBuilder<string>.FailExternal(expectedMessage);
+            var strategy = new ExternalServiceStrategy<string>();
+            var result = OperationStrategy<string>.Fail(expectedMessage, strategy);
 
             // Assert
             Assert.IsNotNull(result);
@@ -364,7 +367,8 @@ namespace Application.Test.Result
             string message = "";
 
             // Act & Assert
-            Assert.ThrowsException<ArgumentException>(() => OperationBuilder<string>.FailExternal(message));
+            var strategy = new ExternalServiceStrategy<string>();
+            Assert.ThrowsException<ArgumentException>(() => OperationStrategy<string>.Fail(message, strategy));
         }
 
         [TestMethod]
@@ -437,7 +441,8 @@ namespace Application.Test.Result
             string message = "   ";
 
             // Act & Assert
-            Assert.ThrowsException<ArgumentException>(() => OperationBuilder<string>.FailExternal(message));
+            var strategy = new ExternalServiceStrategy<string>();
+            Assert.ThrowsException<ArgumentException>(() => OperationStrategy<string>.Fail(message, strategy));
         }
 
         [TestMethod]
@@ -522,7 +527,8 @@ namespace Application.Test.Result
             var message = "External service failed.";
 
             // Act
-            var result = OperationBuilder<string>.FailExternal(message);
+            var strategy = new ExternalServiceStrategy<string>();
+            var result = OperationStrategy<string>.Fail(message, strategy);
 
             // Assert
             Assert.IsNull(result.Data);

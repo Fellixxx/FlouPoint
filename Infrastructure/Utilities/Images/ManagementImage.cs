@@ -6,10 +6,12 @@
     using Application.UseCases.Repository;
     using Application.UseCases.Utilities;
     using Domain.DTO.Logging;
+    using Domain.Entities;
     using Domain.EnumType;
     using Infrastructure.Constants;
     using Infrastructure.Other;
     using Infrastructure.Repositories;
+    using System.Reflection.Metadata;
 
     /// <summary>
     /// Provides functionality for managing images, including interacting with external services like Google Drive.
@@ -80,12 +82,13 @@
             {
                 Log log = Util.GetLogError(ex, filename, ActionType.CreateCustomOperation("Validate",Message.ImageManagement.GeneralValidation));
                 Operation<string> result = await _logService.CreateLog(log);
+                var failedToUploadImage = Message.FailedToUploadImage;
+                var strategy = new ExternalServiceStrategy<bool>();
                 if (!result.IsSuccessful)
                 {
-                    return OperationBuilder<bool>.FailExternal(Message.FailedToUploadImage);
+                    return OperationStrategy<bool>.Fail(failedToUploadImage, strategy);
                 }
-
-                return OperationBuilder<bool>.FailExternal(Message.FailedToUploadImage);
+                return OperationStrategy<bool>.Fail(failedToUploadImage, strategy);
             }
         }
 
@@ -119,12 +122,14 @@
             {
                 Log log = Util.GetLogError(ex, base64String, ActionType.CreateCustomOperation("Validate", "General validation operation."));
                 Operation<string> result = await _logService.CreateLog(log);
+                var failedToUploadImage = Message.FailedToUploadImage;
+                var strategy = new ExternalServiceStrategy<Stream>();
                 if (!result.IsSuccessful)
                 {
-                    return OperationBuilder<Stream>.FailExternal(Message.FailedToUploadImage);
+                    return OperationStrategy<Stream>.Fail(failedToUploadImage, strategy);
                 }
 
-                return OperationBuilder<Stream>.FailExternal(Message.FailedToUploadImage);
+                return OperationStrategy<Stream>.Fail(failedToUploadImage, strategy);
             }
         }
     }

@@ -12,6 +12,7 @@
     using Application.UseCases.Repository;
     using Infrastructure.Repositories;
     using Application.UseCases.ExternalServices.Resorces;
+    using Infrastructure.Constants;
 
     /// <summary>
     /// Provides a base for interacting with an external logging service.
@@ -75,7 +76,8 @@
             if (!response.IsSuccessStatusCode)
             {
                 var failedGetToken = _handler.GetResource("FailedGetToken");
-                return OperationBuilder<string>.FailExternal(failedGetToken);
+                var strategy = new ExternalServiceStrategy<string>();
+                return OperationStrategy<string>.Fail(failedGetToken, strategy);
             }
 
             var result = await _httpContentWrapper.ReadAsStringAsync(response.Content);
@@ -129,7 +131,8 @@
             if (!response.IsSuccessStatusCode)
             {
                 var failedSetLog = _handler.GetResource("FailedGetToken");
-                return OperationBuilder<string>.FailExternal(failedSetLog);
+                var strategy = new ExternalServiceStrategy<string>();
+                return OperationStrategy<string>.Fail(failedSetLog, strategy);
             }
             var successfullySetLog = _handler.GetResource("FailedGetToken");
             return Operation<string>.Success(string.Empty, successfullySetLog);
