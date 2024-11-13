@@ -67,7 +67,8 @@
                 await ResourceHandler.CreateAsync(_provider, _resourceKeys);
                 var failureConfigurationMissingError = _handler.GetResource("FailureConfigurationMissingError");
                 var message = failureConfigurationMissingError;
-                return OperationBuilder<string>.FailConfig(message);
+                var strategy = new ConfigMissingStrategy<string>();
+                return OperationStrategy<string>.Fail(message, strategy);
             }
 
             var url = GetUrl();

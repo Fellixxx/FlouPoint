@@ -58,7 +58,8 @@
             catch (Exception ex)
             {
                 var message = string.Format(Message.UnknownException, ex.Message, ex.StackTrace);
-                return OperationBuilder<string>.FailUnexpected(Message.UnexpectedError);
+                var strategy = new UnexpectedErrorStrategy<string>();
+                return OperationStrategy<string>.Fail(message, strategy);
             }
         }
     }

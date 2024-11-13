@@ -94,14 +94,6 @@
     public static class OperationBuilder<T>
     {
 
-        /// <summary>
-        /// Creates a failed operation result for a missing configuration error.
-        /// </summary>
-        /// <param name="message">The message describing the configuration error.</param>
-        /// <returns>An <see cref="Operation{T}"/> representing the failure.</returns>
-        public static Operation<T> FailConfig(string message)
-            => CreateFailure(message, ErrorTypes.ConfigMissing);
-
 
         /// <summary>
         /// Creates a failed operation result for an invalid data submission.
@@ -110,14 +102,6 @@
         /// <returns>An <see cref="Operation{T}"/> representing the failure.</returns>
         public static Operation<T> FailInvalidData(string message)
             => CreateFailure(message, ErrorTypes.InvalidData);
-
-        /// <summary>
-        /// Creates a failed operation result for an unexpected error.
-        /// </summary>
-        /// <param name="message">The message describing the unexpected error.</param>
-        /// <returns>An <see cref="Operation{T}"/> representing the failure.</returns>
-        public static Operation<T> FailUnexpected(string message)
-            => CreateFailure(message, ErrorTypes.Unexpected);
 
         /// <summary>
         /// Creates a failed operation result for a network error.

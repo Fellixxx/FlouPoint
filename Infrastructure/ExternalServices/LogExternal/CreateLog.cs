@@ -49,13 +49,15 @@
             {
                 // Handle null reference exceptions
                 var failedSerialize = string.Format(Message.Log.NullReference, nullEx.Message);
-                return OperationBuilder<Log>.FailUnexpected(failedSerialize);
+                var strategy = new UnexpectedErrorStrategy<Log>();
+                return OperationStrategy<Log>.Fail(failedSerialize, strategy);
             }
             catch (Exception ex)
             {
                 // General error handling for unexpected issues
                 var unknowledgeableError = string.Format(Message.Log.NullReference, ex.Message);
-                return OperationBuilder<Log>.FailUnexpected(unknowledgeableError);
+                var strategy = new UnexpectedErrorStrategy<Log>();
+                return OperationStrategy<Log>.Fail(unknowledgeableError, strategy);
             }
         }
     }

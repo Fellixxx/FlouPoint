@@ -73,11 +73,14 @@
             {
                 Log log = Util.GetLogError(ex, inputStream, ActionType.CreateCustomOperation("Validate", "General validation operation."));
                 Operation<string> result = await _logService.CreateLog(log);
+                var strategy = new UnexpectedErrorStrategy<Stream>();
+                var message = Message.FailedToCompressImage;
                 if (!result.IsSuccessful)
                 {
-                    return OperationBuilder<Stream>.FailUnexpected(Message.FailedToCompressImage);
+                    
+                    return OperationStrategy<Stream>.Fail(message, strategy);
                 }
-                return OperationBuilder<Stream>.FailUnexpected(Message.FailedToCompressImage);
+                return OperationStrategy<Stream>.Fail(message, strategy);
             }
         }
     }

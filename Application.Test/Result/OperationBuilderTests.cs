@@ -43,7 +43,8 @@ namespace Application.Test.Result
             var message = "TestValue826283408";
 
             // Act
-            var result = OperationBuilder<string>.FailConfig(message);
+            var strategy = new ConfigMissingStrategy<string>();
+            var result = OperationStrategy<string>.Fail(message, strategy);
 
             // Assert
             Assert.IsNotNull(result);
@@ -59,7 +60,8 @@ namespace Application.Test.Result
             string message = null;
 
             // Act & Assert
-            Assert.ThrowsException<ArgumentNullException>(() => OperationBuilder<string>.FailConfig(message));
+            var strategy = new ConfigMissingStrategy<string>();
+            Assert.ThrowsException<ArgumentNullException>(() => OperationStrategy<string>.Fail(message, strategy));
         }
 
         [TestMethod]
@@ -150,7 +152,8 @@ namespace Application.Test.Result
             var message = "TestValue2015692524";
 
             // Act
-            var result = OperationBuilder<string>.FailUnexpected(message);
+            var strategy = new UnexpectedErrorStrategy<string>();
+            var result = OperationStrategy<string>.Fail(message, strategy);
 
             // Assert
             Assert.IsNotNull(result);
@@ -166,7 +169,8 @@ namespace Application.Test.Result
             string message = null;
 
             // Act & Assert
-            Assert.ThrowsException<ArgumentNullException>(() => OperationBuilder<string>.FailUnexpected(message));
+            var strategy = new UnexpectedErrorStrategy<string>();
+            Assert.ThrowsException<ArgumentNullException>(() => OperationStrategy<string>.Fail(message, strategy));
         }
 
         [TestMethod]
@@ -226,7 +230,8 @@ namespace Application.Test.Result
             var expectedMessage = "Configuration is missing.";
 
             // Act
-            var result = OperationBuilder<string>.FailConfig(expectedMessage);
+            var strategy = new ConfigMissingStrategy<string>();
+            var result = OperationStrategy<string>.Fail(expectedMessage, strategy);
 
             // Assert
             Assert.IsNotNull(result);
@@ -292,7 +297,8 @@ namespace Application.Test.Result
             var expectedMessage = "An unexpected error occurred.";
 
             // Act
-            var result = OperationBuilder<string>.FailUnexpected(expectedMessage);
+            var strategy = new UnexpectedErrorStrategy<string>();
+            var result = OperationStrategy<string>.Fail(expectedMessage, strategy);
 
             // Assert
             Assert.IsNotNull(result);
@@ -336,7 +342,8 @@ namespace Application.Test.Result
             string message = "";
 
             // Act & Assert
-            Assert.ThrowsException<ArgumentException>(() => OperationBuilder<string>.FailConfig(message));
+            var strategy = new ConfigMissingStrategy<string>();
+            Assert.ThrowsException<ArgumentException>(() => OperationStrategy<string>.Fail(message, strategy));
         }
 
         [TestMethod]
@@ -378,7 +385,8 @@ namespace Application.Test.Result
             string message = "";
 
             // Act & Assert
-            Assert.ThrowsException<ArgumentException>(() => OperationBuilder<string>.FailUnexpected(message));
+            var strategy = new UnexpectedErrorStrategy<string>();
+            Assert.ThrowsException<ArgumentException>(() => OperationStrategy<string>.Fail(message, strategy));
         }
 
         [TestMethod]
@@ -410,7 +418,8 @@ namespace Application.Test.Result
             string message = "   ";
 
             // Act & Assert
-            Assert.ThrowsException<ArgumentException>(() => OperationBuilder<string>.FailConfig(message));
+            var strategy = new ConfigMissingStrategy<string>();
+            Assert.ThrowsException<ArgumentException>(() => OperationStrategy<string>.Fail(message, strategy));
         }
 
         [TestMethod]
@@ -452,7 +461,8 @@ namespace Application.Test.Result
             string message = "   ";
 
             // Act & Assert
-            Assert.ThrowsException<ArgumentException>(() => OperationBuilder<string>.FailUnexpected(message));
+            var strategy = new UnexpectedErrorStrategy<string>();
+            Assert.ThrowsException<ArgumentException>(() => OperationStrategy<string>.Fail(message, strategy));
         }
 
         [TestMethod]
@@ -487,7 +497,8 @@ namespace Application.Test.Result
             var message = "Configuration is missing.";
 
             // Act
-            var result = OperationBuilder<string>.FailConfig(message);
+            var strategy = new ConfigMissingStrategy<string>();
+            var result = OperationStrategy<string>.Fail(message, strategy);
 
             // Assert
             Assert.IsNull(result.Data);
@@ -541,7 +552,8 @@ namespace Application.Test.Result
             var message = "An unexpected error occurred.";
 
             // Act
-            var result = OperationBuilder<string>.FailUnexpected(message);
+            var strategy = new UnexpectedErrorStrategy<string>();
+            var result = OperationStrategy<string>.Fail(message, strategy);
 
             // Assert
             Assert.IsNull(result.Data);
