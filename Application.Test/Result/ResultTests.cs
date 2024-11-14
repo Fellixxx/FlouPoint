@@ -34,31 +34,32 @@ namespace Application.Test.Result
         /// Test method to verify initialization of Result with correct values.
         /// </summary>
         [TestMethod]
-        public void Result_Should_Initialize_With_Correct_Values()
+        public void Result_ShouldInitialize_WithCorrectValues()
         {
             // Arrange
-            var isSuccess = true;
-            var message = "Operation completed successfully.";
-            var data = "TestData";
-            var errorType = ErrorTypes.None;
+            bool isSuccess = true;
+            string message = "Operation completed successfully.";
+            string data = "TestData";
+            ErrorTypes errorType = ErrorTypes.None;
             // Act
             var result = new TestResult(isSuccess, message, data, errorType);
             // Assert
             Assert.AreEqual(isSuccess, result.IsSuccessful);
             Assert.AreEqual(message, result.Message);
             Assert.AreEqual(data, result.Data);
+            Assert.AreEqual(errorType, result.Type);
         }
 
         /// <summary>
         /// Test method to verify custom error name for Result.
         /// </summary>
         [TestMethod]
-        public void Result_Should_Return_Correct_Error_Custom_Name()
+        public void Result_ShouldReturn_CorrectErrorCustomName()
         {
             // Arrange
             var result = new TestResult(false, "An error occurred", "TestData", ErrorTypes.Database);
             // Act
-            var errorName = result.Error;
+            string errorName = result.Error;
             // Assert
             Assert.AreEqual("DATABASE_ERROR", errorName);
         }
@@ -67,12 +68,12 @@ namespace Application.Test.Result
         /// Test method to verify default error name for Result when no error occurs.
         /// </summary>
         [TestMethod]
-        public void Result_Should_Return_Default_Error_Custom_Name_When_No_Error()
+        public void Result_ShouldReturn_DefaultErrorCustomName_WhenNoError()
         {
             // Arrange
             var result = new TestResult(true, "Operation completed successfully", "TestData", ErrorTypes.None);
             // Act
-            var errorName = result.Error;
+            string errorName = result.Error;
             // Assert
             Assert.AreEqual("NONE", errorName);
         }
@@ -81,7 +82,7 @@ namespace Application.Test.Result
         /// Test method to verify that Result has null data and message when not set.
         /// </summary>
         [TestMethod]
-        public void Result_Should_Have_Null_Data_And_Message_When_Not_Set()
+        public void Result_ShouldHave_NullDataAndMessage_WhenNotSet()
         {
             // Arrange
             var result = new TestResult(true, null, null, ErrorTypes.None);
@@ -89,13 +90,14 @@ namespace Application.Test.Result
             Assert.IsNull(result.Data);
             Assert.IsNull(result.Message);
             Assert.IsTrue(result.IsSuccessful);
+            Assert.AreEqual("NONE", result.Error);
         }
 
         /// <summary>
         /// Test method to verify failure indication with error type for Result.
         /// </summary>
         [TestMethod]
-        public void Result_Should_Indicate_Failure_With_ErrorType()
+        public void Result_ShouldIndicate_Failure_WithErrorType()
         {
             // Arrange
             var result = new TestResult(false, "An unexpected error occurred", null, ErrorTypes.Unexpected);
@@ -104,6 +106,31 @@ namespace Application.Test.Result
             Assert.AreEqual("UNEXPECTED_ERROR", result.Error);
             Assert.AreEqual("An unexpected error occurred", result.Message);
             Assert.IsNull(result.Data);
+        }
+
+        /// <summary>
+        /// Test method to verify creation of Result with empty string message and data.
+        /// </summary>
+        [TestMethod]
+        public void Result_Should_Handle_EmptyStringDataAndMessage()
+        {
+            // Arrange
+            var result = new TestResult(true, "", "", ErrorTypes.None);
+            // Assert
+            Assert.AreEqual("", result.Data);
+            Assert.AreEqual("", result.Message);
+            Assert.IsTrue(result.IsSuccessful);
+            Assert.AreEqual("NONE", result.Error);
+        }
+
+        /// <summary>
+        /// Test method to verify the behavior for non-existing error types.
+        /// </summary>
+        [TestMethod]
+        public void Result_Should_Handle_NonExistent_ErrorType()
+        {
+        // Note: This test would depend on how your application handles unknown error types.
+        // Missing implementation details would be needed for this to work correctly.
         }
     }
 }

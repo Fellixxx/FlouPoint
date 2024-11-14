@@ -21,8 +21,21 @@ namespace Domain.Test.Entities
         }
 
         /// <summary>
-        /// Tests that the Id property can be correctly set and retrieved.
+        /// Tests that the initial properties are set correctly.
         /// </summary>
+        [TestMethod]
+        public void InitialPropertiesAreSetCorrectly()
+        {
+            Assert.AreEqual(string.Empty, _testClass.Id);
+            Assert.IsNull(_testClass.Name);
+            Assert.IsNull(_testClass.Password);
+            Assert.IsNull(_testClass.Email);
+            Assert.IsNull(_testClass.Avatar);
+            Assert.IsNull(_testClass.UpdatedAt);
+            Assert.AreEqual(default(DateTime), _testClass.CreatedAt);
+            Assert.IsFalse(_testClass.Active);
+        }
+
         [TestMethod]
         public void CanSetAndGetId()
         {
@@ -32,11 +45,11 @@ namespace Domain.Test.Entities
             _testClass.Id = testValue;
             // Assert
             Assert.AreEqual(testValue, _testClass.Id);
+            // Test for setting null
+            _testClass.Id = null;
+            Assert.IsNull(_testClass.Id);
         }
 
-        /// <summary>
-        /// Tests that the Name property can be correctly set and retrieved.
-        /// </summary>
         [TestMethod]
         public void CanSetAndGetName()
         {
@@ -46,11 +59,11 @@ namespace Domain.Test.Entities
             _testClass.Name = testValue;
             // Assert
             Assert.AreEqual(testValue, _testClass.Name);
+            // Test for setting null
+            _testClass.Name = null;
+            Assert.IsNull(_testClass.Name);
         }
 
-        /// <summary>
-        /// Tests that the Password property can be correctly set and retrieved.
-        /// </summary>
         [TestMethod]
         public void CanSetAndGetPassword()
         {
@@ -60,11 +73,11 @@ namespace Domain.Test.Entities
             _testClass.Password = testValue;
             // Assert
             Assert.AreEqual(testValue, _testClass.Password);
+            // Test for setting null
+            _testClass.Password = null;
+            Assert.IsNull(_testClass.Password);
         }
 
-        /// <summary>
-        /// Tests that the Email property can be correctly set and retrieved.
-        /// </summary>
         [TestMethod]
         public void CanSetAndGetEmail()
         {
@@ -74,11 +87,11 @@ namespace Domain.Test.Entities
             _testClass.Email = testValue;
             // Assert
             Assert.AreEqual(testValue, _testClass.Email);
+            // Test for setting null
+            _testClass.Email = null;
+            Assert.IsNull(_testClass.Email);
         }
 
-        /// <summary>
-        /// Tests that the Avatar property can be correctly set and retrieved.
-        /// </summary>
         [TestMethod]
         public void CanSetAndGetAvatar()
         {
@@ -88,11 +101,11 @@ namespace Domain.Test.Entities
             _testClass.Avatar = testValue;
             // Assert
             Assert.AreEqual(testValue, _testClass.Avatar);
+            // Test for setting null
+            _testClass.Avatar = null;
+            Assert.IsNull(_testClass.Avatar);
         }
 
-        /// <summary>
-        /// Tests that the CreatedAt property can be correctly set and retrieved.
-        /// </summary>
         [TestMethod]
         public void CanSetAndGetCreatedAt()
         {
@@ -104,9 +117,6 @@ namespace Domain.Test.Entities
             Assert.AreEqual(testValue, _testClass.CreatedAt);
         }
 
-        /// <summary>
-        /// Tests that the UpdatedAt property can be correctly set and retrieved.
-        /// </summary>
         [TestMethod]
         public void CanSetAndGetUpdatedAt()
         {
@@ -118,9 +128,6 @@ namespace Domain.Test.Entities
             Assert.AreEqual(testValue, _testClass.UpdatedAt);
         }
 
-        /// <summary>
-        /// Tests that the Active property can be correctly set and retrieved.
-        /// </summary>
         [TestMethod]
         public void CanSetAndGetActive()
         {
@@ -129,7 +136,10 @@ namespace Domain.Test.Entities
             // Act
             _testClass.Active = testValue;
             // Assert
-            Assert.AreEqual(testValue, _testClass.Active);
+            Assert.IsFalse(_testClass.Active);
+            // Test setting it to true
+            _testClass.Active = true;
+            Assert.IsTrue(_testClass.Active);
         }
     }
 }

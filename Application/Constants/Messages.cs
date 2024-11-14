@@ -50,7 +50,7 @@ namespace Application.Constants
         /// Messages related to resource providers within the application.
         /// Provides constants used for indicating status or issues with resources.
         /// </summary>
-        public static class IResorcesProvider
+        public static class ResorcesProvider
         {
             /// <summary>
             /// Message indicating that a requested resource could not be found.

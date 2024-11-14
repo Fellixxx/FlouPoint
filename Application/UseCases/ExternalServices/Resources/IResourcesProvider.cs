@@ -8,6 +8,6 @@
     {
         Task<Operation<Resource>> GetMessage(string key);
         Task<Operation<IQueryable<Resource>>> GetResourceEntries();
-        Task<string> GetMessageValueOrDefault(string key, string defaultValue = Messages.IResorcesProvider.ResourceNotFound);
+        Task<string> GetMessageValueOrDefault(string key, string defaultValue = Messages.ResorcesProvider.ResourceNotFound);
     }
 }
