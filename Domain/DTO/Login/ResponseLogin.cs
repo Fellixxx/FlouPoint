@@ -3,19 +3,16 @@ namespace Domain.DTO.Login
     using Domain.Interfaces.Login;
 
     /// <summary>
-    /// Represents a response received upon a successful login attempt, typically containing authentication tokens.
-    /// Implements the <see cref = "IResponseLogin"/> interface.
+    /// Represents a response to a login request, containing access and refresh tokens.
     /// </summary>
     public class ResponseLogin : IResponseLogin
     {
         /// <summary>
-        /// Gets or sets the access token that provides short-term access after successful authentication.
-        /// This token is generally used to authorize requests to specific resources.
+        /// Gets or sets the access token.
         /// </summary>
         public string AccessToken { get; set; } = string.Empty;
         /// <summary>
-        /// Gets or sets the refresh token used to obtain a new access token once the current one expires.
-        /// The refresh token usually has a longer lifespan than the access token.
+        /// Gets or sets the refresh token.
         /// </summary>
         public string RefreshToken { get; set; } = string.Empty;
     }

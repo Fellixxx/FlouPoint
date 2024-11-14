@@ -1,4 +1,4 @@
-﻿using Application.Result;
+using Application.Result;
 
 namespace FlouPoint.GitHub
 {
@@ -8,28 +8,26 @@ namespace FlouPoint.GitHub
     public class CredentialNotFoundException : Exception
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="CredentialNotFoundException"/> class.
+        /// Initializes a new instance of the <see cref = "CredentialNotFoundException"/> class.
         /// </summary>
         public CredentialNotFoundException()
         {
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="CredentialNotFoundException"/> class with a specified error message.
+        /// Initializes a new instance of the <see cref = "CredentialNotFoundException"/> class with a specified error message.
         /// </summary>
-        /// <param name="message">The message that describes the error.</param>
-        public CredentialNotFoundException(string message)
-            : base(message)
+        /// <param name = "message">The message that describes the error.</param>
+        public CredentialNotFoundException(string message) : base(message)
         {
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="CredentialNotFoundException"/> class with a specified error message and a reference to the inner exception that is the cause of this exception.
+        /// Initializes a new instance of the <see cref = "CredentialNotFoundException"/> class with a specified error message and a reference to the inner exception that is the cause of this exception.
         /// </summary>
-        /// <param name="message">The error message that explains the reason for this exception.</param>
-        /// <param name="inner">The exception that is the cause of the current exception.</param>
-        public CredentialNotFoundException(string message, Exception inner)
-            : base(message, inner)
+        /// <param name = "message">The error message that explains the reason for this exception.</param>
+        /// <param name = "inner">The exception that is the cause of the current exception.</param>
+        public CredentialNotFoundException(string message, Exception inner) : base(message, inner)
         {
         }
     }
@@ -42,7 +40,7 @@ namespace FlouPoint.GitHub
         /// <summary>
         /// Retrieves credentials.
         /// </summary>
-        /// <returns>An instance of <see cref="Credential"/> containing the credentials.</returns>
+        /// <returns>An instance of <see cref = "Credential"/> containing the credentials.</returns>
         Credential GetCredentials();
     }
 
@@ -54,7 +52,7 @@ namespace FlouPoint.GitHub
         /// <summary>
         /// Retrieves the value of an environment variable.
         /// </summary>
-        /// <param name="key">The name of the environment variable.</param>
+        /// <param name = "key">The name of the environment variable.</param>
         /// <returns>The value of the environment variable, or <c>null</c> if it is not found.</returns>
         Task<OperationResult<string>> GetEnvironmentVariable(string key);
     }
@@ -64,12 +62,11 @@ namespace FlouPoint.GitHub
     /// </summary>
     public class EnvironmentVariableProvider : IEnvironmentVariableProvider
     {
-        /// <inheritdoc />
+        /// <inheritdoc/>
         public async Task<OperationResult<string>> GetEnvironmentVariable(string key)
         {
             if (key == null)
                 throw new ArgumentNullException(nameof(key));
-
             // Retrieves the value of an environment variable from the current process.
             return OperationResult<string>.Success(Environment.GetEnvironmentVariable(key), "Resource.SuccessfullyEmail");
         }
@@ -81,16 +78,14 @@ namespace FlouPoint.GitHub
     public class GitHubCredentialProvider : ICredentialProvider
     {
         private readonly IEnvironmentVariableProvider _environmentVariableProvider;
-
         // Constants for the environment variable names.
         private const string GitHubUsernameEnvVar = "GITHUB_USERNAME";
         private const string GitHubTokenEnvVar = "GITHUB_TOKEN";
-
         /// <summary>
-        /// Initializes a new instance of the <see cref="GitHubCredentialProvider"/> class.
+        /// Initializes a new instance of the <see cref = "GitHubCredentialProvider"/> class.
         /// </summary>
-        /// <param name="environmentVariableProvider">An instance of <see cref="IEnvironmentVariableProvider"/> to retrieve environment variables.</param>
-        /// <exception cref="ArgumentNullException">Thrown when <paramref name="environmentVariableProvider"/> is <c>null</c>.</exception>
+        /// <param name = "environmentVariableProvider">An instance of <see cref = "IEnvironmentVariableProvider"/> to retrieve environment variables.</param>
+        /// <exception cref = "ArgumentNullException">Thrown when <paramref name = "environmentVariableProvider"/> is <c>null</c>.</exception>
         public GitHubCredentialProvider(IEnvironmentVariableProvider environmentVariableProvider)
         {
             _environmentVariableProvider = environmentVariableProvider ?? throw new ArgumentNullException(nameof(environmentVariableProvider));
@@ -99,29 +94,22 @@ namespace FlouPoint.GitHub
         /// <summary>
         /// Retrieves the GitHub credentials from the environment variables.
         /// </summary>
-        /// <returns>An instance of <see cref="Credential"/> containing the GitHub credentials.</returns>
-        /// <exception cref="CredentialNotFoundException">Thrown when the required environment variables are not set.</exception>
-       
+        /// <returns>An instance of <see cref = "Credential"/> containing the GitHub credentials.</returns>
+        /// <exception cref = "CredentialNotFoundException">Thrown when the required environment variables are not set.</exception>
         public Credential GetCredentials()
         {
-           
             // Retrieve the username and token from environment variables.
             var username = _environmentVariableProvider.GetEnvironmentVariable(GitHubUsernameEnvVar);
             var token = _environmentVariableProvider.GetEnvironmentVariable(GitHubTokenEnvVar);
-
             // Validate that the username is not null or whitespace.
             //if (string.IsNullOrWhiteSpace(username))
             //    throw new CredentialNotFoundException($"GitHub username is not set in the environment variable '{GitHubUsernameEnvVar}'.");
-
             // Validate that the token is not null or whitespace.
             //if (string.IsNullOrWhiteSpace(token))
             //    throw new CredentialNotFoundException($"GitHub token is not set in the environment variable '{GitHubTokenEnvVar}'.");
-
             // Return a new Credential object with the retrieved username and token.
             //return new Credential(username, token);
             return new Credential();
-           
         }
-           
     }
 }
