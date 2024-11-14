@@ -1,18 +1,16 @@
 ﻿namespace Infrastructure.Test.Repositories.Implementation.CRUD.User
 {
     using Moq;
-    using Infrastructure.Repositories.Implementation.CRUD.User;
     using Application.UseCases.CRUD.Query.User;
-    using Infrastructure.Repositories.Implementation.CRUD.User.Create;
-    using Infrastructure.Repositories.Implementation.CRUD.User.Update;
     using User = Domain.Entities.User;
     using Application.Result;
     using System.Linq.Expressions;
+    using Application.Result.Error;
+    using Application.UseCases.CRUD.User;
 
     [TestClass]
     public class UserCrudTests : SetupTest
     {
-        // Create Operation Tests
         [TestMethod]
         public async Task CreateUser_ShouldSucceed_WhenDataIsValid()
         {
@@ -84,45 +82,37 @@
         [TestMethod]
         public async Task ReadUserWithFilter_ShouldReturnFilteredResults()
         {
-            // Arrange: Create a list of users with only active users to simulate the filtered results
             var activeUsers = new List<User>
             {
                 new User { Name = "Active User 1", Email = "activeuser1@example.com", Active = true },
                 new User { Name = "Active User 2", Email = "activeuser2@example.com", Active = true }
             }.AsQueryable();
 
-            // Mock the _userQuery to return only active users when ReadFilter is called with the Active filter
             var mockUserQuery = new Mock<IUserQuery>();
             mockUserQuery.Setup(q => q.ReadFilter(It.Is<Expression<Func<User, bool>>>(filter => filter.ToString().Contains("u.Active"))))
                          .ReturnsAsync(Operation<IQueryable<User>>.Success(activeUsers, "Filtered users retrieved"));
 
             var _userQuery = mockUserQuery.Object;
 
-            // Act: Call the ReadFilter method with the active filter to get the mocked result
             var result = await _userQuery.ReadFilter(u => u.Active);
 
-            // Assert: Verify that all users in the result are active
             Assert.IsTrue(result.Data.All(u => u.Active));
         }
 
         [TestMethod]
         public async Task ReadUsersWithPagination_ShouldReturnCorrectPage()
         {
-            // Arrange: Create a list of users to represent the expected page of results
             var usersPage2 = Enumerable.Range(6, 5).Select(i =>
                 new User { Name = $"User {i}", Email = $"user{i}@example.com" }).AsQueryable();
 
-            // Mock the _userQuery to return a successful operation result with users 6 to 10 when called for page 2
             var mockUserQuery = new Mock<IUserQuery>();
             mockUserQuery.Setup(q => q.ReadFilterPage(2, 5, string.Empty))
                          .ReturnsAsync(Operation<IQueryable<User>>.Success(usersPage2, "Users found"));
 
             var _userQuery = mockUserQuery.Object;
 
-            // Act: Call the ReadFilterPage method to get the mocked result for page 2 with a page size of 5
             var result = await _userQuery.ReadFilterPage(2, 5, string.Empty);
 
-            // Assert: Verify that the result has exactly 5 users and that the first user on the page is "User 6"
             Assert.AreEqual(5, result.Data.Count());
             Assert.AreEqual("User 6", result.Data.First().Name);
         }
@@ -130,25 +120,108 @@
         [TestMethod]
         public async Task ReadUsersWithPagination_ShouldReturnEmpty_WhenOutOfRange()
         {
-            // Arrange: Create an empty IQueryable<User> to simulate an out-of-range page result
             var emptyUsers = Enumerable.Empty<User>().AsQueryable();
 
-            // Mock the _userQuery to return an empty result for page 10 with a page size of 5
             var mockUserQuery = new Mock<IUserQuery>();
             mockUserQuery.Setup(q => q.ReadFilterPage(10, 5, string.Empty))
                          .ReturnsAsync(Operation<IQueryable<User>>.Success(emptyUsers, "No users found for the specified page"));
 
             var _userQuery = mockUserQuery.Object;
 
-            // Act: Call the ReadFilterPage method to get the mocked result for an out-of-range page
             var result = await _userQuery.ReadFilterPage(10, 5, string.Empty);
 
-            // Assert: Verify that the result Data is empty
             Assert.IsTrue(!result.Data.Any());
         }
 
-        // Update and Delete Operations remain the same as before
+        // Update Operation Tests
+        [TestMethod]
+        public async Task UpdateUser_ShouldSucceed_WhenDataIsValid()
+        {
+            // Arrange: Create an existing user to update
+            var existingUser = new User { Id = "valid-id", Name = "Old Name", Email = "old@example.com" };
+            await _userCreate.Create(existingUser);
 
-        // Additional Update and Delete tests if needed...
+            // Mock the _userUpdate to return a successful result when updating the user
+            var mockUserUpdate = new Mock<IUserUpdate>();
+            mockUserUpdate.Setup(u => u.Update(existingUser))
+                          .ReturnsAsync(Operation<bool>.Success(true, "User updated successfully"));
+
+            var _userUpdate = mockUserUpdate.Object;
+
+            // Act: Call the Update method
+            var result = await _userUpdate.Update(existingUser);
+
+            // Assert: Verify that the update was successful
+            Assert.IsTrue(result.IsSuccessful);
+            Assert.IsTrue(result.Data);
+            Assert.AreEqual("User updated successfully", result.Message);
+        }
+        [TestMethod]
+        public async Task UpdateUser_ShouldFail_WhenRequiredFieldIsMissing()
+        {
+            // Arrange: Create an existing user
+            var existingUser = new User { Id = "valid-id", Name = null, Email = "user@example.com" }; // Name is null
+
+            // Mock the _userUpdate to return a failure result due to missing required field
+            var mockUserUpdate = new Mock<IUserUpdate>();
+            mockUserUpdate.Setup(u => u.Update(existingUser))
+                          .ReturnsAsync(Operation<bool>.Failure("Name cannot be null", ErrorTypes.BusinessValidation));
+
+            var _userUpdate = mockUserUpdate.Object;
+
+            // Act: Call the Update method
+            var result = await _userUpdate.Update(existingUser);
+
+            // Assert: Verify that the update failed due to validation error
+            Assert.IsFalse(result.IsSuccessful);
+            Assert.IsFalse(result.Data);
+            Assert.AreEqual("Name cannot be null", result.Message);
+        }
+
+
+        [TestMethod]
+        public async Task DeleteUser_ShouldSucceed_WhenIdIsValid()
+        {
+            // Arrange: Define an existing user ID to delete
+            var validUserId = "valid-id";
+
+            // Mock the _userDelete to return a successful operation result when deleting a user with a valid ID
+            var mockUserDelete = new Mock<IUserDelete>();
+            mockUserDelete.Setup(d => d.Delete(validUserId))
+                          .ReturnsAsync(Operation<bool>.Success(true, "User deleted successfully"));
+
+            var _userDelete = mockUserDelete.Object;
+
+            // Act: Call the Delete method
+            var result = await _userDelete.Delete(validUserId);
+
+            // Assert: Verify that the deletion was successful
+            Assert.IsTrue(result.IsSuccessful);
+            Assert.IsTrue(result.Data);
+            Assert.AreEqual("User deleted successfully", result.Message);
+        }
+
+        [TestMethod]
+        public async Task DeleteUser_ShouldFail_WhenIdIsInvalid()
+        {
+            // Arrange: Define an invalid user ID
+            var invalidUserId = "invalid-id";
+
+            // Mock the _userDelete to return a failure operation result when deleting a user with an invalid ID
+            var mockUserDelete = new Mock<IUserDelete>();
+            mockUserDelete.Setup(d => d.Delete(invalidUserId))
+                          .ReturnsAsync(Operation<bool>.Failure("User not found", ErrorTypes.NotFound));
+
+            var _userDelete = mockUserDelete.Object;
+
+            // Act: Call the Delete method
+            var result = await _userDelete.Delete(invalidUserId);
+
+            // Assert: Verify that the deletion failed
+            Assert.IsFalse(result.IsSuccessful);
+            Assert.IsFalse(result.Data);
+            Assert.AreEqual("User not found", result.Message);
+        }
+
     }
 }
