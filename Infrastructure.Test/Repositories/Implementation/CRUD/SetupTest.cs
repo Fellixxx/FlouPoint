@@ -19,6 +19,7 @@ namespace Infrastructure.Test.Repositories.Implementation.CRUD
     using Application.UseCases.Repository.CRUD.Resource;
     using Infrastructure.Repositories.Implementation.CRUD.Query;
     using Infrastructure.Resource;
+    using System.Diagnostics;
 
     /// <summary>
     /// Class to set up the test environment for CRUD operations and related services.
@@ -158,6 +159,10 @@ namespace Infrastructure.Test.Repositories.Implementation.CRUD
                 "The search in the {0} entity completed successfully."
             },
             {
+                "SuccessfullySearchGeneric",
+                "The search in the {0} entity completed successfully."
+            },
+            {
                 "ImageSuccessfullyUpload",
                 "The image was uploaded successfully due to an unexpected error."
             },
@@ -177,16 +182,22 @@ namespace Infrastructure.Test.Repositories.Implementation.CRUD
         public void SetUp()
         {
             // Setup in-memory database options and context
-            _options = new DbContextOptionsBuilder<DataContext>().UseInMemoryDatabase(Guid.NewGuid().ToString()).EnableSensitiveDataLogging().Options;
+            _options = new DbContextOptionsBuilder<DataContext>()
+                .UseInMemoryDatabase(Guid.NewGuid().ToString())
+                .EnableSensitiveDataLogging()
+                .Options;
+
             var columnTypes = new ColumnTypesPosgresql();
             _dbContext = new DataContext(_options, columnTypes);
-            // Initialize mocks and other test services
+
+            // Initialize mocks and services
             _logService = new Mock<ILogService>();
             _resourceHandler = SetupResourceHandlerMock();
             _resourceProvider = SetupResourceProviderMock();
             _resxResourceProvider = new ResxProvider();
             _utilEntity = new UtilEntity<Domain.Entities.User>(_resourceProvider, _resourceHandler);
-            // Initializing the User related services
+
+            // Initialize the User-related services with concrete instances
             _resourceEntryQuery = new ResourceEntryQuery(_dbContext, _logService.Object);
             _userCreate = new UserCreate(_dbContext, _logService.Object, _utilEntity, _resourceProvider, _resourceHandler);
             _userDelete = new UserDelete(_dbContext, _logService.Object, _resourceProvider, _resourceHandler);
@@ -194,13 +205,19 @@ namespace Infrastructure.Test.Repositories.Implementation.CRUD
             _userStatus = new UserStatus(_dbContext, _logService.Object, _resourceProvider, _resourceHandler);
             _userReadFilter = new UserReadFilter(_dbContext, _logService.Object, _resourceProvider, _resourceHandler);
             _userReadFilterCount = new UserReadFilterCount(_dbContext, _logService.Object, _resourceProvider, _resourceHandler);
-            _userQuery = new Mock<IUserQuery>().Object;  // Mocking IUserQuery as it combines all read functionalities
 
+            // Mocking IUserQuery as it combines all read functionalities
+            var mockUserQuery = new Mock<IUserQuery>();
+            _userQuery = mockUserQuery.Object;
+
+            // Debugging output to verify initialization
+            Debug.WriteLine($"_dbContext initialized: {_dbContext != null}");
+            Debug.WriteLine($"_userCreate initialized: {_userCreate != null}");
+            Debug.WriteLine($"_userUpdate initialized: {_userUpdate != null}");
+            Debug.WriteLine($"_userDelete initialized: {_userDelete != null}");
+            Debug.WriteLine($"_userReadFilter initialized: {_userReadFilter != null}");
         }
 
-        /// <summary>
-        /// Setup a mock resource handler that returns predefined resource messages.
-        /// </summary>
         private IResourceHandler SetupResourceHandlerMock()
         {
             var mockResourceHandler = new Mock<IResourceHandler>();
@@ -212,9 +229,6 @@ namespace Infrastructure.Test.Repositories.Implementation.CRUD
             return mockResourceHandler.Object;
         }
 
-        /// <summary>
-        /// Setup a mock resources provider to simulate fetching of resource messages.
-        /// </summary>
         private IResourcesProvider SetupResourceProviderMock()
         {
             var mockResourceProvider = new Mock<IResourcesProvider>();
