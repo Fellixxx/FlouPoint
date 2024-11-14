@@ -14,112 +14,90 @@ namespace FlouPoint.Test.Infrastructure.Repository
     [TestFixture]
     public class OperationBuilderTests
     {
-        /// <summary>
-        /// Tests if the FailureBusinessValidation method returns an OperationResult with 
-        /// the correct error type and message for a business validation failure.
-        /// </summary>
-        [Test]
-        public Task When_FailureBusinessValidation_Called_Then_CorrectResult()
+        [SetUp]
+        public void SetUp()
         {
-            // Given
+        // Perform any necessary setup activities here.
+        }
+
+        [Test]
+        public void FailureBusinessValidation_ShouldReturn_CorrectResult()
+        {
+            // Arrange
             var expectedMessage = "Business validation failed";
-            // When
+            var expectedError = ErrorTypes.BusinessValidationError.GetCustomName();
+            // Act
             var result = OperationBuilder<string>.FailureBusinessValidation(expectedMessage);
-            // Then
+            // Assert
             result.Message.Should().Be(expectedMessage);
-            var expected = ErrorTypes.BusinessValidationError.GetCustomName();
-            result.Error.Should().Be(expected);
-            return Task.CompletedTask;
+            result.Error.Should().Be(expectedError);
+        // Ensure that an operation failure does not inadvertently perform any operation.
+        // Add additional assertions here if necessary.
         }
 
-        /// <summary>
-        /// Tests if the FailureConfigurationMissingError method returns an OperationResult with 
-        /// the correct error type and message for a configuration missing error.
-        /// </summary>
         [Test]
-        public Task When_FailureConfigurationMissingError_Called_Then_CorrectResult()
+        public void FailureConfigurationMissingError_ShouldReturn_CorrectResult()
         {
-            // Given
-            string expectedMessage = "Configuration missing";
-            // When
-            OperationResult<string> result = OperationBuilder<string>.FailureConfigurationMissingError(expectedMessage);
-            // Then
+            // Arrange
+            var expectedMessage = "Configuration missing";
+            var expectedError = ErrorTypes.ConfigurationMissingError.GetCustomName();
+            // Act
+            var result = OperationBuilder<string>.FailureConfigurationMissingError(expectedMessage);
+            // Assert
             result.Message.Should().Be(expectedMessage);
-            string expected = ErrorTypes.ConfigurationMissingError.GetCustomName();
-            result.Error.Should().Be(expected);
-            return Task.CompletedTask;
+            result.Error.Should().Be(expectedError);
         }
 
-        /// <summary>
-        /// Tests if the FailureDatabase method returns an OperationResult with 
-        /// the correct error type and message for a database error.
-        /// </summary>
         [Test]
-        public Task When_FailureDatabase_Called_Then_CorrectResult()
+        public void FailureDatabase_ShouldReturn_CorrectResult()
         {
-            // Given
-            string expectedMessage = "Database error";
-            // When
-            OperationResult<string> result = OperationBuilder<string>.FailureDatabase(expectedMessage);
-            // Then
+            // Arrange
+            var expectedMessage = "Database error";
+            var expectedError = ErrorTypes.DatabaseError.GetCustomName();
+            // Act
+            var result = OperationBuilder<string>.FailureDatabase(expectedMessage);
+            // Assert
             result.Message.Should().Be(expectedMessage);
-            string expected = ErrorTypes.DatabaseError.GetCustomName();
-            result.Error.Should().Be(expected);
-            return Task.CompletedTask;
+            result.Error.Should().Be(expectedError);
         }
 
-        /// <summary>
-        /// Tests if the FailureDataSubmittedInvalid method returns an OperationResult with 
-        /// the correct error type and message for submitting invalid data.
-        /// </summary>
         [Test]
-        public Task When_FailureDataSubmittedInvalid_Called_Then_CorrectResult()
+        public void FailureDataSubmittedInvalid_ShouldReturn_CorrectResult()
         {
-            // Given
-            string expectedMessage = "Invalid data submitted";
-            // When
-            OperationResult<string> result = OperationBuilder<string>.FailureDataSubmittedInvalid(expectedMessage);
-            // Then
+            // Arrange
+            var expectedMessage = "Invalid data submitted";
+            var expectedError = ErrorTypes.DataSubmittedInvalid.GetCustomName();
+            // Act
+            var result = OperationBuilder<string>.FailureDataSubmittedInvalid(expectedMessage);
+            // Assert
             result.Message.Should().Be(expectedMessage);
-            string expected = ErrorTypes.DataSubmittedInvalid.GetCustomName();
-            result.Error.Should().Be(expected);
-            return Task.CompletedTask;
+            result.Error.Should().Be(expectedError);
         }
 
-        /// <summary>
-        /// Tests if the FailureExternalService method returns an OperationResult with 
-        /// the correct error type and message for an external service error.
-        /// </summary>
         [Test]
-        public Task When_FailureExternalService_Called_Then_CorrectResult()
+        public void FailureExternalService_ShouldReturn_CorrectResult()
         {
-            // Given
-            string expectedMessage = "External service error";
-            // When
-            OperationResult<string> result = OperationBuilder<string>.FailureExtenalService(expectedMessage);
-            // Then
+            // Arrange
+            var expectedMessage = "External service error";
+            var expectedError = ErrorTypes.ExternalServicesError.GetCustomName();
+            // Act
+            var result = OperationBuilder<string>.FailureExternalService(expectedMessage);
+            // Assert
             result.Message.Should().Be(expectedMessage);
-            string expected = ErrorTypes.ExternalServicesError.GetCustomName();
-            result.Error.Should().Be(expected);
-            return Task.CompletedTask;
+            result.Error.Should().Be(expectedError);
         }
 
-        /// <summary>
-        /// Tests if the FailureUnexpectedError method returns an OperationResult with 
-        /// the correct error type and message for an unexpected error.
-        /// </summary>
         [Test]
-        public Task When_FailureUnexpectedError_Called_Then_CorrectResult()
+        public void FailureUnexpectedError_ShouldReturn_CorrectResult()
         {
-            // Given
-            string expectedMessage = "Unexpected error";
-            // When
-            OperationResult<string> result = OperationBuilder<string>.FailureUnexpectedError(expectedMessage);
-            // Then
+            // Arrange
+            var expectedMessage = "Unexpected error";
+            var expectedError = ErrorTypes.UnexpectedError.GetCustomName();
+            // Act
+            var result = OperationBuilder<string>.FailureUnexpectedError(expectedMessage);
+            // Assert
             result.Message.Should().Be(expectedMessage);
-            string expected = ErrorTypes.UnexpectedError.GetCustomName();
-            result.Error.Should().Be(expected);
-            return Task.CompletedTask;
+            result.Error.Should().Be(expectedError);
         }
     }
 }

@@ -19,17 +19,28 @@ namespace FlouPoint.Test.Infrastructure.Repository
         /// is accurately retrieved from the exception.
         /// </summary>
         [Test]
-        public Task When_CreateException_ValidMessage_Then_Success()
+        public void When_CreateException_WithValidMessage_Then_MessageIsStoredCorrectly()
         {
             // Arrange
             var expectedMessage = "Test Exception Message";
             // Act
-            InvalidOperationResultException exception = new InvalidOperationResultException(expectedMessage);
-            var actualMessage = exception.Message;
+            var exception = new InvalidOperationResultException(expectedMessage);
             // Assert
-            actualMessage.Should().Be(expectedMessage);
-            // Return a completed task as NUnit supports asynchronous testing
-            return Task.CompletedTask;
+            exception.Message.Should().Be(expectedMessage);
         }
+
+        /// <summary>
+        /// Test to ensure that an InvalidOperationResultException can handle
+        /// a null message without throwing an unexpected error.
+        /// </summary>
+        [Test]
+        public void When_CreateException_WithNullMessage_Then_MessageIsNull()
+        {
+            // Act
+            var exception = new InvalidOperationResultException(null);
+            // Assert
+            exception.Message.Should().BeNull();
+        }
+    // Add more tests here for different scenarios if applicable
     }
 }
