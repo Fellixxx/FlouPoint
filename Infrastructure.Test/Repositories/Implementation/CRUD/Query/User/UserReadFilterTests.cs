@@ -21,7 +21,7 @@ namespace Infrastructure.Test.Repositories.Implementation.CRUD.Query.User
         /// Tests whether an instance of <see cref = "UserReadFilter"/> can be constructed successfully with valid parameters.
         /// </summary>
         [TestMethod]
-        public void CanConstruct()
+        public void Constructor_ShouldInitializeInstance_WithValidParameters()
         {
             // Act
             var instance = new UserReadFilter(_dbContext, _logService.Object, _resourceProvider, _resourceHandler);
@@ -34,7 +34,7 @@ namespace Infrastructure.Test.Repositories.Implementation.CRUD.Query.User
         /// when a null DataContext is passed, ensuring that invalid states are not allowed.
         /// </summary>
         [TestMethod]
-        public void CannotConstructWithNullContext()
+        public void Constructor_ShouldThrowArgumentNullException_WhenDataContextIsNull()
         {
             // Assert
             Assert.ThrowsException<ArgumentNullException>(() => new UserReadFilter(default(DataContext), _logService.Object, _resourceProvider, _resourceHandler), "Constructor should throw ArgumentNullException when a null DataContext is provided.");
