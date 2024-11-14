@@ -6,26 +6,68 @@ namespace Infrastructure.Test.Repositories.Implementation.CRUD.Query.User
     [TestClass]
     public class UserReadFilterPageTests : SetupTest
     {
-    // You can add setup methods here if needed. 
-    // For example, initializing objects or dependencies that are used across multiple tests.
-    /*
+        // Example setup method if needed
+        [TestInitialize]
+        public void Initialize()
+        {
+        // Code to initialize objects or dependencies used across multiple tests
+        }
+
         /// <summary>
-        /// A method to test a specific functionality of the UserReadFilterPage.
+        /// Tests the filtering functionality of UserReadFilterPage with valid filter inputs.
         /// </summary>
         [TestMethod]
-        public void TestMethodName()
+        public void FilterUsers_WithValidFilters_ReturnsExpectedUsers()
         {
-            // Arrange
-            // Set up any necessary objects, data, or state.
-            
-            // Act
-            // Execute the functionality being tested.
-            
-            // Assert
-            // Verify the results are as expected.
+        // Arrange
+        // Set up any necessary objects, data, or state.
+        // Act
+        // Execute the functionality being tested.
+        // Assert
+        // Verify the results are as expected.
         }
-        */
-    // Use the above structure to add test methods for various functionalities or scenarios
-    // you are validating in the UserReadFilterPage class.
+
+        /// <summary>
+        /// Tests the pagination functionality when fetching a specific page of users.
+        /// </summary>
+        [TestMethod]
+        public void GetUsers_WithPageNumber_ReturnsCorrectPageOfUsers()
+        {
+        // Arrange
+        // Set up any necessary objects, data, or state.
+        // Act
+        // Execute the functionality being tested.
+        // Assert
+        // Verify the results are as expected.
+        }
+
+        /// <summary>
+        /// Tests the behavior when no filters are applied on UserReadFilterPage.
+        /// </summary>
+        [TestMethod]
+        public void GetUsers_WithoutFilters_ReturnsAllUsers()
+        {
+        // Arrange
+        // Set up any necessary objects, data, or state.
+        // Act
+        // Execute the functionality being tested.
+        // Assert
+        // Verify the results are as expected.
+        }
+
+        /// <summary>
+        /// Tests the response when invalid filter inputs are provided.
+        /// </summary>
+        [TestMethod]
+        public void FilterUsers_WithInvalidFilters_ReturnsEmptyList()
+        {
+        // Arrange
+        // Set up any necessary objects, data, or state.
+        // Act
+        // Execute the functionality being tested.
+        // Assert
+        // Verify the results are as expected.
+        }
+    // More test methods can be added here for other scenarios and functionalities to be tested.
     }
 }

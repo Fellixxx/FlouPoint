@@ -18,7 +18,7 @@ namespace Infrastructure.Test.Repositories.Implementation.CRUD.User
         /// Tests if the UserUpdate class can be constructed properly.
         /// </summary>
         [TestMethod]
-        public void CanConstruct()
+        public void UserUpdate_CanBeConstructed()
         {
             // Act
             var instance = new UserUpdate(_dbContext, _logService.Object, _utilEntity, _resourceProvider, _resourceHandler);
@@ -30,7 +30,7 @@ namespace Infrastructure.Test.Repositories.Implementation.CRUD.User
         /// Tests if constructing the UserUpdate class with a null DbContext throws an ArgumentNullException.
         /// </summary>
         [TestMethod]
-        public void CannotConstructWithNullContext()
+        public void UserUpdate_CannotBeConstructedWithNullDbContext()
         {
             Assert.ThrowsException<ArgumentNullException>(() => new UserUpdate(null, _logService.Object, _utilEntity, _resourceProvider, _resourceHandler));
         }
@@ -39,7 +39,7 @@ namespace Infrastructure.Test.Repositories.Implementation.CRUD.User
         /// Tests if the UserUpdate class can be constructed with a null LogService.
         /// </summary>
         [TestMethod]
-        public void CanConstructWithNullLogService()
+        public void UserUpdate_CanBeConstructedWithNullLogService()
         {
             var userUpdate = new UserUpdate(_dbContext, null, _utilEntity, _resourceProvider, _resourceHandler);
             Assert.IsNotNull(userUpdate);
@@ -49,7 +49,7 @@ namespace Infrastructure.Test.Repositories.Implementation.CRUD.User
         /// Tests creating a valid user entity and updating it successfully.
         /// </summary>
         [TestMethod]
-        public async Task When_CreateEntity_WithValidUser_ShouldReturnSuccess()
+        public async Task CreateAndUpdate_ValidUser_ReturnsSuccess()
         {
             // Given
             string id = Guid.NewGuid().ToString();
@@ -80,7 +80,7 @@ namespace Infrastructure.Test.Repositories.Implementation.CRUD.User
         /// Tests creating a user entity with an invalid email format and expects a failure.
         /// </summary>
         [TestMethod]
-        public async Task When_CreateEntity_WithInvalidEmailFormat_ShouldReturnFailure()
+        public async Task CreateUser_WithInvalidEmail_ReturnsFailure()
         {
             // Given
             string id = Guid.NewGuid().ToString();
@@ -111,7 +111,7 @@ namespace Infrastructure.Test.Repositories.Implementation.CRUD.User
         /// Tests creating a user entity with an already registered username and expects a failure.
         /// </summary>
         [TestMethod]
-        public async Task When_CreateEntity_WithAlreadyRegisteredUsername_ShouldReturnFailure()
+        public async Task CreateUser_WithDuplicateUsername_ReturnsFailure()
         {
             // Given
             var user = new User
@@ -149,7 +149,7 @@ namespace Infrastructure.Test.Repositories.Implementation.CRUD.User
         /// Tests creating a user entity with an already registered email and expects a failure.
         /// </summary>
         [TestMethod]
-        public async Task When_CreateEntity_WithAlreadyRegisteredEmail_ShouldReturnFailure()
+        public async Task CreateUser_WithDuplicateEmail_ReturnsFailure()
         {
             // Given
             var user = new User
@@ -182,7 +182,7 @@ namespace Infrastructure.Test.Repositories.Implementation.CRUD.User
         /// Tests updating a user entity with null data and expects a failure.
         /// </summary>
         [TestMethod]
-        public async Task When_CreateEntity_WithNullUser_ShouldReturnFailure()
+        public async Task UpdateUser_WithNullUser_ReturnsFailure()
         {
             // Given
             User user = null;
@@ -198,7 +198,7 @@ namespace Infrastructure.Test.Repositories.Implementation.CRUD.User
         /// Tests creating a user entity missing required fields and expects a failure.
         /// </summary>
         [TestMethod]
-        public async Task When_CreateEntity_WithMissingRequiredFields_ShouldReturnFailure()
+        public async Task CreateUser_WithMissingFields_ReturnsFailure()
         {
             // Given
             var user = new User
@@ -220,7 +220,7 @@ namespace Infrastructure.Test.Repositories.Implementation.CRUD.User
         /// Tests creating a user entity with an invalid password and expects a failure.
         /// </summary>
         [TestMethod]
-        public async Task When_CreateEntity_WithInvalidPassword_ShouldReturnFailure()
+        public async Task CreateUser_WithInvalidPassword_ReturnsFailure()
         {
             // Given
             var user = new User
@@ -242,7 +242,7 @@ namespace Infrastructure.Test.Repositories.Implementation.CRUD.User
         /// Tests creating a user entity with fields that have excessively long strings and expects a failure.
         /// </summary>
         [TestMethod]
-        public async Task When_CreateEntity_WithLongStrings_ShouldReturnFailure()
+        public async Task CreateUser_WithLongStringsFields_ReturnsFailure()
         {
             // Given
             string longName = new string ('a', 256); // Assuming max length is less than 256
@@ -265,7 +265,7 @@ namespace Infrastructure.Test.Repositories.Implementation.CRUD.User
         /// Tests that the password is hashed correctly when creating a valid user entity.
         /// </summary>
         [TestMethod]
-        public async Task When_CreateEntity_WithValidUser_ShouldHashPasswordCorrectly()
+        public async Task CreateUser_WithValidData_ShouldHashPassword()
         {
             // Given
             string id = Guid.NewGuid().ToString();
@@ -292,7 +292,7 @@ namespace Infrastructure.Test.Repositories.Implementation.CRUD.User
         /// Tests that the CreatedAt and UpdatedAt timestamps are set correctly when creating a valid user entity.
         /// </summary>
         [TestMethod]
-        public async Task When_CreateEntity_WithValidUser_ShouldSetCreatedAtAndUpdatedAt()
+        public async Task CreateUser_WithValidData_ShouldSetTimestamps()
         {
             // Given
             string id = Guid.NewGuid().ToString();
@@ -320,7 +320,7 @@ namespace Infrastructure.Test.Repositories.Implementation.CRUD.User
         /// Tests that the Active flag is set to false when creating a valid user entity.
         /// </summary>
         [TestMethod]
-        public async Task When_CreateEntity_WithValidUser_ShouldSetActiveToFalse()
+        public async Task CreateUser_WithValidData_ShouldSetActiveFlagToFalse()
         {
             // Given
             string id = Guid.NewGuid().ToString();
@@ -345,7 +345,7 @@ namespace Infrastructure.Test.Repositories.Implementation.CRUD.User
         /// Tests creating user entities with duplicate IDs and expects a failure.
         /// </summary>
         [TestMethod]
-        public async Task When_CreateEntity_WithDuplicateId_ShouldReturnFailure()
+        public async Task CreateUser_WithDuplicateId_ReturnsFailure()
         {
             // Given
             string id = Guid.NewGuid().ToString();

@@ -17,10 +17,10 @@ namespace Infrastructure.Test.Repositories.Implementation.CRUD.Query.User
     public class UserReadFilterCountTests : SetupTest
     {
         /// <summary>
-        /// Tests if the UserReadFilterCount can be constructed successfully.
+        /// Tests if the UserReadFilterCount class can be instantiated successfully with valid arguments.
         /// </summary>
         [TestMethod]
-        public void CanConstruct()
+        public void ShouldConstructUserReadFilterCountSuccessfully()
         {
             // Act: Create an instance of UserReadFilterCount
             var instance = new UserReadFilterCount(_dbContext, _logService.Object, _resourceProvider, _resourceHandler);
@@ -29,10 +29,10 @@ namespace Infrastructure.Test.Repositories.Implementation.CRUD.Query.User
         }
 
         /// <summary>
-        /// Tests that UserReadFilterCount cannot be constructed with a null DataContext.
+        /// Tests that constructing UserReadFilterCount with a null DataContext throws an ArgumentNullException.
         /// </summary>
         [TestMethod]
-        public void CannotConstructWithNullContext()
+        public void ShouldThrowArgumentNullExceptionWhenConstructedWithNullContext()
         {
             // Assert: Verify that constructing with a null DataContext throws an ArgumentNullException
             Assert.ThrowsException<ArgumentNullException>(() => new UserReadFilterCount(default(DataContext), _logService.Object, _resourceProvider, _resourceHandler));

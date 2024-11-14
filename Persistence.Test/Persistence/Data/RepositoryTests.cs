@@ -21,7 +21,7 @@ namespace Persistence.Test.Persistence.Data
         /// Initializes the test by setting up the mock objects.
         /// </summary>
         [TestInitialize]
-        public void SetUp()
+        public void Initialize_Mocks()
         {
             _mockContext = new Mock<DbContext>();
             _mockDbSet = new Mock<DbSet<MockEntity>>();
@@ -30,51 +30,51 @@ namespace Persistence.Test.Persistence.Data
         }
 
         /// <summary>
-        /// Test method for creating a valid entity.
+        /// Verifies that a valid entity is successfully created.
         /// </summary>
         [TestMethod]
-        public async Task When_Create_ValidEntity_Then_Success()
+        public async Task Create_ValidEntity_ShouldAddEntity()
         {
-            // Given
+            // Arrange
             var entity = new MockEntity
             {
                 Id = Guid.NewGuid().ToString(),
                 Name = "Test"
             };
-            // When
+            // Act
             var id = await _repository.Create(entity);
-            // Then
+            // Assert
             _mockDbSet.Verify(x => x.Add(entity), Times.Once);
             Assert.AreEqual(id, entity.Id);
         }
 
         /// <summary>
-        /// Test method for attempting to create a null entity.
+        /// Verifies that creating a null entity throws an exception.
         /// </summary>
         [TestMethod]
-        public async Task When_Create_NullEntity_Then_ThrowsException()
+        public async Task Create_NullEntity_ShouldThrowArgumentNullException()
         {
-            // Given, When, Then
+            // Arrange, Act & Assert
             await Assert.ThrowsExceptionAsync<ArgumentNullException>(async () => await _repository.Create(null));
         }
 
         /// <summary>
-        /// Test method for attempting to update a null entity.
+        /// Verifies that updating a null entity throws an exception.
         /// </summary>
         [TestMethod]
-        public async Task When_Update_NullEntity_Then_ThrowsException()
+        public async Task Update_NullEntity_ShouldThrowArgumentNullException()
         {
-            // Given, When, Then
+            // Arrange, Act & Assert
             await Assert.ThrowsExceptionAsync<ArgumentNullException>(async () => await _repository.Update(null));
         }
 
         /// <summary>
-        /// Test method for attempting to delete a null entity.
+        /// Verifies that deleting a null entity throws an exception.
         /// </summary>
         [TestMethod]
-        public async Task When_Delete_NullEntity_Then_ThrowsException()
+        public async Task Delete_NullEntity_ShouldThrowArgumentNullException()
         {
-            // Given, When, Then
+            // Arrange, Act & Assert
             await Assert.ThrowsExceptionAsync<ArgumentNullException>(async () => await _repository.Delete(null));
         }
 

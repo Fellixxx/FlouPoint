@@ -37,10 +37,10 @@ namespace Infrastructure.Test.Repositories.Implementation.CRUD.Query.User
         }
 
         /// <summary>
-        /// Tests the constructor of the UserQuery class to ensure that an instance can be created successfully.
+        /// Tests that the UserQuery class can be constructed successfully.
         /// </summary>
         [TestMethod]
-        public void CanConstruct()
+        public void Constructor_ShouldInitializeInstance()
         {
             // Act
             var instance = new UserQuery(_userReadFilter.Object, _userReadFilterCount.Object, _userReadFilterPage.Object, _userReadId.Object);
@@ -49,10 +49,10 @@ namespace Infrastructure.Test.Repositories.Implementation.CRUD.Query.User
         }
 
         /// <summary>
-        /// Tests if the ReadFilter method can be called successfully with the given input and expected result.
+        /// Tests the ReadFilter method to ensure it interacts with IUserReadFilter as expected.
         /// </summary>
         [TestMethod]
-        public async Task CanCallReadFilter()
+        public async Task ReadFilter_ShouldReturnExpectedResult_WhenCalled()
         {
             // Arrange
             Expression<Func<User, bool>> predicate = user => user.Active;
@@ -66,10 +66,10 @@ namespace Infrastructure.Test.Repositories.Implementation.CRUD.Query.User
         }
 
         /// <summary>
-        /// Tests if the ReadFilterCount method can be called successfully with the given input and expected result.
+        /// Tests the ReadFilterCount method to ensure it returns the correct count.
         /// </summary>
         [TestMethod]
-        public async Task CanCallReadFilterCount()
+        public async Task ReadFilterCount_ShouldReturnCorrectCount()
         {
             // Arrange
             var filter = "ActiveUsers";
@@ -83,10 +83,10 @@ namespace Infrastructure.Test.Repositories.Implementation.CRUD.Query.User
         }
 
         /// <summary>
-        /// Tests if the ReadFilterPage method can be called successfully with the given input and expected result.
+        /// Tests the ReadFilterPage method to ensure pagination works correctly.
         /// </summary>
         [TestMethod]
-        public async Task CanCallReadFilterPage()
+        public async Task ReadFilterPage_ShouldReturnCorrectPage_WhenCalled()
         {
             // Arrange
             var pageNumber = 1;
@@ -102,10 +102,10 @@ namespace Infrastructure.Test.Repositories.Implementation.CRUD.Query.User
         }
 
         /// <summary>
-        /// Tests if the ReadId method can be called successfully with the given input and expected result.
+        /// Tests the ReadId method to ensure it fetches the correct user by ID.
         /// </summary>
         [TestMethod]
-        public async Task CanCallReadId()
+        public async Task ReadId_ShouldReturnCorrectUser_WhenValidIdIsProvided()
         {
             // Arrange
             var id = "user123";
@@ -125,10 +125,10 @@ namespace Infrastructure.Test.Repositories.Implementation.CRUD.Query.User
         }
 
         /// <summary>
-        /// Tests if the ReadByBearer method can be called successfully with the given input and expected result.
+        /// Tests the ReadByBearer method to ensure the correct user is retrieved with a valid bearer token.
         /// </summary>
         [TestMethod]
-        public async Task CanCallReadByBearer()
+        public async Task ReadByBearer_ShouldReturnCorrectUser_WhenValidTokenIsProvided()
         {
             // Arrange
             var bearerToken = "BearerToken123";
