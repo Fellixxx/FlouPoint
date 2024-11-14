@@ -6,10 +6,10 @@
     /// and ID-based querying functionality for ResourceEntry entities.
     /// </summary>
     public interface IQuery : 
-        IReadFilter, 
-        IReadFilterCount, 
-        IReadFilterPage, 
-        IReadId
+        IResourceReadFilter, 
+        IResourceReadFilterCount, 
+        IResourceReadFilterPage, 
+        IResourceReadId
     {
     }
 }

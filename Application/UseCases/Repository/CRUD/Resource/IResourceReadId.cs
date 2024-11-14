@@ -3,7 +3,7 @@
     using Application.Result;
 
     using Resource = Domain.Entities.Resource;
-    public interface IReadId
+    public interface IResourceReadId
     {
         /// <summary>
         /// Retrieves a ResourceEntry entity by its unique identifier.

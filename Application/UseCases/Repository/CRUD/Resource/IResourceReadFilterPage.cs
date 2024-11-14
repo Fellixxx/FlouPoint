@@ -2,7 +2,7 @@
 {
     using Application.Result;
     using Resource = Domain.Entities.Resource;
-    public interface IReadFilterPage
+    public interface IResourceReadFilterPage
     {
         /// <summary>
         /// Retrieves a paginated list of ResourceEntry entities based on the provided filter string.

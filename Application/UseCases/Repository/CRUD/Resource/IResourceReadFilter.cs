@@ -3,7 +3,7 @@
     using Application.Result;
     using System.Linq.Expressions;
     using Resource = Domain.Entities.Resource;
-    public interface IReadFilter
+    public interface IResourceReadFilter
     {
         /// <summary>
         /// Returns all ResourceEntry entities that satisfy the specified predicate.
