@@ -27,7 +27,7 @@ namespace Domain.Test.DTO.User
         /// Tests whether the Name property can be set and retrieved accurately.
         /// </summary>
         [TestMethod]
-        public void CanSetAndGetName()
+        public void NameProperty_WhenSet_ReturnsCorrectValue()
         {
             // Arrange: Set up a test value for the Name property.
             var testValue = "TestValue1973705464";
@@ -41,7 +41,7 @@ namespace Domain.Test.DTO.User
         /// Tests whether the Password property can be set and retrieved correctly.
         /// </summary>
         [TestMethod]
-        public void CanSetAndGetPassword()
+        public void PasswordProperty_WhenSet_ReturnsCorrectValue()
         {
             // Arrange: Set up a test value for the Password property.
             var testValue = "TestValue573994964";
@@ -55,7 +55,7 @@ namespace Domain.Test.DTO.User
         /// Tests whether the Email property can be set and retrieved accurately.
         /// </summary>
         [TestMethod]
-        public void CanSetAndGetEmail()
+        public void EmailProperty_WhenSet_ReturnsCorrectValue()
         {
             // Arrange: Set up a test value for the Email property.
             var testValue = "TestValue562784087";

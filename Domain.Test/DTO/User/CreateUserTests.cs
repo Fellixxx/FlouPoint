@@ -30,7 +30,7 @@ namespace Domain.Test.DTO.User
         /// Name matches the value that was set.
         /// </summary>
         [TestMethod]
-        public void CanSetAndGetName()
+        public void NameProperty_ShouldSetAndReturnCorrectValue()
         {
             // Arrange
             var testValue = "TestValue1731729349";
@@ -46,7 +46,7 @@ namespace Domain.Test.DTO.User
         /// Password matches the value that was set.
         /// </summary>
         [TestMethod]
-        public void CanSetAndGetPassword()
+        public void PasswordProperty_ShouldSetAndReturnCorrectValue()
         {
             // Arrange
             var testValue = "TestValue1458374591";
@@ -62,7 +62,7 @@ namespace Domain.Test.DTO.User
         /// Email matches the value that was set.
         /// </summary>
         [TestMethod]
-        public void CanSetAndGetEmail()
+        public void EmailProperty_ShouldSetAndReturnCorrectValue()
         {
             // Arrange
             var testValue = "TestValue1026318214";

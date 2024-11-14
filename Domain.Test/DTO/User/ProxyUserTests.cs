@@ -25,7 +25,7 @@ namespace Domain.Test.DTO.User
         /// Test to ensure that the Id property can be set and retrieved correctly.
         /// </summary>
         [TestMethod]
-        public void CanSetAndGetId()
+        public void IdProperty_WhenSet_ShouldReturnCorrectValue()
         {
             // Arrange
             var testValue = "TestValue793144897";
@@ -39,7 +39,7 @@ namespace Domain.Test.DTO.User
         /// Test to ensure that the Name property can be set and retrieved correctly.
         /// </summary>
         [TestMethod]
-        public void CanSetAndGetName()
+        public void NameProperty_WhenSet_ShouldReturnCorrectValue()
         {
             // Arrange
             var testValue = "TestValue1452850";
@@ -53,7 +53,7 @@ namespace Domain.Test.DTO.User
         /// Test to ensure that the Email property can be set and retrieved correctly.
         /// </summary>
         [TestMethod]
-        public void CanSetAndGetEmail()
+        public void EmailProperty_WhenSet_ShouldReturnCorrectValue()
         {
             // Arrange
             var testValue = "TestValue946483756";
@@ -67,7 +67,7 @@ namespace Domain.Test.DTO.User
         /// Test to ensure that the CreatedAt property can be set and retrieved correctly.
         /// </summary>
         [TestMethod]
-        public void CanSetAndGetCreatedAt()
+        public void CreatedAtProperty_WhenSet_ShouldReturnCorrectValue()
         {
             // Arrange
             var testValue = DateTime.UtcNow;
@@ -81,7 +81,7 @@ namespace Domain.Test.DTO.User
         /// Test to ensure that the UpdatedAt property can be set and retrieved correctly.
         /// </summary>
         [TestMethod]
-        public void CanSetAndGetUpdatedAt()
+        public void UpdatedAtProperty_WhenSet_ShouldReturnCorrectValue()
         {
             // Arrange
             var testValue = DateTime.UtcNow;
@@ -95,7 +95,7 @@ namespace Domain.Test.DTO.User
         /// Test to ensure that the Avatar property can be set and retrieved correctly.
         /// </summary>
         [TestMethod]
-        public void CanSetAndGetAvatar()
+        public void AvatarProperty_WhenSet_ShouldReturnCorrectValue()
         {
             // Arrange
             var testValue = "TestValue187255694";
@@ -109,7 +109,7 @@ namespace Domain.Test.DTO.User
         /// Test to ensure that the Active property can be set and retrieved correctly.
         /// </summary>
         [TestMethod]
-        public void CanSetAndGetActive()
+        public void ActiveProperty_WhenSet_ShouldReturnCorrectValue()
         {
             // Arrange
             var testValue = true;
