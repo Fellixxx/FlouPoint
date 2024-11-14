@@ -30,7 +30,7 @@ namespace Domain.Test.EnumType
         /// Tests whether an instance of <c>EnumMetadata</c> can be successfully constructed.
         /// </summary>
         [TestMethod]
-        public void CanConstruct()
+        public void ShouldConstructEnumMetadata()
         {
             // Act
             var instance = new EnumMetadata(_name, _description);
@@ -46,8 +46,9 @@ namespace Domain.Test.EnumType
         [DataRow(null)]
         [DataRow("")]
         [DataRow("   ")]
-        public void CannotConstructWithInvalidName(string value)
+        public void ShouldThrowArgumentNullExceptionForInvalidName(string value)
         {
+            // Act & Assert
             Assert.ThrowsException<ArgumentNullException>(() => new EnumMetadata(value, _description));
         }
 
@@ -59,8 +60,9 @@ namespace Domain.Test.EnumType
         [DataRow(null)]
         [DataRow("")]
         [DataRow("   ")]
-        public void CannotConstructWithInvalidDescription(string value)
+        public void ShouldThrowArgumentNullExceptionForInvalidDescription(string value)
         {
+            // Act & Assert
             Assert.ThrowsException<ArgumentNullException>(() => new EnumMetadata(_name, value));
         }
 
@@ -68,8 +70,9 @@ namespace Domain.Test.EnumType
         /// Verifies that the <c>Name</c> property of <c>EnumMetadata</c> is initialized correctly.
         /// </summary>
         [TestMethod]
-        public void NameIsInitializedCorrectly()
+        public void ShouldInitializeNameCorrectly()
         {
+            // Assert
             Assert.AreEqual(_name, _testClass.Name);
         }
 
@@ -77,8 +80,9 @@ namespace Domain.Test.EnumType
         /// Verifies that the <c>Description</c> property of <c>EnumMetadata</c> is initialized correctly.
         /// </summary>
         [TestMethod]
-        public void DescriptionIsInitializedCorrectly()
+        public void ShouldInitializeDescriptionCorrectly()
         {
+            // Assert
             Assert.AreEqual(_description, _testClass.Description);
         }
 
@@ -86,40 +90,33 @@ namespace Domain.Test.EnumType
         /// Tests that <c>EnumMetadata</c> correctly stores the name and description when initialized.
         /// </summary>
         [TestMethod]
-        public void EnumMetadataAttribute_Should_Store_Name_And_Description_Correctly()
+        public void ShouldStoreNameAndDescriptionCorrectly()
         {
             // Arrange
             string expectedName = "TestName";
             string expectedDescription = "This is a test description for the enum field.";
             // Act
-            var enumMetadataAttribute = new EnumMetadata(expectedName, expectedDescription);
+            var enumMetadata = new EnumMetadata(expectedName, expectedDescription);
             // Assert
-            Assert.AreEqual(expectedName, enumMetadataAttribute.Name);
-            Assert.AreEqual(expectedDescription, enumMetadataAttribute.Description);
+            Assert.AreEqual(expectedName, enumMetadata.Name);
+            Assert.AreEqual(expectedDescription, enumMetadata.Description);
         }
 
         /// <summary>
         /// Ensures that no exception is thrown when <c>EnumMetadata</c> is initialized with valid parameters.
         /// </summary>
         [TestMethod]
-        public void EnumMetadataAttribute_Should_Throw_No_Exception_When_Initialized_With_Valid_Parameters()
+        public void ShouldNotThrowExceptionWhenInitializedWithValidParameters()
         {
             // Act & Assert
-            try
-            {
-                new EnumMetadata("ValidName", "Valid description.");
-            }
-            catch (Exception ex)
-            {
-                Assert.Fail("An exception was thrown when initializing with valid parameters: " + ex.Message);
-            }
+            new EnumMetadata("ValidName", "Valid description.");
         }
 
         /// <summary>
         /// Validates that the <c>EnumMetadata</c> attribute is correctly applied to enum fields.
         /// </summary>
         [TestMethod]
-        public void EnumMetadataAttribute_Should_Be_Applied_To_Enum_Fields()
+        public void ShouldApplyEnumMetadataAttributeToEnumFields()
         {
             // Arrange & Act
             var enumType = typeof(TestEnumWithMetadata);
