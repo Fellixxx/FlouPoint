@@ -13,31 +13,27 @@ namespace FlouPoint.Test.Core.DTOs
     public class ErrorTypesTests
     {
         /// <summary>
-        /// This test method checks each error type defined in the ErrorTypes enumeration.
-        /// It verifies that each error type holds the expected value.
-        /// The test ensures that all error types are correctly defined and their values are as intended.
+        /// Tests if each value in the ErrorTypes enumeration matches the expected integer value.
         /// </summary>
-        [Test]
-        public Task When_ErrorTypesValuesChecked_Then_ValuesAsExpected()
+        /// <param name = "errorType">The error type to check.</param>
+        /// <param name = "expectedValue">The expected integer value of the error type.</param>
+        [TestCase(ErrorTypes.None, 0)]
+        [TestCase(ErrorTypes.BusinessValidationError, 1)] // assuming these as expected values, adjust accordingly
+        [TestCase(ErrorTypes.DatabaseError, 2)]
+        [TestCase(ErrorTypes.ExternalServicesError, 3)]
+        [TestCase(ErrorTypes.UnexpectedError, 4)]
+        [TestCase(ErrorTypes.DataSubmittedInvalid, 5)]
+        [TestCase(ErrorTypes.ConfigurationMissingError, 6)]
+        [TestCase(ErrorTypes.NetworkError, 7)]
+        [TestCase(ErrorTypes.UserInputError, 8)]
+        [TestCase(ErrorTypes.NotFoundError, 9)]
+        [TestCase(ErrorTypes.AuthenticationError, 10)]
+        [TestCase(ErrorTypes.AuthorizationError, 11)]
+        [TestCase(ErrorTypes.ResourceError, 12)]
+        [TestCase(ErrorTypes.TimeoutError, 13)]
+        public void When_ErrorTypeIsChecked_Then_HasExpectedValue(ErrorTypes errorType, int expectedValue)
         {
-            // Given & When & Then - Testing that all ErrorTypes values are as expected
-            ErrorTypes.None.Should().Be(0);
-            ErrorTypes.BusinessValidationError.Should().Be(ErrorTypes.BusinessValidationError);
-            ErrorTypes.DatabaseError.Should().Be(ErrorTypes.DatabaseError);
-            ErrorTypes.ExternalServicesError.Should().Be(ErrorTypes.ExternalServicesError);
-            ErrorTypes.UnexpectedError.Should().Be(ErrorTypes.UnexpectedError);
-            ErrorTypes.DataSubmittedInvalid.Should().Be(ErrorTypes.DataSubmittedInvalid);
-            ErrorTypes.ConfigurationMissingError.Should().Be(ErrorTypes.ConfigurationMissingError);
-            ErrorTypes.NetworkError.Should().Be(ErrorTypes.NetworkError);
-            ErrorTypes.UserInputError.Should().Be(ErrorTypes.UserInputError);
-            ErrorTypes.NotFoundError.Should().Be(ErrorTypes.NotFoundError);
-            ErrorTypes.AuthenticationError.Should().Be(ErrorTypes.AuthenticationError);
-            ErrorTypes.AuthorizationError.Should().Be(ErrorTypes.AuthorizationError);
-            ErrorTypes.ResourceError.Should().Be(ErrorTypes.ResourceError);
-            ErrorTypes.TimeoutError.Should().Be(ErrorTypes.TimeoutError);
-            // This test is a set of assertions and does not perform any asynchronous operations,
-            // hence returning a completed Task.
-            return Task.CompletedTask;
+            errorType.Should().Be(expectedValue);
         }
     }
 }

@@ -12,48 +12,35 @@ namespace FlouPoint.Test.Infrastructure.Repository
     public class HelperErrorTypesExtensionsTests
     {
         /// <summary>
-        /// Tests that when the ErrorType is 'None', the corresponding string representation
-        /// is "NONE".
+        /// Tests that the correct string representation is returned 
+        /// for various ErrorType values.
         /// </summary>
-        [Test]
-        public Task When_ErrorType_None_Then_StringIs_NONE()
+        [TestCase(ErrorTypes.None, "NONE")]
+        [TestCase(ErrorTypes.DatabaseError, "DATABASE_ERROR")]
+        [TestCase(ErrorTypes.NetworkError, "NETWORK_ERROR")] // Add more cases as needed
+        public void When_ErrorType_Then_StringIsCorrect(ErrorTypes errorType, string expectedString)
         {
-            // Given
-            // Initializing an ErrorTypes variable with a value of 'None'.
-            ErrorTypes error = ErrorTypes.None;
-            // Expected string representation for the 'None' ErrorType.
-            var expectedString = "NONE";
-            // When
-            // Obtaining the custom name string for the ErrorType value.
-            var actualString = error.GetCustomName() ?? string.Empty;
-            // Then
-            // Verifying that the obtained string matches the expected value.
-            actualString.Should().Be(expectedString);
-            return Task.CompletedTask;
+            // Act
+            var actualString = errorType.GetCustomName() ?? string.Empty;
+            // Assert
+            actualString.Should().Be(expectedString, $"because the custom name of {errorType} should be {expectedString}");
         }
 
         /// <summary>
-        /// Tests that when the ErrorType is 'DatabaseError', the correct error 
-        /// description is returned.
+        /// Tests that the correct description is returned 
+        /// for various ErrorType values.
         /// </summary>
-        [Test]
-        public Task When_ErrorType_DatabaseError_Then_DescriptionIsCorrect()
+        [TestCase(ErrorTypes.None, "No error.")]
+        [TestCase(ErrorTypes.DatabaseError, "Represents errors when interacting with the database.")]
+        [TestCase(ErrorTypes.NetworkError, "Represents errors occurring during network communication.")] // Add more cases as needed
+        public void When_ErrorType_Then_DescriptionIsCorrect(ErrorTypes errorType, string expectedDescription)
         {
-            // Given
-            // Initializing an ErrorTypes variable with a value of 'DatabaseError'.
-            ErrorTypes error = ErrorTypes.DatabaseError;
-            // Expected description for the 'DatabaseError' ErrorType.
-            var expectedDescription = "Represents errors when interacting with the database.";
-            // When
-            // Obtaining the description string for the ErrorType value.
-            var actualDescription = error.GetDescription();
-            // Then
-            // Verifying that the obtained description matches the expected value.
-            actualDescription.Should().Be(expectedDescription);
-            return Task.CompletedTask;
+            // Act
+            var actualDescription = errorType.GetDescription() ?? string.Empty;
+            // Assert
+            actualDescription.Should().Be(expectedDescription, $"because the description of {errorType} should be {expectedDescription}");
         }
-    // Placeholders for additional tests can be added here. Each test should check
-    // a different ErrorType value and assert the correct custom behaviors or properties
-    // associated with them.
+    // Helper method to provide additional enum values and their expected properties
+    // can be placed here if the value set becomes large.
     }
 }
