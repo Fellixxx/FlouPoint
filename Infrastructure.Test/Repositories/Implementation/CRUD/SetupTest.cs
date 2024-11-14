@@ -16,6 +16,9 @@ namespace Infrastructure.Test.Repositories.Implementation.CRUD
     using Infrastructure.Repositories.Implementation.CRUD.User.Create;
     using Infrastructure.Repositories.Implementation.CRUD.User.Update;
     using Application.UseCases.ExternalServices.Resources;
+    using Application.UseCases.Repository.CRUD.Resource;
+    using Infrastructure.Repositories.Implementation.CRUD.Query;
+    using Infrastructure.Resource;
 
     /// <summary>
     /// Class to set up the test environment for CRUD operations and related services.
@@ -34,8 +37,10 @@ namespace Infrastructure.Test.Repositories.Implementation.CRUD
         protected IUserStatus _userStatus;
         protected IUserReadFilterCount _userReadFilterCount;
         protected IResourcesProvider _resourceProvider;
+        protected IResourcesProvider _resxResourceProvider;
         protected IResourceHandler _resourceHandler;
         protected IUtilEntity<Domain.Entities.User> _utilEntity;
+        protected IQuery _resourceEntryQuery;
         protected readonly Dictionary<string, string> _resourceMessages = new()
         {
             {
@@ -177,8 +182,10 @@ namespace Infrastructure.Test.Repositories.Implementation.CRUD
             _logService = new Mock<ILogService>();
             _resourceHandler = SetupResourceHandlerMock();
             _resourceProvider = SetupResourceProviderMock();
+            _resxResourceProvider = new ResxProvider();
             _utilEntity = new UtilEntity<Domain.Entities.User>(_resourceProvider, _resourceHandler);
             // Initializing the User related services
+            _resourceEntryQuery = new ResourceEntryQuery(_dbContext, _logService.Object);
             _userCreate = new UserCreate(_dbContext, _logService.Object, _utilEntity, _resourceProvider, _resourceHandler);
             _userDelete = new UserDelete(_dbContext, _logService.Object, _resourceProvider, _resourceHandler);
             _userUpdate = new UserUpdate(_dbContext, _logService.Object, _utilEntity, _resourceProvider, _resourceHandler);

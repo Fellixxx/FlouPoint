@@ -4,7 +4,7 @@ namespace Infrastructure.Test.Repositories.Implementation.CRUD.Query.User
     /// Contains test methods for validating the UserReadFilterPage functionality.
     /// </summary>
     [TestClass]
-    public class UserReadFilterPageTests : BaseTests
+    public class UserReadFilterPageTests : SetupTest
     {
     // You can add setup methods here if needed. 
     // For example, initializing objects or dependencies that are used across multiple tests.

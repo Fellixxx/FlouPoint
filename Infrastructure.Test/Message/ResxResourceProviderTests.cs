@@ -3,13 +3,14 @@ namespace Infrastructure.Test.Message
     using System.Threading.Tasks;
     using Infrastructure.Resource;
     using Infrastructure.Test.Repositories.Implementation;
+    using Infrastructure.Test.Repositories.Implementation.CRUD;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     /// <summary>
     /// Unit tests for testing the ResxResourceProvider functionality.
     /// </summary>
     [TestClass]
-    public class ResxResourceProviderTests : BaseTests
+    public class ResxResourceProviderTests : SetupTest
     {
         /// <summary>
         /// Tests that the GetEntries method successfully retrieves a non-null list of entries

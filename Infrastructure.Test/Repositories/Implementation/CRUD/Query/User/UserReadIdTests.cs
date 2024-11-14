@@ -8,7 +8,7 @@ namespace Infrastructure.Test.Repositories.Implementation.CRUD.Query.User
     /// This class inherits from BaseTests to utilize common setup and teardown functionalities.
     /// </summary>
     [TestClass]
-    public class UserReadIdTests : BaseTests
+    public class UserReadIdTests : SetupTest
     {
     // Test methods will be added here to verify the correct functionality of reading user data by ID.
     }

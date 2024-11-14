@@ -2,6 +2,7 @@ namespace Infrastructure.Test.Message
 {
     using Infrastructure.Resource;
     using Infrastructure.Test.Repositories.Implementation;
+    using Infrastructure.Test.Repositories.Implementation.CRUD;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     /// <summary>
@@ -9,7 +10,7 @@ namespace Infrastructure.Test.Message
     /// This class inherits from BaseTests, which likely contains shared setup and utilities for tests.
     /// </summary>
     [TestClass]
-    public class DatabaseResourceProviderTests : BaseTests
+    public class DatabaseResourceProviderTests : SetupTest
     {
         /// <summary>
         /// Test method to verify that an instance of the DatabaseProvider class can be successfully constructed.
