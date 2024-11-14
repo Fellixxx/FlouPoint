@@ -41,6 +41,8 @@ namespace Infrastructure.Test.Repositories.Implementation.CRUD
         protected IResourceHandler _resourceHandler;
         protected IUtilEntity<Domain.Entities.User> _utilEntity;
         protected IQuery _resourceEntryQuery;
+        protected IUserQuery _userQuery;
+
         protected readonly Dictionary<string, string> _resourceMessages = new()
         {
             {
@@ -192,6 +194,8 @@ namespace Infrastructure.Test.Repositories.Implementation.CRUD
             _userStatus = new UserStatus(_dbContext, _logService.Object, _resourceProvider, _resourceHandler);
             _userReadFilter = new UserReadFilter(_dbContext, _logService.Object, _resourceProvider, _resourceHandler);
             _userReadFilterCount = new UserReadFilterCount(_dbContext, _logService.Object, _resourceProvider, _resourceHandler);
+            _userQuery = new Mock<IUserQuery>().Object;  // Mocking IUserQuery as it combines all read functionalities
+
         }
 
         /// <summary>
