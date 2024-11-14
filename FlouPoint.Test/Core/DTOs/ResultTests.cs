@@ -12,21 +12,9 @@ namespace FlouPoint.Test.Application.Result
     /// </summary>
     public class TestableResult<T> : Result<T>
     {
-        /// <summary>
-        /// Sets the IsSuccessful property of the result.
-        /// </summary>
         public void SetIsSuccessful(bool value) => IsSuccessful = value;
-        /// <summary>
-        /// Sets the Data property of the result.
-        /// </summary>
         public void SetData(T value) => Data = value;
-        /// <summary>
-        /// Sets the Message property of the result.
-        /// </summary>
         public void SetMessage(string value) => Message = value;
-        /// <summary>
-        /// Sets the ErrorType property of the result.
-        /// </summary>
         public void SetErrorType(ErrorTypes value) => ErrorType = value;
     }
 
@@ -36,9 +24,20 @@ namespace FlouPoint.Test.Application.Result
     [TestFixture]
     public class ResultTests
     {
-        /// <summary>
-        /// Tests that setting the ErrorType property of a TestableResult results in the expected error string.
-        /// </summary>
+        private TestableResult<int> _result;
+        [SetUp]
+        public void Setup()
+        {
+            _result = new TestableResult<int>();
+        }
+
+        [TearDown]
+        public void Teardown()
+        {
+            _result = null;
+        }
+
+#region ErrorType Tests
         [TestCase(ErrorTypes.None)]
         [TestCase(ErrorTypes.BusinessValidationError)]
         [TestCase(ErrorTypes.DatabaseError)]
@@ -53,17 +52,55 @@ namespace FlouPoint.Test.Application.Result
         [TestCase(ErrorTypes.AuthorizationError)]
         [TestCase(ErrorTypes.ResourceError)]
         [TestCase(ErrorTypes.TimeoutError)]
-        public Task When_Result_Set_ErrorType_Then_Get_Expected_ErrorString(ErrorTypes errorType)
+        public void When_Result_Set_ErrorType_Then_Get_Expected_ErrorString(ErrorTypes errorType)
         {
             // Given
-            var result = new TestableResult<int>();
-            result.SetErrorType(errorType);
+            _result.SetErrorType(errorType);
             // When
-            var actualError = result.Error;
+            var actualError = _result.Error;
             var expected = errorType.GetCustomName();
             // Then
             actualError.Should().Be(expected);
-            return Task.CompletedTask;
         }
+
+#endregion
+#region IsSuccessful Tests
+        [Test]
+        public void When_Result_Set_IsSuccessful_Then_Property_Should_Have_Expected_Value()
+        {
+            // Given
+            bool expected = true;
+            // When
+            _result.SetIsSuccessful(expected);
+            // Then
+            _result.IsSuccessful.Should().Be(expected);
+        }
+
+#endregion
+#region Data Tests
+        [Test]
+        public void When_Result_Set_Data_Then_Property_Should_Have_Expected_Value()
+        {
+            // Given
+            int expectedData = 42;
+            // When
+            _result.SetData(expectedData);
+            // Then
+            _result.Data.Should().Be(expectedData);
+        }
+
+#endregion
+#region Message Tests
+        [Test]
+        public void When_Result_Set_Message_Then_Property_Should_Have_Expected_Value()
+        {
+            // Given
+            string expectedMessage = "Test message";
+            // When
+            _result.SetMessage(expectedMessage);
+            // Then
+            _result.Message.Should().Be(expectedMessage);
+        }
+#endregion
     }
 }
