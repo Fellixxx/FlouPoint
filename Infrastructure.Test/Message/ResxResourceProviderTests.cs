@@ -13,11 +13,10 @@ namespace Infrastructure.Test.Message
     public class ResxResourceProviderTests : SetupTest
     {
         /// <summary>
-        /// Tests that the GetEntries method successfully retrieves a non-null list of entries
-        /// and checks if the count of entries is equal to the expected value.
+        /// Tests that ResxProvider.GetEntries retrieves a non-null list with the correct count.
         /// </summary>
         [TestMethod]
-        public void CanCallGetEntries()
+        public void GetEntries_ReturnsCorrectNumberOfEntries()
         {
             // Act: Call the GetEntries method to retrieve resource entries.
             var result = ResxProvider.GetEntries();
@@ -27,10 +26,10 @@ namespace Infrastructure.Test.Message
         }
 
         /// <summary>
-        /// Tests that calling GetMessage with a valid key returns a successful result with no error type.
+        /// Tests that GetMessage returns a successful result for a valid key with no error type.
         /// </summary>
         [TestMethod]
-        public async Task CanCallGetMessage()
+        public async Task GetMessage_ValidKey_ReturnsSuccess()
         {
             // Arrange: Set up a valid resource key for fetching the message.
             var key = "Infrastructure.ExternalServices.LogExternal.ResourceLogService.resources.SuccessfullySetLog";
@@ -42,10 +41,10 @@ namespace Infrastructure.Test.Message
         }
 
         /// <summary>
-        /// Tests that calling GetMessage with an invalid key returns a failed result and specific error details.
+        /// Tests that GetMessage with an invalid key returns a failed result with error details.
         /// </summary>
         [TestMethod]
-        public async Task KeyNotFoundCallGetMessage()
+        public async Task GetMessage_InvalidKey_ReturnsErrorDetails()
         {
             // Arrange: Set up an invalid resource key which is not expected to be found.
             var key = "Infrastructure.Other.ResourceExample.resources.ResorceExample";

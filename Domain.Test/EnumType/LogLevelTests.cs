@@ -17,6 +17,9 @@ namespace Domain.Test.EnumType
         private const int WarningValue = 3;
         private const int ErrorValue = 4;
         private const int FatalValue = 5;
+        /// <summary>
+        /// Tests that each LogLevel matches the expected integer value.
+        /// </summary>
         [DataTestMethod]
         [DataRow(LogLevel.Trace, TraceValue)]
         [DataRow(LogLevel.Debug, DebugValue)]
@@ -24,13 +27,13 @@ namespace Domain.Test.EnumType
         [DataRow(LogLevel.Warning, WarningValue)]
         [DataRow(LogLevel.Error, ErrorValue)]
         [DataRow(LogLevel.Fatal, FatalValue)]
-        public void LogLevel_Should_Have_Correct_Values(LogLevel logLevel, int expectedValue)
+        public void LogLevel_Should_Have_Expected_Integer_Values(LogLevel logLevel, int expectedValue)
         {
             Assert.AreEqual(expectedValue, (int)logLevel, $"Expected {logLevel} to have value {expectedValue}");
         }
 
         /// <summary>
-        /// Verifies that each LogLevel value has the correct EnumMetadata.
+        /// Verifies that each LogLevel value has the correct EnumMetadata properties.
         /// </summary>
         [DataTestMethod]
         [DataRow(LogLevel.Trace, "Trace", "Used for the most detailed log outputs, including fine-grained information about the application's state.")]
@@ -39,7 +42,7 @@ namespace Domain.Test.EnumType
         [DataRow(LogLevel.Warning, "Warning", "Used for logs that highlight the abnormal or unexpected events in the application flow, which may need attention.")]
         [DataRow(LogLevel.Error, "Error", "Used for logs that highlight when the current flow of execution is stopped due to a failure or significant issue.")]
         [DataRow(LogLevel.Fatal, "Fatal", "Used to log unhandled exceptions or critical errors that cause the program to crash or terminate.")]
-        public void LogLevel_Should_Have_Correct_EnumMetadata(LogLevel logLevel, string expectedName, string expectedDescription)
+        public void LogLevel_EnumMetadata_Should_Match_Expected_Details(LogLevel logLevel, string expectedName, string expectedDescription)
         {
             var attribute = GetEnumMetadataAttribute(logLevel);
             Assert.IsNotNull(attribute, $"LogLevel {logLevel} should have an EnumMetadata attribute.");
@@ -48,10 +51,10 @@ namespace Domain.Test.EnumType
         }
 
         /// <summary>
-        /// Ensures EnumMetadata attributes are applied to all LogLevel values.
+        /// Ensures each LogLevel value has an associated EnumMetadata attribute.
         /// </summary>
         [TestMethod]
-        public void All_LogLevel_Values_Should_Have_EnumMetadata()
+        public void All_LogLevel_Values_Should_Have_Assigned_EnumMetadata()
         {
             foreach (LogLevel logLevel in Enum.GetValues(typeof(LogLevel)))
             {
@@ -61,10 +64,10 @@ namespace Domain.Test.EnumType
         }
 
         /// <summary>
-        /// Validates the EnumMetadata attribute is used correctly.
+        /// Validates that the EnumMetadata attribute is properly used.
         /// </summary>
         [TestMethod]
-        public void EnumMetadata_Should_Have_Correct_AttributeUsage()
+        public void EnumMetadata_Attribute_Should_Have_Correct_Usage()
         {
             var attributeUsage = typeof(EnumMetadata).GetCustomAttribute<AttributeUsageAttribute>();
             Assert.IsNotNull(attributeUsage, "EnumMetadata should have an AttributeUsage attribute.");
@@ -72,6 +75,11 @@ namespace Domain.Test.EnumType
             Assert.IsFalse(attributeUsage.AllowMultiple, "EnumMetadata should not allow multiple instances.");
         }
 
+        /// <summary>
+        /// Retrieves the EnumMetadata attribute for a given LogLevel.
+        /// </summary>
+        /// <param name = "logLevel">The log level for which to retrieve the EnumMetadata.</param>
+        /// <returns>The EnumMetadata attribute associated with the given log level.</returns>
         private EnumMetadata GetEnumMetadataAttribute(LogLevel logLevel)
         {
             var fieldInfo = logLevel.GetType().GetField(logLevel.ToString());

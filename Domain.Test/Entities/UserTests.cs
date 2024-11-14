@@ -21,7 +21,7 @@ namespace Domain.Test.Entities
         }
 
         /// <summary>
-        /// Tests that the initial properties are set correctly.
+        /// Tests that the initial properties of a newly instantiated <see cref = "User"/> object are set to their default values.
         /// </summary>
         [TestMethod]
         public void InitialPropertiesAreSetCorrectly()
@@ -36,106 +36,106 @@ namespace Domain.Test.Entities
             Assert.IsFalse(_testClass.Active);
         }
 
+        /// <summary>
+        /// Verifies that the <see cref = "User.Id"/> property can be set and retrieved correctly.
+        /// </summary>
         [TestMethod]
         public void CanSetAndGetId()
         {
-            // Arrange
             var testValue = "TestValue807988652";
-            // Act
             _testClass.Id = testValue;
-            // Assert
             Assert.AreEqual(testValue, _testClass.Id);
             // Test for setting null
             _testClass.Id = null;
             Assert.IsNull(_testClass.Id);
         }
 
+        /// <summary>
+        /// Verifies that the <see cref = "User.Name"/> property can be set and retrieved correctly.
+        /// </summary>
         [TestMethod]
         public void CanSetAndGetName()
         {
-            // Arrange
             var testValue = "TestValue221291709";
-            // Act
             _testClass.Name = testValue;
-            // Assert
             Assert.AreEqual(testValue, _testClass.Name);
             // Test for setting null
             _testClass.Name = null;
             Assert.IsNull(_testClass.Name);
         }
 
+        /// <summary>
+        /// Verifies that the <see cref = "User.Password"/> property can be set and retrieved correctly.
+        /// </summary>
         [TestMethod]
         public void CanSetAndGetPassword()
         {
-            // Arrange
             var testValue = "TestValue701044800";
-            // Act
             _testClass.Password = testValue;
-            // Assert
             Assert.AreEqual(testValue, _testClass.Password);
             // Test for setting null
             _testClass.Password = null;
             Assert.IsNull(_testClass.Password);
         }
 
+        /// <summary>
+        /// Verifies that the <see cref = "User.Email"/> property can be set and retrieved correctly.
+        /// </summary>
         [TestMethod]
         public void CanSetAndGetEmail()
         {
-            // Arrange
             var testValue = "TestValue616779784";
-            // Act
             _testClass.Email = testValue;
-            // Assert
             Assert.AreEqual(testValue, _testClass.Email);
             // Test for setting null
             _testClass.Email = null;
             Assert.IsNull(_testClass.Email);
         }
 
+        /// <summary>
+        /// Verifies that the <see cref = "User.Avatar"/> property can be set and retrieved correctly.
+        /// </summary>
         [TestMethod]
         public void CanSetAndGetAvatar()
         {
-            // Arrange
             var testValue = "TestValue638963839";
-            // Act
             _testClass.Avatar = testValue;
-            // Assert
             Assert.AreEqual(testValue, _testClass.Avatar);
             // Test for setting null
             _testClass.Avatar = null;
             Assert.IsNull(_testClass.Avatar);
         }
 
+        /// <summary>
+        /// Verifies that the <see cref = "User.CreatedAt"/> property can be set and retrieved correctly.
+        /// </summary>
         [TestMethod]
         public void CanSetAndGetCreatedAt()
         {
-            // Arrange
             var testValue = DateTime.UtcNow;
-            // Act
             _testClass.CreatedAt = testValue;
-            // Assert
             Assert.AreEqual(testValue, _testClass.CreatedAt);
         }
 
+        /// <summary>
+        /// Verifies that the <see cref = "User.UpdatedAt"/> property can be set and retrieved correctly.
+        /// </summary>
         [TestMethod]
         public void CanSetAndGetUpdatedAt()
         {
-            // Arrange
             var testValue = DateTime.UtcNow;
-            // Act
             _testClass.UpdatedAt = testValue;
-            // Assert
             Assert.AreEqual(testValue, _testClass.UpdatedAt);
         }
 
+        /// <summary>
+        /// Verifies that the <see cref = "User.Active"/> property can be set and retrieved correctly.
+        /// </summary>
         [TestMethod]
         public void CanSetAndGetActive()
         {
-            // Arrange
             var testValue = false;
-            // Act
             _testClass.Active = testValue;
-            // Assert
             Assert.IsFalse(_testClass.Active);
             // Test setting it to true
             _testClass.Active = true;

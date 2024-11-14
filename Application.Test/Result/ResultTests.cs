@@ -31,10 +31,10 @@ namespace Application.Test.Result
         }
 
         /// <summary>
-        /// Test method to verify initialization of Result with correct values.
+        /// Test method to verify result initialization with expected values.
         /// </summary>
         [TestMethod]
-        public void Result_ShouldInitialize_WithCorrectValues()
+        public void Initialize_ShouldSetPropertiesCorrectly()
         {
             // Arrange
             bool isSuccess = true;
@@ -51,10 +51,10 @@ namespace Application.Test.Result
         }
 
         /// <summary>
-        /// Test method to verify custom error name for Result.
+        /// Test method to verify correct error name is returned for custom errors.
         /// </summary>
         [TestMethod]
-        public void Result_ShouldReturn_CorrectErrorCustomName()
+        public void Error_ShouldReturnCustomErrorName()
         {
             // Arrange
             var result = new TestResult(false, "An error occurred", "TestData", ErrorTypes.Database);
@@ -65,10 +65,10 @@ namespace Application.Test.Result
         }
 
         /// <summary>
-        /// Test method to verify default error name for Result when no error occurs.
+        /// Test method to verify the default error name is returned when no error occurs.
         /// </summary>
         [TestMethod]
-        public void Result_ShouldReturn_DefaultErrorCustomName_WhenNoError()
+        public void Error_ShouldReturnDefaultErrorName_WhenNoError()
         {
             // Arrange
             var result = new TestResult(true, "Operation completed successfully", "TestData", ErrorTypes.None);
@@ -79,10 +79,10 @@ namespace Application.Test.Result
         }
 
         /// <summary>
-        /// Test method to verify that Result has null data and message when not set.
+        /// Test method to verify that result has null data and message when not explicitly set.
         /// </summary>
         [TestMethod]
-        public void Result_ShouldHave_NullDataAndMessage_WhenNotSet()
+        public void Properties_ShouldBeNull_WhenNotSet()
         {
             // Arrange
             var result = new TestResult(true, null, null, ErrorTypes.None);
@@ -94,10 +94,10 @@ namespace Application.Test.Result
         }
 
         /// <summary>
-        /// Test method to verify failure indication with error type for Result.
+        /// Test method to verify failure indication with an error type.
         /// </summary>
         [TestMethod]
-        public void Result_ShouldIndicate_Failure_WithErrorType()
+        public void Result_ShouldIndicateFailure_WithProvidedErrorType()
         {
             // Arrange
             var result = new TestResult(false, "An unexpected error occurred", null, ErrorTypes.Unexpected);
@@ -109,10 +109,10 @@ namespace Application.Test.Result
         }
 
         /// <summary>
-        /// Test method to verify creation of Result with empty string message and data.
+        /// Test method to verify creation of a result with empty string message and data.
         /// </summary>
         [TestMethod]
-        public void Result_Should_Handle_EmptyStringDataAndMessage()
+        public void Initialize_ShouldHandleEmptyStringDataAndMessage()
         {
             // Arrange
             var result = new TestResult(true, "", "", ErrorTypes.None);
@@ -124,10 +124,10 @@ namespace Application.Test.Result
         }
 
         /// <summary>
-        /// Test method to verify the behavior for non-existing error types.
+        /// Test method to verify behavior when a non-existing error type is provided.
         /// </summary>
         [TestMethod]
-        public void Result_Should_Handle_NonExistent_ErrorType()
+        public void Initialize_ShouldHandleNonExistentErrorType()
         {
         // Note: This test would depend on how your application handles unknown error types.
         // Missing implementation details would be needed for this to work correctly.

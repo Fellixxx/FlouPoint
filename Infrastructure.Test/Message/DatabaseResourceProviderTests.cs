@@ -6,27 +6,23 @@ namespace Infrastructure.Test.Message
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     /// <summary>
-    /// Test class for testing the construction and functionality of the DatabaseResourceProvider.
-    /// This class inherits from BaseTests, which likely contains shared setup and utilities for tests.
+    /// Unit test class for validating the construction and basic functionality of the DatabaseResourceProvider.
     /// </summary>
     [TestClass]
     public class DatabaseResourceProviderTests : SetupTest
     {
         /// <summary>
-        /// Test method to verify that an instance of the DatabaseProvider class can be successfully constructed.
-        /// The CanConstruct method attempts to create an instance of DatabaseProvider and asserts that the instance is not null.
+        /// Test to ensure that the DatabaseProvider instance can be successfully created.
         /// </summary>
         [TestMethod]
-        public void CanConstruct()
+        public void DatabaseProvider_CanBeConstructedSuccessfully()
         {
             // Arrange
-            // Presumably, _dbContext and _resourceEntryQuery are setup in BaseTests or elsewhere
+            // _dbContext and _resourceEntryQuery are expected to be initialized in SetupTest.
             // Act
-            // Create an instance of DatabaseProvider using the existing _dbContext and _resourceEntryQuery
-            var instance = new DatabaseProvider(_dbContext, _resourceEntryQuery);
+            var databaseProviderInstance = new DatabaseProvider(_dbContext, _resourceEntryQuery);
             // Assert
-            // Check that the instance is successfully created and not null
-            Assert.IsNotNull(instance);
+            Assert.IsNotNull(databaseProviderInstance, "The DatabaseProvider instance should be successfully constructed and not null.");
         }
     }
 }

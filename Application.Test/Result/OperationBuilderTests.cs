@@ -18,7 +18,7 @@ namespace Application.Test.Result
         /// Tests that a BusinessValidation failure can be created with a non-null error message and verifies the error type.
         /// </summary>
         [TestMethod]
-        public void CanCallFailureBusinessValidation()
+        public void Fail_WhenBusinessValidationError_ShouldReturnExpectedResult()
         {
             // Arrange
             var message = "TestValue879633508";
@@ -35,7 +35,7 @@ namespace Application.Test.Result
         /// Verifies that passing a null message to the BusinessValidation failure throws an ArgumentNullException.
         /// </summary>
         [TestMethod]
-        public void CannotCallFailureBusinessValidationWithNullMessage()
+        public void Fail_WhenBusinessValidationErrorWithNullMessage_ShouldThrowArgumentNullException()
         {
             // Arrange
             string message = null;
@@ -48,7 +48,7 @@ namespace Application.Test.Result
         /// Tests that a ConfigurationMissing failure can be created with a non-null error message and verifies the error type.
         /// </summary>
         [TestMethod]
-        public void CanCallFailureConfigurationMissingError()
+        public void Fail_WhenConfigurationMissingError_ShouldReturnExpectedResult()
         {
             // Arrange
             var message = "TestValue826283408";
@@ -66,7 +66,7 @@ namespace Application.Test.Result
         /// Verifies that passing a null message to the ConfigurationMissing failure throws an ArgumentNullException.
         /// </summary>
         [TestMethod]
-        public void CannotCallFailureConfigurationMissingErrorWithNullMessage()
+        public void Fail_WhenConfigurationMissingErrorWithNullMessage_ShouldThrowArgumentNullException()
         {
             // Arrange
             string message = null;
@@ -79,7 +79,7 @@ namespace Application.Test.Result
         /// Tests that a Database failure can be created with a non-null error message and verifies the error type.
         /// </summary>
         [TestMethod]
-        public void CanCallFailureDatabase()
+        public void Fail_WhenDatabaseError_ShouldReturnExpectedResult()
         {
             // Arrange
             var message = "TestValue1736562805";
@@ -97,7 +97,7 @@ namespace Application.Test.Result
         /// Verifies that passing a null message to the Database failure throws an ArgumentNullException.
         /// </summary>
         [TestMethod]
-        public void CannotCallFailureDatabaseWithNullMessage()
+        public void Fail_WhenDatabaseErrorWithNullMessage_ShouldThrowArgumentNullException()
         {
             // Arrange
             string message = null;
@@ -110,7 +110,7 @@ namespace Application.Test.Result
         /// Tests that submitting invalid data results in a corresponding operation failure and error type.
         /// </summary>
         [TestMethod]
-        public void CanCallFailureDataSubmittedInvalid()
+        public void Fail_WhenDataSubmittedInvalid_ShouldReturnExpectedResult()
         {
             // Arrange
             var message = "TestValue1393732451";
@@ -128,7 +128,7 @@ namespace Application.Test.Result
         /// Verifies that passing a null message to the DataSubmittedInvalid failure throws an ArgumentNullException.
         /// </summary>
         [TestMethod]
-        public void CannotCallFailureDataSubmittedInvalidWithNullMessage()
+        public void Fail_WhenDataSubmittedInvalidWithNullMessage_ShouldThrowArgumentNullException()
         {
             // Arrange
             string message = null;
@@ -141,7 +141,7 @@ namespace Application.Test.Result
         /// Tests that an ExternalService failure can be created with a non-null error message and verifies the error type.
         /// </summary>
         [TestMethod]
-        public void CanCallFailureExternalService()
+        public void Fail_WhenExternalServiceError_ShouldReturnExpectedResult()
         {
             // Arrange
             var message = "TestValue1769803281";
@@ -158,7 +158,7 @@ namespace Application.Test.Result
         /// Verifies that passing a null message to the ExternalService failure throws an ArgumentNullException.
         /// </summary>
         [TestMethod]
-        public void CannotCallFailureExternalServiceWithNullMessage()
+        public void Fail_WhenExternalServiceErrorWithNullMessage_ShouldThrowArgumentNullException()
         {
             // Arrange
             string message = null;
@@ -171,7 +171,7 @@ namespace Application.Test.Result
         /// Tests that an UnexpectedError failure can be created with a non-null error message and verifies the error type.
         /// </summary>
         [TestMethod]
-        public void CanCallFailureUnexpectedError()
+        public void Fail_WhenUnexpectedError_ShouldReturnExpectedResult()
         {
             // Arrange
             var message = "TestValue2015692524";
@@ -189,7 +189,7 @@ namespace Application.Test.Result
         /// Verifies that passing a null message to the UnexpectedError failure throws an ArgumentNullException.
         /// </summary>
         [TestMethod]
-        public void CannotCallFailureUnexpectedErrorWithNullMessage()
+        public void Fail_WhenUnexpectedErrorWithNullMessage_ShouldThrowArgumentNullException()
         {
             // Arrange
             string message = null;
@@ -202,7 +202,7 @@ namespace Application.Test.Result
         /// Tests that a NetworkError failure can be created with a non-null error message and verifies the error type.
         /// </summary>
         [TestMethod]
-        public void CanCallFailureNetworkError()
+        public void Fail_WhenNetworkError_ShouldReturnExpectedResult()
         {
             // Arrange
             var message = "TestValue2053465";
@@ -220,7 +220,7 @@ namespace Application.Test.Result
         /// Verifies that passing a null message to the NetworkError failure throws an ArgumentNullException.
         /// </summary>
         [TestMethod]
-        public void CannotCallFailureNetworkErrorWithNullMessage()
+        public void Fail_WhenNetworkErrorWithNullMessage_ShouldThrowArgumentNullException()
         {
             // Arrange
             string message = null;
@@ -233,7 +233,7 @@ namespace Application.Test.Result
         /// Tests that the BusinessValidation failure includes the expected error message and error type.
         /// </summary>
         [TestMethod]
-        public void FailureBusinessValidation_Should_Return_OperationResult_With_BusinessValidationError()
+        public void BusinessValidationError_ShouldIncludeExpectedErrorMessageAndErrorType()
         {
             // Arrange
             var expectedMessage = "Business validation failed.";
@@ -243,13 +243,8 @@ namespace Application.Test.Result
             // Assert
             Assert.IsNotNull(result);
             Assert.AreEqual("BUSINESS_VALIDATION_ERROR", result.Error);
-            Assert.AreEqual("Business validation failed.", result.Message);
+            Assert.AreEqual(expectedMessage, result.Message);
             Assert.IsFalse(result.IsSuccessful);
         }
-    // Additional similar test method summaries would continue here...
-    // Note: For the subsequent test methods, similar summary patterns like the above will be useful, 
-    //    indicating the specific type of failure being tested (e.g., ConfigurationMissing, Database, etc.), 
-    //    and the main conditions they are checking (e.g., null, empty, whitespace messages),
-    //    ensuring that appropriate exceptions are thrown or result objects created.
     }
 }

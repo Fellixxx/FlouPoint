@@ -1,4 +1,4 @@
-﻿namespace Domain.Test.DTO.Log
+namespace Domain.Test.DTO.Log
 {
     using System;
     using Domain.DTO.Logging;
@@ -6,243 +6,74 @@
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Newtonsoft.Json;
 
+    /// <summary>
+    /// Test class for verifying the behavior of the Log class.
+    /// </summary>
     [TestClass]
     public class LogTests
     {
         private Log _testClass;
-
+        /// <summary>
+        /// Initializes a new instance of Log for testing.
+        /// </summary>
         [TestInitialize]
         public void SetUp()
         {
-            _testClass=new Log();
+            _testClass = new Log();
         }
 
         [TestMethod]
-        public void CanSetAndGetMessage()
+        public void SetAndGetMessage_ShouldWorkCorrectly()
         {
-            // Arrange
             var testValue = "TestValue262371514";
-
-            // Act
-            _testClass.Message=testValue;
-
-            // Assert
+            _testClass.Message = testValue;
             Assert.AreEqual(testValue, _testClass.Message);
         }
 
         [TestMethod]
-        public void CanSetAndGetEntityName()
+        public void SetAndGetEntityName_ShouldWorkCorrectly()
         {
-            // Arrange
             var testValue = "TestValue127567551";
-
-            // Act
-            _testClass.EntityName=testValue;
-
-            // Assert
+            _testClass.EntityName = testValue;
             Assert.AreEqual(testValue, _testClass.EntityName);
         }
 
         [TestMethod]
-        public void CanSetAndGetEntityValue()
+        public void SetAndGetEntityValue_ShouldWorkCorrectly()
         {
-            // Arrange
             var testValue = "TestValue2108728596";
-
-            // Act
-            _testClass.EntityValue=testValue;
-
-            // Assert
+            _testClass.EntityValue = testValue;
             Assert.AreEqual(testValue, _testClass.EntityValue);
         }
 
         [TestMethod]
-        public void CanSetAndGetLevel()
+        public void SetAndGetLevel_ShouldWorkCorrectly()
         {
-            // Arrange
             var testValue = "TestValue1190128197";
-
-            // Act
-            _testClass.Level=testValue;
-
-            // Assert
+            _testClass.Level = testValue;
             Assert.AreEqual(testValue, _testClass.Level);
         }
 
         [TestMethod]
-        public void CanSetAndGetOperation()
+        public void SetAndGetOperation_ShouldWorkCorrectly()
         {
-            // Arrange
             var testValue = "TestValue9811108";
-
-            // Act
-            _testClass.Operation=testValue;
-
-            // Assert
+            _testClass.Operation = testValue;
             Assert.AreEqual(testValue, _testClass.Operation);
         }
 
         [TestMethod]
-        public void CanSetAndGetCreatedAt()
+        public void SetAndGetCreatedAt_ShouldWorkCorrectly()
         {
-            // Arrange
             var testValue = DateTime.UtcNow;
-
-            // Act
-            _testClass.CreatedAt=testValue;
-
-            // Assert
+            _testClass.CreatedAt = testValue;
             Assert.AreEqual(testValue, _testClass.CreatedAt);
         }
 
         [TestMethod]
-        public void Log_Should_Store_Message_Property_Correctly()
+        public void LogDefaultProperties_ShouldBeNull()
         {
-            // Arrange
-            string expectedMessage = "This is a log message.";
-
-            // Act
-            var log = new Log
-            {
-                Message = expectedMessage
-            };
-
-            // Assert
-            Assert.AreEqual(log.Message, expectedMessage);
-        }
-
-        [TestMethod]
-        public void Log_Should_Store_EntityName_Property_Correctly()
-        {
-            // Arrange
-            string expectedEntityName = "Customer";
-
-            // Act
-            var log = new Log
-            {
-                EntityName = expectedEntityName
-            };
-
-            // Assert
-            Assert.AreEqual(log.EntityName, expectedEntityName);
-        }
-
-        [TestMethod]
-        public void Log_Should_Store_EntityValue_Property_Correctly()
-        {
-            // Arrange
-            string expectedEntityValue = "{ \"id\": 1, \"name\": \"John Doe\" }";
-
-            // Act
-            var log = new Log
-            {
-                EntityValue = expectedEntityValue
-            };
-
-            // Assert
-            Assert.AreEqual(log.EntityValue, expectedEntityValue);
-        }
-
-        [TestMethod]
-        public void Log_Should_Store_Level_Property_Correctly()
-        {
-            // Arrange
-            string expectedLevel = "Error";
-
-            // Act
-            var log = new Log
-            {
-                Level = expectedLevel
-            };
-
-            // Assert
-            Assert.AreEqual(log.Level, expectedLevel);
-        }
-
-        [TestMethod]
-        public void Log_Should_Store_Operation_Property_Correctly()
-        {
-            // Arrange
-            string expectedOperation = "Update";
-
-            // Act
-            var log = new Log
-            {
-                Operation = expectedOperation
-            };
-
-            // Assert
-            Assert.AreEqual(log.Operation, expectedOperation);
-        }
-
-        [TestMethod]
-        public void Log_Should_Store_CreatedAt_Property_Correctly()
-        {
-            // Arrange
-            DateTime expectedCreatedAt = DateTime.UtcNow;
-
-            // Act
-            var log = new Log
-            {
-                CreatedAt = expectedCreatedAt
-            };
-
-            // Assert
-            Assert.AreEqual(log.CreatedAt, expectedCreatedAt);
-        }
-
-        [TestMethod]
-        public void Log_Should_Initialize_With_Null_Properties_By_Default()
-        {
-            // Act
             var log = new Log();
-
-            // Assert
-            Assert.AreEqual(log.Message, null);
-            Assert.AreEqual(log.EntityName, null);
-            Assert.AreEqual(log.EntityValue, null);
-            Assert.AreEqual(log.Level, null);
-            Assert.AreEqual(log.Operation, null);
-        }
-
-        [TestMethod]
-        public void When_LogProperties_Are_Set_Then_They_Should_Return_Same_Values()
-        {
-            // Given
-            var expectedMessage = "Test Message";
-            var expectedEntityName = "TestEntity";
-            var expectedEntityValue = "{ \"id\": 1, \"name\": \"Test\" }";
-            var expectedLevel = "Info";
-            var expectedOperation = "Create";
-            var expectedCreatedAt = DateTime.UtcNow;
-
-            // When
-            var log = new Log
-            {
-                Message = expectedMessage,
-                EntityName = expectedEntityName,
-                EntityValue = expectedEntityValue,
-                Level = expectedLevel,
-                Operation = expectedOperation,
-                CreatedAt = expectedCreatedAt
-            };
-
-            // Then
-            Assert.AreEqual(expectedMessage, log.Message);
-            Assert.AreEqual(expectedEntityName, log.EntityName);
-            Assert.AreEqual(expectedEntityValue, log.EntityValue);
-            Assert.AreEqual(expectedLevel, log.Level);
-            Assert.AreEqual(expectedOperation, log.Operation);
-            Assert.AreEqual(expectedCreatedAt, log.CreatedAt);
-        }
-
-        [TestMethod]
-        public void When_LogIsInitialized_Then_DefaultValuesAreNullOrDefault()
-        {
-            // When
-            var log = new Log();
-
-            // Then
             Assert.IsNull(log.Message);
             Assert.IsNull(log.EntityName);
             Assert.IsNull(log.EntityValue);
@@ -252,20 +83,38 @@
         }
 
         [TestMethod]
-        public void When_LogProperties_Are_Null_Then_Should_Accept_Null()
+        public void LogProperties_SetAndReturnCorrectValues()
         {
-            // Given
+            var expectedMessage = "Test Message";
+            var expectedEntityName = "TestEntity";
+            var expectedEntityValue = "{ \"id\": 1, \"name\": \"Test\" }";
+            var expectedLevel = "Info";
+            var expectedOperation = "Create";
+            var expectedCreatedAt = DateTime.UtcNow;
             var log = new Log
             {
-                Message = null,
-                EntityName = null,
-                EntityValue = null,
-                Level = null,
-                Operation = null,
+                Message = expectedMessage,
+                EntityName = expectedEntityName,
+                EntityValue = expectedEntityValue,
+                Level = expectedLevel,
+                Operation = expectedOperation,
+                CreatedAt = expectedCreatedAt
+            };
+            Assert.AreEqual(expectedMessage, log.Message);
+            Assert.AreEqual(expectedEntityName, log.EntityName);
+            Assert.AreEqual(expectedEntityValue, log.EntityValue);
+            Assert.AreEqual(expectedLevel, log.Level);
+            Assert.AreEqual(expectedOperation, log.Operation);
+            Assert.AreEqual(expectedCreatedAt, log.CreatedAt);
+        }
+
+        [TestMethod]
+        public void HandleNullValuesProperly_WhenLogPropertiesAreNull()
+        {
+            var log = new Log
+            {
                 CreatedAt = DateTime.UtcNow
             };
-
-            // Then
             Assert.IsNull(log.Message);
             Assert.IsNull(log.EntityName);
             Assert.IsNull(log.EntityValue);
@@ -274,9 +123,8 @@
         }
 
         [TestMethod]
-        public void When_LogProperties_Are_EmptyStrings_Then_Should_Accept_EmptyStrings()
+        public void AcceptEmptyStrings_WhenLogPropertiesAreEmptyStrings()
         {
-            // Given
             var log = new Log
             {
                 Message = string.Empty,
@@ -286,8 +134,6 @@
                 Operation = string.Empty,
                 CreatedAt = DateTime.UtcNow
             };
-
-            // Then
             Assert.AreEqual(string.Empty, log.Message);
             Assert.AreEqual(string.Empty, log.EntityName);
             Assert.AreEqual(string.Empty, log.EntityValue);
@@ -296,10 +142,9 @@
         }
 
         [TestMethod]
-        public void When_LogProperties_Have_VeryLongStrings_Then_Should_Handle_Correctly()
+        public void HandleVeryLongStringsProperly()
         {
-            // Given
-            var longString = new string('a', 10000);
+            var longString = new string ('a', 10000);
             var log = new Log
             {
                 Message = longString,
@@ -309,8 +154,6 @@
                 Operation = longString,
                 CreatedAt = DateTime.UtcNow
             };
-
-            // Then
             Assert.AreEqual(longString, log.Message);
             Assert.AreEqual(longString, log.EntityName);
             Assert.AreEqual(longString, log.EntityValue);
@@ -319,9 +162,8 @@
         }
 
         [TestMethod]
-        public void When_LogProperties_Have_SpecialCharacters_Then_Should_Handle_Correctly()
+        public void HandleSpecialCharactersCorrectly()
         {
-            // Given
             var specialString = "特殊字符!@#$%^&*()_+|~=`{}[]:\";'<>?,./\\";
             var log = new Log
             {
@@ -332,8 +174,6 @@
                 Operation = specialString,
                 CreatedAt = DateTime.UtcNow
             };
-
-            // Then
             Assert.AreEqual(specialString, log.Message);
             Assert.AreEqual(specialString, log.EntityName);
             Assert.AreEqual(specialString, log.EntityValue);
@@ -342,9 +182,8 @@
         }
 
         [TestMethod]
-        public void When_Log_Is_Serialized_To_Json_Then_Should_Deserialize_Correctly()
+        public void SerializeAndDeserializeLogCorrectly_WhenSerializedToJson()
         {
-            // Given
             var log = new Log
             {
                 Message = "Test Message",
@@ -354,12 +193,8 @@
                 Operation = "Create",
                 CreatedAt = DateTime.UtcNow
             };
-
-            // When
             var json = JsonConvert.SerializeObject(log);
             var deserializedLog = JsonConvert.DeserializeObject<Log>(json);
-
-            // Then
             Assert.AreEqual(log.Message, deserializedLog.Message);
             Assert.AreEqual(log.EntityName, deserializedLog.EntityName);
             Assert.AreEqual(log.EntityValue, deserializedLog.EntityValue);
@@ -369,9 +204,8 @@
         }
 
         [TestMethod]
-        public void When_Log_Is_Assigned_To_ILog_Interface_Then_Should_Work_Correctly()
+        public void AssignLogToILogInterface_CorrectlyHandlesAssignment()
         {
-            // Given
             ILog logInterface = new Log
             {
                 Message = "Interface Test",
@@ -381,8 +215,6 @@
                 Operation = "Update",
                 CreatedAt = DateTime.UtcNow
             };
-
-            // Then
             Assert.AreEqual("Interface Test", logInterface.Message);
             Assert.AreEqual("InterfaceEntity", logInterface.EntityName);
             Assert.AreEqual("{}", logInterface.EntityValue);
@@ -392,36 +224,27 @@
         }
 
         [TestMethod]
-        public void When_Log_CreatedAt_Is_DefaultValue_Then_Should_Be_MinValue()
+        public void CreatedAt_ShouldBeMinValue_ByDefault()
         {
-            // Given
             var log = new Log();
-
-            // Then
             Assert.AreEqual(DateTime.MinValue, log.CreatedAt);
         }
 
         [TestMethod]
-        public void When_Log_CreatedAt_Is_Set_To_FutureDate_Then_Should_Accept_Value()
+        public void SetFutureDate_ShouldAcceptFutureDate_ForCreatedAt()
         {
-            // Given
             var futureDate = DateTime.UtcNow.AddYears(1);
             var log = new Log
             {
                 CreatedAt = futureDate
             };
-
-            // Then
             Assert.AreEqual(futureDate, log.CreatedAt);
         }
 
         [TestMethod]
-        public void When_Log_CreatedAt_Is_Set_To_InvalidDate_Then_Should_Throw_Exception()
+        public void SetInvalidDate_ShouldThrowException_ForCreatedAt()
         {
-            // Given
             var log = new Log();
-
-            // When & Then
             Assert.ThrowsException<ArgumentOutOfRangeException>(() =>
             {
                 log.CreatedAt = DateTime.MaxValue.AddDays(1);
@@ -429,9 +252,8 @@
         }
 
         [TestMethod]
-        public void When_LogProperties_Have_Whitespace_Then_Should_Handle_Correctly()
+        public void HandleWhitespaceStringsCorrectly()
         {
-            // Given
             var whitespaceString = "   ";
             var log = new Log
             {
@@ -442,44 +264,32 @@
                 Operation = whitespaceString,
                 CreatedAt = DateTime.UtcNow
             };
-
-            // Then
             Assert.AreEqual(whitespaceString, log.Message);
             Assert.AreEqual(whitespaceString, log.EntityName);
             Assert.AreEqual(whitespaceString, log.EntityValue);
             Assert.AreEqual(whitespaceString, log.Level);
             Assert.AreEqual(whitespaceString, log.Operation);
         }
+
         [TestMethod]
-        public void CanSetCreatedAtToDateTimeMinValue()
+        public void SetCreatedAtToDateTimeMinValue_ShouldWorkCorrectly()
         {
-            // Arrange
             var testValue = DateTime.MinValue;
-
-            // Act
             _testClass.CreatedAt = testValue;
-
-            // Assert
             Assert.AreEqual(testValue, _testClass.CreatedAt);
         }
 
         [TestMethod]
-        public void CanSetCreatedAtToDateTimeMaxValue()
+        public void SetCreatedAtToDateTimeMaxValue_ShouldWorkCorrectly()
         {
-            // Arrange
             var testValue = DateTime.MaxValue;
-
-            // Act
             _testClass.CreatedAt = testValue;
-
-            // Assert
             Assert.AreEqual(testValue, _testClass.CreatedAt);
         }
 
         [TestMethod]
-        public void When_Log_With_Null_Properties_Is_Serialized_Then_Should_Deserialize_Correctly()
+        public void SerializeAndDeserializeLogWithNullProperties_Correctly()
         {
-            // Arrange
             var log = new Log
             {
                 Message = null,
@@ -489,12 +299,8 @@
                 Operation = null,
                 CreatedAt = DateTime.UtcNow
             };
-
-            // Act
             var json = JsonConvert.SerializeObject(log);
             var deserializedLog = JsonConvert.DeserializeObject<Log>(json);
-
-            // Assert
             Assert.IsNull(deserializedLog.Message);
             Assert.IsNull(deserializedLog.EntityName);
             Assert.IsNull(deserializedLog.EntityValue);
@@ -504,23 +310,18 @@
         }
 
         [TestMethod]
-        public void CanSetPropertiesToNullAfterSettingValue()
+        public void CanSetPropertiesToNull_AfterSettingValues()
         {
-            // Arrange
             _testClass.Message = "Test Message";
             _testClass.EntityName = "Test Entity";
             _testClass.EntityValue = "{ \"id\": 1 }";
             _testClass.Level = "Info";
             _testClass.Operation = "Create";
-
-            // Act
             _testClass.Message = null;
             _testClass.EntityName = null;
             _testClass.EntityValue = null;
             _testClass.Level = null;
             _testClass.Operation = null;
-
-            // Assert
             Assert.IsNull(_testClass.Message);
             Assert.IsNull(_testClass.EntityName);
             Assert.IsNull(_testClass.EntityValue);
@@ -529,18 +330,19 @@
         }
 
         [TestMethod]
-        public void CanAddLogToCollection()
+        public void AddLogToCollection_ShouldWorkCorrectly()
         {
-            // Arrange
-            var log1 = new Log { Message = "Log 1" };
-            var log2 = new Log { Message = "Log 2" };
+            var log1 = new Log
+            {
+                Message = "Log 1"
+            };
+            var log2 = new Log
+            {
+                Message = "Log 2"
+            };
             var logs = new List<Log>();
-
-            // Act
             logs.Add(log1);
             logs.Add(log2);
-
-            // Assert
             Assert.AreEqual(2, logs.Count);
             Assert.AreEqual("Log 1", logs[0].Message);
             Assert.AreEqual("Log 2", logs[1].Message);
@@ -549,7 +351,6 @@
         [TestMethod]
         public void TwoLogObjectsWithSameValues_AreNotEqualByDefault()
         {
-            // Arrange
             var log1 = new Log
             {
                 Message = "Test Message",
@@ -559,7 +360,6 @@
                 Operation = "Create",
                 CreatedAt = DateTime.UtcNow
             };
-
             var log2 = new Log
             {
                 Message = "Test Message",
@@ -569,15 +369,12 @@
                 Operation = "Create",
                 CreatedAt = log1.CreatedAt
             };
-
-            // Act & Assert
             Assert.AreNotEqual(log1, log2);
         }
 
         [TestMethod]
-        public void CanCloneLogObject()
+        public void CloneLogObject_ShouldWorkCorrectly()
         {
-            // Arrange
             var originalLog = new Log
             {
                 Message = "Original Message",
@@ -587,8 +384,6 @@
                 Operation = "Create",
                 CreatedAt = DateTime.UtcNow
             };
-
-            // Act
             var clonedLog = new Log
             {
                 Message = originalLog.Message,
@@ -598,8 +393,6 @@
                 Operation = originalLog.Operation,
                 CreatedAt = originalLog.CreatedAt
             };
-
-            // Assert
             Assert.AreEqual(originalLog.Message, clonedLog.Message);
             Assert.AreEqual(originalLog.EntityName, clonedLog.EntityName);
             Assert.AreEqual(originalLog.EntityValue, clonedLog.EntityValue);
@@ -610,51 +403,46 @@
         }
 
         [TestMethod]
-        public void LevelProperty_CanBeSetToAnyString()
+        public void LevelProperty_AllowsAnyString()
         {
-            // Arrange
-            var testValues = new[] { "Info", "Warning", "Error", "Debug", "Verbose", "CustomLevel" };
-
+            var testValues = new[]
+            {
+                "Info",
+                "Warning",
+                "Error",
+                "Debug",
+                "Verbose",
+                "CustomLevel"
+            };
             foreach (var level in testValues)
             {
-                // Act
                 _testClass.Level = level;
-
-                // Assert
                 Assert.AreEqual(level, _testClass.Level);
             }
         }
 
         [TestMethod]
-        public void EntityValue_CanAcceptDifferentSerializedFormats()
+        public void EntityValue_AllowsDifferentSerializedFormats()
         {
-            // Arrange
             var jsonValue = "{ \"id\": 1, \"name\": \"Test\" }";
             var xmlValue = "<Entity><Id>1</Id><Name>Test</Name></Entity>";
             var yamlValue = "id: 1\nname: Test";
-
-            // Act & Assert
             _testClass.EntityValue = jsonValue;
             Assert.AreEqual(jsonValue, _testClass.EntityValue);
-
             _testClass.EntityValue = xmlValue;
             Assert.AreEqual(xmlValue, _testClass.EntityValue);
-
             _testClass.EntityValue = yamlValue;
             Assert.AreEqual(yamlValue, _testClass.EntityValue);
         }
 
         [TestMethod]
-        public void CanCreateDerivedClassFromLog()
+        public void CreateDerivedClassFromLog_ShouldWorkCorrectly()
         {
-            // Arrange
             var extendedLog = new ExtendedLog
             {
                 Message = "Extended Message",
                 AdditionalInfo = "Extra Data"
             };
-
-            // Act & Assert
             Assert.AreEqual("Extended Message", extendedLog.Message);
             Assert.AreEqual("Extra Data", extendedLog.AdditionalInfo);
         }
@@ -665,14 +453,11 @@
         }
 
         [TestMethod]
-        public void LogProperties_CanBeAccessedConcurrently()
+        public void AccessLogPropertiesConcurrently_ShouldNotThrowExceptions()
         {
-            // Arrange
             var log = new Log();
             var tasks = new List<Task>();
             var exceptionOccurred = false;
-
-            // Act
             for (int i = 0; i < 100; i++)
             {
                 tasks.Add(Task.Run(() =>
@@ -690,8 +475,6 @@
             }
 
             Task.WaitAll(tasks.ToArray());
-
-            // Assert
             Assert.IsFalse(exceptionOccurred, "Exception occurred during concurrent access.");
         }
     }
