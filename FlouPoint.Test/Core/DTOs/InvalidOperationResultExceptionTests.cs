@@ -14,12 +14,11 @@ namespace FlouPoint.Test.Infrastructure.Repository
     public class InvalidOperationResultExceptionTests
     {
         /// <summary>
-        /// Test to ensure that an InvalidOperationResultException can be 
-        /// instantiated with a valid message and that the message 
-        /// is accurately retrieved from the exception.
+        /// Test to ensure that creating an InvalidOperationResultException with a valid
+        /// message stores the message correctly in the exception instance.
         /// </summary>
         [Test]
-        public void When_CreateException_WithValidMessage_Then_MessageIsStoredCorrectly()
+        public void Constructor_WithValidMessage_ShouldStoreMessageCorrectly()
         {
             // Arrange
             var expectedMessage = "Test Exception Message";
@@ -30,11 +29,11 @@ namespace FlouPoint.Test.Infrastructure.Repository
         }
 
         /// <summary>
-        /// Test to ensure that an InvalidOperationResultException can handle
-        /// a null message without throwing an unexpected error.
+        /// Test to ensure that creating an InvalidOperationResultException with a null
+        /// message does not throw an error and sets the message in the exception as null.
         /// </summary>
         [Test]
-        public void When_CreateException_WithNullMessage_Then_MessageIsNull()
+        public void Constructor_WithNullMessage_ShouldHaveNullMessage()
         {
             // Act
             var exception = new InvalidOperationResultException(null);

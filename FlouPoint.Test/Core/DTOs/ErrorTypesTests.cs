@@ -31,9 +31,10 @@ namespace FlouPoint.Test.Core.DTOs
         [TestCase(ErrorTypes.AuthorizationError, 11)]
         [TestCase(ErrorTypes.ResourceError, 12)]
         [TestCase(ErrorTypes.TimeoutError, 13)]
-        public void When_ErrorTypeIsChecked_Then_HasExpectedValue(ErrorTypes errorType, int expectedValue)
+        public void ErrorType_Should_Match_Expected_Integer_Value(ErrorTypes errorType, int expectedValue)
         {
-            errorType.Should().Be(expectedValue);
+            // Assert that the integer value of the errorType matches the expected value.
+            ((int)errorType).Should().Be(expectedValue);
         }
     }
 }

@@ -14,12 +14,18 @@ namespace FlouPoint.Test.Infrastructure.Repository
     [TestFixture]
     public class OperationBuilderTests
     {
+        /// <summary>
+        /// Sets up resources before each test run.
+        /// </summary>
         [SetUp]
         public void SetUp()
         {
         // Perform any necessary setup activities here.
         }
 
+        /// <summary>
+        /// Tests that FailureBusinessValidation method returns the correct operation result.
+        /// </summary>
         [Test]
         public void FailureBusinessValidation_ShouldReturn_CorrectResult()
         {
@@ -31,10 +37,11 @@ namespace FlouPoint.Test.Infrastructure.Repository
             // Assert
             result.Message.Should().Be(expectedMessage);
             result.Error.Should().Be(expectedError);
-        // Ensure that an operation failure does not inadvertently perform any operation.
-        // Add additional assertions here if necessary.
         }
 
+        /// <summary>
+        /// Tests that FailureConfigurationMissingError method returns the correct operation result.
+        /// </summary>
         [Test]
         public void FailureConfigurationMissingError_ShouldReturn_CorrectResult()
         {
@@ -48,6 +55,9 @@ namespace FlouPoint.Test.Infrastructure.Repository
             result.Error.Should().Be(expectedError);
         }
 
+        /// <summary>
+        /// Tests that FailureDatabase method returns the correct operation result.
+        /// </summary>
         [Test]
         public void FailureDatabase_ShouldReturn_CorrectResult()
         {
@@ -61,6 +71,9 @@ namespace FlouPoint.Test.Infrastructure.Repository
             result.Error.Should().Be(expectedError);
         }
 
+        /// <summary>
+        /// Tests that FailureDataSubmittedInvalid method returns the correct operation result.
+        /// </summary>
         [Test]
         public void FailureDataSubmittedInvalid_ShouldReturn_CorrectResult()
         {
@@ -74,6 +87,9 @@ namespace FlouPoint.Test.Infrastructure.Repository
             result.Error.Should().Be(expectedError);
         }
 
+        /// <summary>
+        /// Tests that FailureExternalService method returns the correct operation result.
+        /// </summary>
         [Test]
         public void FailureExternalService_ShouldReturn_CorrectResult()
         {
@@ -87,6 +103,9 @@ namespace FlouPoint.Test.Infrastructure.Repository
             result.Error.Should().Be(expectedError);
         }
 
+        /// <summary>
+        /// Tests that FailureUnexpectedError method returns the correct operation result.
+        /// </summary>
         [Test]
         public void FailureUnexpectedError_ShouldReturn_CorrectResult()
         {

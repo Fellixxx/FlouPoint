@@ -31,7 +31,7 @@ namespace FlouPoint.Test.Persistence.Repositories
         /// Tests that creating a valid entity succeeds.
         /// </summary>
         [Test]
-        public async Task When_Create_ValidEntity_Then_Success()
+        public async Task Create_ValidEntity_AddsEntityAndSavesChanges()
         {
             // Arrange
             var entity = new MockEntity
@@ -52,7 +52,7 @@ namespace FlouPoint.Test.Persistence.Repositories
         /// Tests that creating a null entity throws an exception.
         /// </summary>
         [Test]
-        public void When_Create_NullEntity_Then_ThrowsException()
+        public void Create_NullEntity_ThrowsArgumentNullException()
         {
             // Act & Assert
             Assert.ThrowsAsync<ArgumentNullException>(() => _repository.Create(null));
@@ -62,7 +62,7 @@ namespace FlouPoint.Test.Persistence.Repositories
         /// Tests that updating a null entity throws an exception.
         /// </summary>
         [Test]
-        public void When_Update_NullEntity_Then_ThrowsException()
+        public void Update_NullEntity_ThrowsArgumentNullException()
         {
             // Act & Assert
             Assert.ThrowsAsync<ArgumentNullException>(() => _repository.Update(null));
@@ -72,7 +72,7 @@ namespace FlouPoint.Test.Persistence.Repositories
         /// Tests that deleting a null entity throws an exception.
         /// </summary>
         [Test]
-        public void When_Delete_NullEntity_Then_ThrowsException()
+        public void Delete_NullEntity_ThrowsArgumentNullException()
         {
             // Act & Assert
             Assert.ThrowsAsync<ArgumentNullException>(() => _repository.Delete(null));
@@ -82,7 +82,7 @@ namespace FlouPoint.Test.Persistence.Repositories
         /// Tests that deleting a valid entity succeeds.
         /// </summary>
         [Test]
-        public async Task When_Delete_ValidEntity_Then_Success()
+        public async Task Delete_ValidEntity_RemovesEntityAndSavesChanges()
         {
             // Arrange
             var entity = new MockEntity

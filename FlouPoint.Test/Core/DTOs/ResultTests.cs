@@ -12,9 +12,13 @@ namespace FlouPoint.Test.Application.Result
     /// </summary>
     public class TestableResult<T> : Result<T>
     {
+        /// <summary>Sets the value of the IsSuccessful property.</summary>
         public void SetIsSuccessful(bool value) => IsSuccessful = value;
+        /// <summary>Sets the value of the Data property.</summary>
         public void SetData(T value) => Data = value;
+        /// <summary>Sets the value of the Message property.</summary>
         public void SetMessage(string value) => Message = value;
+        /// <summary>Sets the value of the ErrorType property.</summary>
         public void SetErrorType(ErrorTypes value) => ErrorType = value;
     }
 
@@ -25,12 +29,14 @@ namespace FlouPoint.Test.Application.Result
     public class ResultTests
     {
         private TestableResult<int> _result;
+        /// <summary>Initializes a new instance of the TestableResult before each test.</summary>
         [SetUp]
         public void Setup()
         {
             _result = new TestableResult<int>();
         }
 
+        /// <summary>Clears the initialized TestableResult after each test.</summary>
         [TearDown]
         public void Teardown()
         {
@@ -52,7 +58,7 @@ namespace FlouPoint.Test.Application.Result
         [TestCase(ErrorTypes.AuthorizationError)]
         [TestCase(ErrorTypes.ResourceError)]
         [TestCase(ErrorTypes.TimeoutError)]
-        public void When_Result_Set_ErrorType_Then_Get_Expected_ErrorString(ErrorTypes errorType)
+        public void ErrorType_ShouldReturnExpectedErrorString_WhenSet(ErrorTypes errorType)
         {
             // Given
             _result.SetErrorType(errorType);
@@ -66,7 +72,7 @@ namespace FlouPoint.Test.Application.Result
 #endregion
 #region IsSuccessful Tests
         [Test]
-        public void When_Result_Set_IsSuccessful_Then_Property_Should_Have_Expected_Value()
+        public void IsSuccessful_ShouldHaveExpectedValue_WhenSet()
         {
             // Given
             bool expected = true;
@@ -79,7 +85,7 @@ namespace FlouPoint.Test.Application.Result
 #endregion
 #region Data Tests
         [Test]
-        public void When_Result_Set_Data_Then_Property_Should_Have_Expected_Value()
+        public void Data_ShouldHaveExpectedValue_WhenSet()
         {
             // Given
             int expectedData = 42;
@@ -92,7 +98,7 @@ namespace FlouPoint.Test.Application.Result
 #endregion
 #region Message Tests
         [Test]
-        public void When_Result_Set_Message_Then_Property_Should_Have_Expected_Value()
+        public void Message_ShouldHaveExpectedValue_WhenSet()
         {
             // Given
             string expectedMessage = "Test message";

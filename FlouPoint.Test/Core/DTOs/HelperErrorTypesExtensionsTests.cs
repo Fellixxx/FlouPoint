@@ -18,7 +18,7 @@ namespace FlouPoint.Test.Infrastructure.Repository
         [TestCase(ErrorTypes.None, "NONE")]
         [TestCase(ErrorTypes.DatabaseError, "DATABASE_ERROR")]
         [TestCase(ErrorTypes.NetworkError, "NETWORK_ERROR")] // Add more cases as needed
-        public void When_ErrorType_Then_StringIsCorrect(ErrorTypes errorType, string expectedString)
+        public void GetCustomName_ShouldReturnCorrectStringGivenErrorType(ErrorTypes errorType, string expectedString)
         {
             // Act
             var actualString = errorType.GetCustomName() ?? string.Empty;
@@ -33,14 +33,12 @@ namespace FlouPoint.Test.Infrastructure.Repository
         [TestCase(ErrorTypes.None, "No error.")]
         [TestCase(ErrorTypes.DatabaseError, "Represents errors when interacting with the database.")]
         [TestCase(ErrorTypes.NetworkError, "Represents errors occurring during network communication.")] // Add more cases as needed
-        public void When_ErrorType_Then_DescriptionIsCorrect(ErrorTypes errorType, string expectedDescription)
+        public void GetDescription_ShouldReturnCorrectDescriptionGivenErrorType(ErrorTypes errorType, string expectedDescription)
         {
             // Act
             var actualDescription = errorType.GetDescription() ?? string.Empty;
             // Assert
             actualDescription.Should().Be(expectedDescription, $"because the description of {errorType} should be {expectedDescription}");
         }
-    // Helper method to provide additional enum values and their expected properties
-    // can be placed here if the value set becomes large.
     }
 }
