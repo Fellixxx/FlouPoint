@@ -1,8 +1,6 @@
 namespace Infrastructure.Repositories.Abstract.CRUD.Query
 {
     using Application.Result;
-    using Application.UseCases.ExternalServices;
-    using Application.UseCases.Repository;
     using Infrastructure.Constants;
     using Newtonsoft.Json.Linq;
     using System.Text;

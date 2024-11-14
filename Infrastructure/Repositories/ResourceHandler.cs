@@ -1,9 +1,9 @@
-using Application.UseCases.ExternalServices.Resources;
-using Infrastructure.Constants;
-using System.Threading.Tasks;
-
 namespace Infrastructure.Repositories
 {
+    using Application.UseCases.ExternalServices.Resources;
+    using Infrastructure.Constants;
+    using System.Threading.Tasks;
+
     /// <summary>
     /// Handles resource loading and retrieval operations by interfacing with an external resource provider.
     /// </summary>

@@ -2,7 +2,6 @@ namespace Infrastructure.ExternalServices.LogExternal
 {
     using Application.Result;
     using Application.UseCases.Wrapper;
-    using Infrastructure;
     using Microsoft.Extensions.Configuration;
     using Newtonsoft.Json;
     using System.Net.Http.Headers;

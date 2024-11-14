@@ -6,7 +6,6 @@ namespace Infrastructure.Resource
     using Domain.Entities;
     using Infrastructure.Constants;
     using Microsoft.EntityFrameworkCore;
-    using Microsoft.Extensions.Logging.Abstractions;
 
     /// <summary>
     /// Provides database operations for managing resources.

@@ -10,23 +10,34 @@ namespace Infrastructure.Test.Repositories.Implementation.CRUD.Query.User
     using Persistence.CreateStruture.Constants.ColumnType;
     using TContext = System.String;
 
+    /// <summary>
+    /// This test class contains unit tests for the <see cref = "UserReadFilter"/> class,
+    /// specifically testing its construction and initialization behavior.
+    /// </summary>
     [TestClass]
     public class UserReadFilterTests : SetupTest
     {
+        /// <summary>
+        /// Tests whether an instance of <see cref = "UserReadFilter"/> can be constructed successfully with valid parameters.
+        /// </summary>
         [TestMethod]
         public void CanConstruct()
         {
             // Act
             var instance = new UserReadFilter(_dbContext, _logService.Object, _resourceProvider, _resourceHandler);
-
             // Assert
-            Assert.IsNotNull(instance);
+            Assert.IsNotNull(instance, "Instance of UserReadFilter should not be null when constructed with valid parameters.");
         }
 
+        /// <summary>
+        /// Tests if the <see cref = "UserReadFilter"/> constructor throws an <see cref = "ArgumentNullException"/>
+        /// when a null DataContext is passed, ensuring that invalid states are not allowed.
+        /// </summary>
         [TestMethod]
         public void CannotConstructWithNullContext()
         {
-            Assert.ThrowsException<ArgumentNullException>(() => new UserReadFilter(default(DataContext), _logService.Object, _resourceProvider, _resourceHandler));
+            // Assert
+            Assert.ThrowsException<ArgumentNullException>(() => new UserReadFilter(default(DataContext), _logService.Object, _resourceProvider, _resourceHandler), "Constructor should throw ArgumentNullException when a null DataContext is provided.");
         }
     }
 }

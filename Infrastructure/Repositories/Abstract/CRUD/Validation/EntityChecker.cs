@@ -6,7 +6,6 @@ namespace Infrastructure.Repositories.Abstract.CRUD.Validation
     using Infrastructure.Utilities;
     using Persistence.Repositories;
     using Microsoft.EntityFrameworkCore;
-    using Infrastructure.ExternalServices.LogExternal;
     using Application.UseCases.ExternalServices.Resources;
 
     /// <summary>

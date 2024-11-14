@@ -1,14 +1,8 @@
 namespace Infrastructure.Test.Message
 {
-    using System;
-    using System.Threading.Tasks;
-    using Application.UseCases.Repository.CRUD.Resource;
     using Infrastructure.Resource;
     using Infrastructure.Test.Repositories.Implementation;
-    using Microsoft.EntityFrameworkCore;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
-    using Moq;
-    using TContext = System.String;
 
     /// <summary>
     /// Test class for testing the construction and functionality of the DatabaseResourceProvider.

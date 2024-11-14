@@ -4,7 +4,6 @@ namespace Infrastructure.Repositories.Implementation.CRUD.User
     using Application.UseCases.ExternalServices;
     using Persistence.BaseDbContext;
     using Domain.Entities;
-    using Application.UseCases.Repository.CRUD;
     using Infrastructure.Repositories.Abstract.CRUD.Delete;
     using Application.UseCases.ExternalServices.Resources;
 

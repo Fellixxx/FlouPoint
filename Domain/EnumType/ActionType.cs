@@ -1,7 +1,7 @@
-using Domain.Constants;
-
 namespace Domain.EnumType
 {
+    using Domain.Constants;
+
     /// <summary>
     /// Defines the types of operations that can be executed.
     /// This class holds a collection of predefined and custom action types that represent various operations within the domain.

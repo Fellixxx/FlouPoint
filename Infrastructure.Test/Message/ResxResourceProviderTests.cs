@@ -1,6 +1,5 @@
 namespace Infrastructure.Test.Message
 {
-    using System;
     using System.Threading.Tasks;
     using Infrastructure.Resource;
     using Infrastructure.Test.Repositories.Implementation;

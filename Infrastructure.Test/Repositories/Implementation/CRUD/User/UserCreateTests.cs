@@ -2,18 +2,10 @@ namespace Infrastructure.Test.Repositories.Implementation.CRUD.User
 {
     using System;
     using System.Threading.Tasks;
-    using Application.UseCases.CRUD.User;
-    using Application.UseCases.ExternalServices;
-    using Domain.DTO.Logging;
     using Domain.Entities;
-    using Infrastructure.Repositories.Implementation.CRUD.User;
     using Infrastructure.Repositories.Implementation.CRUD.User.Create;
     using Infrastructure.Test.Repositories.Implementation.CRUD;
-    using Microsoft.EntityFrameworkCore;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
-    using Moq;
-    using Persistence.BaseDbContext;
-    using Persistence.CreateStruture.Constants.ColumnType;
     using UtilitiesLayer;
 
     /// <summary>

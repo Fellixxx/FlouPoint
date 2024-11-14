@@ -1,10 +1,8 @@
 namespace Infrastructure.Test.Message
 {
-    using System;
     using System.Threading.Tasks;
     using Domain.Entities;
     using Infrastructure.Resource;
-    using Infrastructure.Test.Repositories.Implementation;
     using Infrastructure.Test.Repositories.Implementation.CRUD;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 

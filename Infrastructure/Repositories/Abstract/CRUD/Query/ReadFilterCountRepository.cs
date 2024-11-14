@@ -8,7 +8,6 @@ namespace Infrastructure.Repositories.Abstract.CRUD.Query
     using System;
     using System.Linq.Expressions;
     using Microsoft.EntityFrameworkCore;
-    using Domain.DTO.Logging;
     using Domain.EnumType;
     using Infrastructure.Constants;
     using Application.UseCases.ExternalServices.Resources;

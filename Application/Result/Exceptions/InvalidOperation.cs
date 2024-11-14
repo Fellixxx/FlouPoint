@@ -1,7 +1,7 @@
-using Application.Constants;
-
 namespace Application.Result.Exceptions
 {
+    using Application.Constants;
+
     /// <summary>
     /// Represents an exception that is thrown when an invalid operation result occurs.
     /// </summary>

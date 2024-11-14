@@ -2,15 +2,11 @@ namespace Infrastructure.Test.Repositories.Implementation.CRUD.Status
 {
     using System;
     using System.Threading.Tasks;
-    using Application.UseCases.Repository;
     using Domain.Entities;
-    using Infrastructure.Repositories.Implementation.CRUD.User;
     using Infrastructure.Repositories.Implementation.CRUD.User.Create;
     using Infrastructure.Repositories.Implementation.Status;
     using Infrastructure.Test.Repositories.Implementation.CRUD;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
-    using Moq;
-    using UtilitiesLayer;
 
     /// <summary>
     /// Tests for verifying user status updates and user creation functionalities.

@@ -1,4 +1,3 @@
-﻿
 namespace Infrastructure.Repositories.Implementation.CRUD.User.Create
 {
     using Application.Result;
@@ -23,32 +22,30 @@ namespace Infrastructure.Repositories.Implementation.CRUD.User.Create
         private readonly IResourcesProvider _provider;
         private IResourceHandler _handler;
         private readonly List<string> _resourceKeys;
-
         /// <summary>
-        /// Initializes a new instance of the <see cref="UserCreate"/> class.
+        /// Initializes a new instance of the <see cref = "UserCreate"/> class.
         /// </summary>
-        /// <param name="context">The database context for the application.</param>
-        /// <param name="logService">The logging service for tracking operations.</param>
-        public UserCreate(DataContext context, 
-            ILogService logService, 
-            IUtilEntity<User> utilEntity, 
-            IResourcesProvider provider, 
-            IResourceHandler handler) : base(context, logService, utilEntity, provider, handler)
+        /// <param name = "context">The database context for the application.</param>
+        /// <param name = "logService">The logging service for tracking operations.</param>
+        /// <param name = "utilEntity">Utility entity used for management.</param>
+        /// <param name = "provider">Resource provider for localization or resource access.</param>
+        /// <param name = "handler">Resource handler for managing resources and messaging.</param>
+        public UserCreate(DataContext context, ILogService logService, IUtilEntity<User> utilEntity, IResourcesProvider provider, IResourceHandler handler) : base(context, logService, utilEntity, provider, handler)
         {
             _provider = provider;
             _handler = handler;
-            _resourceKeys =
-            [
+            _resourceKeys = new List<string>
+            {
                 "FailedDataSizeCharacter",
                 "FailedEmailInvalidFormat",
                 "FailedAlreadyRegisteredEmail"
-            ];
+            };
         }
 
         /// <summary>
         /// Method to create a new user entity and persist it in the database.
         /// </summary>
-        /// <param name="entity">The user entity to be created and stored.</param>
+        /// <param name = "entity">The user entity to be created and stored.</param>
         /// <returns>An operation result indicating the outcome of the user creation.</returns>
         protected override async Task<Operation<User>> CreateEntity(User entity)
         {
@@ -56,7 +53,7 @@ namespace Infrastructure.Repositories.Implementation.CRUD.User.Create
             CreateUserRules validatorAdd = new CreateUserRules();
             ValidationResult result = validatorAdd.Validate(entity);
             await ResourceHandler.CreateAsync(_provider, _resourceKeys);
-
+            // Check if validation fails and return an error if so
             if (!result.IsValid)
             {
                 string errorMessage = GetErrorMessage(result);
@@ -91,20 +88,19 @@ namespace Infrastructure.Repositories.Implementation.CRUD.User.Create
         /// <summary>
         /// Extracts and consolidates validation error messages.
         /// </summary>
-        /// <param name="result">The validation result that may contain multiple error messages.</param>
+        /// <param name = "result">The validation result that may contain multiple error messages.</param>
         /// <returns>A single string consolidating all error messages.</returns>
         private static string GetErrorMessage(ValidationResult result)
         {
             IEnumerable<string> errors = result.Errors.Select(x => x.ErrorMessage).Distinct();
             string errorMessage = string.Join(", ", errors);
-
             return errorMessage;
         }
 
         /// <summary>
         /// Prepares the user entity for creation by setting certain properties.
         /// </summary>
-        /// <param name="entity">The original user entity.</param>
+        /// <param name = "entity">The original user entity.</param>
         /// <returns>A new user entity with additional properties set.</returns>
         private static User GetUser(User entity)
         {

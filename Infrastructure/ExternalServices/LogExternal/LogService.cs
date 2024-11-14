@@ -5,7 +5,6 @@ namespace Infrastructure.ExternalServices.LogExternal
     using Application.UseCases.ExternalServices.Resources;
     using Application.UseCases.Wrapper;
     using Domain.DTO.Logging;
-    using Infrastructure;
     using Infrastructure.Constants;
     using Infrastructure.Repositories;
     using Microsoft.Extensions.Configuration;

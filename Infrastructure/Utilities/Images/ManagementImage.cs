@@ -5,12 +5,10 @@ namespace Infrastructure.Utilities.Images
     using Application.UseCases.ExternalServices.Resources;
     using Application.UseCases.Utilities;
     using Domain.DTO.Logging;
-    using Domain.Entities;
     using Domain.EnumType;
     using Infrastructure.Constants;
     using Infrastructure.Other;
     using Infrastructure.Repositories;
-    using System.Reflection.Metadata;
 
     /// <summary>
     /// Provides functionality for managing images, including interacting with external services like Google Drive.

@@ -1,28 +1,27 @@
-using Application.UseCases.CRUD.Query.User;
-using Application.UseCases.CRUD.User;
-using Application.UseCases.CRUD.Validation;
-using Application.UseCases.ExternalServices;
-using Application.UseCases.Operations;
-using Application.UseCases.Repository.CRUD.Resource;
-using Application.UseCases.Repository.Status.StatusChange;
-using Domain.Entities;
-using Infrastructure.Resource;
-using Infrastructure.Repositories.Implementation.CRUD.Query;
-using Infrastructure.Repositories.Implementation.CRUD.Query.User;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Caching.Distributed;
-using Microsoft.Extensions.Configuration;
-using Moq;
-using Persistence.BaseDbContext;
-using Persistence.BaseDbContext.Interface;
-using Persistence.CreateStruture.Constants.ColumnType;
-using Persistence.GenerateData.Interface;
-using System.Security.Cryptography;
-using System.Text;
-using Application.UseCases.ExternalServices.Resources;
-
 namespace Infrastructure.Test.Repositories.Implementation
 {
+    using Application.UseCases.CRUD.Query.User;
+    using Application.UseCases.CRUD.User;
+    using Application.UseCases.CRUD.Validation;
+    using Application.UseCases.ExternalServices;
+    using Application.UseCases.Operations;
+    using Application.UseCases.Repository.CRUD.Resource;
+    using Application.UseCases.Repository.Status.StatusChange;
+    using Domain.Entities;
+    using Infrastructure.Resource;
+    using Infrastructure.Repositories.Implementation.CRUD.Query;
+    using Microsoft.EntityFrameworkCore;
+    using Microsoft.Extensions.Caching.Distributed;
+    using Microsoft.Extensions.Configuration;
+    using Moq;
+    using Persistence.BaseDbContext;
+    using Persistence.BaseDbContext.Interface;
+    using Persistence.CreateStruture.Constants.ColumnType;
+    using Persistence.GenerateData.Interface;
+    using System.Security.Cryptography;
+    using System.Text;
+    using Application.UseCases.ExternalServices.Resources;
+
     /// <summary>
     /// BaseTests provides a foundational setup for testing repository implementations.
     /// It includes initialization of mock services, configurations, and setup for the DataContext.
