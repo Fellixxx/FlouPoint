@@ -58,8 +58,8 @@ namespace Infrastructure.ExternalServices.LogExternal.ServiceBase
             if (HasParameter()) // Checks for missing parameters.
             {
                 await ResourceHandler.CreateAsync(_provider, _resourceKeys);
-                var LogConfigMissingError = _handler.GetResource("LogConfigMissingError");
-                var message = LogConfigMissingError;
+                var logConfigMissingError = _handler.GetResource("LogConfigMissingError");
+                var message = logConfigMissingError;
                 var strategy = new ConfigMissingStrategy<string>();
                 return OperationStrategy<string>.Fail(message, strategy); // Returns failure if configuration is incomplete.
             }
@@ -68,16 +68,16 @@ namespace Infrastructure.ExternalServices.LogExternal.ServiceBase
             var response = await _httpContentWrapper.PostAsync(_client, url, null, null); // Attempts to get the token by sending a POST request.
             if (!response.IsSuccessStatusCode)
             {
-                var LogTokenFetchFailed = _handler.GetResource("LogTokenFetchFailed");
+                var logTokenFetchFailed = _handler.GetResource("LogTokenFetchFailed");
                 var strategy = new ExternalServiceStrategy<string>();
-                return OperationStrategy<string>.Fail(LogTokenFetchFailed, strategy); // Returns failure if the request failed.
+                return OperationStrategy<string>.Fail(logTokenFetchFailed, strategy); // Returns failure if the request failed.
             }
 
             var result = await _httpContentWrapper.ReadAsStringAsync(response.Content); // Reads the response content.
             var _tokenResponse = JsonConvert.DeserializeObject<ResponseLogin>(result); // Deserializes the content to retrieve the token.
             string accessToken = _tokenResponse?.AccessToken ?? string.Empty; // Extracts the token or provides an empty string.
-            var successfullyLogCreate = _handler.GetResource("LogTokenFetched");
-            return Operation<string>.Success(accessToken, successfullyLogCreate); // Returns the token if successful.
+            var logTokenFetched = _handler.GetResource("LogTokenFetched");
+            return Operation<string>.Success(accessToken, logTokenFetched); // Returns the token if successful.
         }
 
         /// <summary>
@@ -119,13 +119,13 @@ namespace Infrastructure.ExternalServices.LogExternal.ServiceBase
             await ResourceHandler.CreateAsync(_provider, _resourceKeys); // Ensures resource keys are available.
             if (!response.IsSuccessStatusCode)
             {
-                var LogCreationFailed = _handler.GetResource("LogTokenFetchFailed");
+                var logCreationFailed = _handler.GetResource("LogTokenFetchFailed");
                 var strategy = new ExternalServiceStrategy<string>();
-                return OperationStrategy<string>.Fail(LogCreationFailed, strategy); // Returns failure if the log creation request failed.
+                return OperationStrategy<string>.Fail(logCreationFailed, strategy); // Returns failure if the log creation request failed.
             }
 
-            var LogCreated = _handler.GetResource("LogTokenFetchFailed");
-            return Operation<string>.Success(string.Empty, LogCreated); // Indicates a successful log creation.
+            var logTokenFetchFailed = _handler.GetResource("LogTokenFetchFailed");
+            return Operation<string>.Success(string.Empty, logTokenFetchFailed); // Indicates a successful log creation.
         }
 
         /// <summary>

@@ -57,8 +57,8 @@ namespace Infrastructure.Repositories.Implementation.CRUD.User.Create
             if (!result.IsValid)
             {
                 string errorMessage = GetErrorMessage(result);
-                var failedDataSizeCharacter = _handler.GetResource("CreateFailedDataSizeCharacter");
-                var message = string.Format(failedDataSizeCharacter, errorMessage);
+                var createFailedDataSizeCharacter = _handler.GetResource("CreateFailedDataSizeCharacter");
+                var message = string.Format(createFailedDataSizeCharacter, errorMessage);
                 var business = new BusinessStrategy<User>();
                 return OperationStrategy<User>.Fail(message, business);
             }
@@ -67,8 +67,8 @@ namespace Infrastructure.Repositories.Implementation.CRUD.User.Create
             var email = entity?.Email ?? string.Empty;
             if (!CredentialUtility.IsValidEmail(email))
             {
-                var failedEmailInvalidFormat = _handler.GetResource("CreateFailedEmailInvalidFormat");
-                return OperationStrategy<User>.Fail(failedEmailInvalidFormat, new BusinessStrategy<User>());
+                var createFailedEmailInvalidFormat = _handler.GetResource("CreateFailedEmailInvalidFormat");
+                return OperationStrategy<User>.Fail(createFailedEmailInvalidFormat, new BusinessStrategy<User>());
             }
 
             // Ensure email uniqueness by checking if it's already used by another user
@@ -76,8 +76,8 @@ namespace Infrastructure.Repositories.Implementation.CRUD.User.Create
             User? userExistByEmail = userByEmail?.FirstOrDefault();
             if (userExistByEmail is not null)
             {
-                var failedAlreadyRegisteredEmail = _handler.GetResource("CreateFailedAlreadyRegisteredEmail");
-                return OperationStrategy<User>.Fail(failedAlreadyRegisteredEmail, new BusinessStrategy<User>());
+                var createFailedAlreadyRegisteredEmail = _handler.GetResource("CreateFailedAlreadyRegisteredEmail");
+                return OperationStrategy<User>.Fail(createFailedAlreadyRegisteredEmail, new BusinessStrategy<User>());
             }
 
             // Create and return the user entity

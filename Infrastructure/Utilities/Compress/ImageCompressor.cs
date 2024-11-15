@@ -70,9 +70,9 @@ namespace Infrastructure.Utilities.Compress
                 outputStream.Seek(0, SeekOrigin.Begin);
                 // Asynchronously create resources using the resource handler.
                 await ResourceHandler.CreateAsync(_provider, _resourceKeys);
-                var successCompressed = _handler.GetResource("CompressedSuccess");
+                var compressedSuccess = _handler.GetResource("CompressedSuccess");
                 // Return a successful operation result with the compressed image stream.
-                return Operation<Stream>.Success(outputStream, successCompressed);
+                return Operation<Stream>.Success(outputStream, compressedSuccess);
             }
             catch (Exception ex)
             {

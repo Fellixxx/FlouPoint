@@ -47,8 +47,8 @@ namespace Infrastructure.Repositories.Abstract.CRUD.Validation
             {
                 // Load necessary resources and return a failed operation if ID is empty
                 await ResourceHandler.CreateAsync(_provider, _resourceKeys);
-                var failedNecesaryData = _handler.GetResource("EntityCheckerFailedNecesaryData");
-                return OperationStrategy<T>.Fail(failedNecesaryData, new BusinessStrategy<T>());
+                var entityCheckerFailedNecesaryData = _handler.GetResource("EntityCheckerFailedNecesaryData");
+                return OperationStrategy<T>.Fail(entityCheckerFailedNecesaryData, new BusinessStrategy<T>());
             }
 
             // Retrieves an entity from the data store using the ID filter
@@ -61,14 +61,14 @@ namespace Infrastructure.Repositories.Abstract.CRUD.Validation
             // Case when the entity does not exist in the repository
             if (!hasEntity)
             {
-                var genericExistValidation = _handler.GetResource("EntityCheckerValidation");
-                var messageExist = string.Format(genericExistValidation, typeof(T).Name);
+                var entityCheckerValidation = _handler.GetResource("EntityCheckerValidation");
+                var messageExist = string.Format(entityCheckerValidation, typeof(T).Name);
                 return OperationStrategy<T>.Fail(messageExist, new BusinessStrategy<T>());
             }
 
             // Successful validation with a message confirming entity existence
-            var validationGlobalOkMessage = _handler.GetResource("EntityCheckerSuccess");
-            return Operation<T>.Success(entityUnmodified, validationGlobalOkMessage);
+            var entityCheckerSuccess = _handler.GetResource("EntityCheckerSuccess");
+            return Operation<T>.Success(entityUnmodified, entityCheckerSuccess);
         }
 
         /// <summary>
@@ -80,11 +80,11 @@ namespace Infrastructure.Repositories.Abstract.CRUD.Validation
         {
             // Preparing necessary resources
             await ResourceHandler.CreateAsync(_provider, _resourceKeys);
-            var failedNecesaryData = _handler.GetResource("EntityCheckerFailedNecesaryData");
+            var entityCheckerFailedNecesaryData = _handler.GetResource("EntityCheckerFailedNecesaryData");
             // Checks for null or whitespace in the provided ID
             if (string.IsNullOrWhiteSpace(id))
             {
-                return OperationStrategy<T>.Fail(failedNecesaryData, new BusinessStrategy<T>());
+                return OperationStrategy<T>.Fail(entityCheckerFailedNecesaryData, new BusinessStrategy<T>());
             }
 
             // Validates the GUID format of the given ID

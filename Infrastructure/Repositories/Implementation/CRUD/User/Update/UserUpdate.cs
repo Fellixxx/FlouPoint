@@ -63,18 +63,18 @@ namespace Infrastructure.Repositories.Implementation.CRUD.User.Update
             if (!result.IsValid)
             {
                 string errorMessage = GetErrorMessage(result);
-                var failedDataSizeCharacter = _handler.GetResource("UpdateFailedDataSizeCharacter");
-                string message = string.Format(failedDataSizeCharacter, errorMessage);
-                var failedAlreadyRegisteredEmail = _handler.GetResource("UpdateFailedAlreadyRegisteredEmail");
-                return OperationStrategy<User>.Fail(failedAlreadyRegisteredEmail, new BusinessStrategy<User>());
+                var updateFailedDataSizeCharacter = _handler.GetResource("UpdateFailedDataSizeCharacter");
+                string message = string.Format(updateFailedDataSizeCharacter, errorMessage);
+                var updateFailedAlreadyRegisteredEmail = _handler.GetResource("UpdateFailedAlreadyRegisteredEmail");
+                return OperationStrategy<User>.Fail(updateFailedAlreadyRegisteredEmail, new BusinessStrategy<User>());
             }
 
             // Check for email validity
             var email = entityModified?.Email ?? string.Empty;
             if (!CredentialUtility.IsValidEmail(email))
             {
-                var failedDataSizeCharacter = _handler.GetResource("UpdateFailedEmailInvalidFormat");
-                return OperationStrategy<User>.Fail(failedDataSizeCharacter, new BusinessStrategy<User>());
+                var updateFailedEmailInvalidFormat = _handler.GetResource("UpdateFailedEmailInvalidFormat");
+                return OperationStrategy<User>.Fail(updateFailedEmailInvalidFormat, new BusinessStrategy<User>());
             }
 
             // Ensure that the modified email is unique and not associated with another user
@@ -83,8 +83,8 @@ namespace Infrastructure.Repositories.Implementation.CRUD.User.Update
             User? userExistByEmail = userByEmail?.FirstOrDefault();
             if (userExistByEmail != null)
             {
-                var failedDataSizeCharacter = _handler.GetResource("UpdateFailedAlreadyRegisteredEmail");
-                return OperationStrategy<User>.Fail(failedDataSizeCharacter, new BusinessStrategy<User>());
+                var updateFailedAlreadyRegisteredEmail = _handler.GetResource("UpdateFailedAlreadyRegisteredEmail");
+                return OperationStrategy<User>.Fail(updateFailedAlreadyRegisteredEmail, new BusinessStrategy<User>());
             }
 
             // Check for changes in the email and update relevant properties
@@ -102,8 +102,8 @@ namespace Infrastructure.Repositories.Implementation.CRUD.User.Update
             var password = entityModified?.Password ?? string.Empty;
             entityUnmodified.Password = CredentialUtility.ComputeSha256Hash(password);
             // Return a success operation result
-            var successfullySearchGeneric = _handler.GetResource("UpdateSuccessfullySearchGeneric");
-            var successMessage = string.Format(successfullySearchGeneric, typeof(User).Name);
+            var updateSuccessfullySearchGeneric = _handler.GetResource("UpdateSuccessfullySearchGeneric");
+            var successMessage = string.Format(updateSuccessfullySearchGeneric, typeof(User).Name);
             return Operation<User>.Success(entityUnmodified, successMessage);
         }
 

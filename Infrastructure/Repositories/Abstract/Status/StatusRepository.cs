@@ -66,9 +66,9 @@ namespace Infrastructure.Repositories.Abstract.Status
                 // Update the entity in the database.
                 bool result = await Update(entity);
                 await ResourceHandler.CreateAsync(_provider, _resourceKeys);
-                var successfullyGenericActiveated = _handler.GetResource("StatusActiveSuccess");
+                var statusActiveSuccess = _handler.GetResource("StatusActiveSuccess");
                 // Generate success message.
-                var messageSuccess = string.Format(successfullyGenericActiveated, typeof(T).Name);
+                var messageSuccess = string.Format(statusActiveSuccess, typeof(T).Name);
                 // Return the success operation result.
                 return Operation<bool>.Success(result, messageSuccess);
             }
@@ -109,9 +109,9 @@ namespace Infrastructure.Repositories.Abstract.Status
                 // Update the entity in the database.
                 bool result = await Update(entity);
                 await ResourceHandler.CreateAsync(_provider, _resourceKeys);
-                var successfullyGenericActiveated = _handler.GetResource("StatusDisableSuccess");
+                var statusDisableSuccess = _handler.GetResource("StatusDisableSuccess");
                 // Generate success message.
-                string messageSuccess = string.Format(successfullyGenericActiveated, typeof(T).Name);
+                string messageSuccess = string.Format(statusDisableSuccess, typeof(T).Name);
                 // Return the success operation result.
                 return Operation<bool>.Success(result, messageSuccess);
             }
@@ -149,10 +149,10 @@ namespace Infrastructure.Repositories.Abstract.Status
             IQueryable<T> entityRepo = await ReadFilter(e => e.Id.Equals(id));
             T? entityUnmodified = entityRepo?.FirstOrDefault();
             bool hasEntity = entityUnmodified is not null;
-            var genericExistValidation = _handler.GetResource("StatusExistValidation");
+            var statusExistValidation = _handler.GetResource("StatusExistValidation");
             if (!hasEntity)
             {
-                string messageExist = string.Format(genericExistValidation, typeof(T).Name);
+                string messageExist = string.Format(statusExistValidation, typeof(T).Name);
                 return OperationStrategy<T>.Fail(messageExist, new BusinessStrategy<T>());
             }
 

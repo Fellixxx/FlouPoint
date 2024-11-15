@@ -45,16 +45,16 @@ namespace Infrastructure.Repositories.Abstract.CRUD.Util
             // Asynchronously create resources based on provided keys
             await ResourceHandler.CreateAsync(_provider, _resourceKeys);
             // Get specific resource message for missing necessary data
-            var failedNecesaryData = _handler.GetResource("UtilEntityFailedNecesaryData");
+            var utilEntityFailedNecesaryData = _handler.GetResource("UtilEntityFailedNecesaryData");
             // Check if the entity is null and return a failure operation if so
             if (entity is null)
             {
-                return OperationStrategy<T>.Fail(failedNecesaryData, new BusinessStrategy<T>());
+                return OperationStrategy<T>.Fail(utilEntityFailedNecesaryData, new BusinessStrategy<T>());
             }
 
             // If the entity is not null, return a success operation with success message
-            var utilGlobalOkMessage = _handler.GetResource("UtilEntitySuccess");
-            return Operation<T>.Success(entity, utilGlobalOkMessage);
+            var utilEntitySuccess = _handler.GetResource("UtilEntitySuccess");
+            return Operation<T>.Success(entity, utilEntitySuccess);
         }
     }
 }

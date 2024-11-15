@@ -49,8 +49,8 @@ namespace Infrastructure.Repositories.Abstract.CRUD.Query.ReadFilter
             {
                 IQueryable<T> result = await base.ReadFilter(predicate); // Calls the base read filter method
                 await ResourceHandler.CreateAsync(_provider, _resourceKeys); // Initializes resources
-                var successfullySearchGeneric = _handler.GetResource("ReadFilterSuccess"); // Retrieves the success message resource
-                var messageSuccessfully = string.Format(successfullySearchGeneric, typeof(T).Name); // Formats the success message
+                var readFilterSuccess = _handler.GetResource("ReadFilterSuccess"); // Retrieves the success message resource
+                var messageSuccessfully = string.Format(readFilterSuccess, typeof(T).Name); // Formats the success message
                 return Operation<IQueryable<T>>.Success(result, messageSuccessfully); // Returns a successful operation result
             }
             catch (Exception ex)

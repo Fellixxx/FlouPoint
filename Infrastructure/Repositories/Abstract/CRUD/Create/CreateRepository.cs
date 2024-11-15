@@ -68,9 +68,9 @@ namespace Infrastructure.Repositories.Abstract.CRUD.Create
                 var addedEntityResult = await base.Create(validationResult.Data);
                 // Handle resources for successful addition
                 await ResourceHandler.CreateAsync(_provider, _resourceKeys);
-                var successfullyGeneric = _handler.GetResource("CreationSuccess");
+                var creationSuccess = _handler.GetResource("CreationSuccess");
                 // Create a success message and return the success result
-                var successMessage = string.Format(successfullyGeneric, typeof(T).Name);
+                var successMessage = string.Format(creationSuccess, typeof(T).Name);
                 return Operation<string>.Success(addedEntityResult, successMessage);
             }
             catch (Exception ex)

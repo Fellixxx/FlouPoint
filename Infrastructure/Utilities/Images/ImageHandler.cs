@@ -74,11 +74,11 @@ namespace Infrastructure.Utilities.Images
                 // Prepare the resources needed for the operation.
                 await ResourceHandler.CreateAsync(_provider, _resourceKeys);
                 // Retrieve success message resource.
-                var successfullyUpload = _handler.GetResource("ImageSuccessfullyUpload");
+                var imageSuccessfullyUpload = _handler.GetResource("ImageSuccessfullyUpload");
                 // Upload operation commented out; possibly uploads to Google Drive or another location.
                 // var result = UploadFileAsync(streamCompress);
                 // Return success operation with the success message.
-                return Operation<bool>.Success(true, successfullyUpload);
+                return Operation<bool>.Success(true, imageSuccessfullyUpload);
             }
             catch (Exception ex)
             {
@@ -123,9 +123,9 @@ namespace Infrastructure.Utilities.Images
                 // Prepare resources needed for the success operation.
                 await ResourceHandler.CreateAsync(_provider, _resourceKeys);
                 // Retrieve success message resource.
-                var imageGlobalOkMessage = _handler.GetResource("ImageConvertSuccess");
+                var imageConvertSuccess = _handler.GetResource("ImageConvertSuccess");
                 // Return a successful operation with the memory stream.
-                return Operation<Stream>.Success(memoryStream, imageGlobalOkMessage);
+                return Operation<Stream>.Success(memoryStream, imageConvertSuccess);
             }
             catch (Exception ex)
             {

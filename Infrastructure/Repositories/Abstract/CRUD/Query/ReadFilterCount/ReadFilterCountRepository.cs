@@ -58,9 +58,9 @@ namespace Infrastructure.Repositories.Abstract.CRUD.Query.ReadFilterCount
                 // Asynchronously creates a resource handler with specified keys.
                 await ResourceHandler.CreateAsync(_provider, _resourceKeys);
                 // Retrieves a localized successful operation message.
-                var messageSuccessfully = _handler.GetResource("ReadFilterCountSuccess");
+                var readFilterCountSuccess = _handler.GetResource("ReadFilterCountSuccess");
                 // Returns a successful operation result with count and message.
-                return Operation<int>.Success(result, messageSuccessfully);
+                return Operation<int>.Success(result, readFilterCountSuccess);
             }
             catch (Exception ex)
             {

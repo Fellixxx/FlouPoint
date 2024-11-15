@@ -62,9 +62,9 @@ namespace Infrastructure.Repositories.Abstract.CRUD.Query.ReadId
                 // Fetch relevant resources after validation
                 await ResourceHandler.CreateAsync(_provider, _resourceKeys);
                 // Retrieve success message resource
-                var successfullyFind = _handler.GetResource("ReadIdSuccess");
+                var readIdSuccess = _handler.GetResource("ReadIdSuccess");
                 // Return success operation with entity
-                return Operation<T>.Success(entity, successfullyFind);
+                return Operation<T>.Success(entity, readIdSuccess);
             }
             catch (Exception ex)
             {
@@ -115,9 +115,9 @@ namespace Infrastructure.Repositories.Abstract.CRUD.Query.ReadId
                 // Fetch relevant resources after validation
                 await ResourceHandler.CreateAsync(_provider, _resourceKeys);
                 // Retrieve success message resource
-                var successfullyFind = _handler.GetResource("ReadByBearerSuccess");
+                var readByBearerSuccess = _handler.GetResource("ReadByBearerSuccess");
                 // Return success operation with entity
-                return Operation<T>.Success(entity, successfullyFind);
+                return Operation<T>.Success(entity, readByBearerSuccess);
             }
             catch (Exception ex)
             {
