@@ -119,18 +119,6 @@ namespace Infrastructure.Test.Repositories.Implementation.CRUD
                 "Ok"
             },
             {
-                "FailedDataSizeCharacter",
-                "One or more data from the User have been submitted with errors {0}"
-            },
-            {
-                "FailedEmailInvalidFormat",
-                "The given email is not in a valid format"
-            },
-            {
-                "FailedAlreadyRegisteredEmail",
-                "A user is already registered with this email."
-            },
-            {
                 "CreateFailedDataSizeCharacter",
                 "One or more data from the User have been submitted with errors {0}"
             },
@@ -191,11 +179,11 @@ namespace Infrastructure.Test.Repositories.Implementation.CRUD
                 "The image was uploaded successfully due to an unexpected error."
             },
             {
-                "ImageGlobalOkMessage",
+                "ImageConvertSuccess",
                 "Ok."
             },
             {
-                "SuccessCompressed",
+                "CompressedSuccess",
                 "The image was compressed successfully."
             }
         };

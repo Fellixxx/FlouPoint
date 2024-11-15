@@ -36,7 +36,7 @@ namespace Infrastructure.Utilities.Compress
             _provider = resourceProvider;
             _handler = resourceHandler;
             // Initialize predefined keys for resource messages.
-            _resourceKeys = ["SuccessCompressed"];
+            _resourceKeys = ["CompressedSuccess"];
         }
 
         /// <summary>
@@ -70,7 +70,7 @@ namespace Infrastructure.Utilities.Compress
                 outputStream.Seek(0, SeekOrigin.Begin);
                 // Asynchronously create resources using the resource handler.
                 await ResourceHandler.CreateAsync(_provider, _resourceKeys);
-                var successCompressed = _handler.GetResource("SuccessCompressed");
+                var successCompressed = _handler.GetResource("CompressedSuccess");
                 // Return a successful operation result with the compressed image stream.
                 return Operation<Stream>.Success(outputStream, successCompressed);
             }

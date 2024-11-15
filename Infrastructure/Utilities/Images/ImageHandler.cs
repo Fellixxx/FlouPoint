@@ -15,8 +15,6 @@ namespace Infrastructure.Utilities.Images
     /// </summary>
     public class ImageHandler : IImageHandler
     {
-        // Constant representing the user for upload operations.
-        private const string UserUpload = "AuthFlowServicesUser";
         // Service responsible for logging activities and errors.
         private readonly ILogService _logService;
         // Service responsible for image compression operations.
@@ -43,7 +41,7 @@ namespace Infrastructure.Utilities.Images
             _resourceKeys = new List<string>
             {
                 "ImageSuccessfullyUpload",
-                "ImageGlobalOkMessage"
+                "ImageConvertSuccess"
             };
         }
 
@@ -125,7 +123,7 @@ namespace Infrastructure.Utilities.Images
                 // Prepare resources needed for the success operation.
                 await ResourceHandler.CreateAsync(_provider, _resourceKeys);
                 // Retrieve success message resource.
-                var imageGlobalOkMessage = _handler.GetResource("ImageGlobalOkMessage");
+                var imageGlobalOkMessage = _handler.GetResource("ImageConvertSuccess");
                 // Return a successful operation with the memory stream.
                 return Operation<Stream>.Success(memoryStream, imageGlobalOkMessage);
             }

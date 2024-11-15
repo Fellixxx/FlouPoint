@@ -36,9 +36,9 @@ namespace Infrastructure.Repositories.Implementation.CRUD.User.Create
             _handler = handler;
             _resourceKeys = new List<string>
             {
-                "FailedDataSizeCharacter",
-                "FailedEmailInvalidFormat",
-                "FailedAlreadyRegisteredEmail"
+                "CreateFailedDataSizeCharacter",
+                "CreateFailedEmailInvalidFormat",
+                "CreateFailedAlreadyRegisteredEmail"
             };
         }
 
@@ -57,7 +57,7 @@ namespace Infrastructure.Repositories.Implementation.CRUD.User.Create
             if (!result.IsValid)
             {
                 string errorMessage = GetErrorMessage(result);
-                var failedDataSizeCharacter = _handler.GetResource("FailedDataSizeCharacter");
+                var failedDataSizeCharacter = _handler.GetResource("CreateFailedDataSizeCharacter");
                 var message = string.Format(failedDataSizeCharacter, errorMessage);
                 var business = new BusinessStrategy<User>();
                 return OperationStrategy<User>.Fail(message, business);
@@ -67,7 +67,7 @@ namespace Infrastructure.Repositories.Implementation.CRUD.User.Create
             var email = entity?.Email ?? string.Empty;
             if (!CredentialUtility.IsValidEmail(email))
             {
-                var failedEmailInvalidFormat = _handler.GetResource("FailedEmailInvalidFormat");
+                var failedEmailInvalidFormat = _handler.GetResource("CreateFailedEmailInvalidFormat");
                 return OperationStrategy<User>.Fail(failedEmailInvalidFormat, new BusinessStrategy<User>());
             }
 
@@ -76,7 +76,7 @@ namespace Infrastructure.Repositories.Implementation.CRUD.User.Create
             User? userExistByEmail = userByEmail?.FirstOrDefault();
             if (userExistByEmail is not null)
             {
-                var failedAlreadyRegisteredEmail = _handler.GetResource("FailedAlreadyRegisteredEmail");
+                var failedAlreadyRegisteredEmail = _handler.GetResource("CreateFailedAlreadyRegisteredEmail");
                 return OperationStrategy<User>.Fail(failedAlreadyRegisteredEmail, new BusinessStrategy<User>());
             }
 

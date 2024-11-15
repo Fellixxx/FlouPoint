@@ -86,32 +86,5 @@ namespace Infrastructure.Repositories.Implementation.CRUD.User.Create {
                 return ResourceManager.GetString("CreateFailedEmailInvalidFormat", resourceCulture);
             }
         }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to A user is already registered with this email..
-        /// </summary>
-        internal static string FailedAlreadyRegisteredEmail {
-            get {
-                return ResourceManager.GetString("FailedAlreadyRegisteredEmail", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to One or more data from the User have been submitted with errors {0}.
-        /// </summary>
-        internal static string FailedDataSizeCharacter {
-            get {
-                return ResourceManager.GetString("FailedDataSizeCharacter", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The given email is not in a valid format.
-        /// </summary>
-        internal static string FailedEmailInvalidFormat {
-            get {
-                return ResourceManager.GetString("FailedEmailInvalidFormat", resourceCulture);
-            }
-        }
     }
 }

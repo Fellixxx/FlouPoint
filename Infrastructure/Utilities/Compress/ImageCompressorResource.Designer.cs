@@ -63,9 +63,9 @@ namespace Infrastructure.Utilities.Compress {
         /// <summary>
         ///   Looks up a localized string similar to The image was compressed successfully..
         /// </summary>
-        internal static string SuccessCompressed {
+        internal static string CompressedSuccess {
             get {
-                return ResourceManager.GetString("SuccessCompressed", resourceCulture);
+                return ResourceManager.GetString("CompressedSuccess", resourceCulture);
             }
         }
     }
