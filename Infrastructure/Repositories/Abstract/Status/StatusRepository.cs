@@ -36,11 +36,11 @@ namespace Infrastructure.Repositories.Abstract.Status
             _handler = resourceHandler;
             _resourceKeys = new List<string>
             {
-                "SuccessfullyGenericActiveated",
+                "StatusActiveSuccess",
                 "StatusFailedNecesaryData",
-                "GenericExistValidation",
-                "StatusSuccessfullyGenericDisabled",
-                "StatusGlobalOkMessage"
+                "StatusExistValidation",
+                "StatusDisableSuccess",
+                "StatusSuccess"
             };
         }
 
@@ -66,7 +66,7 @@ namespace Infrastructure.Repositories.Abstract.Status
                 // Update the entity in the database.
                 bool result = await Update(entity);
                 await ResourceHandler.CreateAsync(_provider, _resourceKeys);
-                var successfullyGenericActiveated = _handler.GetResource("SuccessfullyGenericActiveated");
+                var successfullyGenericActiveated = _handler.GetResource("StatusActiveSuccess");
                 // Generate success message.
                 var messageSuccess = string.Format(successfullyGenericActiveated, typeof(T).Name);
                 // Return the success operation result.
@@ -109,7 +109,7 @@ namespace Infrastructure.Repositories.Abstract.Status
                 // Update the entity in the database.
                 bool result = await Update(entity);
                 await ResourceHandler.CreateAsync(_provider, _resourceKeys);
-                var successfullyGenericActiveated = _handler.GetResource("StatusSuccessfullyGenericDisabled");
+                var successfullyGenericActiveated = _handler.GetResource("StatusDisableSuccess");
                 // Generate success message.
                 string messageSuccess = string.Format(successfullyGenericActiveated, typeof(T).Name);
                 // Return the success operation result.
@@ -149,16 +149,16 @@ namespace Infrastructure.Repositories.Abstract.Status
             IQueryable<T> entityRepo = await ReadFilter(e => e.Id.Equals(id));
             T? entityUnmodified = entityRepo?.FirstOrDefault();
             bool hasEntity = entityUnmodified is not null;
-            var genericExistValidation = _handler.GetResource("GenericExistValidation");
+            var genericExistValidation = _handler.GetResource("StatusExistValidation");
             if (!hasEntity)
             {
                 string messageExist = string.Format(genericExistValidation, typeof(T).Name);
                 return OperationStrategy<T>.Fail(messageExist, new BusinessStrategy<T>());
             }
 
-            var statusGlobalOkMessage = _handler.GetResource("StatusGlobalOkMessage");
+            var statusSuccess = _handler.GetResource("StatusSuccess");
             // Return the success operation result indicating the entity exists.
-            return Operation<T>.Success(entityUnmodified, "statusGlobalOkMessage");
+            return Operation<T>.Success(entityUnmodified, statusSuccess);
         }
     }
 }

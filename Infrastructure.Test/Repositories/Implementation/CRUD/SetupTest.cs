@@ -71,7 +71,7 @@ namespace Infrastructure.Test.Repositories.Implementation.CRUD
                 "The {0} does not exist."
             },
             {
-                "GenericExistValidation",
+                "StatusExistValidation",
                 "The {0} does not exist."
             },
             {
@@ -79,7 +79,7 @@ namespace Infrastructure.Test.Repositories.Implementation.CRUD
                 "{0} was activated successfully."
             },
             {
-                "StatusSuccessfullyGenericDisabled",
+                "StatusDisableSuccess",
                 "{0} was disabled successfully."
             },
             {
@@ -87,7 +87,7 @@ namespace Infrastructure.Test.Repositories.Implementation.CRUD
                 "Necessary data was not provided."
             },
             {
-                "StatusGlobalOkMessage",
+                "StatusSuccess",
                 "Ok"
             },
             {
@@ -95,7 +95,7 @@ namespace Infrastructure.Test.Repositories.Implementation.CRUD
                 "{0} was created successfully."
             },
             {
-                "SuccessfullyGenericActiveated",
+                "StatusActiveSuccess",
                 "{0} was activated successfully."
             },
             {

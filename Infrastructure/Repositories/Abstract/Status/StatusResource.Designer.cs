@@ -61,11 +61,29 @@ namespace Infrastructure.Repositories.Abstract.Status {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to {0} was activated successfully..
+        /// </summary>
+        internal static string StatusActiveSuccess {
+            get {
+                return ResourceManager.GetString("StatusActiveSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} was disabled successfully..
+        /// </summary>
+        internal static string StatusDisableSuccess {
+            get {
+                return ResourceManager.GetString("StatusDisableSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The {0} does not exist..
         /// </summary>
-        internal static string GenericExistValidation {
+        internal static string StatusExistValidation {
             get {
-                return ResourceManager.GetString("GenericExistValidation", resourceCulture);
+                return ResourceManager.GetString("StatusExistValidation", resourceCulture);
             }
         }
         
@@ -81,27 +99,9 @@ namespace Infrastructure.Repositories.Abstract.Status {
         /// <summary>
         ///   Looks up a localized string similar to Ok.
         /// </summary>
-        internal static string StatusGlobalOkMessage {
+        internal static string StatusSuccess {
             get {
-                return ResourceManager.GetString("StatusGlobalOkMessage", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to {0} was disabled successfully..
-        /// </summary>
-        internal static string StatusSuccessfullyGenericDisabled {
-            get {
-                return ResourceManager.GetString("StatusSuccessfullyGenericDisabled", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to {0} was activated successfully..
-        /// </summary>
-        internal static string SuccessfullyGenericActiveated {
-            get {
-                return ResourceManager.GetString("SuccessfullyGenericActiveated", resourceCulture);
+                return ResourceManager.GetString("StatusSuccess", resourceCulture);
             }
         }
     }
