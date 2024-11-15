@@ -32,7 +32,7 @@ namespace Infrastructure.Repositories.Abstract.CRUD.Validation
             _provider = provider;
             _handler = handler;
             // Initialize the list with keys for required error/success messages
-            _resourceKeys = ["FailedNecesaryData", "GenericExistValidation", "ValidationGlobalOkMessage"];
+            _resourceKeys = ["FailedNecesaryData", "GenericExistValidation", "EntityCheckerSuccess"];
         }
 
         /// <summary>
@@ -67,7 +67,7 @@ namespace Infrastructure.Repositories.Abstract.CRUD.Validation
             }
 
             // Successful validation with a message confirming entity existence
-            var validationGlobalOkMessage = _handler.GetResource("ValidationGlobalOkMessage");
+            var validationGlobalOkMessage = _handler.GetResource("EntityCheckerSuccess");
             return Operation<T>.Success(entityUnmodified, validationGlobalOkMessage);
         }
 

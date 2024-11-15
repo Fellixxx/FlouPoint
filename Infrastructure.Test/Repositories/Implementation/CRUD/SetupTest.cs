@@ -107,7 +107,7 @@ namespace Infrastructure.Test.Repositories.Implementation.CRUD
                 "The successfully SetLog."
             },
             {
-                "ValidationGlobalOkMessage",
+                "EntityCheckerSuccess",
                 "Operation completed successfully."
             },
             {
