@@ -25,7 +25,12 @@ namespace Infrastructure.Repositories.Implementation.CRUD.Query.User
         /// <param name = "userReadFilterCount">The service for getting the count of users based on filters.</param>
         /// <param name = "userReadFilterPage">The service for paginating filtered user results.</param>
         /// <param name = "userReadId">The service to read a user by their ID.</param>
-        public UserQuery(IUserReadFilter userReadFilter, IUserReadFilterCount userReadFilterCount, IUserReadFilterPage userReadFilterPage, IUserReadId userReadId)
+        public UserQuery(
+            IUserReadFilter userReadFilter, 
+            IUserReadFilterCount userReadFilterCount, 
+            IUserReadFilterPage userReadFilterPage, 
+            IUserReadId userReadId
+            )
         {
             _userReadFilter = userReadFilter;
             _userReadFilterCount = userReadFilterCount;

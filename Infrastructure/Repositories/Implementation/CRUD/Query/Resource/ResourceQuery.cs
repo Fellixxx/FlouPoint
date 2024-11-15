@@ -2,20 +2,31 @@ namespace Infrastructure.Repositories.Implementation.CRUD.Query.Resource
 {
     using Application.Result;
     using Application.UseCases.CRUD.Query.Resource;
+    using Application.UseCases.CRUD.Query.User;
     using Application.UseCases.ExternalServices;
     using Domain.Entities;
     using Microsoft.EntityFrameworkCore;
     using Persistence.Repositories;
     using System.Linq.Expressions;
 
-    public class ResourceQuery : Read<Resource>, IResourceQuery
+    public class ResourceQuery : IResourceQuery
     {
-        protected readonly ILogService _logService;
+        private readonly IResourceReadFilter _resourceReadFilter;
+        private readonly IResourceReadFilterCount _resourceReadFilterCount;
+        private readonly IResourceReadFilterPage _resourceReadFilterPage;
+        private readonly IResourceReadId _resourceReadId;
 
-        public ResourceQuery(DbContext context, ILogService logService) : base(context)
+        public ResourceQuery(
+            IResourceReadFilter resourceReadFilter,
+            IResourceReadFilterCount resourceReadFilterCount,
+            IResourceReadFilterPage resourceReadFilterPage,
+            IResourceReadId resourceReadId
+            )
         {
-            //_authFlowDbContext = context ?? throw new ArgumentNullException(nameof(context));
-            _logService = logService ?? throw new ArgumentNullException(nameof(logService));
+            _resourceReadFilter=resourceReadFilter;
+            _resourceReadFilterCount=resourceReadFilterCount;
+            _resourceReadFilterPage=resourceReadFilterPage;
+            _resourceReadId=resourceReadId;
         }
         public Task<Operation<Resource>> ReadByBearer(string bearerToken)
         {

@@ -20,6 +20,7 @@ namespace Infrastructure.Test.Repositories.Implementation.CRUD
     using Infrastructure.Resource;
     using System.Diagnostics;
     using Application.UseCases.CRUD.Query.Resource;
+    using System.Resources;
 
     /// <summary>
     /// Class to set up the test environment for CRUD operations and related services.
@@ -41,6 +42,10 @@ namespace Infrastructure.Test.Repositories.Implementation.CRUD
         protected IResourcesProvider _resxResourceProvider;
         protected IResourceHandler _resourceHandler;
         protected IUtilEntity<Domain.Entities.User> _utilEntity;
+        protected Mock<IResourceReadFilter> _resourceReadFilter;
+        protected Mock<IResourceReadFilterCount> _resourceReadFilterCount;
+        protected Mock<IResourceReadFilterPage> _resourceReadFilterPage;
+        protected Mock<IResourceReadId> _resourceReadId;
         protected IResourceQuery _resourceEntryQuery;
         protected IUserQuery _userQuery;
 
@@ -209,13 +214,25 @@ namespace Infrastructure.Test.Repositories.Implementation.CRUD
             _resxResourceProvider = new ResxProvider();
             _utilEntity = new UtilEntity<Domain.Entities.User>(_resourceProvider, _resourceHandler);
 
-            // Initialize the User-related services with concrete instances
-            _resourceEntryQuery = new ResourceQuery(_dbContext, _logService.Object);
+            _resourceReadFilter = new Mock<IResourceReadFilter>();
+            _resourceReadFilterCount = new Mock<IResourceReadFilterCount>();
+            _resourceReadFilterPage = new Mock<IResourceReadFilterPage>();
+            _resourceReadId = new Mock<IResourceReadId>();
+
+        // Initialize the User-related services with concrete instances
+        _resourceEntryQuery = new ResourceQuery(_resourceReadFilter.Object,
+            _resourceReadFilterCount.Object,
+            _resourceReadFilterPage.Object,
+            _resourceReadId.Object
+            );
             _userCreate = new UserCreate(_dbContext, _logService.Object, _utilEntity, _resourceProvider, _resourceHandler);
             _userDelete = new UserDelete(_dbContext, _logService.Object, _resourceProvider, _resourceHandler);
             _userUpdate = new UserUpdate(_dbContext, _logService.Object, _utilEntity, _resourceProvider, _resourceHandler);
             _userStatus = new UserStatus(_dbContext, _logService.Object, _resourceProvider, _resourceHandler);
-            _userReadFilter = new UserReadFilter(_dbContext, _logService.Object, _resourceProvider, _resourceHandler);
+
+
+
+        _userReadFilter = new UserReadFilter(_dbContext, _logService.Object, _resourceProvider, _resourceHandler);
             _userReadFilterCount = new UserReadFilterCount(_dbContext, _logService.Object, _resourceProvider, _resourceHandler);
 
             // Mocking IUserQuery as it combines all read functionalities
