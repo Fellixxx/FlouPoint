@@ -80,10 +80,10 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>UpdateResource.resx</DependentUpon>
     </Compile>
-    <Compile Update="Repositories\Abstract\CRUD\Util\ResourceUtilEntity.Designer.cs">
+    <Compile Update="Repositories\Abstract\CRUD\Util\UtilEntityResource.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-      <DependentUpon>ResourceUtilEntity.resx</DependentUpon>
+      <DependentUpon>UtilEntityResource.resx</DependentUpon>
     </Compile>
     <Compile Update="Repositories\Abstract\CRUD\Validation\ResourceValidation.Designer.cs">
       <DesignTime>True</DesignTime>
@@ -158,9 +158,9 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>UpdateResource.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Update="Repositories\Abstract\CRUD\Util\ResourceUtilEntity.resx">
+    <EmbeddedResource Update="Repositories\Abstract\CRUD\Util\UtilEntityResource.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>ResourceUtilEntity.Designer.cs</LastGenOutput>
+      <LastGenOutput>UtilEntityResource.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Update="Repositories\Abstract\CRUD\Validation\ResourceValidation.resx">
       <Generator>ResXFileCodeGenerator</Generator>
