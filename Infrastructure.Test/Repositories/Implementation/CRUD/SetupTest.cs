@@ -159,7 +159,19 @@ namespace Infrastructure.Test.Repositories.Implementation.CRUD
                 "The search in the {0} entity completed successfully."
             },
             {
-                "SuccessfullySearchGeneric",
+                "SuccessfullyUpdate",
+                "The search in the {0} entity completed successfully."
+            },
+            {
+                "SuccessfullyReadId",
+                "The search in the {0} entity completed successfully."
+            },
+            {
+                "SuccessfullyFind",
+                "The entity was found by id successfully."
+            },
+            {
+                "SuccessfullyReadFilter",
                 "The search in the {0} entity completed successfully."
             },
             {

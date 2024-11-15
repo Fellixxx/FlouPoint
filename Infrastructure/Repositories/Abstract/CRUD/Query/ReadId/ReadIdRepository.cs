@@ -1,4 +1,4 @@
-namespace Infrastructure.Repositories.Abstract.CRUD.Query
+namespace Infrastructure.Repositories.Abstract.CRUD.Query.ReadId
 {
     using Application.Result;
     using Application.UseCases.ExternalServices;
@@ -35,7 +35,7 @@ namespace Infrastructure.Repositories.Abstract.CRUD.Query
             _provider = provider;
             _resourceKeys = new List<string>
             {
-                "SuccessfullyFind"
+                "SuccessfullyReadId"
             }; // Initialize keys for resources
         }
 
@@ -61,7 +61,7 @@ namespace Infrastructure.Repositories.Abstract.CRUD.Query
                 // Fetch relevant resources after validation
                 await ResourceHandler.CreateAsync(_provider, _resourceKeys);
                 // Retrieve success message resource
-                var successfullyFind = _handler.GetResource("SuccessfullySearchGeneric");
+                var successfullyFind = _handler.GetResource("SuccessfullyReadId");
                 // Return success operation with entity
                 return Operation<T>.Success(entity, successfullyFind);
             }

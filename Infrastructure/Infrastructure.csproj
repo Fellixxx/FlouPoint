@@ -65,10 +65,15 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>ReadFilterPageResource.resx</DependentUpon>
     </Compile>
-    <Compile Update="Repositories\Abstract\CRUD\Query\ResourceQuery.Designer.cs">
+    <Compile Update="Repositories\Abstract\CRUD\Query\ReadFilter\ReadFilterResource.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-      <DependentUpon>ResourceQuery.resx</DependentUpon>
+      <DependentUpon>ReadFilterResource.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Repositories\Abstract\CRUD\Query\ReadId\ReadIdResource.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ReadIdResource.resx</DependentUpon>
     </Compile>
     <Compile Update="Repositories\Abstract\CRUD\Update\ResourceUpdate.Designer.cs">
       <DesignTime>True</DesignTime>
@@ -141,9 +146,13 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>ReadFilterPageResource.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Update="Repositories\Abstract\CRUD\Query\ResourceQuery.resx">
+    <EmbeddedResource Update="Repositories\Abstract\CRUD\Query\ReadFilter\ReadFilterResource.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>ResourceQuery.Designer.cs</LastGenOutput>
+      <LastGenOutput>ReadFilterResource.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Repositories\Abstract\CRUD\Query\ReadId\ReadIdResource.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ReadIdResource.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Update="Repositories\Abstract\CRUD\Update\ResourceUpdate.resx">
       <Generator>ResXFileCodeGenerator</Generator>

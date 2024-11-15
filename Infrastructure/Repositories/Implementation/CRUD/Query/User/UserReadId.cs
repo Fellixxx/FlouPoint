@@ -1,11 +1,11 @@
 namespace Infrastructure.Repositories.Implementation.CRUD.Query.User
 {
     using Application.UseCases.CRUD.Query.User;
-    using Infrastructure.Repositories.Abstract.CRUD.Query;
     using User = Domain.Entities.User;
     using Application.UseCases.ExternalServices;
     using Persistence.BaseDbContext;
     using Application.UseCases.ExternalServices.Resources;
+    using Infrastructure.Repositories.Abstract.CRUD.Query.ReadId;
 
     /// <summary>
     /// Repository class for reading a user entity by its ID.

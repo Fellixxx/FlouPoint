@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Infrastructure.Repositories.Abstract.CRUD.Update {
+namespace Infrastructure.Repositories.Abstract.CRUD.Query.ReadId {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace Infrastructure.Repositories.Abstract.CRUD.Update {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class ResourceUpdate {
+    internal class ReadIdResource {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal ResourceUpdate() {
+        internal ReadIdResource() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace Infrastructure.Repositories.Abstract.CRUD.Update {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Infrastructure.Repositories.Abstract.CRUD.Update.ResourceUpdate", typeof(ResourceUpdate).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Infrastructure.Repositories.Abstract.CRUD.Query.ReadId.ReadIdResource", typeof(ReadIdResource).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,20 +61,20 @@ namespace Infrastructure.Repositories.Abstract.CRUD.Update {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0} was updated successfully..
+        ///   Looks up a localized string similar to The entity was found by id successfully..
         /// </summary>
-        internal static string SuccessfullyGenericUpdated {
+        internal static string SuccessfullyFind {
             get {
-                return ResourceManager.GetString("SuccessfullyGenericUpdated", resourceCulture);
+                return ResourceManager.GetString("SuccessfullyFind", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to The search in the {0} entity completed successfully..
         /// </summary>
-        internal static string SuccessfullyUpdate {
+        internal static string SuccessfullyReadId {
             get {
-                return ResourceManager.GetString("SuccessfullyUpdate", resourceCulture);
+                return ResourceManager.GetString("SuccessfullyReadId", resourceCulture);
             }
         }
     }

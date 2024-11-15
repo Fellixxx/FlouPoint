@@ -56,7 +56,8 @@ namespace Infrastructure.Repositories.Abstract.CRUD.Update
             _handler = handler;
             _resourceKeys = new List<string>
             {
-                "SuccessfullyGenericUpdated"
+                "SuccessfullyGenericUpdated",
+                "SuccessfullyUpdate"
             };
         }
 
@@ -127,7 +128,10 @@ namespace Infrastructure.Repositories.Abstract.CRUD.Update
         public virtual async Task<Operation<T>> UpdateEntity(T entityModified, T entityUnmodified)
         {
             // Success message generation for a successfully modified entity
-            string messageSuccessfully = string.Format(ResourceQuery.SuccessfullySearchGeneric, typeof(T).Name);
+            
+            await ResourceHandler.CreateAsync(_provider, _resourceKeys);
+            var successfullyUpdate = _handler.GetResource("SuccessfullyUpdate");
+            string messageSuccessfully = string.Format(successfullyUpdate, typeof(T).Name);
             return Operation<T>.Success(entityModified, messageSuccessfully);
         }
     }

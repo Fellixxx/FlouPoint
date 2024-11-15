@@ -1,4 +1,4 @@
-namespace Infrastructure.Repositories.Abstract.CRUD.Query
+namespace Infrastructure.Repositories.Abstract.CRUD.Query.ReadFilter
 {
     using Application.Result;
     using Application.UseCases.ExternalServices;
@@ -35,7 +35,7 @@ namespace Infrastructure.Repositories.Abstract.CRUD.Query
             _logService = logService;
             _provider = provider;
             _handler = handler;
-            _resourceKeys = ["SuccessfullySearchGeneric"]; // Resource keys for logging messages
+            _resourceKeys = ["SuccessfullyReadFilter"]; // Resource keys for logging messages
         }
 
         /// <summary>
@@ -49,7 +49,7 @@ namespace Infrastructure.Repositories.Abstract.CRUD.Query
             {
                 IQueryable<T> result = await base.ReadFilter(predicate); // Calls the base read filter method
                 await ResourceHandler.CreateAsync(_provider, _resourceKeys); // Initializes resources
-                var successfullySearchGeneric = _handler.GetResource("SuccessfullySearchGeneric"); // Retrieves the success message resource
+                var successfullySearchGeneric = _handler.GetResource("SuccessfullyReadFilter"); // Retrieves the success message resource
                 var messageSuccessfully = string.Format(successfullySearchGeneric, typeof(T).Name); // Formats the success message
                 return Operation<IQueryable<T>>.Success(result, messageSuccessfully); // Returns a successful operation result
             }

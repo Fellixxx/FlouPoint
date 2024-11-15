@@ -22,7 +22,7 @@ namespace Infrastructure.Test.Message
             var result = ResxProvider.GetEntries();
             // Assert: Verify that the result is not null and contains the expected number of entries.
             Assert.IsNotNull(result);
-            Assert.AreEqual(result.Count, 32);
+            Assert.AreEqual(result.Count, 34);
         }
 
         /// <summary>
