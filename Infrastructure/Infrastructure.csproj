@@ -40,15 +40,15 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>LogServiceResource.resx</DependentUpon>
     </Compile>
-    <Compile Update="Repositories\Abstract\CRUD\Create\ResourceCreateRepository.Designer.cs">
+    <Compile Update="Repositories\Abstract\CRUD\Create\CreateResource.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-      <DependentUpon>ResourceCreateRepository.resx</DependentUpon>
+      <DependentUpon>CreateResource.resx</DependentUpon>
     </Compile>
-    <Compile Update="Repositories\Abstract\CRUD\Delete\ResourceDeleteRepository.Designer.cs">
+    <Compile Update="Repositories\Abstract\CRUD\Delete\DeleteResource.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-      <DependentUpon>ResourceDeleteRepository.resx</DependentUpon>
+      <DependentUpon>DeleteResource.resx</DependentUpon>
     </Compile>
     <Compile Update="Repositories\Abstract\CRUD\Query\FilterCount\ReadFilterCountResource.Designer.cs">
       <DesignTime>True</DesignTime>
@@ -126,13 +126,13 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>LogServiceResource.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Update="Repositories\Abstract\CRUD\Create\ResourceCreateRepository.resx">
+    <EmbeddedResource Update="Repositories\Abstract\CRUD\Create\CreateResource.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>ResourceCreateRepository.Designer.cs</LastGenOutput>
+      <LastGenOutput>CreateResource.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Update="Repositories\Abstract\CRUD\Delete\ResourceDeleteRepository.resx">
+    <EmbeddedResource Update="Repositories\Abstract\CRUD\Delete\DeleteResource.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>ResourceDeleteRepository.Designer.cs</LastGenOutput>
+      <LastGenOutput>DeleteResource.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Update="Repositories\Abstract\CRUD\Query\FilterCount\ReadFilterCountResource.resx">
       <Generator>ResXFileCodeGenerator</Generator>
