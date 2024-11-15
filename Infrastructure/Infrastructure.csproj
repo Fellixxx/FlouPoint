@@ -90,20 +90,20 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>EntityCheckerResource.resx</DependentUpon>
     </Compile>
-    <Compile Update="Repositories\Abstract\Status\ResourceStatusRepository.Designer.cs">
+    <Compile Update="Repositories\Abstract\Status\StatusResource.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-      <DependentUpon>ResourceStatusRepository.resx</DependentUpon>
+      <DependentUpon>StatusResource.resx</DependentUpon>
     </Compile>
-    <Compile Update="Repositories\Implementation\CRUD\User\Create\ResourceUserCreate.Designer.cs">
+    <Compile Update="Repositories\Implementation\CRUD\User\Create\UserCreateResource.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-      <DependentUpon>ResourceUserCreate.resx</DependentUpon>
+      <DependentUpon>UserCreateResource.resx</DependentUpon>
     </Compile>
-    <Compile Update="Repositories\Implementation\CRUD\User\Update\ResourceUpdate.Designer.cs">
+    <Compile Update="Repositories\Implementation\CRUD\User\Update\UserUpdateResource.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-      <DependentUpon>ResourceUpdate.resx</DependentUpon>
+      <DependentUpon>UserUpdateResource.resx</DependentUpon>
     </Compile>
     <Compile Update="Utilities\Compress\ResourceCompress.Designer.cs">
       <DesignTime>True</DesignTime>
@@ -166,17 +166,17 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>EntityCheckerResource.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Update="Repositories\Abstract\Status\ResourceStatusRepository.resx">
+    <EmbeddedResource Update="Repositories\Abstract\Status\StatusResource.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>ResourceStatusRepository.Designer.cs</LastGenOutput>
+      <LastGenOutput>StatusResource.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Update="Repositories\Implementation\CRUD\User\Create\ResourceUserCreate.resx">
+    <EmbeddedResource Update="Repositories\Implementation\CRUD\User\Create\UserCreateResource.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>ResourceUserCreate.Designer.cs</LastGenOutput>
+      <LastGenOutput>UserCreateResource.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Update="Repositories\Implementation\CRUD\User\Update\ResourceUpdate.resx">
+    <EmbeddedResource Update="Repositories\Implementation\CRUD\User\Update\UserUpdateResource.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>ResourceUpdate.Designer.cs</LastGenOutput>
+      <LastGenOutput>UserUpdateResource.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Update="Utilities\Compress\ResourceCompress.resx">
       <Generator>ResXFileCodeGenerator</Generator>

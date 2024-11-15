@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Infrastructure.Repositories.Implementation.CRUD.User.Create {
+namespace Infrastructure.Repositories.Abstract.Status {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace Infrastructure.Repositories.Implementation.CRUD.User.Create {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class ResourceUserCreate {
+    internal class StatusResource {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal ResourceUserCreate() {
+        internal StatusResource() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace Infrastructure.Repositories.Implementation.CRUD.User.Create {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Infrastructure.Repositories.Implementation.CRUD.User.Create.ResourceUserCreate", typeof(ResourceUserCreate).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Infrastructure.Repositories.Abstract.Status.StatusResource", typeof(StatusResource).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,56 +61,47 @@ namespace Infrastructure.Repositories.Implementation.CRUD.User.Create {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The given email is not in a valid format.
+        ///   Looks up a localized string similar to The {0} does not exist..
         /// </summary>
-        internal static string CreateFailedAlreadyRegisteredEmail {
+        internal static string GenericExistValidation {
             get {
-                return ResourceManager.GetString("CreateFailedAlreadyRegisteredEmail", resourceCulture);
+                return ResourceManager.GetString("GenericExistValidation", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to One or more data from the User have been submitted with errors {0}.
+        ///   Looks up a localized string similar to Necessary data was not provided..
         /// </summary>
-        internal static string CreateFailedDataSizeCharacter {
+        internal static string StatusFailedNecesaryData {
             get {
-                return ResourceManager.GetString("CreateFailedDataSizeCharacter", resourceCulture);
+                return ResourceManager.GetString("StatusFailedNecesaryData", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The given email is not in a valid format.
+        ///   Looks up a localized string similar to Ok.
         /// </summary>
-        internal static string CreateFailedEmailInvalidFormat {
+        internal static string StatusGlobalOkMessage {
             get {
-                return ResourceManager.GetString("CreateFailedEmailInvalidFormat", resourceCulture);
+                return ResourceManager.GetString("StatusGlobalOkMessage", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to A user is already registered with this email..
+        ///   Looks up a localized string similar to {0} was disabled successfully..
         /// </summary>
-        internal static string FailedAlreadyRegisteredEmail {
+        internal static string StatusSuccessfullyGenericDisabled {
             get {
-                return ResourceManager.GetString("FailedAlreadyRegisteredEmail", resourceCulture);
+                return ResourceManager.GetString("StatusSuccessfullyGenericDisabled", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to One or more data from the User have been submitted with errors {0}.
+        ///   Looks up a localized string similar to {0} was activated successfully..
         /// </summary>
-        internal static string FailedDataSizeCharacter {
+        internal static string SuccessfullyGenericActiveated {
             get {
-                return ResourceManager.GetString("FailedDataSizeCharacter", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The given email is not in a valid format.
-        /// </summary>
-        internal static string FailedEmailInvalidFormat {
-            get {
-                return ResourceManager.GetString("FailedEmailInvalidFormat", resourceCulture);
+                return ResourceManager.GetString("SuccessfullyGenericActiveated", resourceCulture);
             }
         }
     }

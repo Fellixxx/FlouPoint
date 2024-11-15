@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Infrastructure.Repositories.Abstract.Status {
+namespace Infrastructure.Repositories.Implementation.CRUD.User.Update {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace Infrastructure.Repositories.Abstract.Status {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class ResourceStatusRepository {
+    internal class UserUpdateResource {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal ResourceStatusRepository() {
+        internal UserUpdateResource() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace Infrastructure.Repositories.Abstract.Status {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Infrastructure.Repositories.Abstract.Status.ResourceStatusRepository", typeof(ResourceStatusRepository).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Infrastructure.Repositories.Implementation.CRUD.User.Update.UserUpdateResource", typeof(UserUpdateResource).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,47 +61,38 @@ namespace Infrastructure.Repositories.Abstract.Status {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The {0} does not exist..
+        ///   Looks up a localized string similar to The given email is not in a valid format.
         /// </summary>
-        internal static string GenericExistValidation {
+        internal static string UpdateFailedAlreadyRegisteredEmail {
             get {
-                return ResourceManager.GetString("GenericExistValidation", resourceCulture);
+                return ResourceManager.GetString("UpdateFailedAlreadyRegisteredEmail", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Necessary data was not provided..
+        ///   Looks up a localized string similar to One or more data from the User have been submitted with errors {0}.
         /// </summary>
-        internal static string StatusFailedNecesaryData {
+        internal static string UpdateFailedDataSizeCharacter {
             get {
-                return ResourceManager.GetString("StatusFailedNecesaryData", resourceCulture);
+                return ResourceManager.GetString("UpdateFailedDataSizeCharacter", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Ok.
+        ///   Looks up a localized string similar to The given email is not in a valid format.
         /// </summary>
-        internal static string StatusGlobalOkMessage {
+        internal static string UpdateFailedEmailInvalidFormat {
             get {
-                return ResourceManager.GetString("StatusGlobalOkMessage", resourceCulture);
+                return ResourceManager.GetString("UpdateFailedEmailInvalidFormat", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0} was disabled successfully..
+        ///   Looks up a localized string similar to The search in the {0} entity completed successfully..
         /// </summary>
-        internal static string StatusSuccessfullyGenericDisabled {
+        internal static string UpdateSuccessfullySearchGeneric {
             get {
-                return ResourceManager.GetString("StatusSuccessfullyGenericDisabled", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to {0} was activated successfully..
-        /// </summary>
-        internal static string SuccessfullyGenericActiveated {
-            get {
-                return ResourceManager.GetString("SuccessfullyGenericActiveated", resourceCulture);
+                return ResourceManager.GetString("UpdateSuccessfullySearchGeneric", resourceCulture);
             }
         }
     }
