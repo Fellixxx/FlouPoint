@@ -1,4 +1,4 @@
-namespace Infrastructure.Repositories.Implementation.CRUD.Query
+namespace Infrastructure.Repositories.Implementation.CRUD.Query.Resource
 {
     using Application.Result;
     using Application.UseCases.ExternalServices;
@@ -8,11 +8,11 @@ namespace Infrastructure.Repositories.Implementation.CRUD.Query
     using Persistence.Repositories;
     using System.Linq.Expressions;
 
-    public class ResourceEntryQuery : Read<Resource>, IQuery
+    public class ResourceQuery : Read<Resource>, IQuery
     {
         protected readonly ILogService _logService;
 
-        public ResourceEntryQuery(DbContext context, ILogService logService) : base(context)
+        public ResourceQuery(DbContext context, ILogService logService) : base(context)
         {
             //_authFlowDbContext = context ?? throw new ArgumentNullException(nameof(context));
             _logService = logService ?? throw new ArgumentNullException(nameof(logService));
