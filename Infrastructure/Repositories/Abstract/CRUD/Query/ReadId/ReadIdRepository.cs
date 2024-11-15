@@ -35,7 +35,8 @@ namespace Infrastructure.Repositories.Abstract.CRUD.Query.ReadId
             _provider = provider;
             _resourceKeys = new List<string>
             {
-                "SuccessfullyReadId"
+                "SuccessfullyReadId",
+                "SuccessfullyFind"
             }; // Initialize keys for resources
         }
 

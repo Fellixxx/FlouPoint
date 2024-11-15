@@ -42,9 +42,8 @@ namespace Infrastructure.Utilities.Images
             _resourceHandler = resourceHandler;
             _resourceKeys = new List<string>
             {
-                "FailedDataSizeCharacter",
-                "FailedEmailInvalidFormat",
-                "FailedAlreadyRegisteredEmail"
+                "ImageSuccessfullyUpload",
+                "ImageGlobalOkMessage"
             };
         }
 

@@ -36,7 +36,7 @@ namespace Infrastructure.Utilities.Compress
             _resourceProvider = resourceProvider;
             _resourceHandler = resourceHandler;
             // Initialize predefined keys for resource messages.
-            _resourceKeys = ["FailedDataSizeCharacter", "FailedEmailInvalidFormat", "FailedAlreadyRegisteredEmail"];
+            _resourceKeys = ["SuccessCompressed"];
         }
 
         /// <summary>
