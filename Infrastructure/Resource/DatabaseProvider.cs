@@ -1,8 +1,8 @@
 namespace Infrastructure.Resource
 {
     using Application.Result;
+    using Application.UseCases.CRUD.Query.Resource;
     using Application.UseCases.ExternalServices.Resources;
-    using Application.UseCases.Repository.CRUD.Resource;
     using Domain.Entities;
     using Infrastructure.Constants;
     using Microsoft.EntityFrameworkCore;
@@ -15,13 +15,13 @@ namespace Infrastructure.Resource
     {
         private readonly DbContext _context;
         private readonly DbSet<Resource> _dbSet;
-        private readonly IQuery _resourceEntryQuery;
+        private readonly IResourceQuery _resourceEntryQuery;
         /// <summary>
         /// Initializes a new instance of the <see cref = "DatabaseProvider"/> class with the specified database context and query service.
         /// </summary>
         /// <param name = "context">The database context to use.</param>
         /// <param name = "resourceEntryQuery">The query service to query resource entries.</param>
-        public DatabaseProvider(DbContext context, IQuery resourceEntryQuery)
+        public DatabaseProvider(DbContext context, IResourceQuery resourceEntryQuery)
         {
             _context = context;
             _resourceEntryQuery = resourceEntryQuery;

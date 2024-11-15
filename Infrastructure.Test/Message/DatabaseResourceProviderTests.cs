@@ -1,7 +1,6 @@
 namespace Infrastructure.Test.Message
 {
     using Infrastructure.Resource;
-    using Infrastructure.Test.Repositories.Implementation;
     using Infrastructure.Test.Repositories.Implementation.CRUD;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 

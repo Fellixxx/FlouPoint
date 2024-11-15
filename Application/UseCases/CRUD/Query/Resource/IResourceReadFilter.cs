@@ -1,6 +1,5 @@
 ﻿namespace Application.UseCases.CRUD.Query.Resource
 {
-
     using Application.Result;
     using System.Linq.Expressions;
     using Resource = Domain.Entities.Resource;

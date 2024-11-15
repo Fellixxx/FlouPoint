@@ -8,7 +8,7 @@
     /// <summary>
     /// Defines the contract for reading a paginated list of User entities based on a filter.
     /// </summary>
-    public interface IResourceFilterPage
+    public interface IResourceReadFilterPage
     {
         /// <summary>
         /// Retrieves a paginated list of User entities based on the provided filter string.

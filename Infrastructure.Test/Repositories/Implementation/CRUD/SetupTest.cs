@@ -16,10 +16,10 @@ namespace Infrastructure.Test.Repositories.Implementation.CRUD
     using Infrastructure.Repositories.Implementation.CRUD.User.Create;
     using Infrastructure.Repositories.Implementation.CRUD.User.Update;
     using Application.UseCases.ExternalServices.Resources;
-    using Application.UseCases.Repository.CRUD.Resource;
     using Infrastructure.Repositories.Implementation.CRUD.Query.Resource;
     using Infrastructure.Resource;
     using System.Diagnostics;
+    using Application.UseCases.CRUD.Query.Resource;
 
     /// <summary>
     /// Class to set up the test environment for CRUD operations and related services.
@@ -41,7 +41,7 @@ namespace Infrastructure.Test.Repositories.Implementation.CRUD
         protected IResourcesProvider _resxResourceProvider;
         protected IResourceHandler _resourceHandler;
         protected IUtilEntity<Domain.Entities.User> _utilEntity;
-        protected IQuery _resourceEntryQuery;
+        protected IResourceQuery _resourceEntryQuery;
         protected IUserQuery _userQuery;
 
         protected readonly Dictionary<string, string> _resourceMessages = new()

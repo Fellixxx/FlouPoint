@@ -1,14 +1,14 @@
 namespace Infrastructure.Repositories.Implementation.CRUD.Query.Resource
 {
     using Application.Result;
+    using Application.UseCases.CRUD.Query.Resource;
     using Application.UseCases.ExternalServices;
-    using Application.UseCases.Repository.CRUD.Resource;
     using Domain.Entities;
     using Microsoft.EntityFrameworkCore;
     using Persistence.Repositories;
     using System.Linq.Expressions;
 
-    public class ResourceQuery : Read<Resource>, IQuery
+    public class ResourceQuery : Read<Resource>, IResourceQuery
     {
         protected readonly ILogService _logService;
 
