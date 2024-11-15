@@ -126,4 +126,13 @@
   <data name="CreateFailedEmailInvalidFormat" xml:space="preserve">
     <value>The given email is not in a valid format</value>
   </data>
+  <data name="FailedAlreadyRegisteredEmail" xml:space="preserve">
+    <value>A user is already registered with this email.</value>
+  </data>
+  <data name="FailedDataSizeCharacter" xml:space="preserve">
+    <value>One or more data from the User have been submitted with errors {0}</value>
+  </data>
+  <data name="FailedEmailInvalidFormat" xml:space="preserve">
+    <value>The given email is not in a valid format</value>
+  </data>
 </root>
