@@ -51,43 +51,43 @@
         }
 
 
-        //[TestMethod]
-        //public void VerifyClassResourcesExistInResourceKeysList()
-        //{
-        //    // Define the root directory for your Repositories folder
-        //    string repositoriesPath = @"C:\GitHub\FlouPoint\Infrastructure\";
+        [TestMethod]
+        public void VerifyClassResourcesExistInResourceKeysList()
+        {
+            // Define the root directory for your Repositories folder
+            string repositoriesPath = @"C:\GitHub\FlouPoint\Infrastructure\";
 
-        //    // Get all .cs files that are not resource files
-        //    var classFiles = Directory.GetFiles(repositoriesPath, "*.cs", SearchOption.AllDirectories)
-        //        .Where(file => !file.EndsWith(".resx", StringComparison.OrdinalIgnoreCase))
-        //        .ToList();
+            // Get all .cs files that are not resource files
+            var classFiles = Directory.GetFiles(repositoriesPath, "*.cs", SearchOption.AllDirectories)
+                .Where(file => !file.EndsWith(".resx", StringComparison.OrdinalIgnoreCase))
+                .ToList();
 
-        //    foreach (var classFile in classFiles)
-        //    {
-        //        // Get class name and expected .resx file path
-        //        string className = Path.GetFileNameWithoutExtension(classFile);
-        //        string resxFilePath = Path.Combine(Path.GetDirectoryName(classFile), $"Resource{className}.resx");
+            foreach (var classFile in classFiles)
+            {
+                // Get class name and expected .resx file path
+                string className = Path.GetFileNameWithoutExtension(classFile);
+                string resxFilePath = Path.Combine(Path.GetDirectoryName(classFile), $"Resource{className}.resx");
 
-        //        // Ensure the corresponding .resx file exists
-        //        if (!File.Exists(resxFilePath))
-        //        {
-        //            continue;
-        //        }
+                // Ensure the corresponding .resx file exists
+                if (!File.Exists(resxFilePath))
+                {
+                    continue;
+                }
 
-        //        if (classFile.Contains(".resx"))
-        //        {
-        //            continue;
-        //        }
+                if (classFile.Contains(".resx"))
+                {
+                    continue;
+                }
 
-        //        // Get resource keys used in the class file
-        //        var usedResourceKeys = ExtractResourceKeysFromClassFile(classFile);
-        //        var usedListResourceKey = ExtractResourceKeysListFromClassFile(classFile);
-        //        foreach (var key in usedResourceKeys)
-        //        {
-        //            Assert.IsTrue(usedListResourceKey.Contains(key), $"In the list _resourceKey is missing  '{key}' used in {className} is missing in {resxFilePath}");
-        //        }
-        //    }
-        //}
+                // Get resource keys used in the class file
+                var usedResourceKeys = ExtractResourceKeysFromClassFile(classFile);
+                var usedListResourceKey = ExtractResourceKeysListFromClassFile(classFile);
+                foreach (var key in usedResourceKeys)
+                {
+                    Assert.IsTrue(usedListResourceKey.Contains(key), $"In the list _resourceKey is missing  '{key}' used in {className} is missing in {resxFilePath}");
+                }
+            }
+        }
 
 
         private HashSet<string> LoadResourceKeys(string resxFilePath)

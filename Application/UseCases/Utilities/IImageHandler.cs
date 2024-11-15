@@ -5,7 +5,7 @@
     /// <summary>
     /// Defines the contract for interacting with external drive storage services.
     /// </summary>
-    public interface IManagementImage
+    public interface IImageHandler
     {
         /// <summary>
         /// Uploads a file to the external drive storage service asynchronously.

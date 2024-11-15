@@ -14,7 +14,7 @@ namespace Infrastructure.Utilities.Compress
     /// <summary>
     /// Provides functionality for compressing images.
     /// </summary>
-    public class ImageCompressionService : IImageCompression
+    public class ImageCompressor : IImageCompressor
     {
         // Service for logging operations.
         private readonly ILogService _logService;
@@ -30,7 +30,7 @@ namespace Infrastructure.Utilities.Compress
         /// <param name = "logService">Service for logging operations.</param>
         /// <param name = "resourceProvider">Provider for fetching resources.</param>
         /// <param name = "resourceHandler">Handler for managing resources.</param>
-        public ImageCompressionService(ILogService logService, IResourcesProvider resourceProvider, IResourceHandler resourceHandler)
+        public ImageCompressor(ILogService logService, IResourcesProvider resourceProvider, IResourceHandler resourceHandler)
         {
             _logService = logService;
             _resourceProvider = resourceProvider;

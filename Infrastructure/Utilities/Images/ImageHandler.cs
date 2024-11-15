@@ -13,14 +13,14 @@ namespace Infrastructure.Utilities.Images
     /// <summary>
     /// Provides functionality for managing images, including interacting with external services like Google Drive.
     /// </summary>
-    public class ManagementImage : IManagementImage
+    public class ImageHandler : IImageHandler
     {
         // Constant representing the user for upload operations.
         private const string UserUpload = "AuthFlowServicesUser";
         // Service responsible for logging activities and errors.
         private readonly ILogService _logService;
         // Service responsible for image compression operations.
-        private readonly IImageCompression _imageCompressionService;
+        private readonly IImageCompressor _imageCompressionService;
         // Provider for external resources.
         private readonly IResourcesProvider _resourceProvider;
         // Handler for resource-related operations.
@@ -34,7 +34,7 @@ namespace Infrastructure.Utilities.Images
         /// <param name = "imageCompressionService">Service responsible for image compression.</param>
         /// <param name = "resourceProvider">Provider for accessing external resources.</param>
         /// <param name = "resourceHandler">Handler for managing resources.</param>
-        public ManagementImage(ILogService logService, IImageCompression imageCompressionService, IResourcesProvider resourceProvider, IResourceHandler resourceHandler)
+        public ImageHandler(ILogService logService, IImageCompressor imageCompressionService, IResourcesProvider resourceProvider, IResourceHandler resourceHandler)
         {
             _logService = logService;
             _imageCompressionService = imageCompressionService;

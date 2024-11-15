@@ -105,10 +105,10 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>UserUpdateResource.resx</DependentUpon>
     </Compile>
-    <Compile Update="Utilities\Compress\ResourceCompress.Designer.cs">
+    <Compile Update="Utilities\Compress\ImageCompressorResource.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-      <DependentUpon>ResourceCompress.resx</DependentUpon>
+      <DependentUpon>ImageCompressorResource.resx</DependentUpon>
     </Compile>
     <Compile Update="Utilities\Images\ResourceImage.Designer.cs">
       <DesignTime>True</DesignTime>
@@ -178,9 +178,9 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>UserUpdateResource.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Update="Utilities\Compress\ResourceCompress.resx">
+    <EmbeddedResource Update="Utilities\Compress\ImageCompressorResource.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>ResourceCompress.Designer.cs</LastGenOutput>
+      <LastGenOutput>ImageCompressorResource.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Update="Utilities\Images\ResourceImage.resx">
       <Generator>ResXFileCodeGenerator</Generator>
