@@ -81,9 +81,9 @@ namespace Infrastructure.Repositories.Abstract.CRUD.Validation {
         /// <summary>
         ///   Looks up a localized string similar to The {0} does not exist..
         /// </summary>
-        internal static string GenericExistValidation {
+        internal static string EntityCheckerValidation {
             get {
-                return ResourceManager.GetString("GenericExistValidation", resourceCulture);
+                return ResourceManager.GetString("EntityCheckerValidation", resourceCulture);
             }
         }
     }

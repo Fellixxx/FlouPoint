@@ -32,7 +32,7 @@ namespace Infrastructure.Repositories.Abstract.CRUD.Validation
             _provider = provider;
             _handler = handler;
             // Initialize the list with keys for required error/success messages
-            _resourceKeys = ["EntityCheckerFailedNecesaryData", "GenericExistValidation", "EntityCheckerSuccess"];
+            _resourceKeys = ["EntityCheckerFailedNecesaryData", "EntityCheckerValidation", "EntityCheckerSuccess"];
         }
 
         /// <summary>
@@ -61,7 +61,7 @@ namespace Infrastructure.Repositories.Abstract.CRUD.Validation
             // Case when the entity does not exist in the repository
             if (!hasEntity)
             {
-                var genericExistValidation = _handler.GetResource("GenericExistValidation");
+                var genericExistValidation = _handler.GetResource("EntityCheckerValidation");
                 var messageExist = string.Format(genericExistValidation, typeof(T).Name);
                 return OperationStrategy<T>.Fail(messageExist, new BusinessStrategy<T>());
             }

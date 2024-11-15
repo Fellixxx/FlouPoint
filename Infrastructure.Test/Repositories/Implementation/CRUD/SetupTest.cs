@@ -67,6 +67,10 @@ namespace Infrastructure.Test.Repositories.Implementation.CRUD
                 "The configuration for the log services is missing the username, password, or URL."
             },
             {
+                "EntityCheckerValidation",
+                "The {0} does not exist."
+            },
+            {
                 "GenericExistValidation",
                 "The {0} does not exist."
             },
