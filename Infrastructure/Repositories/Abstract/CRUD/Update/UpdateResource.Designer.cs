@@ -22,14 +22,14 @@ namespace Infrastructure.Repositories.Abstract.CRUD.Update {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class ResourceUpdate {
+    internal class UpdateResource {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal ResourceUpdate() {
+        internal UpdateResource() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace Infrastructure.Repositories.Abstract.CRUD.Update {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Infrastructure.Repositories.Abstract.CRUD.Update.ResourceUpdate", typeof(ResourceUpdate).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Infrastructure.Repositories.Abstract.CRUD.Update.UpdateResource", typeof(UpdateResource).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
