@@ -41,7 +41,7 @@ namespace Infrastructure.Repositories.Abstract.CRUD.Query.ReadFilterPage
             // Initialize the resource keys that are needed for resource management.
             _resourceKeys = new List<string>
             {
-                "SuccessfullyReadFilterPage"
+                "ReadFilterPageSuccess"
             };
         }
 
@@ -64,7 +64,7 @@ namespace Infrastructure.Repositories.Abstract.CRUD.Query.ReadFilterPage
                 // Prepare resources using the resource provider and the list of resource keys.
                 await ResourceHandler.CreateAsync(_provider, _resourceKeys);
                 // Get the success message resource and format it with the entity type name.
-                var successfullySearchGeneric = _handler.GetResource("SuccessfullyReadFilterPage");
+                var successfullySearchGeneric = _handler.GetResource("ReadFilterPageSuccess");
                 var messageSuccessfully = string.Format(successfullySearchGeneric, typeof(T).Name);
                 // Return the successful operation with the result and formatted message.
                 return Operation<IQueryable<T>>.Success(result, messageSuccessfully);

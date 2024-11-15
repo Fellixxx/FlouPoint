@@ -35,8 +35,8 @@ namespace Infrastructure.Repositories.Abstract.CRUD.Query.ReadId
             _provider = provider;
             _resourceKeys = new List<string>
             {
-                "SuccessfullyReadId",
-                "SuccessfullyFind"
+                "ReadIdSuccess",
+                "ReadByBearerSuccess"
             }; // Initialize keys for resources
         }
 
@@ -62,7 +62,7 @@ namespace Infrastructure.Repositories.Abstract.CRUD.Query.ReadId
                 // Fetch relevant resources after validation
                 await ResourceHandler.CreateAsync(_provider, _resourceKeys);
                 // Retrieve success message resource
-                var successfullyFind = _handler.GetResource("SuccessfullyReadId");
+                var successfullyFind = _handler.GetResource("ReadIdSuccess");
                 // Return success operation with entity
                 return Operation<T>.Success(entity, successfullyFind);
             }
@@ -115,7 +115,7 @@ namespace Infrastructure.Repositories.Abstract.CRUD.Query.ReadId
                 // Fetch relevant resources after validation
                 await ResourceHandler.CreateAsync(_provider, _resourceKeys);
                 // Retrieve success message resource
-                var successfullyFind = _handler.GetResource("SuccessfullyFind");
+                var successfullyFind = _handler.GetResource("ReadByBearerSuccess");
                 // Return success operation with entity
                 return Operation<T>.Success(entity, successfullyFind);
             }

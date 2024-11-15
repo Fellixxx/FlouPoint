@@ -29,8 +29,8 @@ namespace Infrastructure.Repositories.Abstract.CRUD.Util
             // Initialize resource keys with required keys
             _resourceKeys = new List<string>
             {
-                "EntityFailedNecesaryData",
-                "UtilGlobalOkMessage"
+                "UtilEntityFailedNecesaryData",
+                "UtilEntitySuccess"
             };
         }
 
@@ -45,7 +45,7 @@ namespace Infrastructure.Repositories.Abstract.CRUD.Util
             // Asynchronously create resources based on provided keys
             await ResourceHandler.CreateAsync(_provider, _resourceKeys);
             // Get specific resource message for missing necessary data
-            var failedNecesaryData = _handler.GetResource("EntityFailedNecesaryData");
+            var failedNecesaryData = _handler.GetResource("UtilEntityFailedNecesaryData");
             // Check if the entity is null and return a failure operation if so
             if (entity is null)
             {
@@ -53,7 +53,7 @@ namespace Infrastructure.Repositories.Abstract.CRUD.Util
             }
 
             // If the entity is not null, return a success operation with success message
-            var utilGlobalOkMessage = _handler.GetResource("UtilGlobalOkMessage");
+            var utilGlobalOkMessage = _handler.GetResource("UtilEntitySuccess");
             return Operation<T>.Success(entity, utilGlobalOkMessage);
         }
     }

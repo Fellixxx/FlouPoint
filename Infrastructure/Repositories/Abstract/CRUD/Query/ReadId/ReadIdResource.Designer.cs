@@ -61,20 +61,20 @@ namespace Infrastructure.Repositories.Abstract.CRUD.Query.ReadId {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The entity was found by id successfully..
+        ///   Looks up a localized string similar to The search in the {0} entity completed successfully..
         /// </summary>
-        internal static string SuccessfullyFind {
+        internal static string ReadByBearerSuccess {
             get {
-                return ResourceManager.GetString("SuccessfullyFind", resourceCulture);
+                return ResourceManager.GetString("ReadByBearerSuccess", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The search in the {0} entity completed successfully..
+        ///   Looks up a localized string similar to The entity was found by id successfully..
         /// </summary>
-        internal static string SuccessfullyReadId {
+        internal static string ReadIdSuccess {
             get {
-                return ResourceManager.GetString("SuccessfullyReadId", resourceCulture);
+                return ResourceManager.GetString("ReadIdSuccess", resourceCulture);
             }
         }
     }

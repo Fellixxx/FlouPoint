@@ -37,7 +37,7 @@ namespace Infrastructure.ExternalServices.LogExternal.Service
             // Initialize list with a predefined resource key
             _resourceKeys = new List<string>
             {
-                "LogSuccessfullyGenericActiveated"
+                "LogActivationSuccess"
             };
         }
 
@@ -62,7 +62,7 @@ namespace Infrastructure.ExternalServices.LogExternal.Service
                 // Asynchronously handles resource creation, might set up templates or necessary preconditions for logging
                 await ResourceHandler.CreateAsync(_provider, _resourceKeys);
                 // Retrieves a resource message indicating successful log creation
-                var successfullyLogCreate = _handler.GetResource("LogSuccessfullyGenericActiveated");
+                var successfullyLogCreate = _handler.GetResource("LogActivationSuccess");
                 // Return a successful operation result with an optional message
                 return Operation<string>.Success(string.Empty, successfullyLogCreate);
             }

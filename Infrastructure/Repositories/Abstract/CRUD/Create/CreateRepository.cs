@@ -38,7 +38,7 @@ namespace Infrastructure.Repositories.Abstract.CRUD.Create
             _utilEntity = utilEntity;
             _provider = provider;
             _handler = handler;
-            _resourceKeys = ["SuccessfullyGeneric"]; // Initialize resource keys
+            _resourceKeys = ["CreationSuccess"]; // Initialize resource keys
         }
 
         /// <summary>
@@ -68,7 +68,7 @@ namespace Infrastructure.Repositories.Abstract.CRUD.Create
                 var addedEntityResult = await base.Create(validationResult.Data);
                 // Handle resources for successful addition
                 await ResourceHandler.CreateAsync(_provider, _resourceKeys);
-                var successfullyGeneric = _handler.GetResource("SuccessfullyGeneric");
+                var successfullyGeneric = _handler.GetResource("CreationSuccess");
                 // Create a success message and return the success result
                 var successMessage = string.Format(successfullyGeneric, typeof(T).Name);
                 return Operation<string>.Success(addedEntityResult, successMessage);

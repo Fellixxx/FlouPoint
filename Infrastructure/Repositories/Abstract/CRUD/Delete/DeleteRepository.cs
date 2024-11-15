@@ -38,7 +38,7 @@ namespace Infrastructure.Repositories.Abstract.CRUD.Delete
             _handler = handler;
             _resourceKeys = new List<string>
             {
-                "SuccessfullyGenericDeleted"
+                "DeletionSuccess"
             }; // Initialize resource keys
         }
 
@@ -64,7 +64,7 @@ namespace Infrastructure.Repositories.Abstract.CRUD.Delete
                 bool result = await Delete(entity);
                 // Log a custom success message using resource management.
                 await ResourceHandler.CreateAsync(_provider, _resourceKeys);
-                var successfullyGenericDeleted = _handler.GetResource("SuccessfullyGenericDeleted");
+                var successfullyGenericDeleted = _handler.GetResource("DeletionSuccess");
                 string messageSuccess = string.Format(successfullyGenericDeleted, typeof(T).Name);
                 // Return a success operation result if deletion is successful.
                 return Operation<bool>.Success(result, messageSuccess);

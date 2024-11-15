@@ -61,20 +61,20 @@ namespace Infrastructure.Repositories.Abstract.CRUD.Update {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0} was updated successfully..
+        ///   Looks up a localized string similar to The search in the {0} entity completed successfully..
         /// </summary>
-        internal static string SuccessfullyGenericUpdated {
+        internal static string UpdateEntitySearchSuccess {
             get {
-                return ResourceManager.GetString("SuccessfullyGenericUpdated", resourceCulture);
+                return ResourceManager.GetString("UpdateEntitySearchSuccess", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The search in the {0} entity completed successfully..
+        ///   Looks up a localized string similar to {0} was updated successfully..
         /// </summary>
-        internal static string SuccessfullyUpdate {
+        internal static string UpdateSuccess {
             get {
-                return ResourceManager.GetString("SuccessfullyUpdate", resourceCulture);
+                return ResourceManager.GetString("UpdateSuccess", resourceCulture);
             }
         }
     }

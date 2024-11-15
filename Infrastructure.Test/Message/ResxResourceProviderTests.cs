@@ -32,7 +32,7 @@ namespace Infrastructure.Test.Message
         public async Task GetMessage_ValidKey_ReturnsSuccess()
         {
             // Arrange: Set up a valid resource key for fetching the message.
-            var key = "Infrastructure.ExternalServices.LogExternal.ServiceBase.LogServiceBaseResource.resources.SuccessfullySetLog";
+            var key = "Infrastructure.ExternalServices.LogExternal.ServiceBase.LogServiceBaseResource.resources.LogConfigMissingError";
             // Act: Asynchronously call the GetMessage method with the key.
             var result = await _resxResourceProvider.GetMessage(key);
             // Assert: Verify that the result is successful and has no associated error type.

@@ -63,9 +63,9 @@ namespace Infrastructure.Repositories.Abstract.CRUD.Create {
         /// <summary>
         ///   Looks up a localized string similar to {0} was created successfully..
         /// </summary>
-        internal static string SuccessfullyGeneric {
+        internal static string CreationSuccess {
             get {
-                return ResourceManager.GetString("SuccessfullyGeneric", resourceCulture);
+                return ResourceManager.GetString("CreationSuccess", resourceCulture);
             }
         }
     }

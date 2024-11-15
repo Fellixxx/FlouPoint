@@ -12,9 +12,9 @@
     {
         private readonly Dictionary<string, string> _expectedMessages = new()
         {
-            { "EntityFailedNecesaryData", "Necessary data was not provided." },
+            { "UtilEntityFailedNecesaryData", "Necessary data was not provided." },
             { "FailedAlreadyRegisteredEmail", "A user is already registered with this email." },
-            { "SuccessfullyGeneric", "{0} was created successfully." },
+            { "CreationSuccess", "{0} was created successfully." },
             { "FailedEmailInvalidFormat", "The given email is not in a valid format" },
             // Add more known keys and messages as needed
         };

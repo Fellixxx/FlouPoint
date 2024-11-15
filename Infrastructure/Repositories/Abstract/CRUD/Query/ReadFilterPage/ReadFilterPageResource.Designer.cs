@@ -64,9 +64,9 @@ namespace Infrastructure.Repositories.Abstract.CRUD.Query.ReadFilterPage {
         /// <summary>
         ///   Looks up a localized string similar to The search in the {0} entity completed successfully..
         /// </summary>
-        internal static string SuccessfullyReadFilterPage {
+        internal static string ReadFilterPageSuccess {
             get {
-                return ResourceManager.GetString("SuccessfullyReadFilterPage", resourceCulture);
+                return ResourceManager.GetString("ReadFilterPageSuccess", resourceCulture);
             }
         }
     }

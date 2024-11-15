@@ -63,9 +63,9 @@ namespace Infrastructure.Repositories.Abstract.CRUD.Delete {
         /// <summary>
         ///   Looks up a localized string similar to {0} was deleted successfully..
         /// </summary>
-        internal static string SuccessfullyGenericDeleted {
+        internal static string DeletionSuccess {
             get {
-                return ResourceManager.GetString("SuccessfullyGenericDeleted", resourceCulture);
+                return ResourceManager.GetString("DeletionSuccess", resourceCulture);
             }
         }
     }

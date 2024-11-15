@@ -63,9 +63,9 @@ namespace Infrastructure.ExternalServices.LogExternal.Service {
         /// <summary>
         ///   Looks up a localized string similar to {0} was activated successfully..
         /// </summary>
-        internal static string LogSuccessfullyGenericActiveated {
+        internal static string LogActivationSuccess {
             get {
-                return ResourceManager.GetString("LogSuccessfullyGenericActiveated", resourceCulture);
+                return ResourceManager.GetString("LogActivationSuccess", resourceCulture);
             }
         }
     }

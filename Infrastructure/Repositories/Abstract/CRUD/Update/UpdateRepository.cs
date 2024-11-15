@@ -56,8 +56,8 @@ namespace Infrastructure.Repositories.Abstract.CRUD.Update
             _handler = handler;
             _resourceKeys = new List<string>
             {
-                "SuccessfullyGenericUpdated",
-                "SuccessfullyUpdate"
+                "UpdateSuccess",
+                "UpdateEntitySearchSuccess"
             };
         }
 
@@ -95,7 +95,7 @@ namespace Infrastructure.Repositories.Abstract.CRUD.Update
                 // Update the entity in the database if the previous operations were successful
                 bool updateResult = await base.Update(resultModifyEntity.Data);
                 await ResourceHandler.CreateAsync(_provider, _resourceKeys);
-                var successfullyGenericUpdated = _handler.GetResource("SuccessfullyGenericUpdated");
+                var successfullyGenericUpdated = _handler.GetResource("UpdateSuccess");
                 // Generate a custom success message
                 string messageSuccess = string.Format(successfullyGenericUpdated, typeof(T).Name);
                 // Return a successful operation result, indicating the update was successful
@@ -130,7 +130,7 @@ namespace Infrastructure.Repositories.Abstract.CRUD.Update
             // Success message generation for a successfully modified entity
             
             await ResourceHandler.CreateAsync(_provider, _resourceKeys);
-            var successfullyUpdate = _handler.GetResource("SuccessfullyUpdate");
+            var successfullyUpdate = _handler.GetResource("UpdateEntitySearchSuccess");
             string messageSuccessfully = string.Format(successfullyUpdate, typeof(T).Name);
             return Operation<T>.Success(entityModified, messageSuccessfully);
         }

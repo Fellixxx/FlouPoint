@@ -64,6 +64,15 @@ namespace Infrastructure.Repositories.Abstract.CRUD.Query.ReadFilterCount {
         /// <summary>
         ///   Looks up a localized string similar to The search in the {0} entity completed successfully..
         /// </summary>
+        internal static string ReadFilterCountSuccess {
+            get {
+                return ResourceManager.GetString("ReadFilterCountSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The search in the {0} entity completed successfully..
+        /// </summary>
         internal static string SuccessfullyReadFilterCount {
             get {
                 return ResourceManager.GetString("SuccessfullyReadFilterCount", resourceCulture);

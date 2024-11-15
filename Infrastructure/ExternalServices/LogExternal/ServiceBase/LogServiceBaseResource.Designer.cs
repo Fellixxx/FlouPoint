@@ -61,47 +61,47 @@ namespace Infrastructure.ExternalServices.LogExternal.ServiceBase {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The log services token got failed..
-        /// </summary>
-        internal static string FailedGetToken {
-            get {
-                return ResourceManager.GetString("FailedGetToken", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The log creation got failed..
-        /// </summary>
-        internal static string FailedSetLog {
-            get {
-                return ResourceManager.GetString("FailedSetLog", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to The configuration for the log services is missing the username, password, or URL..
         /// </summary>
-        internal static string FailureConfigurationMissingError {
+        internal static string LogConfigMissingError {
             get {
-                return ResourceManager.GetString("FailureConfigurationMissingError", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Token got successfully..
-        /// </summary>
-        internal static string SuccessfullyGetToken {
-            get {
-                return ResourceManager.GetString("SuccessfullyGetToken", resourceCulture);
+                return ResourceManager.GetString("LogConfigMissingError", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to The successfully SetLog..
         /// </summary>
-        internal static string SuccessfullySetLog {
+        internal static string LogCreated {
             get {
-                return ResourceManager.GetString("SuccessfullySetLog", resourceCulture);
+                return ResourceManager.GetString("LogCreated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The log creation got failed..
+        /// </summary>
+        internal static string LogCreationFailed {
+            get {
+                return ResourceManager.GetString("LogCreationFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Token got successfully..
+        /// </summary>
+        internal static string LogTokenFetched {
+            get {
+                return ResourceManager.GetString("LogTokenFetched", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The log services token got failed..
+        /// </summary>
+        internal static string LogTokenFetchFailed {
+            get {
+                return ResourceManager.GetString("LogTokenFetchFailed", resourceCulture);
             }
         }
     }

@@ -63,18 +63,18 @@ namespace Infrastructure.Repositories.Abstract.CRUD.Util {
         /// <summary>
         ///   Looks up a localized string similar to Necessary data was not provided..
         /// </summary>
-        internal static string EntityFailedNecesaryData {
+        internal static string UtilEntityFailedNecesaryData {
             get {
-                return ResourceManager.GetString("EntityFailedNecesaryData", resourceCulture);
+                return ResourceManager.GetString("UtilEntityFailedNecesaryData", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Ok.
         /// </summary>
-        internal static string UtilGlobalOkMessage {
+        internal static string UtilEntitySuccess {
             get {
-                return ResourceManager.GetString("UtilGlobalOkMessage", resourceCulture);
+                return ResourceManager.GetString("UtilEntitySuccess", resourceCulture);
             }
         }
     }

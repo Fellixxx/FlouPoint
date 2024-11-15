@@ -47,11 +47,11 @@ namespace Infrastructure.Test.Repositories.Implementation.CRUD
         protected readonly Dictionary<string, string> _resourceMessages = new()
         {
             {
-                "EntityFailedNecesaryData",
+                "UtilEntityFailedNecesaryData",
                 "Necessary data was not provided."
             },
             {
-                "FailedGetToken",
+                "LogTokenFetchFailed",
                 "The log services token got failed."
             },
             {
@@ -59,11 +59,11 @@ namespace Infrastructure.Test.Repositories.Implementation.CRUD
                 "Necessary data was not provided."
             },
             {
-                "FailedSetLog",
+                "LogCreationFailed",
                 "The log creation got failed."
             },
             {
-                "FailureConfigurationMissingError",
+                "LogConfigMissingError",
                 "The configuration for the log services is missing the username, password, or URL."
             },
             {
@@ -71,7 +71,7 @@ namespace Infrastructure.Test.Repositories.Implementation.CRUD
                 "The {0} does not exist."
             },
             {
-                "LogSuccessfullyGenericActiveated",
+                "LogActivationSuccess",
                 "{0} was activated successfully."
             },
             {
@@ -87,7 +87,7 @@ namespace Infrastructure.Test.Repositories.Implementation.CRUD
                 "Ok"
             },
             {
-                "SuccessfullyGeneric",
+                "CreationSuccess",
                 "{0} was created successfully."
             },
             {
@@ -95,15 +95,15 @@ namespace Infrastructure.Test.Repositories.Implementation.CRUD
                 "{0} was activated successfully."
             },
             {
-                "SuccessfullyGenericDeleted",
+                "DeletionSuccess",
                 "{0} was deleted successfully."
             },
             {
-                "SuccessfullyGetToken",
+                "LogTokenFetched",
                 "Token got successfully."
             },
             {
-                "SuccessfullySetLog",
+                "LogCreated",
                 "The successfully SetLog."
             },
             {
@@ -111,7 +111,7 @@ namespace Infrastructure.Test.Repositories.Implementation.CRUD
                 "Operation completed successfully."
             },
             {
-                "UtilGlobalOkMessage",
+                "UtilEntitySuccess",
                 "Ok"
             },
             {
@@ -139,7 +139,7 @@ namespace Infrastructure.Test.Repositories.Implementation.CRUD
                 "A user is already registered with this email."
             },
             {
-                "SuccessfullyGenericUpdated",
+                "UpdateSuccess",
                 "{0} was updated successfully."
             },
             {
@@ -159,27 +159,27 @@ namespace Infrastructure.Test.Repositories.Implementation.CRUD
                 "The search in the {0} entity completed successfully."
             },
             {
-                "SuccessfullyUpdate",
+                "UpdateEntitySearchSuccess",
                 "The search in the {0} entity completed successfully."
             },
             {
-                "SuccessfullyReadId",
+                "ReadByBearerSuccess",
                 "The search in the {0} entity completed successfully."
             },
             {
-                "SuccessfullyFind",
+                "ReadIdSuccess",
                 "The entity was found by id successfully."
             },
             {
-                "SuccessfullyReadFilter",
+                "ReadFilterSuccess",
                 "The search in the {0} entity completed successfully."
             },
             {
-                "SuccessfullyReadFilterPage",
+                "ReadFilterPageSuccess",
                 "The search in the {0} entity completed successfully."
             },
             {
-                "SuccessfullyReadFilterCount",
+                "ReadFilterCountSuccess",
                 "The search in the {0} entity completed successfully."
             },
             {

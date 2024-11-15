@@ -45,7 +45,7 @@ namespace Infrastructure.ExternalServices.LogExternal.ServiceBase
             _httpContentWrapper = wrapper; // Assigns the HTTP content wrapper.
             _provider = provider; // Assigns the resource provider.
             _handler = handler; // Assigns the resource handler.
-            _resourceKeys = ["FailureConfigurationMissingError", "FailedGetToken", "SuccessfullyGetToken", "FailedSetLog", "SuccessfullySetLog"]; // Initializes resource keys.
+            _resourceKeys = ["LogConfigMissingError", "LogTokenFetchFailed", "LogTokenFetched", "LogCreationFailed", "LogCreated"]; // Initializes resource keys.
         }
 
         /// <summary>
@@ -58,8 +58,8 @@ namespace Infrastructure.ExternalServices.LogExternal.ServiceBase
             if (HasParameter()) // Checks for missing parameters.
             {
                 await ResourceHandler.CreateAsync(_provider, _resourceKeys);
-                var failureConfigurationMissingError = _handler.GetResource("FailureConfigurationMissingError");
-                var message = failureConfigurationMissingError;
+                var LogConfigMissingError = _handler.GetResource("LogConfigMissingError");
+                var message = LogConfigMissingError;
                 var strategy = new ConfigMissingStrategy<string>();
                 return OperationStrategy<string>.Fail(message, strategy); // Returns failure if configuration is incomplete.
             }
@@ -68,15 +68,15 @@ namespace Infrastructure.ExternalServices.LogExternal.ServiceBase
             var response = await _httpContentWrapper.PostAsync(_client, url, null, null); // Attempts to get the token by sending a POST request.
             if (!response.IsSuccessStatusCode)
             {
-                var failedGetToken = _handler.GetResource("FailedGetToken");
+                var LogTokenFetchFailed = _handler.GetResource("LogTokenFetchFailed");
                 var strategy = new ExternalServiceStrategy<string>();
-                return OperationStrategy<string>.Fail(failedGetToken, strategy); // Returns failure if the request failed.
+                return OperationStrategy<string>.Fail(LogTokenFetchFailed, strategy); // Returns failure if the request failed.
             }
 
             var result = await _httpContentWrapper.ReadAsStringAsync(response.Content); // Reads the response content.
             var _tokenResponse = JsonConvert.DeserializeObject<ResponseLogin>(result); // Deserializes the content to retrieve the token.
             string accessToken = _tokenResponse?.AccessToken ?? string.Empty; // Extracts the token or provides an empty string.
-            var successfullyLogCreate = _handler.GetResource("SuccessfullyGetToken");
+            var successfullyLogCreate = _handler.GetResource("LogTokenFetched");
             return Operation<string>.Success(accessToken, successfullyLogCreate); // Returns the token if successful.
         }
 
@@ -119,13 +119,13 @@ namespace Infrastructure.ExternalServices.LogExternal.ServiceBase
             await ResourceHandler.CreateAsync(_provider, _resourceKeys); // Ensures resource keys are available.
             if (!response.IsSuccessStatusCode)
             {
-                var failedSetLog = _handler.GetResource("FailedGetToken");
+                var LogCreationFailed = _handler.GetResource("LogTokenFetchFailed");
                 var strategy = new ExternalServiceStrategy<string>();
-                return OperationStrategy<string>.Fail(failedSetLog, strategy); // Returns failure if the log creation request failed.
+                return OperationStrategy<string>.Fail(LogCreationFailed, strategy); // Returns failure if the log creation request failed.
             }
 
-            var successfullySetLog = _handler.GetResource("FailedGetToken");
-            return Operation<string>.Success(string.Empty, successfullySetLog); // Indicates a successful log creation.
+            var LogCreated = _handler.GetResource("LogTokenFetchFailed");
+            return Operation<string>.Success(string.Empty, LogCreated); // Indicates a successful log creation.
         }
 
         /// <summary>
