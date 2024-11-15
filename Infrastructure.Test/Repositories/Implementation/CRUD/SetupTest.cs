@@ -55,7 +55,7 @@ namespace Infrastructure.Test.Repositories.Implementation.CRUD
                 "The log services token got failed."
             },
             {
-                "FailedNecesaryData",
+                "EntityCheckerFailedNecesaryData",
                 "Necessary data was not provided."
             },
             {

@@ -61,20 +61,20 @@ namespace Infrastructure.Repositories.Abstract.CRUD.Validation {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Necessary data was not provided..
+        /// </summary>
+        internal static string EntityCheckerFailedNecesaryData {
+            get {
+                return ResourceManager.GetString("EntityCheckerFailedNecesaryData", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Ok.
         /// </summary>
         internal static string EntityCheckerSuccess {
             get {
                 return ResourceManager.GetString("EntityCheckerSuccess", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Necessary data was not provided..
-        /// </summary>
-        internal static string FailedNecesaryData {
-            get {
-                return ResourceManager.GetString("FailedNecesaryData", resourceCulture);
             }
         }
         

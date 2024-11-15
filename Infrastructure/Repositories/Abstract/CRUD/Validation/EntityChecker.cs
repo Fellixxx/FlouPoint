@@ -32,7 +32,7 @@ namespace Infrastructure.Repositories.Abstract.CRUD.Validation
             _provider = provider;
             _handler = handler;
             // Initialize the list with keys for required error/success messages
-            _resourceKeys = ["FailedNecesaryData", "GenericExistValidation", "EntityCheckerSuccess"];
+            _resourceKeys = ["EntityCheckerFailedNecesaryData", "GenericExistValidation", "EntityCheckerSuccess"];
         }
 
         /// <summary>
@@ -47,7 +47,7 @@ namespace Infrastructure.Repositories.Abstract.CRUD.Validation
             {
                 // Load necessary resources and return a failed operation if ID is empty
                 await ResourceHandler.CreateAsync(_provider, _resourceKeys);
-                var failedNecesaryData = _handler.GetResource("FailedNecesaryData");
+                var failedNecesaryData = _handler.GetResource("EntityCheckerFailedNecesaryData");
                 return OperationStrategy<T>.Fail(failedNecesaryData, new BusinessStrategy<T>());
             }
 
@@ -80,7 +80,7 @@ namespace Infrastructure.Repositories.Abstract.CRUD.Validation
         {
             // Preparing necessary resources
             await ResourceHandler.CreateAsync(_provider, _resourceKeys);
-            var failedNecesaryData = _handler.GetResource("FailedNecesaryData");
+            var failedNecesaryData = _handler.GetResource("EntityCheckerFailedNecesaryData");
             // Checks for null or whitespace in the provided ID
             if (string.IsNullOrWhiteSpace(id))
             {
