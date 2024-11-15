@@ -1,4 +1,4 @@
-namespace Infrastructure.ExternalServices.LogExternal
+namespace Infrastructure.ExternalServices.LogExternal.Service
 {
     using Application.Result;
     using Application.UseCases.ExternalServices;
@@ -6,6 +6,7 @@ namespace Infrastructure.ExternalServices.LogExternal
     using Application.UseCases.Wrapper;
     using Domain.DTO.Logging;
     using Infrastructure.Constants;
+    using Infrastructure.ExternalServices.LogExternal.ServiceBase;
     using Infrastructure.Repositories;
     using Microsoft.Extensions.Configuration;
 

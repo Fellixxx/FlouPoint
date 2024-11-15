@@ -117,22 +117,7 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="FailedGetToken" xml:space="preserve">
-    <value>The log services token got failed.</value>
-  </data>
-  <data name="FailedSetLog" xml:space="preserve">
-    <value>The log creation got failed.</value>
-  </data>
-  <data name="FailureConfigurationMissingError" xml:space="preserve">
-    <value>The configuration for the log services is missing the username, password, or URL.</value>
-  </data>
   <data name="LogSuccessfullyGenericActiveated" xml:space="preserve">
     <value>{0} was activated successfully.</value>
-  </data>
-  <data name="SuccessfullyGetToken" xml:space="preserve">
-    <value>Token got successfully.</value>
-  </data>
-  <data name="SuccessfullySetLog" xml:space="preserve">
-    <value>The successfully SetLog.</value>
   </data>
 </root>

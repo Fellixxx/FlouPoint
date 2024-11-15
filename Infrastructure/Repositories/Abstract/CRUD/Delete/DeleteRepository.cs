@@ -38,7 +38,7 @@ namespace Infrastructure.Repositories.Abstract.CRUD.Delete
             _handler = handler;
             _resourceKeys = new List<string>
             {
-                "LogSuccessfullyGenericActiveated"
+                "SuccessfullyGenericDeleted"
             }; // Initialize resource keys
         }
 

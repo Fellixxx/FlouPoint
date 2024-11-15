@@ -30,10 +30,15 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="ExternalServices\LogExternal\ResourceLogService.Designer.cs">
+    <Compile Update="ExternalServices\LogExternal\ServiceBase\LogServiceBaseResource.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-      <DependentUpon>ResourceLogService.resx</DependentUpon>
+      <DependentUpon>LogServiceBaseResource.resx</DependentUpon>
+    </Compile>
+    <Compile Update="ExternalServices\LogExternal\Service\LogServiceResource.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>LogServiceResource.resx</DependentUpon>
     </Compile>
     <Compile Update="Repositories\Abstract\CRUD\Create\ResourceCreateRepository.Designer.cs">
       <DesignTime>True</DesignTime>
@@ -93,9 +98,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="ExternalServices\LogExternal\ResourceLogService.resx">
+    <EmbeddedResource Update="ExternalServices\LogExternal\ServiceBase\LogServiceBaseResource.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>ResourceLogService.Designer.cs</LastGenOutput>
+      <LastGenOutput>LogServiceBaseResource.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="ExternalServices\LogExternal\Service\LogServiceResource.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>LogServiceResource.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Update="Repositories\Abstract\CRUD\Create\ResourceCreateRepository.resx">
       <Generator>ResXFileCodeGenerator</Generator>

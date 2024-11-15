@@ -1,4 +1,4 @@
-namespace Infrastructure.ExternalServices.LogExternal
+namespace Infrastructure.ExternalServices.LogExternal.ServiceBase
 {
     using Application.Result;
     using Application.UseCases.Wrapper;
