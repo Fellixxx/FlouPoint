@@ -39,7 +39,7 @@ namespace Infrastructure.Repositories.Abstract.CRUD.Query.ReadFilterCount
             _provider = provider;
             _handler = handler;
             // Initialize with predefined resource keys for successful operations.
-            _resourceKeys = ["SuccessfullySearchGeneric"];
+            _resourceKeys = ["SuccessfullyReadFilterCount"];
         }
 
         /// <summary>
@@ -58,7 +58,7 @@ namespace Infrastructure.Repositories.Abstract.CRUD.Query.ReadFilterCount
                 // Asynchronously creates a resource handler with specified keys.
                 await ResourceHandler.CreateAsync(_provider, _resourceKeys);
                 // Retrieves a localized successful operation message.
-                var messageSuccessfully = _handler.GetResource("SuccessfullySearchGeneric");
+                var messageSuccessfully = _handler.GetResource("SuccessfullyReadFilterCount");
                 // Returns a successful operation result with count and message.
                 return Operation<int>.Success(result, messageSuccessfully);
             }

@@ -1,4 +1,4 @@
-namespace Infrastructure.Repositories.Abstract.CRUD.Query
+namespace Infrastructure.Repositories.Abstract.CRUD.Query.ReadFilterPage
 {
     using Application.Result;
     using Application.UseCases.ExternalServices;
@@ -12,6 +12,7 @@ namespace Infrastructure.Repositories.Abstract.CRUD.Query
     using Domain.EnumType;
     using Infrastructure.Constants;
     using Application.UseCases.ExternalServices.Resources;
+    using Infrastructure.Repositories;
 
     /// <summary>
     /// Abstract repository class for reading and filtering entities with pagination.
@@ -40,7 +41,7 @@ namespace Infrastructure.Repositories.Abstract.CRUD.Query
             // Initialize the resource keys that are needed for resource management.
             _resourceKeys = new List<string>
             {
-                "SuccessfullySearchGeneric"
+                "SuccessfullyReadFilterPage"
             };
         }
 
@@ -63,7 +64,7 @@ namespace Infrastructure.Repositories.Abstract.CRUD.Query
                 // Prepare resources using the resource provider and the list of resource keys.
                 await ResourceHandler.CreateAsync(_provider, _resourceKeys);
                 // Get the success message resource and format it with the entity type name.
-                var successfullySearchGeneric = _handler.GetResource("SuccessfullySearchGeneric");
+                var successfullySearchGeneric = _handler.GetResource("SuccessfullyReadFilterPage");
                 var messageSuccessfully = string.Format(successfullySearchGeneric, typeof(T).Name);
                 // Return the successful operation with the result and formatted message.
                 return Operation<IQueryable<T>>.Success(result, messageSuccessfully);
