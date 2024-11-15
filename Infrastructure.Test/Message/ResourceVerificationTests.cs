@@ -31,7 +31,7 @@
                 string resxFilePath = Path.Combine(Path.GetDirectoryName(classFile), $"Resource{className}.resx");
 
                 // Ensure the corresponding .resx file exists
-                if(!File.Exists(resxFilePath))
+                if (!File.Exists(resxFilePath))
                 {
                     continue;
                 }
@@ -58,37 +58,37 @@
             string repositoriesPath = @"C:\GitHub\FlouPoint\Infrastructure\";
 
             // Get all .cs files that are not resource files
-            var classFiles = Directory.GetFiles(repositoriesPath, "*.cs", SearchOption.AllDirectories)
-                .Where(file => !file.EndsWith(".resx", StringComparison.OrdinalIgnoreCase))
-                .ToList();
+            var classFiles = GetClassFiles(repositoriesPath);
 
             foreach (var classFile in classFiles)
             {
-                // Get class name and expected .resx file path
-                string className = Path.GetFileNameWithoutExtension(classFile);
-                string resxFilePath = Path.Combine(Path.GetDirectoryName(classFile), $"Resource{className}.resx");
-
-                // Ensure the corresponding .resx file exists
-                if (!File.Exists(resxFilePath))
+                if (classFile.EndsWith(".Designer.cs"))
                 {
                     continue;
                 }
 
-                if (classFile.Contains(".resx"))
+                var code = File.ReadAllText(classFile);
+                if (!code.Contains("_resourceKeys"))
                 {
                     continue;
                 }
+
 
                 // Get resource keys used in the class file
                 var usedResourceKeys = ExtractResourceKeysFromClassFile(classFile);
                 var usedListResourceKey = ExtractResourceKeysListFromClassFile(classFile);
+                string className = Path.GetFileNameWithoutExtension(classFile);
                 foreach (var key in usedResourceKeys)
                 {
-                    Assert.IsTrue(usedListResourceKey.Contains(key), $"In the list _resourceKey is missing  '{key}' used in {className} is missing in {resxFilePath}");
+                    Assert.IsTrue(usedListResourceKey.Contains(key), $"In the list _resourceKey is missing  '{key}' used in {className} is missing");
                 }
             }
         }
 
+        private static string[] GetClassFiles(string repositoriesPath)
+        {
+            return Directory.GetFiles(repositoriesPath, "*.cs", SearchOption.AllDirectories);
+        }
 
         private HashSet<string> LoadResourceKeys(string resxFilePath)
         {
@@ -112,10 +112,11 @@
             var usedKeys = new HashSet<string>();
 
             // Read each line in the file to find resource keys
-            foreach (var line in File.ReadLines(classFilePath))
+            IEnumerable<string> lines = File.ReadLines(classFilePath);
+            foreach (var line in lines)
             {
                 // Example regex to match keys in the form "_handler.GetResource(\"KeyName\")"
-                var match = System.Text.RegularExpressions.Regex.Match(line, @"_handler\.GetResource\(\s*""([^""]+)""\s*\)");
+                var match = Regex.Match(line, @"_handler\.GetResource\(\s*""([^""]+)""\s*\)");
 
                 // If a match is found, add the key to the set
                 if (match.Success)
@@ -127,47 +128,63 @@
             return usedKeys;
         }
 
-    public HashSet<string> ExtractResourceKeysListFromClassFile(string classFilePath)
-    {
-        var resourceKeys = new HashSet<string>();
-
-        // Load and parse the file content into a SyntaxTree
-        var fileContent = File.ReadAllText(classFilePath);
-        var syntaxTree = CSharpSyntaxTree.ParseText(fileContent);
-
-        // Get the root node of the syntax tree
-        var root = syntaxTree.GetRoot();
-
-        // Find the field declaration for _resourceKeys
-        var fieldDeclarations = root.DescendantNodes()
-            .OfType<FieldDeclarationSyntax>()
-            .Where(f => f.Declaration.Variables.Any(v => v.Identifier.Text == "_resourceKeys"));
-
-        foreach (var field in fieldDeclarations)
+        public HashSet<string> ExtractResourceKeysListFromClassFile(string classFilePath)
         {
-            // Look for an initializer that contains a list of strings (new List<string> { "Key1", "Key2", ... })
-            var initializer = field.Declaration.Variables
-                .FirstOrDefault(v => v.Identifier.Text == "_resourceKeys")
-                ?.Initializer?.Value as ObjectCreationExpressionSyntax;
+            var resourceKeys = new HashSet<string>();
 
-            if (initializer != null)
+            // Load and parse the file content into a SyntaxTree
+            var fileContent = File.ReadAllText(classFilePath);
+            var syntaxTree = CSharpSyntaxTree.ParseText(fileContent);
+
+            // Get the root node of the syntax tree
+            var root = syntaxTree.GetRoot();
+
+            // Look for assignment expressions directly setting _resourceKeys
+            var assignmentExpressions = root.DescendantNodes()
+                .OfType<AssignmentExpressionSyntax>()
+                .Where(ae => ae.Left.ToString() == "_resourceKeys");
+
+            foreach (var assignment in assignmentExpressions)
             {
-                // Find the initializer expression containing the list of keys
-                var initializerExpression = initializer.Initializer as InitializerExpressionSyntax;
-
-                if (initializerExpression != null)
+                // Check if the right-hand side is an array or list initializer
+                var initializer = assignment.Right as CollectionExpressionSyntax;
+                if (initializer != null)
                 {
-                    foreach (var expression in initializerExpression.Expressions.OfType<LiteralExpressionSyntax>())
+                    // Extract each string literal within the initializer
+                    foreach (var expression in initializer.Elements)
                     {
-                        // Extract the string value and add it to the resourceKeys set
-                        var key = expression.Token.ValueText;
-                        resourceKeys.Add(key);
+                        var expressionElement = expression as ExpressionElementSyntax;
+                        foreach (var node in expressionElement.DescendantNodes())
+                        {
+                            var nodekey = node as LiteralExpressionSyntax;
+                            var key = nodekey.Token.ValueText;
+                            resourceKeys.Add(key);
+                        }                      
                     }
                 }
-            }
-        }
+                var objectCreation = assignment.Right as ObjectCreationExpressionSyntax;
+                if (objectCreation != null)
+                {
+                    var initializerExpression = objectCreation.Initializer as InitializerExpressionSyntax;
+                    if (initializerExpression != null)
+                    {
+                        foreach (var expression in initializerExpression.Expressions)
+                        {
+                            if (expression is LiteralExpressionSyntax literalExpression)
+                            {
+                                // Extract the string value of the literal and add it to the set
+                                var key = literalExpression.Token.ValueText;
+                                resourceKeys.Add(key);
+                            }
+                        }
+                    }
 
-        return resourceKeys;
-    }
+                }
+
+
+            }
+
+            return resourceKeys;
+        }
     }
 }

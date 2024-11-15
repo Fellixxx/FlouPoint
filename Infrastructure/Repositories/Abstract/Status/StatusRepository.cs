@@ -39,7 +39,8 @@ namespace Infrastructure.Repositories.Abstract.Status
                 "SuccessfullyGenericActiveated",
                 "StatusFailedNecesaryData",
                 "GenericExistValidation",
-                "StatusSuccessfullyGenericDisabled"
+                "StatusSuccessfullyGenericDisabled",
+                "StatusGlobalOkMessage"
             };
         }
 

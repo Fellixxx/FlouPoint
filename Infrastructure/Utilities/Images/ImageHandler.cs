@@ -22,9 +22,9 @@ namespace Infrastructure.Utilities.Images
         // Service responsible for image compression operations.
         private readonly IImageCompressor _imageCompressionService;
         // Provider for external resources.
-        private readonly IResourcesProvider _resourceProvider;
+        private readonly IResourcesProvider _provider;
         // Handler for resource-related operations.
-        private IResourceHandler _resourceHandler;
+        private IResourceHandler _handler;
         // List of resource keys used for error handling and messaging.
         private readonly List<string> _resourceKeys;
         /// <summary>
@@ -38,8 +38,8 @@ namespace Infrastructure.Utilities.Images
         {
             _logService = logService;
             _imageCompressionService = imageCompressionService;
-            _resourceProvider = resourceProvider;
-            _resourceHandler = resourceHandler;
+            _provider = resourceProvider;
+            _handler = resourceHandler;
             _resourceKeys = new List<string>
             {
                 "ImageSuccessfullyUpload",
@@ -74,9 +74,9 @@ namespace Infrastructure.Utilities.Images
 
                 Stream streamCompress = resultCompress.Data ?? new MemoryStream();
                 // Prepare the resources needed for the operation.
-                await ResourceHandler.CreateAsync(_resourceProvider, _resourceKeys);
+                await ResourceHandler.CreateAsync(_provider, _resourceKeys);
                 // Retrieve success message resource.
-                var successfullyUpload = _resourceHandler.GetResource("ImageSuccessfullyUpload");
+                var successfullyUpload = _handler.GetResource("ImageSuccessfullyUpload");
                 // Upload operation commented out; possibly uploads to Google Drive or another location.
                 // var result = UploadFileAsync(streamCompress);
                 // Return success operation with the success message.
@@ -123,9 +123,9 @@ namespace Infrastructure.Utilities.Images
                 byte[] bytes = Convert.FromBase64String(base64String);
                 MemoryStream memoryStream = new MemoryStream(bytes);
                 // Prepare resources needed for the success operation.
-                await ResourceHandler.CreateAsync(_resourceProvider, _resourceKeys);
+                await ResourceHandler.CreateAsync(_provider, _resourceKeys);
                 // Retrieve success message resource.
-                var imageGlobalOkMessage = _resourceHandler.GetResource("ImageGlobalOkMessage");
+                var imageGlobalOkMessage = _handler.GetResource("ImageGlobalOkMessage");
                 // Return a successful operation with the memory stream.
                 return Operation<Stream>.Success(memoryStream, imageGlobalOkMessage);
             }

@@ -19,9 +19,9 @@ namespace Infrastructure.Utilities.Compress
         // Service for logging operations.
         private readonly ILogService _logService;
         // Provider for fetching resources.
-        private readonly IResourcesProvider _resourceProvider;
+        private readonly IResourcesProvider _provider;
         // Handler for managing resources.
-        private IResourceHandler _resourceHandler;
+        private IResourceHandler _handler;
         // List of keys to access specific resource strings.
         private readonly List<string> _resourceKeys;
         /// <summary>
@@ -33,8 +33,8 @@ namespace Infrastructure.Utilities.Compress
         public ImageCompressor(ILogService logService, IResourcesProvider resourceProvider, IResourceHandler resourceHandler)
         {
             _logService = logService;
-            _resourceProvider = resourceProvider;
-            _resourceHandler = resourceHandler;
+            _provider = resourceProvider;
+            _handler = resourceHandler;
             // Initialize predefined keys for resource messages.
             _resourceKeys = ["SuccessCompressed"];
         }
@@ -69,8 +69,8 @@ namespace Infrastructure.Utilities.Compress
                 // Reset the output stream position to the beginning.
                 outputStream.Seek(0, SeekOrigin.Begin);
                 // Asynchronously create resources using the resource handler.
-                await ResourceHandler.CreateAsync(_resourceProvider, _resourceKeys);
-                var successCompressed = _resourceHandler.GetResource("SuccessCompressed");
+                await ResourceHandler.CreateAsync(_provider, _resourceKeys);
+                var successCompressed = _handler.GetResource("SuccessCompressed");
                 // Return a successful operation result with the compressed image stream.
                 return Operation<Stream>.Success(outputStream, successCompressed);
             }

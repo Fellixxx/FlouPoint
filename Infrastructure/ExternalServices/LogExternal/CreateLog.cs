@@ -13,9 +13,6 @@ namespace Infrastructure.ExternalServices.LogExternal
     {
         // Uncommented private variables are placeholders for potential future use
         // or to guide developers on potential areas for extension or modification.
-        // private readonly IResourceProvider _resourceProvider;
-        // private IResourceHandler _resourceHandler;
-        // private readonly List<string> _resourceKeys;
         /// <summary>
         /// Attempts to create a log entry if the provided data is valid.
         /// </summary>

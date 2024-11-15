@@ -41,7 +41,8 @@ namespace Infrastructure.Repositories.Implementation.CRUD.User.Update
             {
                 "UpdateFailedDataSizeCharacter",
                 "UpdateFailedEmailInvalidFormat",
-                "UpdateFailedAlreadyRegisteredEmail"
+                "UpdateFailedAlreadyRegisteredEmail",
+                "UpdateSuccessfullySearchGeneric"
             };
         }
 
@@ -64,7 +65,7 @@ namespace Infrastructure.Repositories.Implementation.CRUD.User.Update
                 string errorMessage = GetErrorMessage(result);
                 var failedDataSizeCharacter = _handler.GetResource("UpdateFailedDataSizeCharacter");
                 string message = string.Format(failedDataSizeCharacter, errorMessage);
-                var failedAlreadyRegisteredEmail = _handler.GetResource("FailedAlreadyRegisteredEmail");
+                var failedAlreadyRegisteredEmail = _handler.GetResource("UpdateFailedAlreadyRegisteredEmail");
                 return OperationStrategy<User>.Fail(failedAlreadyRegisteredEmail, new BusinessStrategy<User>());
             }
 

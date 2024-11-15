@@ -29,7 +29,8 @@ namespace Infrastructure.Repositories.Abstract.CRUD.Util
             // Initialize resource keys with required keys
             _resourceKeys = new List<string>
             {
-                "EntityFailedNecesaryData"
+                "EntityFailedNecesaryData",
+                "UtilGlobalOkMessage"
             };
         }
 
