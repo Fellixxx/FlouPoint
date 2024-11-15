@@ -163,6 +163,10 @@ namespace Infrastructure.Test.Repositories.Implementation.CRUD
                 "The search in the {0} entity completed successfully."
             },
             {
+                "SuccessfullyReadFilterCount",
+                "The search in the {0} entity completed successfully."
+            },
+            {
                 "ImageSuccessfullyUpload",
                 "The image was uploaded successfully due to an unexpected error."
             },

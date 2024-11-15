@@ -50,6 +50,16 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>ResourceDeleteRepository.resx</DependentUpon>
     </Compile>
+    <Compile Update="Repositories\Abstract\CRUD\Query\FilterCount\ReadFilterCountResource.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ReadFilterCountResource.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Repositories\Abstract\CRUD\Query\ReadFilterCount\ReadFilterCountResource.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ReadFilterCountResource.resx</DependentUpon>
+    </Compile>
     <Compile Update="Repositories\Abstract\CRUD\Query\ResourceQuery.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -113,6 +123,14 @@
     <EmbeddedResource Update="Repositories\Abstract\CRUD\Delete\ResourceDeleteRepository.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>ResourceDeleteRepository.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Repositories\Abstract\CRUD\Query\FilterCount\ReadFilterCountResource.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ReadFilterCountResource.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Repositories\Abstract\CRUD\Query\ReadFilterCount\ReadFilterCountResource.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ReadFilterCountResource.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Update="Repositories\Abstract\CRUD\Query\ResourceQuery.resx">
       <Generator>ResXFileCodeGenerator</Generator>

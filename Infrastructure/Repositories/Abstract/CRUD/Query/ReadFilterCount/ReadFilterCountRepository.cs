@@ -1,4 +1,4 @@
-namespace Infrastructure.Repositories.Abstract.CRUD.Query
+namespace Infrastructure.Repositories.Abstract.CRUD.Query.ReadFilterCount
 {
     using Application.Result;
     using Application.UseCases.ExternalServices;

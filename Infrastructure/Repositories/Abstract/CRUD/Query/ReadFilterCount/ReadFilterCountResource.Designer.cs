@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Infrastructure.Repositories.Abstract.CRUD.Delete {
+namespace Infrastructure.Repositories.Abstract.CRUD.Query.ReadFilterCount {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace Infrastructure.Repositories.Abstract.CRUD.Delete {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class ResourceDeleteRepository {
+    internal class ReadFilterCountResource {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal ResourceDeleteRepository() {
+        internal ReadFilterCountResource() {
         }
         
         /// <summary>
@@ -39,7 +39,8 @@ namespace Infrastructure.Repositories.Abstract.CRUD.Delete {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Infrastructure.Repositories.Abstract.CRUD.Delete.ResourceDeleteRepository", typeof(ResourceDeleteRepository).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Infrastructure.Repositories.Abstract.CRUD.Query.ReadFilterCount.ReadFilterCountRe" +
+                            "source", typeof(ReadFilterCountResource).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,11 +62,11 @@ namespace Infrastructure.Repositories.Abstract.CRUD.Delete {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0} was deleted successfully..
+        ///   Looks up a localized string similar to The search in the {0} entity completed successfully..
         /// </summary>
-        internal static string SuccessfullyGenericDeleted {
+        internal static string SuccessfullyReadFilterCount {
             get {
-                return ResourceManager.GetString("SuccessfullyGenericDeleted", resourceCulture);
+                return ResourceManager.GetString("SuccessfullyReadFilterCount", resourceCulture);
             }
         }
     }

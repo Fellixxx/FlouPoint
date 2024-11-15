@@ -1,13 +1,13 @@
 namespace Infrastructure.Repositories.Implementation.CRUD.Query.User
 {
     using Application.UseCases.CRUD.Query.User;
-    using Infrastructure.Repositories.Abstract.CRUD.Query;
     using System.Linq.Expressions;
     using Application.UseCases.ExternalServices;
     using User = Domain.Entities.User;
     using Persistence.BaseDbContext;
     using Microsoft.EntityFrameworkCore;
     using Application.UseCases.ExternalServices.Resources;
+    using Infrastructure.Repositories.Abstract.CRUD.Query.ReadFilterCount;
 
     /// <summary>
     /// Repository class for reading filtered user entity counts.
