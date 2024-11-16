@@ -33,6 +33,16 @@ namespace Domain.Entities
         /// Gets or sets a value indicating whether the resource entry is active.
         /// This property determines if the resource entry is currently enabled or in use.
         /// </summary>
+        public DateTime CreatedAt { get; set; }
+        /// <summary>
+        /// Gets or sets the date and time when the User was last updated.
+        /// This property can be null if the user has not been updated since creation.
+        /// </summary>
+        public DateTime? UpdatedAt { get; set; }
+        /// <summary>
+        /// Gets or sets a boolean value indicating whether the User account is currently active or not.
+        /// If this property is false, the user account is considered disabled or deactivated.
+        /// </summary>
         public bool Active { get; set; }
     }
 }

@@ -3,11 +3,11 @@ namespace Infrastructure.Repositories.Implementation.CRUD.Query.Resource
     using Application.Result;
     using Application.UseCases.CRUD.Query.Resource;
     using Application.UseCases.CRUD.Query.User;
-    using Application.UseCases.ExternalServices;
     using Domain.Entities;
-    using Microsoft.EntityFrameworkCore;
-    using Persistence.Repositories;
+    using System;
+    using System.Linq;
     using System.Linq.Expressions;
+    using System.Threading.Tasks;
 
     public class ResourceQuery : IResourceQuery
     {
@@ -28,29 +28,30 @@ namespace Infrastructure.Repositories.Implementation.CRUD.Query.Resource
             _resourceReadFilterPage=resourceReadFilterPage;
             _resourceReadId=resourceReadId;
         }
+
         public Task<Operation<Resource>> ReadByBearer(string bearerToken)
         {
-            throw new NotImplementedException();
+            return _resourceReadId.ReadByBearer(bearerToken);
+        }
+
+        public Task<Operation<IQueryable<Resource>>> ReadFilter(Expression<Func<Resource, bool>> predicate)
+        {
+            return _resourceReadFilter.ReadFilter(predicate);
         }
 
         public Task<Operation<int>> ReadFilterCount(string filter)
         {
-            throw new NotImplementedException();
+            return _resourceReadFilterCount.ReadFilterCount(filter);
         }
 
         public Task<Operation<IQueryable<Resource>>> ReadFilterPage(int pageNumber, int pageSize, string filter)
         {
-            throw new NotImplementedException();
+            return _resourceReadFilterPage.ReadFilterPage(pageNumber, pageSize, filter);
         }
 
         public Task<Operation<Resource>> ReadId(string id)
         {
-            throw new NotImplementedException();
-        }
-
-        Task<Operation<IQueryable<Resource>>> IResourceReadFilter.ReadFilter(Expression<Func<Resource, bool>> predicate)
-        {
-            throw new NotImplementedException();
+            return _resourceReadId.ReadId(id);
         }
     }
 }
