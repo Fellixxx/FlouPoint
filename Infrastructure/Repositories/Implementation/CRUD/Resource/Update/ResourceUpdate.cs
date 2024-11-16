@@ -1,4 +1,4 @@
-﻿namespace Infrastructure.Repositories.Implementation.CRUD.Resource.Update
+namespace Infrastructure.Repositories.Implementation.CRUD.Resource.Update
 {
     using Application.Result;
     using Application.UseCases.CRUD.User;
@@ -11,17 +11,20 @@
     using Resource = Domain.Entities.Resource;
     using Persistence.BaseDbContext;
 
+    /// <summary>
+    /// Provides functionality for updating a Resource entity in the database.
+    /// </summary>
     public class ResourceUpdate : UpdateRepository<Resource>, IResourceUpdate
     {
         private readonly IResourcesProvider _provider;
         private IResourceHandler _handler;
         private readonly List<string> _resourceKeys;
         /// <summary>
-        /// Initializes a new instance of the <see cref = "UserUpdate"/> class.
+        /// Initializes a new instance of the <see cref = "ResourceUpdate"/> class.
         /// </summary>
         /// <param name = "context">The database context.</param>
         /// <param name = "logService">The service used for logging operations.</param>
-        /// <param name = "utilEntity">Utility functions for the User entity.</param>
+        /// <param name = "utilEntity">Utility functions for the Resource entity.</param>
         /// <param name = "provider">Service providing access to resources.</param>
         /// <param name = "handler">Handler for managing resource operations.</param>
         public ResourceUpdate(DataContext context, ILogService logService, IUtilEntity<Resource> utilEntity, IResourcesProvider provider, IResourceHandler handler) : base(context, logService, utilEntity, provider, handler)
@@ -37,14 +40,14 @@
         }
 
         /// <summary>
-        /// Updates a user entity in the database based on provided modifications.
+        /// Updates a resource entity in the database based on the provided modifications.
         /// </summary>
-        /// <param name = "entityModified">The updated user entity with new values.</param>
-        /// <param name = "entityUnmodified">The original user entity before changes.</param>
+        /// <param name = "entityModified">The updated resource entity with new values.</param>
+        /// <param name = "entityUnmodified">The original resource entity before changes.</param>
         /// <returns>An operation result indicating the success or failure of the update operation.</returns>
         public override async Task<Operation<Resource>> UpdateEntity(Resource entityModified, Resource entityUnmodified)
         {
-            // Validate the modified entity using the UpdateUserRules validator
+            // Validate the modified entity using the UpdateResourceRules validator
             UpdateResourceRules validatorModified = new UpdateResourceRules();
             ValidationResult result = validatorModified.Validate(entityModified);
             // Load resources required for generating messages
@@ -59,20 +62,19 @@
                 return OperationStrategy<Resource>.Fail(updateFailedAlreadyRegisteredEmail, new BusinessStrategy<Resource>());
             }
 
-            // Ensure that the modified email is unique and not associated with another user
+            // Ensure that the modified resource name is unique and not associated with another resource
             var id = entityModified?.Id ?? string.Empty;
             var name = entityModified?.Name ?? string.Empty;
-            IQueryable<Resource> userByEmail = await ReadFilter(p => (p.Name ?? string.Empty).Equals(name) && !p.Id.Equals(id));
-            Resource? resourceExistByName = userByEmail?.FirstOrDefault();
+            IQueryable<Resource> resourceByName = await ReadFilter(p => (p.Name ?? string.Empty).Equals(name) && !p.Id.Equals(id));
+            Resource? resourceExistByName = resourceByName?.FirstOrDefault();
             if (resourceExistByName != null)
             {
                 var updateFailedAlreadyRegisteredEmail = _handler.GetResource("UpdateFailedDuplicateName");
                 return OperationStrategy<Resource>.Fail(updateFailedAlreadyRegisteredEmail, new BusinessStrategy<Resource>());
             }
 
-            
-            // Check for changes in the email and update relevant properties
-            bool hasEmailChanged = !name.Equals(entityUnmodified.Name);
+            // Update the timestamp of the resource entity
+            bool hasNameChanged = !name.Equals(entityUnmodified.Name);
             entityUnmodified.UpdatedAt = DateTime.Now;
             // Return a success operation result
             var updateSuccessfullySearchGeneric = _handler.GetResource("UpdateSearchSuccess");
