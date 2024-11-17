@@ -7,6 +7,7 @@ namespace Infrastructure.Repositories.Abstract.CRUD.Validation
     using Persistence.Repositories;
     using Microsoft.EntityFrameworkCore;
     using Application.UseCases.ExternalServices.Resources;
+    using Application.UseCases.ExternalServices.Resources.Provider;
 
     /// <summary>
     /// Abstract class responsible for validating the existence of an entity in the database.

@@ -10,6 +10,7 @@ namespace Infrastructure.ExternalServices.LogExternal.ServiceBase
     using Domain.DTO.Logging;
     using Infrastructure.Repositories;
     using Application.UseCases.ExternalServices.Resources;
+    using Application.UseCases.ExternalServices.Resources.Provider;
 
     /// <summary>
     /// Provides a base for interacting with an external logging service by managing authentication and log creation.

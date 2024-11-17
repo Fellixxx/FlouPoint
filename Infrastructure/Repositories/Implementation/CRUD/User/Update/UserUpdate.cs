@@ -15,6 +15,7 @@ namespace Infrastructure.Repositories.Implementation.CRUD.User.Update
     using Application.UseCases.Repository.CRUD;
     using Infrastructure.Repositories.Abstract.CRUD.Update;
     using Application.UseCases.ExternalServices.Resources;
+    using Application.UseCases.ExternalServices.Resources.Provider;
 
     /// <summary>
     /// Provides methods to update user entities in the database.

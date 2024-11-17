@@ -1,7 +1,7 @@
 namespace Infrastructure.Resource
 {
     using Application.Result;
-    using Application.UseCases.ExternalServices.Resources;
+    using Application.UseCases.ExternalServices.Resources.Provider;
     using Domain.Entities;
     using Infrastructure.Constants;
     using System.Collections;
@@ -12,7 +12,7 @@ namespace Infrastructure.Resource
     /// <summary>
     /// Provides functionality to manage and retrieve resources embedded in the assembly.
     /// </summary>
-    public class ResxProvider : IResourcesProvider
+    public class ResxProvider : IResourcesProvider, IResxProvider
     {
         /// <summary>
         /// Retrieves all entries from the embedded resource files within the assembly.

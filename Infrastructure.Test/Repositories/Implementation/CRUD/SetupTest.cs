@@ -21,6 +21,7 @@ namespace Infrastructure.Test.Repositories.Implementation.CRUD
     using System.Diagnostics;
     using Application.UseCases.CRUD.Query.Resource;
     using System.Resources;
+    using Application.UseCases.ExternalServices.Resources.Provider;
 
     /// <summary>
     /// Class to set up the test environment for CRUD operations and related services.

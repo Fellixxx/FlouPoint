@@ -6,6 +6,7 @@ namespace Infrastructure.Repositories.Implementation.CRUD.Query.User
     using Persistence.BaseDbContext;
     using Application.UseCases.ExternalServices.Resources;
     using Infrastructure.Repositories.Abstract.CRUD.Query.ReadId;
+    using Application.UseCases.ExternalServices.Resources.Provider;
 
     /// <summary>
     /// Repository class for reading a user entity by its ID.

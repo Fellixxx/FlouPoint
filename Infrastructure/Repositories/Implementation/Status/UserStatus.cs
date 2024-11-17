@@ -6,6 +6,7 @@ namespace Infrastructure.Repositories.Implementation.Status
     using Persistence.BaseDbContext;
     using Application.UseCases.Repository.Status.Status;
     using Application.UseCases.ExternalServices.Resources;
+    using Application.UseCases.ExternalServices.Resources.Provider;
 
     /// <summary>
     /// Repository class for managing the status of user entities.

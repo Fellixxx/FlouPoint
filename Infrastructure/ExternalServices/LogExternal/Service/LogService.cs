@@ -3,6 +3,7 @@ namespace Infrastructure.ExternalServices.LogExternal.Service
     using Application.Result;
     using Application.UseCases.ExternalServices;
     using Application.UseCases.ExternalServices.Resources;
+    using Application.UseCases.ExternalServices.Resources.Provider;
     using Application.UseCases.Wrapper;
     using Domain.DTO.Logging;
     using Infrastructure.Constants;

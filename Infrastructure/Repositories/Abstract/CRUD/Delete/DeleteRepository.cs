@@ -12,6 +12,7 @@ namespace Infrastructure.Repositories.Abstract.CRUD.Delete
     using Domain.EnumType;
     using Infrastructure.Constants;
     using Application.UseCases.ExternalServices.Resources;
+    using Application.UseCases.ExternalServices.Resources.Provider;
 
     /// <summary>
     /// Abstract repository class for deleting an entity.

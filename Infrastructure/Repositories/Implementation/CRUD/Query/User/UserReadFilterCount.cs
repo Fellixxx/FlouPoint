@@ -8,6 +8,7 @@ namespace Infrastructure.Repositories.Implementation.CRUD.Query.User
     using Microsoft.EntityFrameworkCore;
     using Application.UseCases.ExternalServices.Resources;
     using Infrastructure.Repositories.Abstract.CRUD.Query.ReadFilterCount;
+    using Application.UseCases.ExternalServices.Resources.Provider;
 
     /// <summary>
     /// Repository class for reading filtered user entity counts.

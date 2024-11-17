@@ -6,6 +6,7 @@ namespace Infrastructure.Repositories.Implementation.CRUD.Query.Resource
     using Persistence.BaseDbContext;
     using Application.UseCases.ExternalServices.Resources;
     using Infrastructure.Repositories.Abstract.CRUD.Query.ReadId;
+    using Application.UseCases.ExternalServices.Resources.Provider;
 
     /// <summary>
     /// Represents a repository class responsible for reading a Resource entity by its identifier.

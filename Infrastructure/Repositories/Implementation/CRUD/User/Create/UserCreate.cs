@@ -13,6 +13,7 @@ namespace Infrastructure.Repositories.Implementation.CRUD.User.Create
     using Infrastructure.Repositories;
     using Infrastructure.Constants;
     using Application.UseCases.ExternalServices.Resources;
+    using Application.UseCases.ExternalServices.Resources.Provider;
 
     /// <summary>
     /// Implementation of the user creation repository.

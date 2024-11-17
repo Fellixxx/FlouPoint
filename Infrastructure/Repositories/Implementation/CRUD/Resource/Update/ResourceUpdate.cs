@@ -1,16 +1,17 @@
 namespace Infrastructure.Repositories.Implementation.CRUD.Resource.Update
 {
     using Application.Result;
-    using Application.UseCases.CRUD.User;
+    using Application.UseCases.CRUD.Resource;
     using Application.UseCases.ExternalServices.Resources;
+    using Application.UseCases.ExternalServices.Resources.Provider;
     using Application.UseCases.ExternalServices;
     using Application.UseCases.Repository.CRUD;
     using Application.Validators.User;
+    using Persistence.BaseDbContext;
     using Infrastructure.Repositories.Abstract.CRUD.Update;
     using FluentValidation.Results;
     using Resource = Domain.Entities.Resource;
-    using Persistence.BaseDbContext;
-
+    
     /// <summary>
     /// Provides functionality for updating a Resource entity in the database.
     /// </summary>
@@ -31,12 +32,12 @@ namespace Infrastructure.Repositories.Implementation.CRUD.Resource.Update
         {
             _provider = provider;
             _handler = handler;
-            _resourceKeys = new List<string>
-            {
+            _resourceKeys =
+            [
                 "UpdateFailedDataLength",
                 "UpdateFailedDuplicateName",
                 "UpdateSearchSuccess"
-            };
+            ];
         }
 
         /// <summary>

@@ -13,6 +13,7 @@ namespace Infrastructure.Repositories.Abstract.CRUD.Query.ReadFilterPage
     using Infrastructure.Constants;
     using Application.UseCases.ExternalServices.Resources;
     using Infrastructure.Repositories;
+    using Application.UseCases.ExternalServices.Resources.Provider;
 
     /// <summary>
     /// Abstract repository class for reading and filtering entities with pagination.

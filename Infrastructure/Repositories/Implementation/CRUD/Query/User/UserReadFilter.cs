@@ -6,6 +6,7 @@ namespace Infrastructure.Repositories.Implementation.CRUD.Query.User
     using Persistence.BaseDbContext;
     using Application.UseCases.ExternalServices.Resources;
     using Infrastructure.Repositories.Abstract.CRUD.Query.ReadFilter;
+    using Application.UseCases.ExternalServices.Resources.Provider;
 
     /// <summary>
     /// Repository class for reading user entities with filtering.

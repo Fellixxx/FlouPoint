@@ -1,5 +1,4 @@
 using Application.UseCases.CRUD.Query.User;
-using Application.UseCases.ExternalServices.Resources;
 using Application.UseCases.ExternalServices;
 using Infrastructure.Repositories.Abstract.CRUD.Query.ReadFilterPage;
 using System;
@@ -16,8 +15,8 @@ namespace Infrastructure.Repositories.Implementation.CRUD.Query.Resource
     using Resource = Domain.Entities.Resource;
     using Application.UseCases.ExternalServices;
     using Persistence.BaseDbContext;
-    using Application.UseCases.ExternalServices.Resources;
     using Infrastructure.Repositories.Abstract.CRUD.Query.ReadFilterPage;
+    using Application.UseCases.ExternalServices.Resources.Provider;
 
     /// <summary>
     /// Provides implementation for reading, filtering, and paginating Resource entities.

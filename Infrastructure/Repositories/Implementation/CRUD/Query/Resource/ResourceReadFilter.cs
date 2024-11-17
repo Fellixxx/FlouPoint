@@ -6,6 +6,7 @@ namespace Infrastructure.Repositories.Implementation.CRUD.Query.Resource
     using Persistence.BaseDbContext;
     using Application.UseCases.ExternalServices.Resources;
     using Infrastructure.Repositories.Abstract.CRUD.Query.ReadFilter;
+    using Application.UseCases.ExternalServices.Resources.Provider;
 
     /// <summary>
     /// Represents a repository implementation for reading and filtering resources.

@@ -4,6 +4,7 @@ namespace Infrastructure.Repositories.Abstract.CRUD.Util
     using Domain.Interfaces.Entity;
     using Application.Result;
     using Application.UseCases.ExternalServices.Resources;
+    using Application.UseCases.ExternalServices.Resources.Provider;
 
     /// <summary>
     /// Utility class for performing validation operations on entities.

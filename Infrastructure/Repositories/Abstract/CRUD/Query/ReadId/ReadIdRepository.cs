@@ -11,6 +11,7 @@ namespace Infrastructure.Repositories.Abstract.CRUD.Query.ReadId
     using Domain.EnumType;
     using Infrastructure.Constants;
     using Application.UseCases.ExternalServices.Resources;
+    using Application.UseCases.ExternalServices.Resources.Provider;
 
     /// <summary>
     /// Abstract repository class that provides functionality to read an entity by its ID.

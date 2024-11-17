@@ -6,6 +6,7 @@ namespace Infrastructure.Test.Repositories.Implementation.Resources
     using System.Threading.Tasks;
     using Application.UseCases.ExternalServices.Resources;
     using Infrastructure.Test.Repositories.Implementation.CRUD;
+    using Application.UseCases.ExternalServices.Resources.Provider;
 
     /// <summary>
     /// Provides tests for resource localization functionality.

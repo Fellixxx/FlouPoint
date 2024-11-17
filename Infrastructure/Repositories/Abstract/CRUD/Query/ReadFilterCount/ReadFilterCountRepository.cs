@@ -11,6 +11,7 @@ namespace Infrastructure.Repositories.Abstract.CRUD.Query.ReadFilterCount
     using Domain.EnumType;
     using Infrastructure.Constants;
     using Application.UseCases.ExternalServices.Resources;
+    using Application.UseCases.ExternalServices.Resources.Provider;
 
     /// <summary>
     /// Abstract repository class for reading and counting entities based on a filter.

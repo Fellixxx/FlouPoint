@@ -2,7 +2,7 @@ namespace Infrastructure.Resource
 {
     using Application.Result;
     using Application.UseCases.CRUD.Query.Resource;
-    using Application.UseCases.ExternalServices.Resources;
+    using Application.UseCases.ExternalServices.Resources.Provider;
     using Domain.Entities;
     using Infrastructure.Constants;
     using Microsoft.EntityFrameworkCore;
@@ -11,10 +11,9 @@ namespace Infrastructure.Resource
     /// Provides database operations for managing resources.
     /// Implements the IResourcesProvider interface to interact with resources in the database.
     /// </summary>
-    public class DatabaseProvider : IResourcesProvider
+    public class DatabaseProvider : IResourcesProvider, IDatabaseProvider
     {
         private readonly DbContext _context;
-        private readonly DbSet<Resource> _dbSet;
         private readonly IResourceQuery _resourceEntryQuery;
         /// <summary>
         /// Initializes a new instance of the <see cref = "DatabaseProvider"/> class with the specified database context and query service.

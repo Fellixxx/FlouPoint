@@ -3,6 +3,7 @@ namespace Infrastructure.Utilities.Images
     using Application.Result;
     using Application.UseCases.ExternalServices;
     using Application.UseCases.ExternalServices.Resources;
+    using Application.UseCases.ExternalServices.Resources.Provider;
     using Application.UseCases.Utilities;
     using Domain.DTO.Logging;
     using Domain.EnumType;

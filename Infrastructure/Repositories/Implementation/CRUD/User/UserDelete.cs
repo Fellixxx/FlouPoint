@@ -6,6 +6,7 @@ namespace Infrastructure.Repositories.Implementation.CRUD.User
     using Domain.Entities;
     using Infrastructure.Repositories.Abstract.CRUD.Delete;
     using Application.UseCases.ExternalServices.Resources;
+    using Application.UseCases.ExternalServices.Resources.Provider;
 
     /// <summary>
     /// Repository class for deleting user entities.

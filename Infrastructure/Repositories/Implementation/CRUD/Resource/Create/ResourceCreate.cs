@@ -1,7 +1,7 @@
 namespace Infrastructure.Repositories.Implementation.CRUD.Resource.Create
 {
     using Application.Result;
-    using Application.UseCases.CRUD.User;
+    using Application.UseCases.CRUD.Resource;
     using Application.UseCases.ExternalServices;
     using Application.UseCases.ExternalServices.Resources;
     using Application.UseCases.Repository.CRUD;
@@ -11,6 +11,7 @@ namespace Infrastructure.Repositories.Implementation.CRUD.Resource.Create
     using FluentValidation.Results;
     using System.Threading.Tasks;
     using Resource = Domain.Entities.Resource;
+    using Application.UseCases.ExternalServices.Resources.Provider;
 
     /// <summary>
     /// Represents the logic for creating a Resource entity in the database.

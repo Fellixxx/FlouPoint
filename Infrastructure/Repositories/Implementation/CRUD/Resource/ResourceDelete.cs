@@ -6,6 +6,7 @@ namespace Infrastructure.Repositories.Implementation.CRUD.Resource
     using Infrastructure.Repositories.Abstract.CRUD.Delete;
     using Persistence.BaseDbContext;
     using Resource = Domain.Entities.Resource;
+    using Application.UseCases.ExternalServices.Resources.Provider;
 
     /// <summary>
     /// A repository class responsible for deleting resources from the data store.

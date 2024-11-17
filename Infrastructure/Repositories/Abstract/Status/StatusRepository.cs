@@ -11,6 +11,7 @@ namespace Infrastructure.Repositories.Abstract.Status
     using Domain.EnumType;
     using Infrastructure.Constants;
     using Application.UseCases.ExternalServices.Resources;
+    using Application.UseCases.ExternalServices.Resources.Provider;
 
     /// <summary>
     /// Repository class for managing the status of entities.

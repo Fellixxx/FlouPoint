@@ -1,5 +1,4 @@
 using Application.UseCases.CRUD.Query.User;
-using Application.UseCases.ExternalServices.Resources;
 using Application.UseCases.ExternalServices;
 using Infrastructure.Repositories.Abstract.CRUD.Query.ReadFilterCount;
 using System;
@@ -18,6 +17,7 @@ namespace Infrastructure.Repositories.Implementation.CRUD.Query.Resource
     using Application.UseCases.ExternalServices.Resources;
     using Infrastructure.Repositories.Abstract.CRUD.Query.ReadFilterCount;
     using Application.UseCases.CRUD.Query.Resource;
+    using Application.UseCases.ExternalServices.Resources.Provider;
 
     /// <summary>
     /// Implements the resource-specific read filter count functionality.

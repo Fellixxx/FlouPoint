@@ -11,6 +11,7 @@ namespace Infrastructure.Repositories.Abstract.CRUD.Update
     using Infrastructure.Repositories.Abstract.CRUD.Query;
     using Infrastructure.Constants;
     using Application.UseCases.ExternalServices.Resources;
+    using Application.UseCases.ExternalServices.Resources.Provider;
 
     /// <summary>
     /// Abstract repository class for updating an entity.

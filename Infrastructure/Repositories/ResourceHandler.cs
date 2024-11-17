@@ -1,6 +1,7 @@
 namespace Infrastructure.Repositories
 {
     using Application.UseCases.ExternalServices.Resources;
+    using Application.UseCases.ExternalServices.Resources.Provider;
     using Infrastructure.Constants;
     using System.Threading.Tasks;
 

@@ -1,4 +1,4 @@
-﻿namespace Application.UseCases.CRUD.User
+﻿namespace Application.UseCases.CRUD.Resource
 {
     using Application.Result;
     using Domain.Entities;
