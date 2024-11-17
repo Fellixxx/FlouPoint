@@ -24,7 +24,7 @@ namespace Infrastructure.Test.Repositories.Implementation.CRUD.Query.User
         public void Constructor_ShouldInitializeInstance_WithValidParameters()
         {
             // Act
-            var instance = new UserReadFilter(_dbContext, _logService.Object, _resourceProvider, _resourceHandler);
+            var instance = new UserReadFilter(_dbContext, _logService.Object, _provider, _handler);
             // Assert
             Assert.IsNotNull(instance, "Instance of UserReadFilter should not be null when constructed with valid parameters.");
         }
@@ -37,7 +37,7 @@ namespace Infrastructure.Test.Repositories.Implementation.CRUD.Query.User
         public void Constructor_ShouldThrowArgumentNullException_WhenDataContextIsNull()
         {
             // Assert
-            Assert.ThrowsException<ArgumentNullException>(() => new UserReadFilter(default(DataContext), _logService.Object, _resourceProvider, _resourceHandler), "Constructor should throw ArgumentNullException when a null DataContext is provided.");
+            Assert.ThrowsException<ArgumentNullException>(() => new UserReadFilter(default(DataContext), _logService.Object, _provider, _handler), "Constructor should throw ArgumentNullException when a null DataContext is provided.");
         }
     }
 }

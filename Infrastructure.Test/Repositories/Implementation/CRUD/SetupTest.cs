@@ -39,10 +39,10 @@ namespace Infrastructure.Test.Repositories.Implementation.CRUD
         protected IUserDelete _userDelete;
         protected IUserStatus _userStatus;
         protected IUserReadFilterCount _userReadFilterCount;
-        protected IResourcesProvider _resourceProvider;
-        protected IResourcesProvider _resxResourceProvider;
-        protected IResourceHandler _resourceHandler;
-        protected IUtilEntity<Domain.Entities.User> _utilEntity;
+        protected IResourcesProvider _provider;
+        protected IResourceHandler _handler;
+        protected IUtilEntity<Domain.Entities.User> _utilEntityUser;
+        protected IUtilEntity<Domain.Entities.Resource> _utilEntityResource;
         protected Mock<IResourceReadFilter> _resourceReadFilter;
         protected Mock<IResourceReadFilterCount> _resourceReadFilterCount;
         protected Mock<IResourceReadFilterPage> _resourceReadFilterPage;
@@ -137,6 +137,26 @@ namespace Infrastructure.Test.Repositories.Implementation.CRUD
                 "A user is already registered with this email."
             },
             {
+                "ResourceFailedDataLength",
+                "One or more data from the User have been submitted with errors {0}"
+            },
+            {
+                "ResourceFailedDuplicateName",
+                "The given name already exists."
+            },
+            {
+                "UpdateFailedDataLength",
+                "One or more data from the User have been submitted with errors {0}"
+            },
+            {
+                "UpdateFailedDuplicateName",
+                "The given name already exists."
+            },
+            {
+                "UpdateSearchSuccess",
+                "The resource was found successfully."
+            },
+            {
                 "UpdateSuccess",
                 "{0} was updated successfully."
             },
@@ -210,11 +230,11 @@ namespace Infrastructure.Test.Repositories.Implementation.CRUD
 
             // Initialize mocks and services
             _logService = new Mock<ILogService>();
-            _resourceHandler = SetupResourceHandlerMock();
-            _resourceProvider = SetupResourceProviderMock();
-            _resxResourceProvider = new ResxProvider();
-            _utilEntity = new UtilEntity<Domain.Entities.User>(_resourceProvider, _resourceHandler);
-
+            _handler = SetupResourceHandlerMock();
+            _provider = SetupResourceProviderMock();
+            _provider = new ResxProvider();
+            _utilEntityUser = new UtilEntity<Domain.Entities.User>(_provider, _handler);
+            _utilEntityResource = new UtilEntity<Domain.Entities.Resource>(_provider, _handler);
             _resourceReadFilter = new Mock<IResourceReadFilter>();
             _resourceReadFilterCount = new Mock<IResourceReadFilterCount>();
             _resourceReadFilterPage = new Mock<IResourceReadFilterPage>();
@@ -226,15 +246,15 @@ namespace Infrastructure.Test.Repositories.Implementation.CRUD
             _resourceReadFilterPage.Object,
             _resourceReadId.Object
             );
-            _userCreate = new UserCreate(_dbContext, _logService.Object, _utilEntity, _resourceProvider, _resourceHandler);
-            _userDelete = new UserDelete(_dbContext, _logService.Object, _resourceProvider, _resourceHandler);
-            _userUpdate = new UserUpdate(_dbContext, _logService.Object, _utilEntity, _resourceProvider, _resourceHandler);
-            _userStatus = new UserStatus(_dbContext, _logService.Object, _resourceProvider, _resourceHandler);
+            _userCreate = new UserCreate(_dbContext, _logService.Object, _utilEntityUser, _provider, _handler);
+            _userDelete = new UserDelete(_dbContext, _logService.Object, _provider, _handler);
+            _userUpdate = new UserUpdate(_dbContext, _logService.Object, _utilEntityUser, _provider, _handler);
+            _userStatus = new UserStatus(_dbContext, _logService.Object, _provider, _handler);
 
 
 
-        _userReadFilter = new UserReadFilter(_dbContext, _logService.Object, _resourceProvider, _resourceHandler);
-            _userReadFilterCount = new UserReadFilterCount(_dbContext, _logService.Object, _resourceProvider, _resourceHandler);
+        _userReadFilter = new UserReadFilter(_dbContext, _logService.Object, _provider, _handler);
+            _userReadFilterCount = new UserReadFilterCount(_dbContext, _logService.Object, _provider, _handler);
 
             // Mocking IUserQuery as it combines all read functionalities
             var mockUserQuery = new Mock<IUserQuery>();

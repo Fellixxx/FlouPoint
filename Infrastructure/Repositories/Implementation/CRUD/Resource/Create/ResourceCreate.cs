@@ -67,8 +67,9 @@ namespace Infrastructure.Repositories.Implementation.CRUD.Resource.Create
             }
 
             var name = entity?.Name ?? string.Empty;
+            var id = entity?.Id ?? string.Empty;
             // Check for name uniqueness by seeing if it's already used by another resource.
-            IQueryable<Resource> resourceByName = await ReadFilter(p => p.Name == name);
+            IQueryable<Resource> resourceByName = await ReadFilter(p => p.Name == name || p.Id == id);
             Resource? resourceExistByName = resourceByName?.FirstOrDefault();
             if (resourceExistByName is not null)
             {

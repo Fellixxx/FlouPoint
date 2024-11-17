@@ -46,7 +46,7 @@ namespace Infrastructure.Test.Repositories.Implementation.Resources
                 string key = kvp.Key;
                 string expectedMessage = kvp.Value;
                 // Act: Retrieve the message from the resource handler.
-                var message = _resourceHandler.GetResource(key);
+                var message = _handler.GetResource(key);
                 // Assert: Verify the retrieved message matches the expected one.
                 Assert.AreEqual(expectedMessage, message, $"The message for key '{key}' was not retrieved correctly.");
             }
@@ -63,9 +63,9 @@ namespace Infrastructure.Test.Repositories.Implementation.Resources
             // Set up the mock to return a fallback message for unknown keys.
             var mockResourceHandler = new Mock<IResourceHandler>();
             mockResourceHandler.Setup(r => r.GetResource(It.IsAny<string>())).Returns((string key) => _expectedMessages.ContainsKey(key) ? _expectedMessages[key] : fallbackMessage);
-            _resourceHandler = mockResourceHandler.Object; // Override the setup with the mocked fallback.
+            _handler = mockResourceHandler.Object; // Override the setup with the mocked fallback.
             // Act: Attempt to retrieve a message with an unknown key.
-            var resultMessage = _resourceHandler.GetResource(unknownKey);
+            var resultMessage = _handler.GetResource(unknownKey);
             // Assert: Verify that the fallback message is returned.
             Assert.AreEqual(fallbackMessage, resultMessage, "The fallback message for an unknown key was not correct.");
         }
@@ -81,9 +81,9 @@ namespace Infrastructure.Test.Repositories.Implementation.Resources
             // Set up the mock to handle unknown keys gracefully using an asynchronous method.
             var mockResourceProvider = new Mock<IResourcesProvider>();
             mockResourceProvider.Setup(rp => rp.GetMessageValueOrDefault(It.IsAny<string>(), It.IsAny<string>())).ReturnsAsync((string key, string defaultValue) => _expectedMessages.ContainsKey(key) ? _expectedMessages[key] : defaultValue);
-            _resourceProvider = mockResourceProvider.Object;
+            _provider = mockResourceProvider.Object;
             // Act: Attempt to retrieve a message with an unknown key, expecting a fallback.
-            var resultMessage = await _resourceProvider.GetMessageValueOrDefault(unknownKey, fallbackMessage);
+            var resultMessage = await _provider.GetMessageValueOrDefault(unknownKey, fallbackMessage);
             // Assert: Ensure the fallback message is returned for the unknown key.
             Assert.AreEqual(fallbackMessage, resultMessage, "The fallback message for an unknown key was not correct.");
         }

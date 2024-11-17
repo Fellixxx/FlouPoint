@@ -21,7 +21,7 @@ namespace Infrastructure.Test.Repositories.Implementation.CRUD.Status
         public void CanConstruct()
         {
             // Act
-            var instance = new UserStatus(_dbContext, _logService.Object, _resourceProvider, _resourceHandler);
+            var instance = new UserStatus(_dbContext, _logService.Object, _provider, _handler);
             // Assert
             Assert.IsNotNull(instance);
         }
@@ -32,7 +32,7 @@ namespace Infrastructure.Test.Repositories.Implementation.CRUD.Status
         [TestMethod]
         public void CannotConstructWithNullContext()
         {
-            Assert.ThrowsException<ArgumentNullException>(() => new UserStatus(null, _logService.Object, _resourceProvider, _resourceHandler));
+            Assert.ThrowsException<ArgumentNullException>(() => new UserStatus(null, _logService.Object, _provider, _handler));
         }
 
         /// <summary>
@@ -41,7 +41,7 @@ namespace Infrastructure.Test.Repositories.Implementation.CRUD.Status
         [TestMethod]
         public void CanConstructWithNullLogService()
         {
-            var userCreate = new UserCreate(_dbContext, null, _utilEntity, _resourceProvider, _resourceHandler);
+            var userCreate = new UserCreate(_dbContext, null, _utilEntityUser, _provider, _handler);
             Assert.IsNotNull(userCreate);
         }
 

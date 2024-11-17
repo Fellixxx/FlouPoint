@@ -34,7 +34,7 @@ namespace Infrastructure.Test.Message
             // Arrange: Set up a valid resource key for fetching the message.
             var key = "Infrastructure.ExternalServices.LogExternal.ServiceBase.LogServiceBaseResource.resources.LogConfigMissingError";
             // Act: Asynchronously call the GetMessage method with the key.
-            var result = await _resxResourceProvider.GetMessage(key);
+            var result = await _provider.GetMessage(key);
             // Assert: Verify that the result is successful and has no associated error type.
             Assert.IsTrue(result.IsSuccessful);
             Assert.AreEqual(result.Type, Application.Result.Error.ErrorTypes.None);
@@ -49,7 +49,7 @@ namespace Infrastructure.Test.Message
             // Arrange: Set up an invalid resource key which is not expected to be found.
             var key = "Infrastructure.Other.ResourceExample.resources.ResorceExample";
             // Act: Asynchronously call the GetMessage method with the invalid key.
-            var result = await _resxResourceProvider.GetMessage(key);
+            var result = await _provider.GetMessage(key);
             // Assert: Verify that the result is not successful, and contains expected error details.
             Assert.IsFalse(result.IsSuccessful);
             Assert.AreEqual(Application.Result.Error.ErrorTypes.BusinessValidation, result.Type);

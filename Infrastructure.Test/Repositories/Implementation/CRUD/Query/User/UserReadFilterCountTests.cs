@@ -23,7 +23,7 @@ namespace Infrastructure.Test.Repositories.Implementation.CRUD.Query.User
         public void ShouldConstructUserReadFilterCountSuccessfully()
         {
             // Act: Create an instance of UserReadFilterCount
-            var instance = new UserReadFilterCount(_dbContext, _logService.Object, _resourceProvider, _resourceHandler);
+            var instance = new UserReadFilterCount(_dbContext, _logService.Object, _provider, _handler);
             // Assert: Verify that the instance is not null
             Assert.IsNotNull(instance);
         }
@@ -35,7 +35,7 @@ namespace Infrastructure.Test.Repositories.Implementation.CRUD.Query.User
         public void ShouldThrowArgumentNullExceptionWhenConstructedWithNullContext()
         {
             // Assert: Verify that constructing with a null DataContext throws an ArgumentNullException
-            Assert.ThrowsException<ArgumentNullException>(() => new UserReadFilterCount(default(DataContext), _logService.Object, _resourceProvider, _resourceHandler));
+            Assert.ThrowsException<ArgumentNullException>(() => new UserReadFilterCount(default(DataContext), _logService.Object, _provider, _handler));
         }
     }
 }
