@@ -80,9 +80,9 @@ namespace Persistence.Test.BaseDbContext
             // Arrange
             var testValue = Substitute.For<DbSet<Resource>>();
             // Act
-            _testContext.Lists = testValue;
+            _testContext.Resources = testValue;
             // Assert
-            Assert.AreSame(testValue, _testContext.Lists);
+            Assert.AreSame(testValue, _testContext.Resources);
         }
     }
 }

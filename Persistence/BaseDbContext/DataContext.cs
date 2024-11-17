@@ -16,7 +16,7 @@ namespace Persistence.BaseDbContext
         /// <summary>
         /// Represents a collection of <see cref = "Resource"/> entities in the database context.
         /// </summary>
-        public virtual DbSet<Resource> Lists { get; set; }
+        public virtual DbSet<Resource> Resources { get; set; }
         /// <summary>
         /// Represents a collection of <see cref = "User"/> entities in the database context.
         /// </summary>

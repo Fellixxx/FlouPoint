@@ -182,6 +182,10 @@
             // Then
             Assert.IsTrue(result.IsSuccessful);
             Assert.IsNotNull(result.Data);
+            var createdResource = await _dbContext.Resources.FindAsync(resource.Id);
+            Assert.IsNotNull(createdResource);
+            Assert.IsTrue(createdResource.CreatedAt >= startTime && createdResource.CreatedAt <= endTime);
+            Assert.IsTrue(createdResource.UpdatedAt >= startTime && createdResource.UpdatedAt <= endTime);
         }
     }
 }
