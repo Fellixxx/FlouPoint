@@ -22,7 +22,7 @@ namespace Infrastructure.Repositories.Abstract.CRUD.Query.ReadId
         private readonly ILogService _logService; // Service used for logging errors and information
         private readonly IResourcesProvider _provider; // Provider for various resources
         private IResourceHandler _handler; // Handles resource retrieval
-        private readonly List<string> _resourceKeys; // List of keys used for resource fetching
+        protected List<string> _resourceKeys; // List of keys used for resource fetching
         /// <summary>
         /// Constructor that initializes the ReadIdRepository with necessary dependencies.
         /// </summary>
@@ -34,6 +34,12 @@ namespace Infrastructure.Repositories.Abstract.CRUD.Query.ReadId
         {
             _logService = logService;
             _provider = provider;
+            SetResourceKeys();
+        }
+
+        protected virtual void SetResourceKeys()
+        {
+            // Initialize with predefined resource keys for successful operations.
             _resourceKeys =
             [
                 "ReadIdSuccess",

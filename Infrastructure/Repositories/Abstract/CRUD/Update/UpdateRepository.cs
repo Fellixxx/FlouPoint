@@ -40,7 +40,7 @@ namespace Infrastructure.Repositories.Abstract.CRUD.Update
         /// <summary>
         /// List of resource keys used for feedback messages.
         /// </summary>
-        private readonly List<string> _resourceKeys;
+        protected List<string> _resourceKeys;
         /// <summary>
         /// Constructor with dependency injection for dependencies.
         /// </summary>
@@ -55,6 +55,12 @@ namespace Infrastructure.Repositories.Abstract.CRUD.Update
             _utilEntity = utilEntity;
             _provider = provider;
             _handler = handler;
+            SetResourceKeys();
+        }
+
+        protected virtual void SetResourceKeys()
+        {
+            // Initialize with predefined resource keys for successful operations.
             _resourceKeys =
             [
                 "UpdateSuccess",

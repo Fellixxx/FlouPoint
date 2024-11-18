@@ -26,7 +26,7 @@ namespace Infrastructure.Repositories.Abstract.CRUD.Query.ReadFilterPage
         private readonly ILogService _logService;
         private readonly IResourcesProvider _provider;
         private IResourceHandler _handler;
-        private readonly List<string> _resourceKeys;
+        protected List<string> _resourceKeys;
         /// <summary>
         /// Initializes a new instance of the <see cref = "ReadFilterPageRepository{T}"/> class
         /// with the specified database context, log service, and resource provider.
@@ -40,10 +40,16 @@ namespace Infrastructure.Repositories.Abstract.CRUD.Query.ReadFilterPage
             _logService = logService;
             _provider = provider;
             // Initialize the resource keys that are needed for resource management.
+            SetResourceKeys();
+        }
+
+        protected virtual void SetResourceKeys()
+        {
+            // Initialize with predefined resource keys for successful operations.
             _resourceKeys =
-            [
-                "ReadFilterPageSuccess"
-            ];
+             [
+                 "ReadFilterPageSuccess"
+             ];
         }
 
         /// <summary>

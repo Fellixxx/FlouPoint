@@ -20,7 +20,7 @@ namespace Infrastructure.Repositories.Abstract.CRUD.Util
         // Dependency injection for read exist entites
         IReadFilter<T> _readFilter;
         // List of resource keys used within the class
-        private readonly List<string> _resourceKeys;
+        protected List<string> _resourceKeys;
         /// <summary>
         /// Initializes a new instance of the <see cref = "UtilEntity{T}"/> class.
         /// </summary>
@@ -32,6 +32,12 @@ namespace Infrastructure.Repositories.Abstract.CRUD.Util
             _handler = resourceHandler;
             _readFilter = readFilter;
             // Initialize resource keys with required keys
+            SetResourceKeys();
+        }
+
+        protected virtual void SetResourceKeys()
+        {
+            // Initialize with predefined resource keys for successful operations.
             _resourceKeys =
             [
                 "UtilEntityFailedNecesaryData",
