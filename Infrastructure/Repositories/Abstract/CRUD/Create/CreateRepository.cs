@@ -45,7 +45,6 @@ namespace Infrastructure.Repositories.Abstract.CRUD.Create
         protected virtual void SetResourceKeys()
         {
             _resourceKeys = ["CreationSuccess"]; // Initialize resource keys
-
         }
         /// <summary>
         /// Add a new entity to the database after performing validations.

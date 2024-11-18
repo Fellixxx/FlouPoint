@@ -22,7 +22,7 @@ namespace Infrastructure.Repositories.Abstract.CRUD.Query.ReadFilter
         private readonly ILogService _logService; // Used for logging operations and errors
         private readonly IResourcesProvider _provider; // Provides access to resource strings
         private IResourceHandler _handler; // Handles retrieval of specific resources
-        private readonly List<string> _resourceKeys; // List of keys used to access resources
+        protected List<string> _resourceKeys; // List of keys used to access resources
         /// <summary>
         /// Constructor with dependency injection.
         /// Initializes a new instance of the ReadFilterRepository class.
@@ -36,6 +36,13 @@ namespace Infrastructure.Repositories.Abstract.CRUD.Query.ReadFilter
             _logService = logService;
             _provider = provider;
             _handler = handler;
+            SetResourceKeys();
+
+
+        }
+
+        protected virtual void SetResourceKeys()
+        {
             _resourceKeys = ["ReadFilterSuccess"]; // Resource keys for logging messages
         }
 

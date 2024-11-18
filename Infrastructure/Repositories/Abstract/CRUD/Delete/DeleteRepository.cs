@@ -46,7 +46,6 @@ namespace Infrastructure.Repositories.Abstract.CRUD.Delete
            [
                "DeletionSuccess"
            ]; // Initialize resource keys
-
         }
 
         /// <summary>
