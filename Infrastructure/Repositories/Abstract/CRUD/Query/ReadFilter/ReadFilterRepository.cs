@@ -37,8 +37,6 @@ namespace Infrastructure.Repositories.Abstract.CRUD.Query.ReadFilter
             _provider = provider;
             _handler = handler;
             SetResourceKeys();
-
-
         }
 
         protected virtual void SetResourceKeys()

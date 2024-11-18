@@ -26,7 +26,7 @@ namespace Infrastructure.Repositories.Abstract.CRUD.Query.ReadFilterCount
         // Private field for handling resource-related operations.
         private IResourceHandler _handler;
         // List of resource keys used for retrieving messages.
-        private readonly List<string> _resourceKeys;
+        protected List<string> _resourceKeys;
         /// <summary>
         /// Constructor for initializing the repository with necessary services.
         /// </summary>
@@ -39,6 +39,11 @@ namespace Infrastructure.Repositories.Abstract.CRUD.Query.ReadFilterCount
             _logService = logService;
             _provider = provider;
             _handler = handler;
+            SetResourceKeys();
+        }
+
+        protected virtual void SetResourceKeys()
+        {
             // Initialize with predefined resource keys for successful operations.
             _resourceKeys = ["ReadFilterCountSuccess"];
         }
