@@ -18,7 +18,7 @@ namespace Infrastructure.Repositories.Abstract.CRUD.Util
         // Dependency injection for resource handler
         private IResourceHandler _handler;
         // Dependency injection for read exist entites
-        IReadFilterCount<T> _readFilterCount;
+        IReadFilter<T> _readFilter;
         // List of resource keys used within the class
         private readonly List<string> _resourceKeys;
         /// <summary>
@@ -26,11 +26,11 @@ namespace Infrastructure.Repositories.Abstract.CRUD.Util
         /// </summary>
         /// <param name = "resourceProvider">The resource provider to be used for fetching resources.</param>
         /// <param name = "resourceHandler">The resource handler to handle resource logic.</param>
-        public UtilEntity(IResourcesProvider resourceProvider, IResourceHandler resourceHandler, IReadFilterCount<T> readFilterCount)
+        public UtilEntity(IResourcesProvider resourceProvider, IResourceHandler resourceHandler, IReadFilter<T> readFilter)
         {
             _provider = resourceProvider;
             _handler = resourceHandler;
-            _readFilterCount = readFilterCount;
+            _readFilter = readFilter;
             // Initialize resource keys with required keys
             _resourceKeys = new List<string>
             {
@@ -76,7 +76,12 @@ namespace Infrastructure.Repositories.Abstract.CRUD.Util
             // Get specific resource message for missing necessary data
             var utilEntityFailedNecesaryData = _handler.GetResource("UtilEntityFailedUnique");
             // Check if the entity is null and return a failure operation if so
-            if (entity is null)
+            var entityFound = await _readFilter.ReadFilter(E =>E.Id == entity.Id);
+            if (
+                entityFound.IsSuccessful && 
+                entityFound is not null && 
+                entityFound.Data is not null
+                )
             {
                 return OperationStrategy<T>.Fail(utilEntityFailedNecesaryData, new BusinessStrategy<T>());
             }
