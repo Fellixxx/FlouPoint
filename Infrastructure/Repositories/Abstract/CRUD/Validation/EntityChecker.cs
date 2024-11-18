@@ -21,7 +21,7 @@ namespace Infrastructure.Repositories.Abstract.CRUD.Validation
         // Handler for managing and retrieving resource strings
         private IResourceHandler _handler;
         // Key list for retrieving necessary resources
-        private readonly List<string> _resourceKeys;
+        protected List<string> _resourceKeys;
         /// <summary>
         /// Initializes a new instance of the EntityChecker class.
         /// </summary>
@@ -33,6 +33,11 @@ namespace Infrastructure.Repositories.Abstract.CRUD.Validation
             _provider = provider;
             _handler = handler;
             // Initialize the list with keys for required error/success messages
+            SetResourceKeys();
+        }
+        protected virtual void SetResourceKeys()
+        {
+            // Initialize with predefined resource keys for successful operations.
             _resourceKeys = ["EntityCheckerFailedNecesaryData", "EntityCheckerValidation", "EntityCheckerSuccess"];
         }
 
