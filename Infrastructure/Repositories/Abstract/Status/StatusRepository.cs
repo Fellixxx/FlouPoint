@@ -35,14 +35,14 @@ namespace Infrastructure.Repositories.Abstract.Status
             _logService = logService;
             _provider = resourceProvider;
             _handler = resourceHandler;
-            _resourceKeys = new List<string>
-            {
+            _resourceKeys =
+            [
                 "StatusActiveSuccess",
                 "StatusFailedNecesaryData",
                 "StatusExistValidation",
                 "StatusDisableSuccess",
                 "StatusSuccess"
-            };
+            ];
         }
 
         /// <summary>

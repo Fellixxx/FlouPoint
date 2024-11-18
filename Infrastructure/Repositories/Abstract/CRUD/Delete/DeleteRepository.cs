@@ -37,10 +37,10 @@ namespace Infrastructure.Repositories.Abstract.CRUD.Delete
             _logService = logService;
             _provider = provider;
             _handler = handler;
-            _resourceKeys = new List<string>
-            {
+            _resourceKeys =
+            [
                 "DeletionSuccess"
-            }; // Initialize resource keys
+            ]; // Initialize resource keys
         }
 
         /// <summary>

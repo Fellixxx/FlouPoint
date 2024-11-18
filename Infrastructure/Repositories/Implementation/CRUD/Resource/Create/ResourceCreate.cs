@@ -37,11 +37,11 @@ namespace Infrastructure.Repositories.Implementation.CRUD.Resource.Create
         {
             _provider = provider;
             _handler = handler;
-            _resourceKeys = new List<string>
-            {
+            _resourceKeys =
+            [
                 "ResourceFailedDataLength",
                 "ResourceFailedDuplicateName"
-            };
+            ];
         }
 
         /// <summary>

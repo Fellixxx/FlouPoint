@@ -34,11 +34,11 @@ namespace Infrastructure.Repositories.Abstract.CRUD.Query.ReadId
         {
             _logService = logService;
             _provider = provider;
-            _resourceKeys = new List<string>
-            {
+            _resourceKeys =
+            [
                 "ReadIdSuccess",
                 "ReadByBearerSuccess"
-            }; // Initialize keys for resources
+            ]; // Initialize keys for resources
         }
 
         /// <summary>

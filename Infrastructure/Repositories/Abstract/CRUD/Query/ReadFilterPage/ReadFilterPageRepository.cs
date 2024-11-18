@@ -40,10 +40,10 @@ namespace Infrastructure.Repositories.Abstract.CRUD.Query.ReadFilterPage
             _logService = logService;
             _provider = provider;
             // Initialize the resource keys that are needed for resource management.
-            _resourceKeys = new List<string>
-            {
+            _resourceKeys =
+            [
                 "ReadFilterPageSuccess"
-            };
+            ];
         }
 
         /// <summary>

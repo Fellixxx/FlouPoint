@@ -65,14 +65,14 @@ namespace Infrastructure.Repositories.Abstract.CRUD.Create
                     return validationResult.ConvertTo<string>(); // Convert unsuccessful result to generic type
                 }
 
-               var unique = base.ReadCountFilter(E=> E.Id == entity.Id);
+                var unique = base.ReadCountFilter(E => E.Id == entity.Id);
 
 
                 // If validation is successful, add the entity to the database
                 var addedEntityResult = await base.Create(validationResult.Data);
                 // Handle resources for successful addition
                 await ResourceHandler.CreateAsync(_provider, _resourceKeys);
-                var creationSuccess = _handler.GetResource("CreationSuccess");
+                string creationSuccess = GetCreationSuccess();
                 // Create a success message and return the success result
                 var successMessage = string.Format(creationSuccess, typeof(T).Name);
                 return Operation<string>.Success(addedEntityResult, successMessage);
@@ -92,6 +92,11 @@ namespace Infrastructure.Repositories.Abstract.CRUD.Create
                 var errorOccurredDataLayer = Message.ErrorOccurredDataLayer;
                 return OperationStrategy<string>.Fail(errorOccurredDataLayer, strategy);
             }
+        }
+
+        protected virtual string GetCreationSuccess()
+        {
+            return _handler.GetResource("CreationSuccess");
         }
 
         /// <summary>

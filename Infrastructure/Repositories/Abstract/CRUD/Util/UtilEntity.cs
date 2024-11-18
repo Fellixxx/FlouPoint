@@ -32,12 +32,12 @@ namespace Infrastructure.Repositories.Abstract.CRUD.Util
             _handler = resourceHandler;
             _readFilter = readFilter;
             // Initialize resource keys with required keys
-            _resourceKeys = new List<string>
-            {
+            _resourceKeys =
+            [
                 "UtilEntityFailedNecesaryData",
                 "UtilEntitySuccess",
                 "UtilEntityFailedUnique"
-            };
+            ];
         }
 
         /// <summary>

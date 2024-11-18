@@ -39,11 +39,11 @@ namespace Infrastructure.Utilities.Images
             _imageCompressionService = imageCompressionService;
             _provider = resourceProvider;
             _handler = resourceHandler;
-            _resourceKeys = new List<string>
-            {
+            _resourceKeys =
+            [
                 "ImageSuccessfullyUpload",
                 "ImageConvertSuccess"
-            };
+            ];
         }
 
         /// <summary>

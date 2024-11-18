@@ -38,13 +38,13 @@ namespace Infrastructure.Repositories.Implementation.CRUD.User.Update
         {
             _provider = provider;
             _handler = handler;
-            _resourceKeys = new List<string>
-            {
+            _resourceKeys =
+            [
                 "UpdateFailedDataSizeCharacter",
                 "UpdateFailedEmailInvalidFormat",
                 "UpdateFailedAlreadyRegisteredEmail",
                 "UpdateSuccessfullySearchGeneric"
-            };
+            ];
         }
 
         /// <summary>

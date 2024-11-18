@@ -55,11 +55,11 @@ namespace Infrastructure.Repositories.Abstract.CRUD.Update
             _utilEntity = utilEntity;
             _provider = provider;
             _handler = handler;
-            _resourceKeys = new List<string>
-            {
+            _resourceKeys =
+            [
                 "UpdateSuccess",
                 "UpdateEntitySearchSuccess"
-            };
+            ];
         }
 
         /// <summary>

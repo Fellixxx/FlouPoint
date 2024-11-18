@@ -36,10 +36,10 @@ namespace Infrastructure.ExternalServices.LogExternal.Service
             _provider = provider;
             _handler = handler;
             // Initialize list with a predefined resource key
-            _resourceKeys = new List<string>
-            {
+            _resourceKeys =
+            [
                 "LogActivationSuccess"
-            };
+            ];
         }
 
         /// <summary>
