@@ -65,6 +65,9 @@ namespace Infrastructure.Repositories.Abstract.CRUD.Create
                     return validationResult.ConvertTo<string>(); // Convert unsuccessful result to generic type
                 }
 
+               var unique = base.ReadCountFilter(E=> E.Id == entity.Id);
+
+
                 // If validation is successful, add the entity to the database
                 var addedEntityResult = await base.Create(validationResult.Data);
                 // Handle resources for successful addition

@@ -11,7 +11,6 @@ namespace Infrastructure.Repositories.Implementation.CRUD.User.Create
     using Application.UseCases.Repository.CRUD;
     using Infrastructure.Repositories.Abstract.CRUD.Create;
     using Infrastructure.Repositories;
-    using Infrastructure.Constants;
     using Application.UseCases.ExternalServices.Resources;
     using Application.UseCases.ExternalServices.Resources.Provider;
 
@@ -35,12 +34,12 @@ namespace Infrastructure.Repositories.Implementation.CRUD.User.Create
         {
             _provider = provider;
             _handler = handler;
-            _resourceKeys = new List<string>
-            {
+            _resourceKeys =
+            [
                 "CreateFailedDataSizeCharacter",
                 "CreateFailedEmailInvalidFormat",
                 "CreateFailedAlreadyRegisteredEmail"
-            };
+            ];
         }
 
         /// <summary>

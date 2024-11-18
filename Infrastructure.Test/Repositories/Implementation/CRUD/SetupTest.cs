@@ -22,6 +22,7 @@ namespace Infrastructure.Test.Repositories.Implementation.CRUD
     using Application.UseCases.CRUD.Query.Resource;
     using System.Resources;
     using Application.UseCases.ExternalServices.Resources.Provider;
+    using Application.UseCases.Repository.CRUD.Query;
 
     /// <summary>
     /// Class to set up the test environment for CRUD operations and related services.
@@ -49,6 +50,8 @@ namespace Infrastructure.Test.Repositories.Implementation.CRUD
         protected Mock<IResourceReadId> _resourceReadId;
         protected IResourceQuery _resourceEntryQuery;
         protected IUserQuery _userQuery;
+        protected IReadFilterCount<Domain.Entities.User> _readFilterCounUser;
+        protected IReadFilterCount<Domain.Entities.Resource> _readFilterCounResource;
 
         protected readonly Dictionary<string, string> _resourceMessages = new()
         {
@@ -232,9 +235,11 @@ namespace Infrastructure.Test.Repositories.Implementation.CRUD
             _logService = new Mock<ILogService>();
             _handler = SetupResourceHandlerMock();
             _provider = SetupResourceProviderMock();
+            _readFilterCounUser = new UserReadFilterCount(_dbContext,_logService.Object, _provider, _handler);
+            _readFilterCounResource = new ResourceReadFilterCount(_dbContext, _logService.Object, _provider, _handler);
             _provider = new ResxProvider();
-            _utilEntityUser = new UtilEntity<Domain.Entities.User>(_provider, _handler);
-            _utilEntityResource = new UtilEntity<Domain.Entities.Resource>(_provider, _handler);
+            _utilEntityUser = new UtilEntity<Domain.Entities.User>(_provider, _handler, _readFilterCounUser);
+            _utilEntityResource = new UtilEntity<Domain.Entities.Resource>(_provider, _handler, _readFilterCounResource);
             _resourceReadFilter = new Mock<IResourceReadFilter>();
             _resourceReadFilterCount = new Mock<IResourceReadFilterCount>();
             _resourceReadFilterPage = new Mock<IResourceReadFilterPage>();

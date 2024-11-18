@@ -70,6 +70,15 @@ namespace Infrastructure.Repositories.Abstract.CRUD.Util {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The ID of the entity already exists..
+        /// </summary>
+        internal static string UtilEntityFailedUnique {
+            get {
+                return ResourceManager.GetString("UtilEntityFailedUnique", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Ok.
         /// </summary>
         internal static string UtilEntitySuccess {
