@@ -24,7 +24,7 @@ namespace Infrastructure.Repositories.Implementation.CRUD.Resource.Create
         // Handler to manage resource-related actions and retrieve resource messages.
         private IResourceHandler _handler;
         // List of keys used for managing resource-related messages.
-        private readonly List<string> _resourceKeys;
+        protected List<string> _resourceKeys;
         /// <summary>
         /// Initializes a new instance of the <see cref = "ResourceCreate"/> class.
         /// </summary>
@@ -37,13 +37,17 @@ namespace Infrastructure.Repositories.Implementation.CRUD.Resource.Create
         {
             _provider = provider;
             _handler = handler;
+            SetResourceKeys();
+        }
+
+        protected virtual void SetResourceKeys()
+        {
             _resourceKeys =
             [
                 "ResourceFailedDataLength",
                 "ResourceFailedDuplicateName"
             ];
         }
-
         /// <summary>
         /// Asynchronously creates a resource entity after validation.
         /// </summary>

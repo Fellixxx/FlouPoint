@@ -25,7 +25,7 @@ namespace Infrastructure.Repositories.Implementation.CRUD.User.Update
     {
         private readonly IResourcesProvider _provider;
         private IResourceHandler _handler;
-        private readonly List<string> _resourceKeys;
+        protected List<string> _resourceKeys;
         /// <summary>
         /// Initializes a new instance of the <see cref = "UserUpdate"/> class.
         /// </summary>
@@ -38,6 +38,10 @@ namespace Infrastructure.Repositories.Implementation.CRUD.User.Update
         {
             _provider = provider;
             _handler = handler;
+            SetResourceKeys();
+        }
+        protected virtual void SetResourceKeys()
+        {
             _resourceKeys =
             [
                 "UpdateFailedDataSizeCharacter",
@@ -46,7 +50,6 @@ namespace Infrastructure.Repositories.Implementation.CRUD.User.Update
                 "UpdateSuccessfullySearchGeneric"
             ];
         }
-
         /// <summary>
         /// Updates a user entity in the database based on provided modifications.
         /// </summary>

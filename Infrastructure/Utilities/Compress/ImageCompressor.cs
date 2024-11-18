@@ -24,7 +24,7 @@ namespace Infrastructure.Utilities.Compress
         // Handler for managing resources.
         private IResourceHandler _handler;
         // List of keys to access specific resource strings.
-        private readonly List<string> _resourceKeys;
+        protected List<string> _resourceKeys;
         /// <summary>
         /// Initializes a new instance of the ImageCompressionService class.
         /// </summary>
@@ -37,9 +37,12 @@ namespace Infrastructure.Utilities.Compress
             _provider = resourceProvider;
             _handler = resourceHandler;
             // Initialize predefined keys for resource messages.
+            SetResourceKeys();
+        }
+        protected virtual void SetResourceKeys()
+        {
             _resourceKeys = ["CompressedSuccess"];
         }
-
         /// <summary>
         /// Compresses an image from a given stream.
         /// </summary>

@@ -19,7 +19,7 @@ namespace Infrastructure.Repositories.Implementation.CRUD.Resource.Update
     {
         private readonly IResourcesProvider _provider;
         private IResourceHandler _handler;
-        private readonly List<string> _resourceKeys;
+        protected List<string> _resourceKeys;
         /// <summary>
         /// Initializes a new instance of the <see cref = "ResourceUpdate"/> class.
         /// </summary>
@@ -32,6 +32,11 @@ namespace Infrastructure.Repositories.Implementation.CRUD.Resource.Update
         {
             _provider = provider;
             _handler = handler;
+            SetResourceKeys();
+        }
+
+        protected virtual void SetResourceKeys()
+        {
             _resourceKeys =
             [
                 "UpdateFailedDataLength",
@@ -39,7 +44,6 @@ namespace Infrastructure.Repositories.Implementation.CRUD.Resource.Update
                 "UpdateSearchSuccess"
             ];
         }
-
         /// <summary>
         /// Updates a resource entity in the database based on the provided modifications.
         /// </summary>

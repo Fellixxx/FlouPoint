@@ -22,7 +22,7 @@ namespace Infrastructure.Repositories.Abstract.Status
         private readonly ILogService _logService;
         private readonly IResourcesProvider _provider;
         private readonly IResourceHandler _handler;
-        private readonly List<string> _resourceKeys;
+        protected List<string> _resourceKeys;
         /// <summary>
         /// Initializes a new instance of the <see cref = "StatusRepository{T}"/> class with specified dependencies.
         /// </summary>
@@ -35,6 +35,10 @@ namespace Infrastructure.Repositories.Abstract.Status
             _logService = logService;
             _provider = resourceProvider;
             _handler = resourceHandler;
+            SetResourceKeys();
+        }
+        protected virtual void SetResourceKeys()
+        {
             _resourceKeys =
             [
                 "StatusActiveSuccess",

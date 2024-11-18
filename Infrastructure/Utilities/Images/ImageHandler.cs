@@ -25,7 +25,7 @@ namespace Infrastructure.Utilities.Images
         // Handler for resource-related operations.
         private IResourceHandler _handler;
         // List of resource keys used for error handling and messaging.
-        private readonly List<string> _resourceKeys;
+        protected List<string> _resourceKeys;
         /// <summary>
         /// Initializes a new instance of the ManagementImage class.
         /// </summary>
@@ -39,13 +39,16 @@ namespace Infrastructure.Utilities.Images
             _imageCompressionService = imageCompressionService;
             _provider = resourceProvider;
             _handler = resourceHandler;
+            SetResourceKeys();
+        }
+        protected virtual void SetResourceKeys()
+        {
             _resourceKeys =
             [
                 "ImageSuccessfullyUpload",
                 "ImageConvertSuccess"
             ];
         }
-
         /// <summary>
         /// Asynchronously uploads a given image, represented as a base64 string, after converting and compressing it.
         /// </summary>
