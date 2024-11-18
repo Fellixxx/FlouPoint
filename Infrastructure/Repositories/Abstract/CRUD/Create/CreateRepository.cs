@@ -24,7 +24,7 @@ namespace Infrastructure.Repositories.Abstract.CRUD.Create
         private readonly IUtilEntity<T> _utilEntity; // Utility service for entity-related operations
         private readonly IResourcesProvider _provider; // Provider for resource handling
         private IResourceHandler _handler; // Resource handler
-        private readonly List<string> _resourceKeys; // List of resource keys used for localization or messages
+        protected List<string> _resourceKeys; // List of resource keys used for localization or messages
         /// <summary>
         /// Constructor with dependency injection.
         /// </summary>
@@ -39,9 +39,14 @@ namespace Infrastructure.Repositories.Abstract.CRUD.Create
             _utilEntity = utilEntity;
             _provider = provider;
             _handler = handler;
-            _resourceKeys = ["CreationSuccess"]; // Initialize resource keys
+            SetResourceKeys();
         }
 
+        protected virtual void SetResourceKeys()
+        {
+            _resourceKeys = ["CreationSuccess"]; // Initialize resource keys
+
+        }
         /// <summary>
         /// Add a new entity to the database after performing validations.
         /// </summary>

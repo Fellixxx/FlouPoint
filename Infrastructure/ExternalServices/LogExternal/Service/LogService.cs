@@ -20,7 +20,7 @@ namespace Infrastructure.ExternalServices.LogExternal.Service
         // Private member variables
         private readonly IResourcesProvider _provider; // Provides resources needed for service operations
         private IResourceHandler _handler; // Handles resources, possibly for localization or templating
-        private readonly List<string> _resourceKeys; // Stores keys to access specific resources
+        protected List<string> _resourceKeys; // Stores keys to access specific resources
         /// <summary>
         /// Initializes a new instance of the <see cref = "LogService"/> class.
         /// Sets up required dependencies for the class by injecting them.
@@ -36,6 +36,11 @@ namespace Infrastructure.ExternalServices.LogExternal.Service
             _provider = provider;
             _handler = handler;
             // Initialize list with a predefined resource key
+            SetResourceKeys();
+        }
+
+        protected virtual void SetResourceKeys()
+        {
             _resourceKeys =
             [
                 "LogActivationSuccess"

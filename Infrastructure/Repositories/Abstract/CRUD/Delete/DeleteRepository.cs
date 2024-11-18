@@ -24,7 +24,7 @@ namespace Infrastructure.Repositories.Abstract.CRUD.Delete
         private readonly ILogService _logService;
         private readonly IResourcesProvider _provider;
         private IResourceHandler _handler;
-        private readonly List<string> _resourceKeys;
+        protected List<string> _resourceKeys;
         /// <summary>
         /// Constructor with dependency injection to initialize necessary services.
         /// </summary>
@@ -37,10 +37,16 @@ namespace Infrastructure.Repositories.Abstract.CRUD.Delete
             _logService = logService;
             _provider = provider;
             _handler = handler;
+            SetResourceKeys();
+        }
+
+        protected virtual void SetResourceKeys()
+        {
             _resourceKeys =
-            [
-                "DeletionSuccess"
-            ]; // Initialize resource keys
+           [
+               "DeletionSuccess"
+           ]; // Initialize resource keys
+
         }
 
         /// <summary>

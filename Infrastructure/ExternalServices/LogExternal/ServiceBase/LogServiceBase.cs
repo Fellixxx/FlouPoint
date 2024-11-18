@@ -25,7 +25,7 @@ namespace Infrastructure.ExternalServices.LogExternal.ServiceBase
         private readonly HttpClient _client; // HttpClient instance for making HTTP requests.
         private readonly IResourcesProvider _provider; // Provider for resource management.
         private IResourceHandler _handler; // Handler for managing resources.
-        private readonly List<string> _resourceKeys; // Keys for accessing various resources.
+        protected List<string> _resourceKeys; // Keys for accessing various resources.
         /// <summary>
         /// Initializes a new instance of the <see cref = "LogServiceBase"/> class.
         /// Configures necessary parameters like credentials and URL for logging service.
@@ -46,6 +46,11 @@ namespace Infrastructure.ExternalServices.LogExternal.ServiceBase
             _httpContentWrapper = wrapper; // Assigns the HTTP content wrapper.
             _provider = provider; // Assigns the resource provider.
             _handler = handler; // Assigns the resource handler.
+            SetResourceKeys();
+        }
+
+        protected virtual void SetResourceKeys()
+        {
             _resourceKeys = ["LogConfigMissingError", "LogTokenFetchFailed", "LogTokenFetched", "LogCreationFailed", "LogCreated"]; // Initializes resource keys.
         }
 
